@@ -1,3 +1,16 @@
+--[[
+ * ReaScript Name: insert NRPN
+ * Version: 1.0
+ * Author: YS
+ * Repository URI: https://github.com/zaibuyidao/YS_ReaScripts
+--]]
+
+--[[
+ * Changelog:
+ * v1.0 (2021-10-14)
+  + Initial release
+--]]
+
 local num=reaper.GetCursorPositionEx(0)
 
 local editor=reaper.MIDIEditor_GetActive()

@@ -3,7 +3,6 @@
  * Version: 1.0
  * Author: YS
  * Repository URI: https://github.com/zaibuyidao/YS_ReaScripts
- * provides: [main=midi_main] .
 --]]
 
 --[[
