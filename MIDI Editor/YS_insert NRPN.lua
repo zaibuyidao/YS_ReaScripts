@@ -1,6 +1,6 @@
 --[[
  * ReaScript Name: insert NRPN
- * Version: 1.0
+ * Version: 1.0.1
  * Author: YS
  * Repository URI: https://github.com/zaibuyidao/YS_ReaScripts
 --]]
