@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<index version="1" name="YS Scripts" commit="d525bcf1f915e338d37d547dae585137dff91b91">
+<index version="1" name="YS Scripts" commit="cc6c17f0446880aa4cb3ba9e3e33f4e44984358e">
   <category name="Items Editing">
     <reapack name="YS_Midi Take Name From Track.lua" type="script" desc="Bass 定弦">
       <version name="1.0" author="YS" time="2021-10-14T16:59:44Z">
@@ -243,6 +243,9 @@
       <version name="1.0" author="YS" time="2021-10-14T17:02:38Z">
         <changelog><![CDATA[+ Initial release]]></changelog>
         <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/d525bcf1f915e338d37d547dae585137dff91b91/MIDI%20Editor/YS_insert%20NRPN.lua</source>
+      </version>
+      <version name="1.0.1" author="YS" time="2021-10-14T17:05:23Z">
+        <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/cc6c17f0446880aa4cb3ba9e3e33f4e44984358e/MIDI%20Editor/YS_insert%20NRPN.lua</source>
       </version>
     </reapack>
     <reapack name="YS_insert PC.lua" type="script" desc="insert PC">
@@ -769,6 +772,9 @@
       <version name="1.0" author="YS" time="2021-10-14T17:02:38Z">
         <changelog><![CDATA[+ Initial release]]></changelog>
         <source main="main">https://github.com/zaibuyidao/YS_ReaScripts/raw/d525bcf1f915e338d37d547dae585137dff91b91/Utility/YS_%E5%A4%84%E7%90%86%E6%8F%92%E5%85%A5%E9%9F%B3%E8%89%B2%E5%9C%A8%E9%9F%B3%E7%AC%A6%E4%B8%AD.lua</source>
+      </version>
+      <version name="1.0.1" author="YS" time="2021-10-14T17:05:23Z">
+        <source main="main">https://github.com/zaibuyidao/YS_ReaScripts/raw/cc6c17f0446880aa4cb3ba9e3e33f4e44984358e/Utility/YS_%E5%A4%84%E7%90%86%E6%8F%92%E5%85%A5%E9%9F%B3%E8%89%B2%E5%9C%A8%E9%9F%B3%E7%AC%A6%E4%B8%AD.lua</source>
       </version>
     </reapack>
     <reapack name="YS_定时启动录制.lua" type="script" desc="定时启动录制">
