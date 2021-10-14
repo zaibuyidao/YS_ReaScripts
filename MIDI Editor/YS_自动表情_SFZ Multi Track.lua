@@ -1,8 +1,7 @@
 --[[
  * ReaScript Name: 自动表情_SFZ Multi Track
- * Version: 1.0
+ * Version: 1.1
  * Author: YS
- * provides: [main=midi_editor] .
 --]]
 
 --[[
@@ -15,13 +14,12 @@ retval, retvals_csv = reaper.GetUserInputs('自动表情 SFZ', 2, 'CC Min Val,CC
 if  retval==false then reaper.SN_FocusMIDIEditor() return end
 min,max=string.match(retvals_csv,"(%d+),(%d+)")
 min=tonumber(min) max=tonumber(max) 
-contselitem= reaper.CountSelectedMediaItems(0)
-selitem = 0
-while selitem < contselitem do
-MediaItem = reaper.GetSelectedMediaItem(0, selitem)
-selitem = selitem + 1
-take = reaper.GetTake(MediaItem, 0)
-if reaper.TakeIsMIDI(take) then
+local editor=reaper.MIDIEditor_GetActive()
+
+takeindex = 0
+take=reaper.MIDIEditor_EnumTakes(editor, takeindex, true)
+while take~=nil do
+
 reaper.MIDI_DisableSort(take)
 -------------
 noteidx=-1
@@ -46,6 +44,9 @@ selidx=reaper.MIDI_EnumSelNotes(take,noteidx)
           selidx=reaper.MIDI_EnumSelNotes(take,noteidx)
     end -- while end
 reaper.MIDI_Sort(take)
-end  --take midi
-end -- while item end
+
+takeindex=takeindex+1
+take=reaper.MIDIEditor_EnumTakes(editor, takeindex, true)
+end -- while take end
+
 reaper.SN_FocusMIDIEditor()

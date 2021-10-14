@@ -1,6 +1,6 @@
 --[[
  * ReaScript Name: Copy X_Multi Track
- * Version: 1.0
+ * Version: 1.1
  * Author: YS
  * Repository URI: https://github.com/zaibuyidao/YS_ReaScripts
  * provides: [main=midi_editor] .
@@ -17,13 +17,10 @@ local num=reaper.GetCursorPositionEx(0)
 left=math.huge
 right = -1
 
-contselitem= reaper.CountSelectedMediaItems(0)
-selitem = 0
-while selitem < contselitem do
-MediaItem = reaper.GetSelectedMediaItem(0, selitem)
-selitem = selitem + 1
-take = reaper.GetTake(MediaItem, 0)
-if reaper.TakeIsMIDI(take) then
+takeindex = 0
+take=reaper.MIDIEditor_EnumTakes(editor, takeindex, true)
+while take~=nil do
+
 idx=-1
     
 reaper.MIDI_DisableSort(take)
@@ -45,17 +42,18 @@ integer = reaper.MIDI_EnumSelEvts(take, idx)
 end -- while end
 
 reaper.MIDI_Sort(take)
-end
-end -- while item end
+
+takeindex=takeindex+1
+take=reaper.MIDIEditor_EnumTakes(editor, takeindex, true)
+end -- while take end
 -------------------------------------
-contselitem= reaper.CountSelectedMediaItems(0)
-selitem = 0
-while selitem < contselitem do
-MediaItem = reaper.GetSelectedMediaItem(0, selitem)
-selitem = selitem + 1
-take = reaper.GetTake(MediaItem, 0)
-if reaper.TakeIsMIDI(take) then
+
+takeindex = 0
+take=reaper.MIDIEditor_EnumTakes(editor, takeindex, true)
+while take~=nil do
+
 pos=reaper.MIDI_GetPPQPosFromProjTime(take, num)
+MediaItem= reaper.GetMediaItemTake_Item(take)
 itemposition=reaper.GetMediaItemInfo_Value(MediaItem, 'D_POSITION')
 itemlenth=reaper.GetMediaItemInfo_Value(MediaItem, 'D_LENGTH')
 itemend = itemposition + itemlenth
@@ -139,8 +137,10 @@ integer = reaper.MIDI_EnumSelTextSysexEvts(take, idx)
 end -- while end
 
 reaper.MIDI_Sort(take)
-end
-end -- while item end
+
+takeindex=takeindex+1
+take=reaper.MIDIEditor_EnumTakes(editor, takeindex, true)
+end -- while take end
 
 --reaper.UpdateArrange()
 

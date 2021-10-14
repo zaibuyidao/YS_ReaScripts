@@ -1,8 +1,7 @@
 --[[
  * ReaScript Name: CC shaper_Linear_Multi Track
- * Version: 1.0
+ * Version: 1.1
  * Author: YS
- * provides: [main=midi_editor] .
 --]]
 
 --[[
@@ -12,13 +11,11 @@
 --]]
 
 editor=reaper.MIDIEditor_GetActive()
-contselitem= reaper.CountSelectedMediaItems(0)
-selitem = 0
-while selitem < contselitem do
-MediaItem = reaper.GetSelectedMediaItem(0, selitem)
-selitem = selitem + 1
-take = reaper.GetTake(MediaItem, 0)
-if reaper.TakeIsMIDI(take) then
+
+takeindex = 0
+take=reaper.MIDIEditor_EnumTakes(editor, takeindex, true)
+while take~=nil do
+
  reaper.MIDI_DisableSort(take)
 idx=-1 
 repeat 
@@ -31,7 +28,8 @@ ccidx = reaper.MIDI_EnumSelCC(take,idx)
 until (ccidx==-1) 
 
 reaper.MIDI_Sort(take)
-end
-end -- while item end
 
+takeindex=takeindex+1
+take=reaper.MIDIEditor_EnumTakes(editor, takeindex, true)
+end -- while take end
 

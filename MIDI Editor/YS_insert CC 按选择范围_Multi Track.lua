@@ -1,8 +1,7 @@
 --[[
  * ReaScript Name: insert CC 按选择范围_Multi Track
- * Version: 1.0
+ * Version: 1.1
  * Author: YS
- * provides: [main=midi_editor] .
 --]]
 
 --[[
@@ -24,13 +23,9 @@ if val2 >= 0 and val2 <= 127 then
 
 local editor=reaper.MIDIEditor_GetActive()
 
-contselitem= reaper.CountSelectedMediaItems(0)
-selitem = 0
-while selitem < contselitem do
-MediaItem = reaper.GetSelectedMediaItem(0, selitem)
-selitem = selitem + 1
-take = reaper.GetTake(MediaItem, 0)
-if reaper.TakeIsMIDI(take) then
+takeindex = 0
+take=reaper.MIDIEditor_EnumTakes(editor, takeindex, true)
+while take~=nil do
 
 reaper.MIDI_DisableSort(take)
 
@@ -46,9 +41,11 @@ retval, notecnt, ccevtcnt, textsyxevtcnt = reaper.MIDI_CountEvts(take)
 reaper.MIDI_SetCCShape(take, ccevtcnt-1, 1, 1, false)
 reaper.MIDI_InsertCC(take, false, false, Thru_tick , 176, 0,num,val2)
 reaper.MIDI_Sort(take)
-end
 
-end -- while item end
+takeindex=takeindex+1
+take=reaper.MIDIEditor_EnumTakes(editor, takeindex, true)
+
+end -- while take end
 
 if num >= 0 and num <= 119 then
 

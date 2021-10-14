@@ -1,6 +1,6 @@
 --[[
  * ReaScript Name: Tempo list 速度列表
- * Version: 1.0
+ * Version: 1.1
  * Author: YS
  * provides: [main=main] .
 --]]
@@ -40,7 +40,7 @@ i = i+1
 until retval==false
 
 
-local ctx = reaper.ImGui_CreateContext('My script')
+local ctx = reaper.ImGui_CreateContext('Tempo List')
 reaper.ImGui_SetNextWindowSize(ctx, 250, 400)
 function loop()
 

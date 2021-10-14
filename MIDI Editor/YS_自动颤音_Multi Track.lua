@@ -1,8 +1,7 @@
 --[[
  * ReaScript Name: 自动颤音_Multi Track
- * Version: 1.0
+ * Version: 1.1
  * Author: YS
- * provides: [main=midi_editor] .
 --]]
 
 --[[
@@ -12,13 +11,11 @@
 --]]
 
 local editor=reaper.MIDIEditor_GetActive()
-contselitem= reaper.CountSelectedMediaItems(0)
-selitem = 0
-while selitem < contselitem do
-MediaItem = reaper.GetSelectedMediaItem(0, selitem)
-selitem = selitem + 1
-take = reaper.GetTake(MediaItem, 0)
-if reaper.TakeIsMIDI(take) then
+
+takeindex = 0
+take=reaper.MIDIEditor_EnumTakes(editor, takeindex, true)
+while take~=nil do
+
 reaper.MIDI_DisableSort(take)
 retval, notecnt, ccevtcnt, textsyxevtcnt = reaper.MIDI_CountEvts(take)
 
@@ -44,7 +41,8 @@ idx=n_idx
 until (n_idx==-1) 
 reaper.MIDI_Sort(take)
 
-end -- take is midi
-end -- while item end
+takeindex=takeindex+1
+take=reaper.MIDIEditor_EnumTakes(editor, takeindex, true)
+end -- while take end
 
 reaper.MIDIEditor_OnCommand(editor,40239)

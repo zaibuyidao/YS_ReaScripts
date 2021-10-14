@@ -1,6 +1,6 @@
 --[[
  * ReaScript Name: Flam Note
- * Version: 1.0
+ * Version: 1.1
  * Author: YS
  * provides: [main=midi_editor] .
 --]]
@@ -18,16 +18,15 @@ tick_sub,chazhi_sub=string.match(shuzhi,"(-?%d+),(-?%d+)")
 local tick = tonumber (tick_sub)
 local chazhi = tonumber (chazhi_sub)
 
+editor=reaper.MIDIEditor_GetActive()
+
 if tick < 0 then tick_sub = tick * (-1) else tick_sub = tick end 
 
 if tick_sub >= 5 then
 
-contselitem= reaper.CountSelectedMediaItems(0)
-selitem = 0
-while selitem < contselitem do
-MediaItem = reaper.GetSelectedMediaItem(0, selitem)
-selitem = selitem + 1
-take = reaper.GetTake(MediaItem, 0)
+takeindex = 0
+take=reaper.MIDIEditor_EnumTakes(editor, takeindex, true)
+while take~=nil do
 
 reaper.MIDI_DisableSort(take)
 idx=-1
@@ -50,7 +49,10 @@ repeat
  end
  until integer==-1
  reaper.MIDI_Sort(take)
- end -- while item end
+ 
+takeindex=takeindex+1
+take=reaper.MIDIEditor_EnumTakes(editor, takeindex, true)
+end -- while take end
 
 end -- >=5
 reaper.SN_FocusMIDIEditor()

@@ -1,8 +1,7 @@
 --[[
  * ReaScript Name: strum-it_Up_Multi Track
- * Version: 1.0
+ * Version: 1.1
  * Author: YS
- * provides: [main=midi_editor] .
 --]]
 
 --[[
@@ -18,13 +17,10 @@ num_sub=string.match(shuzhi,"(%d+)")
 num=tonumber (num_sub)
 if retval then   
 
-contselitem= reaper.CountSelectedMediaItems(0)
-selitem = 0
-while selitem < contselitem do
-MediaItem = reaper.GetSelectedMediaItem(0, selitem)
-selitem = selitem + 1
-take = reaper.GetTake(MediaItem, 0)
-if reaper.TakeIsMIDI(take) then
+takeindex = 0
+take=reaper.MIDIEditor_EnumTakes(editor, takeindex, true)
+while take~=nil do
+
 reaper.MIDI_DisableSort(take)
 
 i,idx=2,-1
@@ -36,7 +32,7 @@ tbchan={}
 tbpitch={}
 tbpitch2={}
 tbvel={}
-tempst=0
+tempst=-1
 TBinteger={}
 integer = reaper.MIDI_EnumSelNotes(take,idx)
 
@@ -95,8 +91,12 @@ end--if end
 idx=integer
 end -- while end
 reaper.MIDI_Sort(take)
-end
-end -- while item end
+
+takeindex=takeindex+1
+take=reaper.MIDIEditor_EnumTakes(editor, takeindex, true)
+
+end -- while take end
+
 end -- not 0 end
 
 reaper.SN_FocusMIDIEditor()

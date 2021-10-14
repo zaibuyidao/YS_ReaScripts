@@ -1,6 +1,6 @@
 --[[
  * ReaScript Name: Lenth 事件缩放_Multi Track
- * Version: 1.0
+ * Version: 1.1
  * Author: YS
  * provides: [main=midi_editor] .
 --]]
@@ -17,7 +17,7 @@ local take=reaper.MIDIEditor_GetTake(editor)
 
 string = reaper.GetExtState('old lenth', '1')
 
-retval, shuzhi = reaper.GetUserInputs('Lengh 长度 Multi Track', 1, '设定长度比例%：', string)
+retval, shuzhi = reaper.GetUserInputs('Lengh 长度 Multi Track', 1, '设定长度比例% (允许小数点)：', string)
 
 if retval then
 val=tonumber (shuzhi)
@@ -29,13 +29,10 @@ val=tonumber (shuzhi)
 
  ------------
  
- contselitem= reaper.CountSelectedMediaItems(0)
- selitem = 0
- while selitem < contselitem do
- MediaItem = reaper.GetSelectedMediaItem(0, selitem)
- selitem = selitem + 1
- take = reaper.GetTake(MediaItem, 0)
- if reaper.TakeIsMIDI(take) then
+takeindex = 0
+take=reaper.MIDIEditor_EnumTakes(editor, takeindex, true)
+while take~=nil do
+
  reaper.MIDI_DisableSort(take)
   i=-1
   integer = reaper.MIDI_EnumSelEvts(take, i)
@@ -50,16 +47,16 @@ val=tonumber (shuzhi)
  end 
  
  reaper.MIDI_Sort(take)
- end
- end -- selitem end
+
+takeindex=takeindex+1
+take=reaper.MIDIEditor_EnumTakes(editor, takeindex, true)
+end -- while take end
  
  
- selitem = 0
- while selitem < contselitem do
- MediaItem = reaper.GetSelectedMediaItem(0, selitem)
- selitem = selitem + 1
- take = reaper.GetTake(MediaItem, 0)
- if reaper.TakeIsMIDI(take) then
+takeindex = 0
+take=reaper.MIDIEditor_EnumTakes(editor, takeindex, true)
+while take~=nil do
+
  reaper.MIDI_DisableSort(take)
 
  evtidx = -1
@@ -77,8 +74,10 @@ if  integer ~= -1 then
       end  -- if end
        
 reaper.MIDI_Sort(take) 
-end
-end --selitem end
+
+takeindex=takeindex+1
+take=reaper.MIDIEditor_EnumTakes(editor, takeindex, true)
+end -- while take end
 
 reaper.SN_FocusMIDIEditor()
 

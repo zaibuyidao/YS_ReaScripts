@@ -1,8 +1,7 @@
 --[[
  * ReaScript Name: Velocity力度 V2_Multi Track
- * Version: 1.0
+ * Version: 1.1
  * Author: YS
- * provides: [main=midi_editor] .
 --]]
 
 --[[
@@ -24,13 +23,10 @@ chazhi=wei-tou+ 0.1
 left=math.huge
 right = -1
 
-contselitem= reaper.CountSelectedMediaItems(0)
-selitem = 0
-while selitem < contselitem do
-MediaItem = reaper.GetSelectedMediaItem(0, selitem)
-selitem = selitem + 1
-take = reaper.GetTake(MediaItem, 0)
-if reaper.TakeIsMIDI(take) then
+takeindex = 0
+take=reaper.MIDIEditor_EnumTakes(editor, takeindex, true)
+while take~=nil do
+
 reaper.MIDI_DisableSort(take)
  i=-1
 repeat
@@ -47,18 +43,17 @@ until  (integer==-1)
 reaper.MIDI_Sort(take)
 juli = right - left
 jiange = juli / chazhi
-end
 
-end -- while item end  get select time
+takeindex=takeindex+1
+take=reaper.MIDIEditor_EnumTakes(editor, takeindex, true)
+  
+end -- while take end get select time
 
 
-contselitem= reaper.CountSelectedMediaItems(0)
-selitem = 0
-while selitem < contselitem do
-MediaItem = reaper.GetSelectedMediaItem(0, selitem)
-selitem = selitem + 1
-take = reaper.GetTake(MediaItem, 0)
-if reaper.TakeIsMIDI(take) then
+takeindex = 0
+take=reaper.MIDIEditor_EnumTakes(editor, takeindex, true)
+while take~=nil do
+
 reaper.MIDI_DisableSort(take)
  i=-1
 repeat
@@ -89,8 +84,11 @@ repeat
 until  (integer==-1)
 
 reaper.MIDI_Sort(take)
-end
-end -- while item end
+
+takeindex=takeindex+1
+take=reaper.MIDIEditor_EnumTakes(editor, takeindex, true)
+end -- while take end
+
 end
 
 reaper.SN_FocusMIDIEditor()

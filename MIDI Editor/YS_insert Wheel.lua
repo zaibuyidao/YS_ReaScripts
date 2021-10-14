@@ -1,8 +1,7 @@
 --[[
  * ReaScript Name: insert Wheel
- * Version: 1.0
+ * Version: 1.1
  * Author: YS
- * provides: [main=midi_editor] .
 --]]
 
 --[[
@@ -11,18 +10,19 @@
   + Initial release
 --]]
 
+retval,banyin= reaper.GetUserInputs('Insert Wheel Multi Track',1,'输入-12到12 Wheel Val=','0') 
+if retval==false then reaper.SN_FocusMIDIEditor() return end
+banyinsub=tonumber (banyin)
+
 local num=reaper.GetCursorPositionEx(0)
 
 local editor=reaper.MIDIEditor_GetActive()
 
-local take=reaper.MIDIEditor_GetTake(editor)
+takeindex = 0
+take=reaper.MIDIEditor_EnumTakes(editor, takeindex, true)
+while take~=nil do
 
-local startpos=reaper.MIDI_GetPPQPosFromProjTime(take, num)
-
-retval,banyin= reaper.GetUserInputs('Insert Wheel',1,'输入-12到12 Wheel Val=','0') 
-
-banyinsub=tonumber (banyin)
-
+startpos=reaper.MIDI_GetPPQPosFromProjTime(take, num)
 pitch = 683*banyinsub 
 
 if (pitch > 8191) then pitch = 8191 end
@@ -36,5 +36,10 @@ end
 
 reaper.MIDI_InsertCC(take, false, false, startpos , 224, 0,yushu,64+beishu)
 
+takeindex=takeindex+1
+take=reaper.MIDIEditor_EnumTakes(editor, takeindex, true)
+end -- while take end
+
+reaper.MIDIEditor_OnCommand(editor, 40366) --show pitch
 reaper.SN_FocusMIDIEditor()
 
