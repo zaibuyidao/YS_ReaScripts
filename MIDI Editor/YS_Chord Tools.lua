@@ -1,6 +1,6 @@
 --[[
  * ReaScript Name: Chord Tools
- * Version: 1.0
+ * Version: 1.0.1
  * Author: YS
 --]]
 
@@ -115,7 +115,7 @@ key_list['key=ab']='Db,Eb,Gb,Ab,Bb'
 key_list['key=a']='C#,D#,F#,G#,Bb'
 key_list['key=bb']='Db,Eb,Gb,Ab,Bb'
 key_list['key=b']='C#,D#,F#,G#,A#'
---key_list['key=c#']='C#,D#,F#,G#,A#'
+key_list['key=c#']='C#,D#,F#,G#,A#'
 key_list['key=f#']='C#,D#,F#,G#,A#'
 
 
@@ -521,7 +521,7 @@ function loop()
  if chord_to_lyrics then  chordtolyrics() flag=false end
  if Lyrics_To_Chord_Track then  LyricsToChordTrack() flag=false end
  if Lyrics_To_region then  LyricsToregion() flag=false end
- if _Help then  reaper.MB(help,'Help',0) flag=false end
+ if _Help then  reaper.MB(help,'Help',0)  end
   
   if open and flag then
     reaper.defer(loop)

@@ -1,6 +1,6 @@
 --[[
  * ReaScript Name: A.G 吉他和弦建立 V2
- * Version: 1.0
+ * Version: 1.0.1
  * Author: YS
  * provides: [main=midi_editor] .
 --]]
@@ -102,16 +102,16 @@ repeat
  if integer ~= -1 then
  retval, selected, muted, startppqpos, endppqpos, chan, pitch, vel = reaper.MIDI_GetNote(take, integer)
  reaper.MIDI_DeleteNote(take, integer)
- pitch_key=pitch % 12
+ pitch_key=(pitch-capo) % 12
  pitch_key = key[pitch_key]..leixing
  notetb=chord[pitch_key]
  n1,n2,n3,n4,n5,n6=string.match(notetb,"(%d+),(%d+),(%d+),(%d+),(%d+),(%d+)")
-if n1~='0' then  reaper.MIDI_InsertNote(take, false, false, startppqpos, endppqpos, chan, n1, vel, false) end
-if n2~='0' then  reaper.MIDI_InsertNote(take, false, false, startppqpos, endppqpos, chan, n2, vel, false) end
-if n3~='0' then  reaper.MIDI_InsertNote(take, false, false, startppqpos, endppqpos, chan, n3, vel, false) end
-if n4~='0' then  reaper.MIDI_InsertNote(take, false, false, startppqpos, endppqpos, chan, n4, vel, false) end
-if n5~='0' then  reaper.MIDI_InsertNote(take, false, false, startppqpos, endppqpos, chan, n5, vel, false) end
-if n6~='0' then  reaper.MIDI_InsertNote(take, false, false, startppqpos, endppqpos, chan, n6, vel, false) end
+if n1~='0' then  reaper.MIDI_InsertNote(take, false, false, startppqpos, endppqpos, chan, n1+capo, vel, false) end
+if n2~='0' then  reaper.MIDI_InsertNote(take, false, false, startppqpos, endppqpos, chan, n2+capo, vel, false) end
+if n3~='0' then  reaper.MIDI_InsertNote(take, false, false, startppqpos, endppqpos, chan, n3+capo, vel, false) end
+if n4~='0' then  reaper.MIDI_InsertNote(take, false, false, startppqpos, endppqpos, chan, n4+capo, vel, false) end
+if n5~='0' then  reaper.MIDI_InsertNote(take, false, false, startppqpos, endppqpos, chan, n5+capo, vel, false) end
+if n6~='0' then  reaper.MIDI_InsertNote(take, false, false, startppqpos, endppqpos, chan, n6+capo, vel, false) end
 
   end
  integer = reaper.MIDI_EnumSelNotes(take, idx)
@@ -122,11 +122,12 @@ reaper.MIDI_Sort(take)
 reaper.SN_FocusMIDIEditor()
 
 end -- function 
-
+capo = reaper.GetExtState('A.G CHORD', 'capo')
+if capo=='' then capo=0 else capo=tonumber(capo) end
 
 local ctx = reaper.ImGui_CreateContext('A.G CHORD')
 x,y=reaper.GetMousePosition()
-reaper.ImGui_SetNextWindowSize(ctx, 270, 80)
+reaper.ImGui_SetNextWindowSize(ctx, 270, 100)
   reaper.ImGui_SetNextWindowPos(ctx, x, y)
 flag=true
 function loop()
@@ -159,6 +160,7 @@ function loop()
     _7j5=reaper.ImGui_Button(ctx,'7-5')
     reaper.ImGui_SameLine(ctx)
     m7j5=reaper.ImGui_Button(ctx,'m7-5')
+    retval, capo= reaper.ImGui_SliderInt(ctx, 'capo', capo, 0, 11, nil,nil)
     reaper.ImGui_End(ctx)
  end
  if Maj then leixing=''  chord() flag=false end
@@ -180,6 +182,7 @@ function loop()
   if open and flag then
     reaper.defer(loop)
   else
+    reaper.SetExtState('A.G CHORD', 'capo', capo, true)
     reaper.ImGui_DestroyContext(ctx)
     reaper.SN_FocusMIDIEditor()
   end

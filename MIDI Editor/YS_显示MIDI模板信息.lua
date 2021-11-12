@@ -1,6 +1,6 @@
 --[[
  * ReaScript Name: 显示MIDI模板信息
- * Version: 1.0
+ * Version: 1.0.1
  * Author: YS
  * provides: [main=main] .
 --]]
@@ -33,6 +33,7 @@ end
 retval, notecnt, ccevtcnt,textsyxevtcnt = reaper.MIDI_CountEvts(take)
 ccidx=0
 if ccevtcnt~=0 then 
+bank='-1    '  PC='-1  ' vol='-1  ' pan='-1  ' rev='-1  ' cho='-1  ' delay='-1  '
 while ccidx<ccevtcnt do
 retval,selected,muted, ppqpos,chanmsg, chan, msg2, msg3 = reaper.MIDI_GetCC(take, ccidx)
 if chanmsg==176 then
@@ -75,7 +76,6 @@ i=0
 while i<blank do cho=cho..' ' i=i+1 end
 end
 
-delay=''
 if msg2==94 then
 delay=msg3  delay=tostring(delay)
 if #delay<4 then blank=4-#delay end
@@ -104,7 +104,7 @@ end
 --reaper.ShowConsoleMsg(out)
 
 
-local ctx = reaper.ImGui_CreateContext('My script')
+local ctx = reaper.ImGui_CreateContext('tempinfo')
  reaper.ImGui_SetNextWindowSize(ctx, 650, 900)
 function loop()
 
