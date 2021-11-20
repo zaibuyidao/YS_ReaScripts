@@ -1,6 +1,6 @@
 --[[
  * ReaScript Name: Chord Tools
- * Version: 1.0.1
+ * Version: 1.0.2
  * Author: YS
 --]]
 
@@ -22,8 +22,8 @@ chord['m']='3,7,0,0,0,0'
 chord['6']='4,7,9,0,0,0'
 chord['9']='4,7,10,14,0,0'
 chord['Maj9']='4,7,11,14,0,0'
-chord['add9']='2,4,7,0,0,0'
-chord['madd9']='2,3,7,0,0,0'
+chord['add2']='2,4,7,0,0,0'
+chord['madd2']='2,3,7,0,0,0'
 chord['7#9']='4,7,10,15,0,0'
 chord['sus4']='5,7,0,0,0,0'
 chord['m6']='3,7,9,0,0,0'
@@ -36,12 +36,52 @@ chord['dim']='3,6,0,0,0,0'
 chord['7']='4,7,10,0,0,0'
 chord['7-5']='4,6,10,0,0,0'
 chord['Aug7']='4,8,10,0,0,0'
-chord['69']='2,4,7,9,0,0'
+chord['69']='4,7,9,14,0,0'
 chord['7b9']='4,7,10,13,0,0'
 chord['m7']='3,7,10,0,0,0'
 chord['11']='4,7,10,14,17,0'
 chord['m11']='3,7,10,14,17,0'
 chord['13']='4,7,10,14,17,21'
+------------------------------------
+chord['7sus4b9']='5,7,10,13,0,0'
+chord['11b9']='4,7,10,13,17,0'
+chord['13#9']='4,7,10,15,17,21'
+chord['13b5b9']='4,6,10,13,17,21'
+chord['13b9']='4,7,10,13,17,21'
+chord['6sus4']='5,7,9,0,0,0'
+chord['7#11']='4,7,10,18,0,0'
+chord['7#5']='4,8,10,0,0,0'
+chord['7#5#9']='4,8,10,15,0,0'
+chord['7#5b9']='4,8,10,13,0,0'
+chord['7add11']='4,7,10,17,0,0'
+chord['7add13']='4,7,10,21,0,0'
+chord['7b5#9']='4,6,10,15,0,0'
+chord['7b5b9']='4,6,10,13,0,0'
+chord['9#11']='4,7,10,14,18,0'
+chord['9#5']='4,8,10,14,0,0'
+chord['9b13']='4,7,10,14,20,0'
+chord['9b5']='4,6,10,14,0,0'
+chord['9sus4']='5,7,10,14,0,0'
+chord['Maj11']='4,7,11,14,17,0'
+chord['Maj13']='4,7,11,14,17,21'
+chord['Maj7#11']='4,7,11,18,0,0'
+chord['Maj7add13']='4,7,11,21,0,0'
+chord['Maj7b5']='4,6,11,0,0,0'
+chord['Maj9#11']='4,8,11,14,18,0'
+chord['Maj9#5']='4,8,11,14,0,0'
+chord['Maj9sus4']='5,7,11,14,0,0'
+chord['m13']='3,7,10,14,17,21'
+chord['m6add9']='3,7,9,14,0,0'
+chord['m7add11']='3,7,10,17,0,0'
+chord['m7add13']='3,7,10,21,0,0'
+chord['m7b9']='3,7,10,13,0,0'
+chord['m9b5']='3,6,10,14,0,0'
+chord['mMaj11']='3,7,11,14,17,0'
+chord['mMaj13']='3,7,11,14,17,21'
+chord['mMaj7add11']='3,7,11,17,0,0'
+chord['mMaj7add13']='3,7,11,21,0,0'
+chord['mMaj9']='3,7,11,14,0,0'
+
 
 help='和弦输入必须是原位的完整和弦音，可以根据所选音符作为根音用脚本写入，也可以手动写入，根音不要低于Key48。目前只支持列表中的和弦类型。和弦之间最小间隔为八分音符。\n\n转位根音请写在Key48键号以下（C3 or C4）。\n\nChord Note To Lyrics 需要读取调号标记，第一个标记放在工程头部，格式为 Key=** ，必须写自然大调，中途变调的地方在小节头写入同样的格式。'
 
@@ -162,10 +202,51 @@ chordtype={} chordtype[340]='' chordtype[430]='m' chordtype[250]='sus4' chordtyp
 chordtype[440]='aug' chordtype[2340]='6' chordtype[2430]='m6' chordtype[3340]='7' chordtype[3430]='m7' 
 chordtype[4340]='M7' chordtype[43340]='9' chordtype[43430]='m9' chordtype[4240]='7b5' 
 chordtype[4330]='m7b5' chordtype[34340]='M9' chordtype[3250]='7sus4' chordtype[3330]='dim7' 
-chordtype[520]='sus2' chordtype[3220]='add9' chordtype[3520]='7sus2' chordtype[2440]='aug7'
-chordtype[3330]='dim7' chordtype[4120]='madd9' chordtype[240]='-5'  chordtype[23220]='69'
+chordtype[520]='sus2' chordtype[3220]='add2' chordtype[3520]='7sus2' chordtype[2440]='aug7'
+chordtype[3330]='dim7' chordtype[4120]='madd2' chordtype[240]='-5'  chordtype[52340]='69'
 chordtype[4430]='mM7'  chordtype[53340]='7#9'  chordtype[3440]='M7#5'  chordtype[33340]='7b9'
 chordtype[343340]='11' chordtype[343430]='m11' chordtype[4343340]='13'
+-----------------------------------
+chordtype[33250]='7sus4b9'
+chordtype[433340]='11b9'
+chordtype[4253340]='13#9'
+chordtype[4434240]='13b5b9'
+chordtype[4433340]='13b9'
+chordtype[2250]='6sus4'
+chordtype[83340]='7#11'
+chordtype[2440]='7#5'
+chordtype[52440]='7#5#9'
+chordtype[32440]='7#5b9'
+chordtype[73340]='7add11'
+chordtype[113340]='7add13'
+chordtype[54240]='7b5#9'
+chordtype[34240]='7b5b9'
+chordtype[443340]='9#11'
+chordtype[42440]='9#5'
+chordtype[643340]='9b13'
+chordtype[44240]='9b5'
+chordtype[43250]='9sus4'
+chordtype[334340]='Maj11'
+chordtype[4334340]='Maj13'
+chordtype[74340]='Maj7#11'
+chordtype[104340]='Maj7add13'
+chordtype[5240]='Maj7b5'
+chordtype[34340]='Maj9'
+chordtype[433440]='Maj9#11'
+chordtype[33440]='Maj9#5'
+chordtype[34250]='Maj9sus4'
+chordtype[4343430]='m13'
+chordtype[52430]='m6add9'
+chordtype[73430]='m7add11'
+chordtype[113430]='m7add13'
+chordtype[33430]='m7b9'
+chordtype[44330]='m9b5'
+chordtype[334430]='mMaj11'
+chordtype[4334430]='mMaj13'
+chordtype[64430]='mMaj7add11'
+chordtype[104430]='mMaj7add13'
+chordtype[34430]='mMaj9'
+
 
 while noteidx <= notecnt  do
 
@@ -410,82 +491,90 @@ end -- Lyrics To region
 
 local ctx = reaper.ImGui_CreateContext('Chord Tools')
 x,y=reaper.GetMousePosition()
-reaper.ImGui_SetNextWindowSize(ctx, 475, 150)
+reaper.ImGui_SetNextWindowSize(ctx, 610, 215)
   reaper.ImGui_SetNextWindowPos(ctx, x, y)
 flag=true
 function loop()
   local visible, open = reaper.ImGui_Begin(ctx, 'Chord Tools', true)
   if visible then
-    Maj=reaper.ImGui_Button(ctx,'Maj')
-    reaper.ImGui_SameLine(ctx)
-    Min=reaper.ImGui_Button(ctx,'Min')
-    reaper.ImGui_SameLine(ctx)
-    sus4=reaper.ImGui_Button(ctx,'sus4')    
-    reaper.ImGui_SameLine(ctx)
-    sus2=reaper.ImGui_Button(ctx,'sus2')   
-    reaper.ImGui_SameLine(ctx)
-    Dim=reaper.ImGui_Button(ctx,'Dim')
-    reaper.ImGui_SameLine(ctx)
-    Aug=reaper.ImGui_Button(ctx,'Aug')   
-    reaper.ImGui_SameLine(ctx)
-    j5=reaper.ImGui_Button(ctx,'-5')
-    --reaper.ImGui_SameLine(ctx)
-    m7=reaper.ImGui_Button(ctx,'m7')
-    reaper.ImGui_SameLine(ctx)
-    _7=reaper.ImGui_Button(ctx,'7')
-    reaper.ImGui_SameLine(ctx)
-    Maj7=reaper.ImGui_Button(ctx,'Maj7')    
-    reaper.ImGui_SameLine(ctx)
-    Dim7=reaper.ImGui_Button(ctx,'Dim7')
-    reaper.ImGui_SameLine(ctx)
-    mM7=reaper.ImGui_Button(ctx,'mM7')
-    reaper.ImGui_SameLine(ctx)
-    _7j5=reaper.ImGui_Button(ctx,'7-5')
-    reaper.ImGui_SameLine(ctx)
-    m7j5=reaper.ImGui_Button(ctx,'m7-5')
-    reaper.ImGui_SameLine(ctx)
-    _7sus4=reaper.ImGui_Button(ctx,'7sus4')
-    reaper.ImGui_SameLine(ctx)
-    _7sus2=reaper.ImGui_Button(ctx,'7sus2')
-    reaper.ImGui_SameLine(ctx)
-    M7s5=reaper.ImGui_Button(ctx,'M7#5')
-    reaper.ImGui_SameLine(ctx)
-    Aug7=reaper.ImGui_Button(ctx,'Aug7')
-   -- reaper.ImGui_SameLine(ctx)
-    _6=reaper.ImGui_Button(ctx,'6')
-    reaper.ImGui_SameLine(ctx)
-    _9=reaper.ImGui_Button(ctx,'9')
-    reaper.ImGui_SameLine(ctx)
-    m9=reaper.ImGui_Button(ctx,'m9')
-    reaper.ImGui_SameLine(ctx)
-    Maj9=reaper.ImGui_Button(ctx,'Maj9')
-    reaper.ImGui_SameLine(ctx)
-    add9=reaper.ImGui_Button(ctx,'add9')
-    reaper.ImGui_SameLine(ctx)
-    madd9=reaper.ImGui_Button(ctx,'madd9')
-    reaper.ImGui_SameLine(ctx)
-    _7s9=reaper.ImGui_Button(ctx,'7#9')
-    reaper.ImGui_SameLine(ctx)
-    m6=reaper.ImGui_Button(ctx,'m6')
-    reaper.ImGui_SameLine(ctx)
-    _69=reaper.ImGui_Button(ctx,'69')
-    reaper.ImGui_SameLine(ctx)
-    _7b9=reaper.ImGui_Button(ctx,'7b9')
-    reaper.ImGui_SameLine(ctx)
-    _11=reaper.ImGui_Button(ctx,'11')
-    reaper.ImGui_SameLine(ctx)
-    m11=reaper.ImGui_Button(ctx,'m11')
-    reaper.ImGui_SameLine(ctx)
-    _13=reaper.ImGui_Button(ctx,'13')
-   -- reaper.ImGui_SameLine(ctx)
+    Maj=reaper.ImGui_Button(ctx,'Maj')     reaper.ImGui_SameLine(ctx)
+    Min=reaper.ImGui_Button(ctx,'Min')      reaper.ImGui_SameLine(ctx)
+    sus4=reaper.ImGui_Button(ctx,'sus4')        reaper.ImGui_SameLine(ctx)
+     sus2=reaper.ImGui_Button(ctx,'sus2')       reaper.ImGui_SameLine(ctx)
+    Dim=reaper.ImGui_Button(ctx,'Dim')    reaper.ImGui_SameLine(ctx)
+    Aug=reaper.ImGui_Button(ctx,'Aug')       reaper.ImGui_SameLine(ctx)
+    _6=reaper.ImGui_Button(ctx,'6')      reaper.ImGui_SameLine(ctx)
+    m6=reaper.ImGui_Button(ctx,'m6')      reaper.ImGui_SameLine(ctx)
+    _69=reaper.ImGui_Button(ctx,'69')      reaper.ImGui_SameLine(ctx)
+    _6sus4=reaper.ImGui_Button(ctx,'6sus4')     reaper.ImGui_SameLine(ctx)
+    m6add9=reaper.ImGui_Button(ctx,'m6add9')     reaper.ImGui_SameLine(ctx)
+    add2=reaper.ImGui_Button(ctx,'add2')      reaper.ImGui_SameLine(ctx)
+    madd2=reaper.ImGui_Button(ctx,'madd2')      reaper.ImGui_SameLine(ctx)
+    j5=reaper.ImGui_Button(ctx,'-5')    
+   m7=reaper.ImGui_Button(ctx,'m7')      reaper.ImGui_SameLine(ctx)
+    _7=reaper.ImGui_Button(ctx,'7')      reaper.ImGui_SameLine(ctx)
+    Maj7=reaper.ImGui_Button(ctx,'Maj7')          reaper.ImGui_SameLine(ctx)
+     Dim7=reaper.ImGui_Button(ctx,'Dim7')      reaper.ImGui_SameLine(ctx)
+     mM7=reaper.ImGui_Button(ctx,'mM7')      reaper.ImGui_SameLine(ctx)
+     _7j5=reaper.ImGui_Button(ctx,'7-5')      reaper.ImGui_SameLine(ctx)
+     _7s5=reaper.ImGui_Button(ctx,'7#5')     reaper.ImGui_SameLine(ctx)
+     m7j5=reaper.ImGui_Button(ctx,'m7-5')      reaper.ImGui_SameLine(ctx)
+    _7sus4=reaper.ImGui_Button(ctx,'7sus4')      reaper.ImGui_SameLine(ctx)
+    _7sus2=reaper.ImGui_Button(ctx,'7sus2')      reaper.ImGui_SameLine(ctx)
+     M7s5=reaper.ImGui_Button(ctx,'M7#5')      reaper.ImGui_SameLine(ctx)
+    Aug7=reaper.ImGui_Button(ctx,'Aug7')       reaper.ImGui_SameLine(ctx)
+    _7s9=reaper.ImGui_Button(ctx,'7#9')      reaper.ImGui_SameLine(ctx)
+    _7b9=reaper.ImGui_Button(ctx,'7b9')     
+    Maj7b5=reaper.ImGui_Button(ctx,'Maj7b5')     reaper.ImGui_SameLine(ctx)
+    m7b9=reaper.ImGui_Button(ctx,'m7b9')    reaper.ImGui_SameLine(ctx)
+    _7sus4b9=reaper.ImGui_Button(ctx,'7sus4b9')     reaper.ImGui_SameLine(ctx)
+    _7s5s9=reaper.ImGui_Button(ctx,'7#5#9')     reaper.ImGui_SameLine(ctx)
+    _7s5b9=reaper.ImGui_Button(ctx,'7#5b9')     reaper.ImGui_SameLine(ctx)
+    _7s11=reaper.ImGui_Button(ctx,'7#11')     reaper.ImGui_SameLine(ctx)
+    _7add11=reaper.ImGui_Button(ctx,'7add11')   reaper.ImGui_SameLine(ctx)
+    _7add13=reaper.ImGui_Button(ctx,'7add13')     reaper.ImGui_SameLine(ctx)
+    _7b5s9=reaper.ImGui_Button(ctx,'7b5#9')     reaper.ImGui_SameLine(ctx)
+    _7b5b9=reaper.ImGui_Button(ctx,'7b5b9')     reaper.ImGui_SameLine(ctx)
+    Maj7s11=reaper.ImGui_Button(ctx,'Maj7#11')     
+    Maj7add13=reaper.ImGui_Button(ctx,'Maj7add13')     reaper.ImGui_SameLine(ctx)
+    m7add11=reaper.ImGui_Button(ctx,'m7add11')     reaper.ImGui_SameLine(ctx)
+    m7add13=reaper.ImGui_Button(ctx,'m7add13')     reaper.ImGui_SameLine(ctx)
+     _9=reaper.ImGui_Button(ctx,'9')      reaper.ImGui_SameLine(ctx)
+     m9=reaper.ImGui_Button(ctx,'m9')      reaper.ImGui_SameLine(ctx)
+     Maj9=reaper.ImGui_Button(ctx,'Maj9')      reaper.ImGui_SameLine(ctx)
+     _9s11=reaper.ImGui_Button(ctx,'9#11')     reaper.ImGui_SameLine(ctx)
+     _9s5=reaper.ImGui_Button(ctx,'9#5')     reaper.ImGui_SameLine(ctx)
+     _9b13=reaper.ImGui_Button(ctx,'9b13')     reaper.ImGui_SameLine(ctx)
+     _9b5=reaper.ImGui_Button(ctx,'9b5')     reaper.ImGui_SameLine(ctx)
+     _9sus4=reaper.ImGui_Button(ctx,'9sus4')     reaper.ImGui_SameLine(ctx)
+     Maj9s11=reaper.ImGui_Button(ctx,'Maj9#11')     
+     Maj9s5=reaper.ImGui_Button(ctx,'Maj9#5')     reaper.ImGui_SameLine(ctx)
+     Maj9sus4=reaper.ImGui_Button(ctx,'Maj9sus4')     reaper.ImGui_SameLine(ctx)
+     m9b5=reaper.ImGui_Button(ctx,'m9b5')     reaper.ImGui_SameLine(ctx)
+     _11=reaper.ImGui_Button(ctx,'11')      reaper.ImGui_SameLine(ctx)
+     Maj11=reaper.ImGui_Button(ctx,'Maj11')     reaper.ImGui_SameLine(ctx)
+     m11=reaper.ImGui_Button(ctx,'m11')      reaper.ImGui_SameLine(ctx)
+     _11b9=reaper.ImGui_Button(ctx,'11b9')     reaper.ImGui_SameLine(ctx)
+     _13=reaper.ImGui_Button(ctx,'13')      reaper.ImGui_SameLine(ctx)
+     Maj13=reaper.ImGui_Button(ctx,'Maj13')     reaper.ImGui_SameLine(ctx)
+     m13=reaper.ImGui_Button(ctx,'m13')     reaper.ImGui_SameLine(ctx)
+   _13s9=reaper.ImGui_Button(ctx,'13#9')     reaper.ImGui_SameLine(ctx)
+   _13b5b9=reaper.ImGui_Button(ctx,'13b5b9')     reaper.ImGui_SameLine(ctx)
+   _13b9=reaper.ImGui_Button(ctx,'13b9')     
+   mMaj11=reaper.ImGui_Button(ctx,'mMaj11')     reaper.ImGui_SameLine(ctx)
+   mMaj13=reaper.ImGui_Button(ctx,'mMaj13')     reaper.ImGui_SameLine(ctx)
+   mMaj7add11=reaper.ImGui_Button(ctx,'mMaj7add11')     reaper.ImGui_SameLine(ctx)
+   mMaj7add13=reaper.ImGui_Button(ctx,'mMaj7add13')     reaper.ImGui_SameLine(ctx)
+   mMaj9=reaper.ImGui_Button(ctx,'mMaj9')
+   
     chord_to_lyrics=reaper.ImGui_Button(ctx,'Chord Note To Lyrics')
     reaper.ImGui_SameLine(ctx)
      Lyrics_To_Chord_Track=reaper.ImGui_Button(ctx,'Lyrics To Chord Track')
      reaper.ImGui_SameLine(ctx)
      Lyrics_To_region=reaper.ImGui_Button(ctx,'Lyrics To region')
-     _Help=reaper.ImGui_Button(ctx,'Help')
+     _Help=reaper.ImGui_Button(ctx,'Help') 
+     
     reaper.ImGui_End(ctx)
-    
  end
  if Maj then leixing='Maj'  chordin() flag=false end
  if Min then leixing='m' chordin() flag=false end
@@ -509,8 +598,8 @@ function loop()
  if M7s5 then leixing='M7#5' chordin() flag=false end
  if Aug7 then leixing='Aug7' chordin() flag=false end
  if _6 then leixing='6' chordin() flag=false end
- if add9 then leixing='add9' chordin() flag=false end
- if madd9 then leixing='madd9' chordin() flag=false end
+ if add2 then leixing='add2' chordin() flag=false end
+ if madd2 then leixing='madd2' chordin() flag=false end
  if _7s9 then leixing='7#9' chordin() flag=false end
  if m6 then leixing='m6' chordin() flag=false end
  if _69 then leixing='69' chordin() flag=false end
@@ -518,10 +607,52 @@ function loop()
  if _11 then leixing='11' chordin() flag=false end
  if m11 then leixing='m11' chordin() flag=false end
  if _13 then leixing='13' chordin() flag=false end
+ if _7sus4b9  then leixing='7sus4b9' chordin() flag=false end
+ if _11b9  then leixing='11b9' chordin() flag=false end
+ if _13s9  then leixing='13#9' chordin() flag=false end
+ if _13b5b9  then leixing='13b5b9' chordin() flag=false end
+ if _13b9  then leixing='13b9' chordin() flag=false end
+ if _6sus4  then leixing='6sus4' chordin() flag=false end
+ if _7s11 then leixing='7#11' chordin() flag=false end
+ if _7s5 then leixing='7#5' chordin() flag=false end
+ if _7s5s9 then leixing='7#5#9' chordin() flag=false end
+ if _7s5b9 then leixing='7#5b9' chordin() flag=false end
+ if _7add11 then leixing='7add11' chordin() flag=false end
+ if _7add13 then leixing='7add13' chordin() flag=false end
+ if _7b5s9 then leixing='7b5#9' chordin() flag=false end
+ if _7b5b9 then leixing='7b5b9' chordin() flag=false end
+ if _9s11 then leixing='9#11' chordin() flag=false end
+ if _9s5 then leixing='9#5' chordin() flag=false end
+ if _9b13 then leixing='9b13' chordin() flag=false end
+ if _9b5 then leixing='9b5' chordin() flag=false end
+ if _9sus4 then leixing='9sus4' chordin() flag=false end
+ if Maj11 then leixing='Maj11' chordin() flag=false end
+ if Maj13 then leixing='Maj13' chordin() flag=false end
+ if Maj7s11 then leixing='Maj7#11' chordin() flag=false end
+ if Maj7add13 then leixing='Maj7add13' chordin() flag=false end
+ if Maj7b5 then leixing='Maj7b5' chordin() flag=false end
+ if Maj9 then leixing='Maj9' chordin() flag=false end
+ if Maj9s11 then leixing='Maj9#11' chordin() flag=false end
+ if Maj9s5 then leixing='Maj9#5' chordin() flag=false end
+ if Maj9sus4 then leixing='Maj9sus4' chordin() flag=false end
+ if m13 then leixing='m13' chordin() flag=false end
+ if m6add9 then leixing='m6add9' chordin() flag=false end
+ if m7add11 then leixing='m7add11' chordin() flag=false end
+ if m7add13 then leixing='m7add13' chordin() flag=false end
+ if m7b9 then leixing='m7b9' chordin() flag=false end
+ if m9b5 then leixing='m9b5' chordin() flag=false end
+ if mMaj11 then leixing='mMaj11' chordin() flag=false end
+ if mMaj13 then leixing='mMaj13' chordin() flag=false end
+ if mMaj7add11 then leixing='mMaj7add11' chordin() flag=false end
+ if mMaj7add13 then leixing='mMaj7add13' chordin() flag=false end
+ if mMaj9 then leixing='mMaj9' chordin() flag=false end
+ 
  if chord_to_lyrics then  chordtolyrics() flag=false end
  if Lyrics_To_Chord_Track then  LyricsToChordTrack() flag=false end
  if Lyrics_To_region then  LyricsToregion() flag=false end
  if _Help then  reaper.MB(help,'Help',0)  end
+ retval = reaper.ImGui_IsKeyPressed(ctx, 27, nil)
+ if retval then  flag=false end
   
   if open and flag then
     reaper.defer(loop)

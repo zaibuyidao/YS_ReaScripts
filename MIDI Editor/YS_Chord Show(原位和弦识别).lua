@@ -1,9 +1,7 @@
 --[[
  * ReaScript Name: Chord Show(原位和弦识别)
- * Version: 1.1
+ * Version: 1.1.1
  * Author: YS
- * Repository URI: https://github.com/zaibuyidao/YS_ReaScripts
- * provides: [main=midi_editor] .
 --]]
 
 --[[
@@ -35,10 +33,47 @@ chord = ''
 chordtype={} chordtype[340]='' chordtype[430]='m' chordtype[250]='sus4' chordtype[330]='dim' 
 chordtype[440]='aug' chordtype[2340]='6' chordtype[2430]='m6' chordtype[3340]='7' chordtype[3430]='m7' 
 chordtype[4340]='M7' chordtype[43340]='9' chordtype[43430]='m9' chordtype[4240]='7b5' 
-chordtype[4330]='m7b5' chordtype[34340]='M9' chordtype[3250]='7sus4' chordtype[3330]='dim7' 
+chordtype[4330]='m7b5' chordtype[34340]='Maj9' chordtype[3250]='7sus4' chordtype[3330]='dim7' 
 chordtype[520]='sus2' chordtype[3220]='add9' chordtype[3520]='7sus2' chordtype[2440]='aug7'
-chordtype[3330]='dim7' chordtype[4120]='madd9' chordtype[240]='-5'  chordtype[23220]='69'
+chordtype[3330]='dim7' chordtype[4120]='madd9' chordtype[240]='-5'  chordtype[52340]='69'
 chordtype[4430]='mM7'  chordtype[53340]='7#9'  chordtype[3440]='M7#5'  chordtype[33340]='7b9' chordtype[33250]='7sus4b9'
+chordtype[433340]='11b9'
+chordtype[4253340]='13#9'
+chordtype[4434240]='13b5b9'
+chordtype[4433340]='13b9'
+chordtype[2250]='6sus4'
+chordtype[83340]='7#11'
+chordtype[2440]='7#5'
+chordtype[52440]='7#5#9'
+chordtype[32440]='7#5b9'
+chordtype[73340]='7add11'
+chordtype[113340]='7add13'
+chordtype[54240]='7b5#9'
+chordtype[34240]='7b5b9'
+chordtype[443340]='9#11'
+chordtype[42440]='9#5'
+chordtype[643340]='9b13'
+chordtype[44240]='9b5'
+chordtype[43250]='9sus4'
+chordtype[334340]='Maj11'
+chordtype[4334340]='Maj13'
+chordtype[74340]='Maj7#11'
+chordtype[104340]='Maj7add13'
+chordtype[5240]='Maj7b5'
+chordtype[433440]='Maj9#11'
+chordtype[33440]='Maj9#5'
+chordtype[34250]='Maj9sus4'
+chordtype[4343430]='m13'
+chordtype[52430]='m6add9'
+chordtype[73430]='m7add11'
+chordtype[113430]='m7add13'
+chordtype[33430]='m7b9'
+chordtype[44330]='m9b5'
+chordtype[334430]='mMaj11'
+chordtype[4334430]='mMaj13'
+chordtype[64430]='mMaj7add11'
+chordtype[104430]='mMaj7add13'
+chordtype[34430]='mMaj9'
 
 idx=-1
 noteidx=reaper.MIDI_EnumSelNotes(take,idx) 
@@ -117,6 +152,6 @@ retval, selected, muted, startppqpos, endppqpos, chan, pitch, vel = reaper.MIDI_
 until  flag
 
 reaper.MIDI_Sort(take)
-if chordsend~='' then reaper.MB(chordsend,'',0) end
+if chordsend~='' then reaper.MB(chordsend,'Chord Check',0) end
 reaper.SN_FocusMIDIEditor()
 
