@@ -1,6 +1,6 @@
 --[[
  * ReaScript Name: A.G 吉他和弦建立 V2
- * Version: 1.0.1
+ * Version: 1.0.2
  * Author: YS
  * provides: [main=midi_editor] .
 --]]
@@ -10,12 +10,6 @@
  * v1.0 (2021-8-29)
   + Initial release
 --]]
-
-function chord()
-
-local editor=reaper.MIDIEditor_GetActive()
-
-local take=reaper.MIDIEditor_GetTake(editor)
 
 leixing_tb={}
 leixing_tb['m']=0 leixing_tb['m7']=0 leixing_tb['7']=0 leixing_tb['7M']=0 leixing_tb['sus4']=0 
@@ -37,8 +31,8 @@ chord['Gbm']='42,49,54,57,61,66' chord['Gm']='43,50,55,58,62,67' chord['Abm']='4
 chord['Am']='0,45,52,57,60,64' chord['Bbm']='0,46,53,58,61,65' chord['Bm']='0,47,54,59,62,66' 
 -- sus4
 chord['Csus4']='0,48,55,60,65,67'  chord['Dbsus4']='0,49,56,61,66,68'  chord['Dsus4']='0,50,57,62,67,69'
-chord['Ebsus4']='0,51,58,63,68,70' chord['Esus4']='40,45,52,57,59,64' chord['Fsus4']='41,46,53,58,60,65'
-chord['Gbsus4']='42,47,54,59,61,66' chord['Gsus4']='43,48,55,60,62,67' chord['Absus4']='44,49,56,61,63,68'
+chord['Ebsus4']='0,51,58,63,68,70' chord['Esus4']='40,47,52,57,59,64' chord['Fsus4']='41,48,53,58,60,65'
+chord['Gbsus4']='42,49,54,59,61,66' chord['Gsus4']='43,50,55,60,62,67' chord['Absus4']='44,51,56,61,63,68'
 chord['Asus4']='0,45,52,57,62,64' chord['Bbsus4']='0,46,53,58,63,65' chord['Bsus4']='0,47,54,59,64,66' 
 -- m7
 chord['Cm7']='0,48,55,58,63,67'  chord['Dbm7']='0,49,52,56,59,64'  chord['Dm7']='0,0,50,57,60,65'
@@ -95,7 +89,16 @@ chord['Cm7-5']='0,48,51,58,60,66'  chord['Dbm7-5']='0,49,52,55,59,64'  chord['Dm
 chord['Ebm7-5']='0,0,51,57,61,66' chord['Em7-5']='40,46,50,55,62,64' chord['Fm7-5']='41,47,51,56,63,65'
 chord['Gbm7-5']='42,48,52,57,64,66' chord['Gm7-5']='43,49,53,58,65,67' chord['Abm7-5']='44,50,54,59,66,68'
 chord['Am7-5']='0,45,51,55,60,67' chord['Bbm7-5']='0,46,52,56,61,64' chord['Bm7-5']='0,47,50,57,59,65'
+
+
+function chordin()
+
+local editor=reaper.MIDIEditor_GetActive()
+
+local take=reaper.MIDIEditor_GetTake(editor)
+
 reaper.MIDI_DisableSort(take)
+
 idx=-1
 repeat
  integer = reaper.MIDI_EnumSelNotes(take, idx)
@@ -122,8 +125,81 @@ reaper.MIDI_Sort(take)
 reaper.SN_FocusMIDIEditor()
 
 end -- function 
+
 capo = reaper.GetExtState('A.G CHORD', 'capo')
 if capo=='' then capo=0 else capo=tonumber(capo) end
+
+------------------------------------------------------
+function Audition()
+reaper.Main_OnCommand(reaper.NamedCommandLookup('_BR_SAVE_SOLO_MUTE_ALL_TRACKS_SLOT_1'),0)
+reaper.Main_OnCommand(40340,0) --unsolo all track
+local editor=reaper.MIDIEditor_GetActive()
+local take=reaper.MIDIEditor_GetTake(editor)
+integer = reaper.MIDI_EnumSelNotes(take, -1)
+ if integer ~= -1 then
+ retval, selected, muted, startppqpos, endppqpos, chan, pitch, vel = reaper.MIDI_GetNote(take, integer)
+ pitch_key=(pitch-capo) % 12
+ pitch_key = key[pitch_key]..leixing
+ notetb=chord[pitch_key]
+ n1,n2,n3,n4,n5,n6=string.match(notetb,"(%d+),(%d+),(%d+),(%d+),(%d+),(%d+)")
+
+ if n1~='0' then  
+ local yanchi=os.clock()
+ while os.clock() - yanchi < 0.08 do end
+ reaper.StuffMIDIMessage(0, 144,n1+capo,vel)
+ end
+ if n2~='0' then  
+ local yanchi=os.clock()
+ while os.clock() - yanchi < 0.08 do end
+ reaper.StuffMIDIMessage(0, 144,n2+capo,vel)
+ end
+ if n3~='0' then  
+ local yanchi=os.clock()
+ while os.clock() - yanchi < 0.08 do end
+ reaper.StuffMIDIMessage(0, 144,n3+capo,vel)
+ end
+ if n4~='0' then  
+ local yanchi=os.clock()
+ while os.clock() - yanchi < 0.08 do end
+ reaper.StuffMIDIMessage(0, 144,n4+capo,vel)
+ end
+ if n5~='0' then  
+ local yanchi=os.clock()
+ while os.clock() - yanchi < 0.08 do end
+ reaper.StuffMIDIMessage(0, 144,n5+capo,vel)
+ end
+ if n6~='0' then 
+ local yanchi=os.clock()
+ while os.clock() - yanchi < 0.08 do end
+ reaper.StuffMIDIMessage(0, 144,n6+capo,vel)
+ end
+ local yanchi=os.clock()
+ while os.clock() - yanchi < 0.3 do end
+ --reaper.MIDIEditor_OnCommand(editor,40435)
+ reaper.StuffMIDIMessage(0, 176,120,0)
+
+ end -- integer ~= -1
+reaper.Main_OnCommand(reaper.NamedCommandLookup('_BR_RESTORE_SOLO_MUTE_ALL_TRACKS_SLOT_1'), 0)
+
+end  --function end
+-------------------------------------------------
+function recst()
+editor=reaper.MIDIEditor_GetActive()
+take=reaper.MIDIEditor_GetTake(editor)
+TK=reaper.GetMediaItemTake_Track(take)
+
+reaper.Main_OnCommand(40491,0) --all rec off
+ retval = reaper.SetMediaTrackInfo_Value(TK, 'I_RECARM', 1)
+ retval, str = reaper.GetTrackStateChunk(TK, '', false)
+ oldrec=string.match(str,'REC%s%d+%s%d+%s%d+%s%d+%s%d+%s%d+%s%d+')
+ if oldrec~='REC 1 5088 1 0 0 0 0' then
+  str=string.gsub(str,oldrec,'REC 1 5088 1 0 0 0 0')
+  ok=reaper.SetTrackStateChunk(TK, str, false)
+  reaper.TrackCtl_SetToolTip('              提示！\n当前轨道录音监听已打开，全部MIDI输入全部通道！', 500, 400, true)
+ end
+end --recst end
+recst()
+----------------------------------------------------------------
 
 local ctx = reaper.ImGui_CreateContext('A.G CHORD')
 x,y=reaper.GetMousePosition()
@@ -131,54 +207,44 @@ reaper.ImGui_SetNextWindowSize(ctx, 270, 100)
   reaper.ImGui_SetNextWindowPos(ctx, x, y)
 flag=true
 function loop()
-  local visible, open = reaper.ImGui_Begin(ctx, 'A.Guitar Chord', true)
+  local visible, open = reaper.ImGui_Begin(ctx, 'A.Guitar Chord ~ Right audition', true)
   if visible then
-    Maj=reaper.ImGui_Button(ctx,'Maj')
-    reaper.ImGui_SameLine(ctx)
-    Min=reaper.ImGui_Button(ctx,'Min')
-    reaper.ImGui_SameLine(ctx)
-    m7=reaper.ImGui_Button(ctx,'m7')
-    reaper.ImGui_SameLine(ctx)
-    _7=reaper.ImGui_Button(ctx,'7')
-    reaper.ImGui_SameLine(ctx)
-    Maj7=reaper.ImGui_Button(ctx,'Maj7')    
-    reaper.ImGui_SameLine(ctx)
-    sus4=reaper.ImGui_Button(ctx,'sus4')    
-    reaper.ImGui_SameLine(ctx)
-    sus2=reaper.ImGui_Button(ctx,'sus2')    
-   -- reaper.ImGui_SameLine(ctx)
-    Dim=reaper.ImGui_Button(ctx,'Dim')
-    reaper.ImGui_SameLine(ctx)
-    Aug=reaper.ImGui_Button(ctx,'Aug')    
-    reaper.ImGui_SameLine(ctx)
-    _9=reaper.ImGui_Button(ctx,'9')
-    reaper.ImGui_SameLine(ctx)
-    m9=reaper.ImGui_Button(ctx,'m9')
-    reaper.ImGui_SameLine(ctx)
-    Maj9=reaper.ImGui_Button(ctx,'Maj9')
-    reaper.ImGui_SameLine(ctx)
-    _7j5=reaper.ImGui_Button(ctx,'7-5')
-    reaper.ImGui_SameLine(ctx)
-    m7j5=reaper.ImGui_Button(ctx,'m7-5')
-    retval, capo= reaper.ImGui_SliderInt(ctx, 'capo', capo, 0, 11, nil,nil)
+
+ if reaper.ImGui_Button(ctx,'Maj') then leixing=''  chordin()  flag=false end  
+ if reaper.ImGui_IsItemClicked(ctx, reaper.ImGui_MouseButton_Right()) then  leixing=''  Audition()  end reaper.ImGui_SameLine(ctx)
+ if reaper.ImGui_Button(ctx,'Min') then leixing='m' chordin() flag=false end   
+ if reaper.ImGui_IsItemClicked(ctx, reaper.ImGui_MouseButton_Right()) then  leixing='m'  Audition()  end reaper.ImGui_SameLine(ctx)
+ if reaper.ImGui_Button(ctx,'m7') then leixing='m7' chordin() flag=false end
+ if reaper.ImGui_IsItemClicked(ctx, reaper.ImGui_MouseButton_Right()) then  leixing='m7'  Audition()  end reaper.ImGui_SameLine(ctx)
+ if reaper.ImGui_Button(ctx,'7') then leixing='7' chordin() flag=false end
+ if reaper.ImGui_IsItemClicked(ctx, reaper.ImGui_MouseButton_Right()) then  leixing='7'  Audition()  end reaper.ImGui_SameLine(ctx)
+ if reaper.ImGui_Button(ctx,'Maj7') then leixing='7M'  chordin() flag=false end
+ if reaper.ImGui_IsItemClicked(ctx, reaper.ImGui_MouseButton_Right()) then  leixing='7M'  Audition()  end reaper.ImGui_SameLine(ctx)
+ if reaper.ImGui_Button(ctx,'sus4') then leixing='sus4' chordin() flag=false end
+ if reaper.ImGui_IsItemClicked(ctx, reaper.ImGui_MouseButton_Right()) then  leixing='sus4'  Audition()  end reaper.ImGui_SameLine(ctx)
+ if reaper.ImGui_Button(ctx,'sus2') then leixing='sus2' chordin() flag=false end
+ if reaper.ImGui_IsItemClicked(ctx, reaper.ImGui_MouseButton_Right()) then  leixing='sus2'  Audition()  end 
+ if reaper.ImGui_Button(ctx,'Dim') then leixing='dim' chordin() flag=false end
+ if reaper.ImGui_IsItemClicked(ctx, reaper.ImGui_MouseButton_Right()) then  leixing='dim'  Audition()  end reaper.ImGui_SameLine(ctx)
+ if reaper.ImGui_Button(ctx,'Aug') then leixing='aug' chordin() flag=false end
+ if reaper.ImGui_IsItemClicked(ctx, reaper.ImGui_MouseButton_Right()) then  leixing='aug'  Audition()  end reaper.ImGui_SameLine(ctx)
+ if reaper.ImGui_Button(ctx,'9') then leixing='9' chordin() flag=false end
+ if reaper.ImGui_IsItemClicked(ctx, reaper.ImGui_MouseButton_Right()) then  leixing='9'  Audition()  end reaper.ImGui_SameLine(ctx)
+ if reaper.ImGui_Button(ctx,'m9') then leixing='m9' chordin() flag=false end
+ if reaper.ImGui_IsItemClicked(ctx, reaper.ImGui_MouseButton_Right()) then  leixing='m9'  Audition()  end reaper.ImGui_SameLine(ctx)
+ if reaper.ImGui_Button(ctx,'Maj9') then leixing='Maj9' chordin() flag=false end
+ if reaper.ImGui_IsItemClicked(ctx, reaper.ImGui_MouseButton_Right()) then  leixing='Maj9'  Audition()  end reaper.ImGui_SameLine(ctx)
+ if reaper.ImGui_Button(ctx,'7-5') then leixing='7-5' chordin() flag=false end
+ if reaper.ImGui_IsItemClicked(ctx, reaper.ImGui_MouseButton_Right()) then  leixing='7-5'  Audition()  end reaper.ImGui_SameLine(ctx)
+ if reaper.ImGui_Button(ctx,'m7-5') then leixing='m7-5' chordin() flag=false end
+ if reaper.ImGui_IsItemClicked(ctx, reaper.ImGui_MouseButton_Right()) then  leixing='m7-5'  Audition()  end 
+ 
+    retval, capo= reaper.ImGui_SliderInt(ctx, 'capo', capo, -2, 11, nil,nil)
+    retval = reaper.ImGui_IsKeyPressed(ctx, 27, nil)
+    if retval then  flag=false end
     reaper.ImGui_End(ctx)
  end
- if Maj then leixing=''  chord() flag=false end
- if Min then leixing='m' chord() flag=false end
- if m7 then leixing='m7' chord() flag=false end
- if _7 then leixing='7' chord() flag=false end
- if Maj7 then leixing='7M'  chord() flag=false end
- if sus4 then leixing='sus4' chord() flag=false end
- if sus2 then leixing='sus2' chord() flag=false end
- if Dim then leixing='dim' chord() flag=false end
- if Aug then leixing='aug' chord() flag=false end
- if _9 then leixing='9' chord() flag=false end
- if m9 then leixing='m9' chord() flag=false end
- if Maj9 then leixing='Maj9' chord() flag=false end
- if _7j5 then leixing='7-5' chord() flag=false end
- if m7j5 then leixing='m7-5' chord() flag=false end
- 
-  
+
   if open and flag then
     reaper.defer(loop)
   else

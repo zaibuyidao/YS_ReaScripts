@@ -1,6 +1,6 @@
 --[[
- * ReaScript Name: YS_Auto Trackname 自动填轨道名
- * Version: 1.0
+ * ReaScript Name: Auto Trackname 自动填轨道名
+ * Version: 1.0.1
  * Author: YS
  * provides: [main=main] .
 --]]
