@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<index version="1" name="YS Scripts" commit="d278dabc035d5db47add36ed100af60835a1c4c9">
+<index version="1" name="YS Scripts" commit="80324c81e5153564714cb0b53c38110d3db86b16">
   <category name="Items Editing">
     <reapack name="YS_Midi Take Name From Track.lua" type="script" desc="Bass 定弦">
       <version name="1.0" author="YS" time="2021-10-14T16:59:44Z">
@@ -39,6 +39,9 @@
       </version>
       <version name="1.0.1" author="YS" time="2021-11-12T14:23:53Z">
         <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/327e02bfef57768dbf04a4a1a7fa6acf950c5342/MIDI%20Editor/YS_A.G%20%E5%90%89%E4%BB%96%E5%92%8C%E5%BC%A6%E5%BB%BA%E7%AB%8B%20V2.lua</source>
+      </version>
+      <version name="1.0.2" author="YS" time="2021-11-26T11:59:15Z">
+        <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/80324c81e5153564714cb0b53c38110d3db86b16/MIDI%20Editor/YS_A.G%20%E5%90%89%E4%BB%96%E5%92%8C%E5%BC%A6%E5%BB%BA%E7%AB%8B%20V2.lua</source>
       </version>
     </reapack>
     <reapack name="YS_A.G 吉他和弦建立.lua" type="script" desc="A.G 吉他和弦建立">
@@ -159,6 +162,9 @@
       </version>
       <version name="1.0.2" author="YS" time="2021-11-20T08:42:52Z">
         <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/d278dabc035d5db47add36ed100af60835a1c4c9/MIDI%20Editor/YS_Chord%20Tools.lua</source>
+      </version>
+      <version name="1.0.3" author="YS" time="2021-11-26T11:59:15Z">
+        <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/80324c81e5153564714cb0b53c38110d3db86b16/MIDI%20Editor/YS_Chord%20Tools.lua</source>
       </version>
     </reapack>
     <reapack name="YS_Copy X_Multi Track.lua" type="script" desc="Copy X_Multi Track">
@@ -469,6 +475,9 @@
         <changelog><![CDATA[+ Initial release]]></changelog>
         <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/d3f6cedd65e29e252170f14943a7eb21ff2ba29a/MIDI%20Editor/YS_slide%20out.lua</source>
       </version>
+      <version name="1.0.1" author="YS" time="2021-11-26T11:59:15Z">
+        <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/80324c81e5153564714cb0b53c38110d3db86b16/MIDI%20Editor/YS_slide%20out.lua</source>
+      </version>
     </reapack>
     <reapack name="YS_slide Right 10 tick_Multi Track.lua" type="script" desc="slide Right 10 tick_Multi Track">
       <version name="1.0" author="YS" time="2021-08-29T12:17:58Z">
@@ -724,10 +733,13 @@
     </reapack>
   </category>
   <category name="Tracks Properties">
-    <reapack name="YS_Auto Trackname 自动填轨道名.lua" type="script" desc="YS_Auto Trackname 自动填轨道名">
+    <reapack name="YS_Auto Trackname 自动填轨道名.lua" type="script" desc="Auto Trackname 自动填轨道名">
       <version name="1.0" author="YS" time="2021-10-14T16:59:44Z">
         <changelog><![CDATA[+ Initial release]]></changelog>
         <source main="main">https://github.com/zaibuyidao/YS_ReaScripts/raw/e0c2cb8030173de0d7e0794ee7cc6a751307fd97/Tracks%20Properties/YS_Auto%20Trackname%20%E8%87%AA%E5%8A%A8%E5%A1%AB%E8%BD%A8%E9%81%93%E5%90%8D.lua</source>
+      </version>
+      <version name="1.0.1" author="YS" time="2021-11-26T11:59:15Z">
+        <source main="main">https://github.com/zaibuyidao/YS_ReaScripts/raw/80324c81e5153564714cb0b53c38110d3db86b16/Tracks%20Properties/YS_Auto%20Trackname%20%E8%87%AA%E5%8A%A8%E5%A1%AB%E8%BD%A8%E9%81%93%E5%90%8D.lua</source>
       </version>
     </reapack>
     <reapack name="YS_GetSet Track Info.lua" type="script" desc="GetSet Track Info">
