@@ -1,6 +1,6 @@
 --[[
  * ReaScript Name: Chord Tools
- * Version: 1.0.3
+ * Version: 1.0.4
  * Author: YS
 --]]
 
@@ -14,9 +14,9 @@ chord={}
 chord['Maj']='4,7,0,0,0,0'
 chord['aug']='4,8,0,0,0,0'
 chord['Maj7']='4,7,11,0,0,0'
-chord['m7-5']='3,6,10,0,0,0'
+chord['m7b5']='3,6,10,0,0,0'
 chord['sus2']='2,7,0,0,0,0'
-chord['Dim7']='3,6,9,0,0,0'
+chord['dim7']='3,6,9,0,0,0'
 chord['mM7']='3,7,11,0,0,0'
 chord['m']='3,7,0,0,0,0'
 chord['6']='4,7,9,0,0,0'
@@ -24,6 +24,7 @@ chord['9']='4,7,10,14,0,0'
 chord['Maj9']='4,7,11,14,0,0'
 chord['add2']='2,4,7,0,0,0'
 chord['madd2']='2,3,7,0,0,0'
+chord['add9']='4,7,14,0,0,0'
 chord['7#9']='4,7,10,15,0,0'
 chord['sus4']='5,7,0,0,0,0'
 chord['m6']='3,7,9,0,0,0'
@@ -35,7 +36,7 @@ chord['-5']='4,6,0,0,0,0'
 chord['M7#5']='4,8,11,0,0,0'
 chord['dim']='3,6,0,0,0,0'
 chord['7']='4,7,10,0,0,0'
-chord['7-5']='4,6,10,0,0,0'
+chord['7b5']='4,6,10,0,0,0'
 chord['Aug7']='4,8,10,0,0,0'
 chord['69']='4,7,9,14,0,0'
 chord['7b9']='4,7,10,13,0,0'
@@ -221,11 +222,11 @@ chord = ''
 chordtype={} chordtype[340]='' chordtype[430]='m' chordtype[250]='sus4' chordtype[330]='dim' 
 chordtype[440]='aug' chordtype[2340]='6' chordtype[2430]='m6' chordtype[3340]='7' chordtype[3430]='m7' 
 chordtype[4340]='M7' chordtype[43340]='9' chordtype[43430]='m9' chordtype[4240]='7b5' 
-chordtype[4330]='m7b5' chordtype[34340]='M9' chordtype[3250]='7sus4' chordtype[4250]='Maj7sus4' chordtype[3330]='dim7' 
+chordtype[4330]='m7b5' chordtype[34340]='M9' chordtype[3250]='7sus4' chordtype[4250]='Maj7sus4' 
 chordtype[520]='sus2' chordtype[3220]='add2' chordtype[3520]='7sus2' chordtype[2440]='aug7'
 chordtype[3330]='dim7' chordtype[4120]='madd2' chordtype[240]='-5'  chordtype[52340]='69'
 chordtype[4430]='mM7'  chordtype[53340]='7#9'  chordtype[3440]='M7#5'  chordtype[33340]='7b9'
-chordtype[343340]='11' chordtype[343430]='m11' chordtype[4343340]='13'
+chordtype[343340]='11' chordtype[343430]='m11' chordtype[4343340]='13'  chordtype[7340]='add9'
 -----------------------------------
 chordtype[33250]='7sus4b9'
 chordtype[433340]='11b9'
@@ -466,11 +467,11 @@ chord = ''
 chordtype={} chordtype[340]='' chordtype[430]='m' chordtype[250]='sus4' chordtype[330]='dim' 
 chordtype[440]='aug' chordtype[2340]='6' chordtype[2430]='m6' chordtype[3340]='7' chordtype[3430]='m7' 
 chordtype[4340]='M7' chordtype[43340]='9' chordtype[43430]='m9' chordtype[4240]='7b5' 
-chordtype[4330]='m7b5' chordtype[34340]='M9' chordtype[3250]='7sus4' chordtype[4250]='Maj7sus4' chordtype[3330]='dim7' 
+chordtype[4330]='m7b5' chordtype[34340]='M9' chordtype[3250]='7sus4' chordtype[4250]='Maj7sus4' 
 chordtype[520]='sus2' chordtype[3220]='add2' chordtype[3520]='7sus2' chordtype[2440]='aug7'
 chordtype[3330]='dim7' chordtype[4120]='madd2' chordtype[240]='-5'  chordtype[52340]='69'
 chordtype[4430]='mM7'  chordtype[53340]='7#9'  chordtype[3440]='M7#5'  chordtype[33340]='7b9'
-chordtype[343340]='11' chordtype[343430]='m11' chordtype[4343340]='13'
+chordtype[343340]='11' chordtype[343430]='m11' chordtype[4343340]='13'  chordtype[7340]='add9'
 -----------------------------------
 chordtype[33250]='7sus4b9'
 chordtype[433340]='11b9'
@@ -688,6 +689,188 @@ reaper.SN_FocusMIDIEditor()
 
 end --chordtolyrics_series
 -----------------------------------------------------------------
+function LyricsToNote()
+chord={}
+chord['']='4,7,0,0,0,0'  chord['Maj']='4,7,0,0,0,0'
+chord['aug']='4,8,0,0,0,0'
+chord['Maj7']='4,7,11,0,0,0'  chord['M7']='4,7,11,0,0,0'
+chord['m7b5']='3,6,10,0,0,0'  chord['m7-5']='3,6,10,0,0,0'
+chord['sus2']='2,7,0,0,0,0'
+chord['dim7']='3,6,9,0,0,0'
+chord['mM7']='3,7,11,0,0,0'
+chord['m']='3,7,0,0,0,0'  chord['min']='3,7,0,0,0,0'
+chord['6']='4,7,9,0,0,0'
+chord['9']='4,7,10,14,0,0'
+chord['Maj9']='4,7,11,14,0,0'  chord['M9']='4,7,11,14,0,0'
+chord['add2']='2,4,7,0,0,0'
+chord['madd2']='2,3,7,0,0,0'
+chord['add9']='4,7,14,0,0,0'
+chord['7#9']='4,7,10,15,0,0'
+chord['sus4']='5,7,0,0,0,0'
+chord['m6']='3,7,9,0,0,0'
+chord['m9']='3,7,10,14,0,0'
+chord['7sus4']='5,7,10,0,0,0'
+chord['Maj7sus4']='5,7,11,0,0,0'
+chord['7sus2']='2,7,10,0,0,0'
+chord['-5']='4,6,0,0,0,0'
+chord['M7#5']='4,8,11,0,0,0'
+chord['dim']='3,6,0,0,0,0'
+chord['7']='4,7,10,0,0,0' 
+chord['7b5']='4,6,10,0,0,0'   chord['7-5']='4,6,10,0,0,0'
+chord['Aug7']='4,8,10,0,0,0'
+chord['69']='4,7,9,14,0,0'
+chord['7b9']='4,7,10,13,0,0'
+chord['m7']='3,7,10,0,0,0'
+chord['11']='4,7,10,14,17,0'
+chord['m11']='3,7,10,14,17,0'
+chord['13']='4,7,10,14,17,21'
+------------------------------------
+chord['7sus4b9']='5,7,10,13,0,0'
+chord['11b9']='4,7,10,13,17,0'
+chord['13#9']='4,7,10,15,17,21'
+chord['13b5b9']='4,6,10,13,17,21'
+chord['13b9']='4,7,10,13,17,21'
+chord['6sus4']='5,7,9,0,0,0'
+chord['7#11']='4,7,10,18,0,0'
+chord['7#5']='4,8,10,0,0,0'
+chord['7#5#9']='4,8,10,15,0,0'
+chord['7#5b9']='4,8,10,13,0,0'
+chord['7add11']='4,7,10,17,0,0'
+chord['7add13']='4,7,10,21,0,0'
+chord['7b5#9']='4,6,10,15,0,0'
+chord['7b5b9']='4,6,10,13,0,0'
+chord['9#11']='4,7,10,14,18,0'
+chord['9#5']='4,8,10,14,0,0'
+chord['9b13']='4,7,10,14,20,0'
+chord['9b5']='4,6,10,14,0,0'
+chord['9sus4']='5,7,10,14,0,0'
+chord['Maj11']='4,7,11,14,17,0'  chord['M11']='4,7,11,14,17,0'
+chord['Maj13']='4,7,11,14,17,21'  chord['M13']='4,7,11,14,17,21'
+chord['Maj7#11']='4,7,11,18,0,0'
+chord['Maj7add13']='4,7,11,21,0,0'
+chord['Maj7b5']='4,6,11,0,0,0'
+chord['Maj9#11']='4,8,11,14,18,0'
+chord['Maj9#5']='4,8,11,14,0,0'
+chord['Maj9sus4']='5,7,11,14,0,0'
+chord['m13']='3,7,10,14,17,21'
+chord['m6add9']='3,7,9,14,0,0'
+chord['m7add11']='3,7,10,17,0,0'
+chord['m7add13']='3,7,10,21,0,0'
+chord['m7b9']='3,7,10,13,0,0'
+chord['m9b5']='3,6,10,14,0,0'
+chord['mMaj11']='3,7,11,14,17,0'
+chord['mMaj13']='3,7,11,14,17,21'
+chord['mMaj7add11']='3,7,11,17,0,0'
+chord['mMaj7add13']='3,7,11,21,0,0'
+chord['mMaj9']='3,7,11,14,0,0'
+local editor=reaper.MIDIEditor_GetActive()
+local take=reaper.MIDIEditor_GetTake(editor)
+roottb={} 
+roottb['C']=60
+roottb['C#']=61
+roottb['Db']=61
+roottb['D']=62
+roottb['D#']=63
+roottb['Eb']=63
+roottb['E']=64
+roottb['F']=53
+roottb['F#']=54
+roottb['Gb']=54
+roottb['G']=55
+roottb['G#']=56
+roottb['Ab']=56
+roottb['A']=57
+roottb['A#']=58
+roottb['Bb']=58
+roottb['B']=59
+
+zhuanweitb={}
+zhuanweitb['C']=36
+zhuanweitb['C#']=37
+zhuanweitb['Db']=37
+zhuanweitb['D']=38
+zhuanweitb['D#']=39
+zhuanweitb['Eb']=39
+zhuanweitb['E']=40
+zhuanweitb['F']=41
+zhuanweitb['F#']=42
+zhuanweitb['Gb']=42
+zhuanweitb['G']=43
+zhuanweitb['G#']=44
+zhuanweitb['Ab']=44
+zhuanweitb['A']=45
+zhuanweitb['A#']=46
+zhuanweitb['Bb']=46
+zhuanweitb['B']=47
+
+message=''
+reaper.MIDIEditor_OnCommand(editor,40003) --select all note
+reaper.MIDIEditor_OnCommand(editor,40002) --delete note
+reaper.MIDI_DisableSort(take)
+idx=0
+retval, selected,muted, ppqpos, txt_type, chord_txt = reaper.MIDI_GetTextSysexEvt(take, idx, true, false, 0, 5, '')
+repeat
+  tb_note={}
+  if retval and  txt_type==5 then
+  chord_txt=string.gsub(chord_txt,'%s','') 
+  zhuanwei_sub=string.match(chord_txt,'%/%S+')
+  if zhuanwei_sub~=nil then  
+  zhuanwei=string.gsub(zhuanwei_sub,'%/','') 
+  chord_new=string.gsub(chord_txt,zhuanwei_sub,'') 
+  if zhuanweitb[zhuanwei]~=nil then
+  reaper.MIDI_InsertNote(take, false, false, ppqpos, ppqpos+240, 0, zhuanweitb[zhuanwei], 100, false)
+  else
+  ProjTime = reaper.MIDI_GetProjTimeFromPPQPos(take, ppqpos)
+  hahahaha, measures, cml, fullbeats, cdenom = reaper.TimeMap2_timeToBeats(0, ProjTime)
+  measures =  measures + 1
+  message=message..'有无法识别的和弦符号 '..chord_txt..' 在第 '..measures..' 小节！\n'  
+  end
+  else
+  chord_new=chord_txt
+  end
+  root1=string.sub(chord_new,1,1)
+  root2=string.sub(chord_new,2,2)
+  if root2=='b'or root2=='#' then
+  root=root1..root2
+  chord_type=string.sub(chord_new,3)
+  else
+  root=root1
+  chord_type=string.sub(chord_new,2)
+  end
+  if roottb[root]~=nil and chord[chord_type]~=nil then
+  reaper.MIDI_InsertNote(take, false, false, ppqpos, ppqpos+240, 0, roottb[root], 100, false)
+  
+  note1,note2,note3,note4,note5,note6=string.match(chord[chord_type],"(%d+),(%d+),(%d+),(%d+),(%d+),(%d+)")
+ if note1~='0' then table.insert(tb_note,tonumber(note1)) end
+ if note2~='0' then table.insert(tb_note,tonumber(note2)) end
+ if note3~='0' then table.insert(tb_note,tonumber(note3)) end
+ if note4~='0' then table.insert(tb_note,tonumber(note4)) end
+ if note5~='0' then table.insert(tb_note,tonumber(note5)) end
+ if note6~='0' then table.insert(tb_note,tonumber(note6)) end
+ for i,v in  ipairs(tb_note) do 
+ reaper.MIDI_InsertNote(take, false, false, ppqpos, ppqpos+240, 0, roottb[root]+v, 100, false)
+  end -- for end
+  else 
+  ProjTime = reaper.MIDI_GetProjTimeFromPPQPos(take, ppqpos)
+  hahahaha, measures, cml, fullbeats, cdenom = reaper.TimeMap2_timeToBeats(0, ProjTime)
+  measures =  measures + 1
+  
+  message=message..'有无法识别的和弦符号 '..chord_txt..' 在第 '..measures..' 小节！\n'
+  end 
+  end
+
+ idx=idx+1
+ 
+retval, selected,muted, ppqpos, txt_type, chord_txt = reaper.MIDI_GetTextSysexEvt(take, idx, true, false, 0, 5, '')
+ 
+ until retval==false
+ 
+reaper.MIDI_Sort(take)
+reaper.TrackCtl_SetToolTip('          提示！\n全部和弦音符已写入！', 500, 400, true)
+if message~='' then reaper.MB(message,'提示！',0) end
+
+end  --LyricsToNote
+-----------------------------------------------------------
 
 function LyricsToChordTrack()
 reaper.Undo_BeginBlock()
@@ -870,7 +1053,7 @@ recst()
 
 local ctx = reaper.ImGui_CreateContext('Chord Tools')
 x,y=reaper.GetMousePosition()
-reaper.ImGui_SetNextWindowSize(ctx, 405, 310)
+reaper.ImGui_SetNextWindowSize(ctx, 410, 325)
   reaper.ImGui_SetNextWindowPos(ctx, x, y)
 flag=true
 function loop()
@@ -885,7 +1068,7 @@ function loop()
   if reaper.ImGui_IsItemClicked(ctx, reaper.ImGui_MouseButton_Right()) then  leixing='sus4'  Audition()  end   reaper.ImGui_SameLine(ctx)
   if reaper.ImGui_Button(ctx, "sus2") then  leixing='sus2'  chordin()  flag=false  end  
   if reaper.ImGui_IsItemClicked(ctx, reaper.ImGui_MouseButton_Right()) then  leixing='sus2'  Audition()  end   reaper.ImGui_SameLine(ctx)
-  if reaper.ImGui_Button(ctx, "Dim") then  leixing='dim'  chordin()  flag=false  end  
+  if reaper.ImGui_Button(ctx, "dim") then  leixing='dim'  chordin()  flag=false  end  
   if reaper.ImGui_IsItemClicked(ctx, reaper.ImGui_MouseButton_Right()) then  leixing='dim'  Audition()  end   reaper.ImGui_SameLine(ctx)
   if reaper.ImGui_Button(ctx, "Aug") then  leixing='aug'  chordin()  flag=false  end  
   if reaper.ImGui_IsItemClicked(ctx, reaper.ImGui_MouseButton_Right()) then  leixing='aug'  Audition()  end   reaper.ImGui_SameLine(ctx)
@@ -911,16 +1094,18 @@ function loop()
   if reaper.ImGui_IsItemClicked(ctx, reaper.ImGui_MouseButton_Right()) then  leixing='7'  Audition()  end   reaper.ImGui_SameLine(ctx)
   if reaper.ImGui_Button(ctx, "Maj7") then  leixing='Maj7'  chordin()  flag=false  end  
   if reaper.ImGui_IsItemClicked(ctx, reaper.ImGui_MouseButton_Right()) then  leixing='Maj7'  Audition()  end   reaper.ImGui_SameLine(ctx)
-  if reaper.ImGui_Button(ctx, "Dim7") then  leixing='Dim7'  chordin()  flag=false  end  
-  if reaper.ImGui_IsItemClicked(ctx, reaper.ImGui_MouseButton_Right()) then  leixing='Dim7'  Audition()  end   reaper.ImGui_SameLine(ctx)
+  if reaper.ImGui_Button(ctx, "dim7") then  leixing='dim7'  chordin()  flag=false  end  
+  if reaper.ImGui_IsItemClicked(ctx, reaper.ImGui_MouseButton_Right()) then  leixing='dim7'  Audition()  end   reaper.ImGui_SameLine(ctx)
   if reaper.ImGui_Button(ctx, "mM7") then  leixing='mM7'  chordin()  flag=false  end  
-  if reaper.ImGui_IsItemClicked(ctx, reaper.ImGui_MouseButton_Right()) then  leixing='mM7'  Audition()  end   
-  if reaper.ImGui_Button(ctx, "7-5") then  leixing='7-5'  chordin()  flag=false  end  
-  if reaper.ImGui_IsItemClicked(ctx, reaper.ImGui_MouseButton_Right()) then  leixing='7-5'  Audition()  end   reaper.ImGui_SameLine(ctx)
+  if reaper.ImGui_IsItemClicked(ctx, reaper.ImGui_MouseButton_Right()) then  leixing='mM7'  Audition()  end   reaper.ImGui_SameLine(ctx)
+  if reaper.ImGui_Button(ctx, "add9") then  leixing='add9'  chordin()  flag=false  end  
+  if reaper.ImGui_IsItemClicked(ctx, reaper.ImGui_MouseButton_Right()) then  leixing='add9'  Audition()  end   
+  if reaper.ImGui_Button(ctx, "7b5") then  leixing='7b5'  chordin()  flag=false  end  
+  if reaper.ImGui_IsItemClicked(ctx, reaper.ImGui_MouseButton_Right()) then  leixing='7b5'  Audition()  end   reaper.ImGui_SameLine(ctx)
   if reaper.ImGui_Button(ctx, "7#5") then  leixing='7#5'  chordin()  flag=false  end  
   if reaper.ImGui_IsItemClicked(ctx, reaper.ImGui_MouseButton_Right()) then  leixing='7#5'  Audition()  end   reaper.ImGui_SameLine(ctx)
-  if reaper.ImGui_Button(ctx, "m7-5") then  leixing='m7-5'  chordin()  flag=false  end  
-  if reaper.ImGui_IsItemClicked(ctx, reaper.ImGui_MouseButton_Right()) then  leixing='m7-5'  Audition()  end   reaper.ImGui_SameLine(ctx)
+  if reaper.ImGui_Button(ctx, "m7b5") then  leixing='m7b5'  chordin()  flag=false  end  
+  if reaper.ImGui_IsItemClicked(ctx, reaper.ImGui_MouseButton_Right()) then  leixing='m7b5'  Audition()  end   reaper.ImGui_SameLine(ctx)
   if reaper.ImGui_Button(ctx, "7sus4") then  leixing='7sus4'  chordin()  flag=false  end  
   if reaper.ImGui_IsItemClicked(ctx, reaper.ImGui_MouseButton_Right()) then  leixing='7sus4'  Audition()  end   reaper.ImGui_SameLine(ctx)
   if reaper.ImGui_Button(ctx, "Maj7sus4") then  leixing='Maj7sus4'  chordin()  flag=false  end  
@@ -1017,12 +1202,12 @@ function loop()
   if reaper.ImGui_IsItemClicked(ctx, reaper.ImGui_MouseButton_Right()) then  leixing='mMaj7add13'  Audition()  end   reaper.ImGui_SameLine(ctx)
   if reaper.ImGui_Button(ctx, "mMaj9") then  leixing='mMaj9'  chordin()  flag=false  end  
   if reaper.ImGui_IsItemClicked(ctx, reaper.ImGui_MouseButton_Right()) then  leixing='mMaj9'  Audition()  end   
-  
-  if reaper.ImGui_Button(ctx, "Chord To Lyrics") then  chordtolyrics() flag=false  end   reaper.ImGui_SameLine(ctx)
-  if reaper.ImGui_Button(ctx, "Chord Series To Lyrics") then  chordtolyrics_series() flag=false  end   
+  reaper.ImGui_Text(ctx, '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
+  if reaper.ImGui_Button(ctx, "Chord Note To Lyrics") then  chordtolyrics() flag=false  end   reaper.ImGui_SameLine(ctx)
+  if reaper.ImGui_Button(ctx, "Chord Note Series To Lyrics") then  chordtolyrics_series() flag=false  end   
   if reaper.ImGui_Button(ctx, "Lyrics To Track") then  LyricsToChordTrack() flag=false  end   reaper.ImGui_SameLine(ctx)
   if reaper.ImGui_Button(ctx, "Lyrics To region") then  LyricsToregion() flag=false  end    reaper.ImGui_SameLine(ctx)
- -- if reaper.ImGui_Button(ctx, "Insert Key Marker") then    inkeymark() flag=false   end 
+  if reaper.ImGui_Button(ctx, "Lyrics To Note") then    LyricsToNote() flag=false   end 
   if reaper.ImGui_Button(ctx, "Help") then  reaper.MB(help,'Help',0)  end
   
   retval = reaper.ImGui_IsKeyPressed(ctx, 27, nil)
