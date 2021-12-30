@@ -1,6 +1,6 @@
 --[[
  * ReaScript Name: A.G 吉他和弦建立 V2
- * Version: 1.0.2
+ * Version: 1.0.3
  * Author: YS
  * provides: [main=midi_editor] .
 --]]

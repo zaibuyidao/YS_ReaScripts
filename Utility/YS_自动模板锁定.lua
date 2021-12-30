@@ -1,6 +1,6 @@
 --[[
  * ReaScript Name: 自动模板锁定
- * Version: 1.0
+ * Version: 1.0.1
  * Author: YS
  * provides: [main=main] .
 --]]
@@ -17,13 +17,14 @@ if getcom==0 or getcom==-1 then
 reaper.SetToggleCommandState(sectionID,ownCommandID,1)
 reaper.RefreshToolbar2(sectionID, ownCommandID)
 end
-flag=0
+flag=1
+project, projfn = reaper.EnumProjects(0)
 
 function getitem()
 idx=0
 repeat 
-item0=reaper.GetMediaItem(0,idx) 
-take0=reaper.GetTake(item0,0)
+item0=reaper.GetMediaItem(project,idx) 
+take0=reaper.GetTake(item0,0) 
 idx=idx+1
 until reaper.TakeIsMIDI(take0)
 itemst=reaper.GetMediaItemInfo_Value(item0, 'D_POSITION')
@@ -35,15 +36,16 @@ function automute()
 pos=reaper.GetPlayPosition() 
 if pos>itemend and flag==0 then 
 --reaper.ShowConsoleMsg('mute  ')
-getitem()
+--getitem()
 integer = reaper.CountMediaItems(0)
  idx = 0
  ccidx ,syxidx = 0, 0
  
  while idx < integer do 
- MediaItem = reaper.GetMediaItem(0, idx)
+ MediaItem = reaper.GetMediaItem(project, idx)
  idx=idx+1
   take = reaper.GetTake(MediaItem, 0)
+  if take~=nil then
   num = reaper.GetMediaItemInfo_Value(MediaItem, 'IP_ITEMNUMBER')
    if ( num == 0 and reaper.TakeIsMIDI(take) ) then
    --if reaper.TakeIsMIDI(take)  then
@@ -52,33 +54,41 @@ integer = reaper.CountMediaItems(0)
      while ccidx < ccevtcnt do 
      retval, selected, muted, ppqpos, chanmsg, chan, msg2, msg3 = reaper.MIDI_GetCC(take, ccidx)
       if chanmsg == 176 and msg2 == 6 then 
-      reaper.MIDI_SetCC(take, ccidx, false, true, ppqpos, chanmsg, chan, msg2, msg3, true)
-      reaper.SetMediaItemTakeInfo_Value(take, 'I_CUSTOMCOLOR', 16777471)
-      end -- if cc6 end
+      reaper.MIDI_SetCC(take, ccidx, NULL, true, NULL, NULL, NULL, NULL, NULL, true)
+       end -- if cc6 end
+       if chanmsg == 176 and msg2 == 0 then 
+       reaper.MIDI_SetCC(take, ccidx, NULL, true, NULL, NULL, NULL, NULL, NULL, true)
+        end -- if cc0 end
+        if chanmsg == 176 and msg2 == 32 then 
+        reaper.MIDI_SetCC(take, ccidx, NULL, true, NULL, NULL, NULL, NULL, NULL, true)
+         end -- if cc32 end
       if chanmsg == 176  then 
         if msg2 >=98 and msg2 <= 101 then
-      reaper.MIDI_SetCC(take, ccidx, false, true, ppqpos, chanmsg, chan, msg2, msg3, true)
-      reaper.SetMediaItemTakeInfo_Value(take, 'I_CUSTOMCOLOR', 16777471)
+      reaper.MIDI_SetCC(take, ccidx, NULL, true, NULL, NULL, NULL, NULL, NULL, true)
       end
       end -- if cc98-101 end
       if chanmsg == 192  then 
       reaper.MIDI_SetCC(take, ccidx, false, true, ppqpos, chanmsg, chan, msg2, msg3, true)
-      reaper.SetMediaItemTakeInfo_Value(take, 'I_CUSTOMCOLOR', 16777471)
-      end -- if PC end
-      ccidx = ccidx + 1
+       end -- if PC end
+     ccidx = ccidx + 1
     end -- while end
     ccidx = 0
   end   -- if ccevt end
     if textsyxevtcnt > 0 then 
     while syxidx < textsyxevtcnt do
-    reaper.MIDI_SetTextSysexEvt(take, syxidx, false, true, NULL, NULL, '', true)
-    reaper.SetMediaItemTakeInfo_Value(take, 'I_CUSTOMCOLOR', 16777471)
+    retval, selected, muted, ppqpos, txt_type, msg =reaper.MIDI_GetTextSysexEvt(take,syxidx,false,false,0,0,'')
+    if txt_type==-1 then
+    reaper.MIDI_SetTextSysexEvt(take, syxidx, false, true, NULL, NULL, '', false)
+    end
+    
     syxidx = syxidx + 1
     end -- while end
     syxidx = 0
     end -- if syx end
+    reaper.SetMediaItemTakeInfo_Value(take, 'I_CUSTOMCOLOR', 16777471)
     reaper.MIDI_Sort(take)
   end   --take midi end
+  end --take~=nil
 end -- while end
 reaper.UpdateArrange()
 flag=1
@@ -86,7 +96,7 @@ end
 
 if pos<itemend and flag==1 then
 reaper.Main_OnCommand(40044, 0) --playstop
-getitem()
+--getitem()
 --reaper.ShowConsoleMsg('unmute ')
 --reaper.Main_OnCommand(40340, 0) --unsolo all track
 
@@ -108,9 +118,10 @@ integer = reaper.CountMediaItems(0)
  idx = 0
  ccidx , syxidx= 0 ,0
   while idx < integer do
- MediaItem = reaper.GetMediaItem(0, idx)
+ MediaItem = reaper.GetMediaItem(project, idx)
  idx=idx+1
   take = reaper.GetTake(MediaItem, 0)
+  if take~=nil then
   num = reaper.GetMediaItemInfo_Value(MediaItem, 'IP_ITEMNUMBER')
    if ( num == 0 and reaper.TakeIsMIDI(take) ) then
    retval, notecnt, ccevtcnt, textsyxevtcnt = reaper.MIDI_CountEvts(take)
@@ -118,18 +129,21 @@ integer = reaper.CountMediaItems(0)
      while ccidx < ccevtcnt do 
      retval, selected, muted, ppqpos, chanmsg, chan, msg2, msg3 = reaper.MIDI_GetCC(take, ccidx)
       if chanmsg == 176 and msg2 == 6 then 
-      reaper.MIDI_SetCC(take, ccidx, false, false, ppqpos, chanmsg, chan, msg2, msg3, true)
-      reaper.SetMediaItemTakeInfo_Value(take, 'I_CUSTOMCOLOR', 21036800)
-      end -- if cc6 end
+      reaper.MIDI_SetCC(take, ccidx, NULL, false, NULL, NULL, NULL, NULL, NULL, true)
+       end -- if cc6 end
+       if chanmsg == 176 and msg2 == 0 then 
+       reaper.MIDI_SetCC(take, ccidx, NULL, false, NULL, NULL, NULL, NULL, NULL, true)
+        end -- if cc0 end
+        if chanmsg == 176 and msg2 == 32 then 
+        reaper.MIDI_SetCC(take, ccidx, NULL, false, NULL, NULL, NULL, NULL, NULL, true)
+         end -- if cc32 end
       if chanmsg == 176  then 
         if msg2 >=98 and msg2 <= 101 then
-      reaper.MIDI_SetCC(take, ccidx, false, false, ppqpos, chanmsg, chan, msg2, msg3, true)
-      reaper.SetMediaItemTakeInfo_Value(take, 'I_CUSTOMCOLOR', 21036800)
+      reaper.MIDI_SetCC(take, ccidx, NULL, false, NULL, NULL, NULL, NULL, NULL, true)
       end
       end -- if cc98-101 end
       if chanmsg == 192  then 
       reaper.MIDI_SetCC(take, ccidx, false, false, ppqpos, chanmsg, chan, msg2, msg3, true)
-      reaper.SetMediaItemTakeInfo_Value(take, 'I_CUSTOMCOLOR', 21036800)
       end -- if PC end
       ccidx = ccidx + 1
     end -- while end
@@ -138,17 +152,18 @@ integer = reaper.CountMediaItems(0)
   if textsyxevtcnt > 0 then 
   while syxidx < textsyxevtcnt do
   retval, selected, muted, ppqpos, txt_type, msg =reaper.MIDI_GetTextSysexEvt(take,syxidx,false,false,0,0,'')
-
+  if txt_type==-1 then
   reaper.MIDI_SetTextSysexEvt(take, syxidx, false, false, NULL, NULL, '', false)
-
-  reaper.SetMediaItemTakeInfo_Value(take, 'I_CUSTOMCOLOR', 21036800)
+  end 
   syxidx = syxidx + 1
   end -- while end
   syxidx = 0 
   end -- if syx end
+  reaper.SetMediaItemTakeInfo_Value(take, 'I_CUSTOMCOLOR', 21036800)
   reaper.MIDI_Sort(take)
   end -- if takemidi end
   takename()
+  end --take~=nil
 end -- while end
 reaper.UpdateArrange()
 flag=0
