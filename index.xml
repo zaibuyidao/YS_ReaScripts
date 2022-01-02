@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<index version="1" name="YS Scripts" commit="088fae1cffabb400429f3ee25c741b381ca3fcbd">
+<index version="1" name="YS Scripts" commit="3e57988e53752c84cc1f64d56e8a5c694f687f69">
   <category name="Items Editing">
     <reapack name="YS_Midi Take Name From Track.lua" type="script" desc="Bass 定弦">
       <version name="1.0" author="YS" time="2021-10-14T16:59:44Z">
@@ -171,6 +171,9 @@
       </version>
       <version name="1.0.4" author="YS" time="2021-12-09T14:38:23Z">
         <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/39fdcdc68135ae56c3ec14bd6833b34699e645c7/MIDI%20Editor/YS_Chord%20Tools.lua</source>
+      </version>
+      <version name="1.0.5" author="YS" time="2022-01-02T17:05:15Z">
+        <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/3e57988e53752c84cc1f64d56e8a5c694f687f69/MIDI%20Editor/YS_Chord%20Tools.lua</source>
       </version>
     </reapack>
     <reapack name="YS_Copy X_Multi Track.lua" type="script" desc="Copy X_Multi Track">
@@ -657,6 +660,12 @@
       <version name="1.0" author="YS" time="2021-08-29T12:17:58Z">
         <changelog><![CDATA[+ Initial release]]></changelog>
         <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/d3f6cedd65e29e252170f14943a7eb21ff2ba29a/MIDI%20Editor/YS_%E6%99%BA%E8%83%BD%E9%87%8D%E5%A4%8D%E6%89%80%E6%9C%89%E9%80%89%E4%B8%AD%E4%BA%8B%E4%BB%B6.lua</source>
+      </version>
+    </reapack>
+    <reapack name="YS_根据所选事件激活Take(仅激活take可编辑).lua" type="script" desc="根据所选事件激活Take(仅激活take可编辑)">
+      <version name="1.0" author="YS" time="2022-01-02T17:05:15Z">
+        <changelog><![CDATA[+ Initial release]]></changelog>
+        <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/3e57988e53752c84cc1f64d56e8a5c694f687f69/MIDI%20Editor/YS_%E6%A0%B9%E6%8D%AE%E6%89%80%E9%80%89%E4%BA%8B%E4%BB%B6%E6%BF%80%E6%B4%BBTake(%E4%BB%85%E6%BF%80%E6%B4%BBtake%E5%8F%AF%E7%BC%96%E8%BE%91).lua</source>
       </version>
     </reapack>
     <reapack name="YS_滚擦自动分轨.lua" type="script" desc="滚擦自动分轨">
