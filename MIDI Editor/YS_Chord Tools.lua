@@ -1,6 +1,6 @@
 --[[
  * ReaScript Name: Chord Tools
- * Version: 1.0.4
+ * Version: 1.0.5
  * Author: YS
 --]]
 
@@ -22,9 +22,8 @@ chord['m']='3,7,0,0,0,0'
 chord['6']='4,7,9,0,0,0'
 chord['9']='4,7,10,14,0,0'
 chord['Maj9']='4,7,11,14,0,0'
-chord['add2']='2,4,7,0,0,0'
-chord['madd2']='2,3,7,0,0,0'
-chord['add9']='4,7,14,0,0,0'
+chord['add9']='2,4,7,0,0,0'
+chord['madd9']='2,3,7,0,0,0'
 chord['7#9']='4,7,10,15,0,0'
 chord['sus4']='5,7,0,0,0,0'
 chord['m6']='3,7,9,0,0,0'
@@ -223,10 +222,10 @@ chordtype={} chordtype[340]='' chordtype[430]='m' chordtype[250]='sus4' chordtyp
 chordtype[440]='aug' chordtype[2340]='6' chordtype[2430]='m6' chordtype[3340]='7' chordtype[3430]='m7' 
 chordtype[4340]='M7' chordtype[43340]='9' chordtype[43430]='m9' chordtype[4240]='7b5' 
 chordtype[4330]='m7b5' chordtype[34340]='M9' chordtype[3250]='7sus4' chordtype[4250]='Maj7sus4' 
-chordtype[520]='sus2' chordtype[3220]='add2' chordtype[3520]='7sus2' chordtype[2440]='aug7'
-chordtype[3330]='dim7' chordtype[4120]='madd2' chordtype[240]='-5'  chordtype[52340]='69'
+chordtype[520]='sus2' chordtype[3220]='add9' chordtype[3520]='7sus2' chordtype[2440]='aug7'
+chordtype[3330]='dim7' chordtype[4120]='madd9' chordtype[240]='-5'  chordtype[52340]='69'
 chordtype[4430]='mM7'  chordtype[53340]='7#9'  chordtype[3440]='M7#5'  chordtype[33340]='7b9'
-chordtype[343340]='11' chordtype[343430]='m11' chordtype[4343340]='13'  chordtype[7340]='add9'
+chordtype[343340]='11' chordtype[343430]='m11' chordtype[4343340]='13'  
 -----------------------------------
 chordtype[33250]='7sus4b9'
 chordtype[433340]='11b9'
@@ -468,10 +467,10 @@ chordtype={} chordtype[340]='' chordtype[430]='m' chordtype[250]='sus4' chordtyp
 chordtype[440]='aug' chordtype[2340]='6' chordtype[2430]='m6' chordtype[3340]='7' chordtype[3430]='m7' 
 chordtype[4340]='M7' chordtype[43340]='9' chordtype[43430]='m9' chordtype[4240]='7b5' 
 chordtype[4330]='m7b5' chordtype[34340]='M9' chordtype[3250]='7sus4' chordtype[4250]='Maj7sus4' 
-chordtype[520]='sus2' chordtype[3220]='add2' chordtype[3520]='7sus2' chordtype[2440]='aug7'
-chordtype[3330]='dim7' chordtype[4120]='madd2' chordtype[240]='-5'  chordtype[52340]='69'
+chordtype[520]='sus2' chordtype[3220]='add9' chordtype[3520]='7sus2' chordtype[2440]='aug7'
+chordtype[3330]='dim7' chordtype[4120]='madd9' chordtype[240]='-5'  chordtype[52340]='69'
 chordtype[4430]='mM7'  chordtype[53340]='7#9'  chordtype[3440]='M7#5'  chordtype[33340]='7b9'
-chordtype[343340]='11' chordtype[343430]='m11' chordtype[4343340]='13'  chordtype[7340]='add9'
+chordtype[343340]='11' chordtype[343430]='m11' chordtype[4343340]='13'  
 -----------------------------------
 chordtype[33250]='7sus4b9'
 chordtype[433340]='11b9'
@@ -702,9 +701,8 @@ chord['m']='3,7,0,0,0,0'  chord['min']='3,7,0,0,0,0'
 chord['6']='4,7,9,0,0,0'
 chord['9']='4,7,10,14,0,0'
 chord['Maj9']='4,7,11,14,0,0'  chord['M9']='4,7,11,14,0,0'
-chord['add2']='2,4,7,0,0,0'
-chord['madd2']='2,3,7,0,0,0'
-chord['add9']='4,7,14,0,0,0'
+chord['add9']='2,4,7,0,0,0'
+chord['madd9']='2,3,7,0,0,0'
 chord['7#9']='4,7,10,15,0,0'
 chord['sus4']='5,7,0,0,0,0'
 chord['m6']='3,7,9,0,0,0'
@@ -1082,10 +1080,10 @@ function loop()
   if reaper.ImGui_IsItemClicked(ctx, reaper.ImGui_MouseButton_Right()) then  leixing='6sus4'  Audition()  end  
   if reaper.ImGui_Button(ctx, "m6add9") then  leixing='m6add9'  chordin()  flag=false  end  
   if reaper.ImGui_IsItemClicked(ctx, reaper.ImGui_MouseButton_Right()) then  leixing='m6add9'  Audition()  end   reaper.ImGui_SameLine(ctx)
-  if reaper.ImGui_Button(ctx, "add2") then  leixing='add2'  chordin()  flag=false  end  
-  if reaper.ImGui_IsItemClicked(ctx, reaper.ImGui_MouseButton_Right()) then  leixing='add2'  Audition()  end   reaper.ImGui_SameLine(ctx)
-  if reaper.ImGui_Button(ctx, "madd2") then  leixing='madd2'  chordin()  flag=false  end  
-  if reaper.ImGui_IsItemClicked(ctx, reaper.ImGui_MouseButton_Right()) then  leixing='madd2'  Audition()  end   reaper.ImGui_SameLine(ctx)
+  if reaper.ImGui_Button(ctx, "add9") then  leixing='add9'  chordin()  flag=false  end  
+  if reaper.ImGui_IsItemClicked(ctx, reaper.ImGui_MouseButton_Right()) then  leixing='add9'  Audition()  end   reaper.ImGui_SameLine(ctx)
+  if reaper.ImGui_Button(ctx, "madd9") then  leixing='madd9'  chordin()  flag=false  end  
+  if reaper.ImGui_IsItemClicked(ctx, reaper.ImGui_MouseButton_Right()) then  leixing='madd9'  Audition()  end   reaper.ImGui_SameLine(ctx)
   if reaper.ImGui_Button(ctx, "-5") then  leixing='-5'  chordin()  flag=false  end  
   if reaper.ImGui_IsItemClicked(ctx, reaper.ImGui_MouseButton_Right()) then  leixing='-5'  Audition()  end    reaper.ImGui_SameLine(ctx)
   if reaper.ImGui_Button(ctx, "m7") then  leixing='m7'  chordin()  flag=false  end  
@@ -1097,9 +1095,7 @@ function loop()
   if reaper.ImGui_Button(ctx, "dim7") then  leixing='dim7'  chordin()  flag=false  end  
   if reaper.ImGui_IsItemClicked(ctx, reaper.ImGui_MouseButton_Right()) then  leixing='dim7'  Audition()  end   reaper.ImGui_SameLine(ctx)
   if reaper.ImGui_Button(ctx, "mM7") then  leixing='mM7'  chordin()  flag=false  end  
-  if reaper.ImGui_IsItemClicked(ctx, reaper.ImGui_MouseButton_Right()) then  leixing='mM7'  Audition()  end   reaper.ImGui_SameLine(ctx)
-  if reaper.ImGui_Button(ctx, "add9") then  leixing='add9'  chordin()  flag=false  end  
-  if reaper.ImGui_IsItemClicked(ctx, reaper.ImGui_MouseButton_Right()) then  leixing='add9'  Audition()  end   
+  if reaper.ImGui_IsItemClicked(ctx, reaper.ImGui_MouseButton_Right()) then  leixing='mM7'  Audition()  end   
   if reaper.ImGui_Button(ctx, "7b5") then  leixing='7b5'  chordin()  flag=false  end  
   if reaper.ImGui_IsItemClicked(ctx, reaper.ImGui_MouseButton_Right()) then  leixing='7b5'  Audition()  end   reaper.ImGui_SameLine(ctx)
   if reaper.ImGui_Button(ctx, "7#5") then  leixing='7#5'  chordin()  flag=false  end  
