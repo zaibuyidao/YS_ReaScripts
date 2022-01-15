@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<index version="1" name="YS Scripts" commit="3e57988e53752c84cc1f64d56e8a5c694f687f69">
+<index version="1" name="YS Scripts" commit="4c65d10a6ee75f3a84989a4760220daf3cb92d6b">
   <category name="Items Editing">
     <reapack name="YS_Midi Take Name From Track.lua" type="script" desc="Bass 定弦">
       <version name="1.0" author="YS" time="2021-10-14T16:59:44Z">
@@ -226,6 +226,9 @@
       <version name="1.1" author="YS" time="2021-10-14T17:40:43Z">
         <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/a32e905c3451d4b7f3edb01514106b7e009825a6/MIDI%20Editor/YS_Endtime_Multi%20Track.lua</source>
       </version>
+      <version name="1.1.1" author="YS" time="2022-01-15T15:04:19Z">
+        <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/4c65d10a6ee75f3a84989a4760220daf3cb92d6b/MIDI%20Editor/YS_Endtime_Multi%20Track.lua</source>
+      </version>
     </reapack>
     <reapack name="YS_EZ_Slide.lua" type="script" desc="EZ_Slide">
       <version name="1.0" author="YS" time="2021-10-14T16:59:44Z">
@@ -358,6 +361,9 @@
         <changelog><![CDATA[+ Initial release]]></changelog>
         <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/e0c2cb8030173de0d7e0794ee7cc6a751307fd97/MIDI%20Editor/YS_Key%E8%B0%83%E5%8F%B7%E6%A3%80%E6%B5%8B.lua</source>
       </version>
+      <version name="1.0.1" author="YS" time="2022-01-15T15:04:19Z">
+        <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/4c65d10a6ee75f3a84989a4760220daf3cb92d6b/MIDI%20Editor/YS_Key%E8%B0%83%E5%8F%B7%E6%A3%80%E6%B5%8B.lua</source>
+      </version>
     </reapack>
     <reapack name="YS_Lenth 事件缩放.lua" type="script" desc="Lenth 事件缩放">
       <version name="1.0" author="YS" time="2021-10-14T16:59:44Z">
@@ -469,6 +475,9 @@
         <changelog><![CDATA[+ Initial release]]></changelog>
         <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/d3f6cedd65e29e252170f14943a7eb21ff2ba29a/MIDI%20Editor/YS_slide%20in.lua</source>
       </version>
+      <version name="1.0.1" author="YS" time="2022-01-15T15:04:19Z">
+        <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/4c65d10a6ee75f3a84989a4760220daf3cb92d6b/MIDI%20Editor/YS_slide%20in.lua</source>
+      </version>
     </reapack>
     <reapack name="YS_slide Left 10 tick_Multi Track.lua" type="script" desc="slide Left 10 tick_Multi Track">
       <version name="1.0" author="YS" time="2021-08-29T12:17:58Z">
@@ -486,6 +495,9 @@
       </version>
       <version name="1.0.1" author="YS" time="2021-11-26T11:59:15Z">
         <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/80324c81e5153564714cb0b53c38110d3db86b16/MIDI%20Editor/YS_slide%20out.lua</source>
+      </version>
+      <version name="1.0.2" author="YS" time="2022-01-15T15:04:19Z">
+        <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/4c65d10a6ee75f3a84989a4760220daf3cb92d6b/MIDI%20Editor/YS_slide%20out.lua</source>
       </version>
     </reapack>
     <reapack name="YS_slide Right 10 tick_Multi Track.lua" type="script" desc="slide Right 10 tick_Multi Track">
@@ -617,6 +629,12 @@
         <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/e0c2cb8030173de0d7e0794ee7cc6a751307fd97/MIDI%20Editor/YS_%E5%B1%9E%E4%B8%83%E5%92%8C%E5%BC%A6.lua</source>
       </version>
     </reapack>
+    <reapack name="YS_延音踏板CC64转音长.lua" type="script" desc="延音踏板CC64转音长">
+      <version name="1.0" author="YS" time="2022-01-15T15:04:19Z">
+        <changelog><![CDATA[+ Initial release]]></changelog>
+        <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/4c65d10a6ee75f3a84989a4760220daf3cb92d6b/MIDI%20Editor/YS_%E5%BB%B6%E9%9F%B3%E8%B8%8F%E6%9D%BFCC64%E8%BD%AC%E9%9F%B3%E9%95%BF.lua</source>
+      </version>
+    </reapack>
     <reapack name="YS_弯音变实音(击勾弦转换).lua" type="script" desc="弯音变实音(击勾弦转换)">
       <version name="1.0" author="YS" time="2021-08-29T12:17:58Z">
         <changelog><![CDATA[+ Initial release]]></changelog>
@@ -647,15 +665,6 @@
         <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/e0c2cb8030173de0d7e0794ee7cc6a751307fd97/MIDI%20Editor/YS_%E6%8F%92%E5%85%A5%E9%9F%B3%E7%AC%A6%E5%88%87%E6%8D%A2%E9%9F%B3%E8%89%B2.lua</source>
       </version>
     </reapack>
-    <reapack name="YS_显示MIDI模板信息.lua" type="script" desc="显示MIDI模板信息">
-      <version name="1.0" author="YS" time="2021-08-29T12:17:58Z">
-        <changelog><![CDATA[+ Initial release]]></changelog>
-        <source main="main">https://github.com/zaibuyidao/YS_ReaScripts/raw/d3f6cedd65e29e252170f14943a7eb21ff2ba29a/MIDI%20Editor/YS_%E6%98%BE%E7%A4%BAMIDI%E6%A8%A1%E6%9D%BF%E4%BF%A1%E6%81%AF.lua</source>
-      </version>
-      <version name="1.0.1" author="YS" time="2021-11-12T14:23:53Z">
-        <source main="main">https://github.com/zaibuyidao/YS_ReaScripts/raw/327e02bfef57768dbf04a4a1a7fa6acf950c5342/MIDI%20Editor/YS_%E6%98%BE%E7%A4%BAMIDI%E6%A8%A1%E6%9D%BF%E4%BF%A1%E6%81%AF.lua</source>
-      </version>
-    </reapack>
     <reapack name="YS_智能重复所有选中事件.lua" type="script" desc="智能重复所有选中事件">
       <version name="1.0" author="YS" time="2021-08-29T12:17:58Z">
         <changelog><![CDATA[+ Initial release]]></changelog>
@@ -666,6 +675,12 @@
       <version name="1.0" author="YS" time="2022-01-02T17:05:15Z">
         <changelog><![CDATA[+ Initial release]]></changelog>
         <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/3e57988e53752c84cc1f64d56e8a5c694f687f69/MIDI%20Editor/YS_%E6%A0%B9%E6%8D%AE%E6%89%80%E9%80%89%E4%BA%8B%E4%BB%B6%E6%BF%80%E6%B4%BBTake(%E4%BB%85%E6%BF%80%E6%B4%BBtake%E5%8F%AF%E7%BC%96%E8%BE%91).lua</source>
+      </version>
+    </reapack>
+    <reapack name="YS_根据所选事件设置可编辑多Take.lua" type="script" desc="根据所选事件设置可编辑多Take">
+      <version name="1.0" author="YS" time="2022-01-15T15:04:19Z">
+        <changelog><![CDATA[+ Initial release]]></changelog>
+        <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/4c65d10a6ee75f3a84989a4760220daf3cb92d6b/MIDI%20Editor/YS_%E6%A0%B9%E6%8D%AE%E6%89%80%E9%80%89%E4%BA%8B%E4%BB%B6%E8%AE%BE%E7%BD%AE%E5%8F%AF%E7%BC%96%E8%BE%91%E5%A4%9ATake.lua</source>
       </version>
     </reapack>
     <reapack name="YS_滚擦自动分轨.lua" type="script" desc="滚擦自动分轨">
@@ -722,6 +737,12 @@
         <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/d3f6cedd65e29e252170f14943a7eb21ff2ba29a/MIDI%20Editor/YS_%E9%80%89%E6%8B%A9%E6%8C%87%E5%AE%9A%E9%97%B4%E9%9A%94%E4%BB%A5%E4%B8%8A%E9%9F%B3%E7%AC%A6.lua</source>
       </version>
     </reapack>
+    <reapack name="YS_选择音色信息后面相应数据分轨.lua" type="script" desc="选择音色信息后面相应数据分轨">
+      <version name="1.0" author="YS" time="2022-01-15T15:04:19Z">
+        <changelog><![CDATA[+ Initial release]]></changelog>
+        <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/4c65d10a6ee75f3a84989a4760220daf3cb92d6b/MIDI%20Editor/YS_%E9%80%89%E6%8B%A9%E9%9F%B3%E8%89%B2%E4%BF%A1%E6%81%AF%E5%90%8E%E9%9D%A2%E7%9B%B8%E5%BA%94%E6%95%B0%E6%8D%AE%E5%88%86%E8%BD%A8.lua</source>
+      </version>
+    </reapack>
     <reapack name="YS_间隔选中音符.lua" type="script" desc="间隔选中音符">
       <version name="1.0" author="YS" time="2021-08-29T12:17:58Z">
         <changelog><![CDATA[+ Initial release]]></changelog>
@@ -738,6 +759,12 @@
       <version name="1.0" author="YS" time="2021-08-29T12:17:58Z">
         <changelog><![CDATA[+ Initial release]]></changelog>
         <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/d3f6cedd65e29e252170f14943a7eb21ff2ba29a/MIDI%20Editor/YS_%E9%9F%B3%E7%AC%A6%E5%AF%B9%E4%BD%8D.lua</source>
+      </version>
+    </reapack>
+    <reapack name="YS_音符长度渐变.lua" type="script" desc="音符长度渐变">
+      <version name="1.0" author="YS" time="2022-01-15T15:04:19Z">
+        <changelog><![CDATA[+ Initial release]]></changelog>
+        <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/4c65d10a6ee75f3a84989a4760220daf3cb92d6b/MIDI%20Editor/YS_%E9%9F%B3%E7%AC%A6%E9%95%BF%E5%BA%A6%E6%B8%90%E5%8F%98.lua</source>
       </version>
     </reapack>
     <reapack name="YS_音色信息批量修改.lua" type="script" desc="音色信息批量修改">
@@ -943,6 +970,12 @@
       <version name="1.0" author="YS" time="2021-10-14T16:59:44Z">
         <changelog><![CDATA[+ Initial release]]></changelog>
         <source main="main">https://github.com/zaibuyidao/YS_ReaScripts/raw/e0c2cb8030173de0d7e0794ee7cc6a751307fd97/Utility/YS_%E6%8F%92%E5%85%A5%E6%8B%8D%E5%8F%B7%E6%9B%B4%E6%94%B9%E6%A0%87%E8%AE%B0(%E4%B8%8D%E6%8F%92%E5%85%A5Tempo).lua</source>
+      </version>
+    </reapack>
+    <reapack name="YS_显示MIDI模板信息.lua" type="script" desc="显示MIDI模板信息">
+      <version name="1.0" author="YS" time="2022-01-15T15:04:19Z">
+        <changelog><![CDATA[+ Initial release]]></changelog>
+        <source main="main">https://github.com/zaibuyidao/YS_ReaScripts/raw/4c65d10a6ee75f3a84989a4760220daf3cb92d6b/Utility/YS_%E6%98%BE%E7%A4%BAMIDI%E6%A8%A1%E6%9D%BF%E4%BF%A1%E6%81%AF.lua</source>
       </version>
     </reapack>
     <reapack name="YS_模板数据对齐到光标.lua" type="script" desc="模板数据对齐到光标">
