@@ -1,8 +1,7 @@
 --[[
  * ReaScript Name: 显示MIDI模板信息
- * Version: 1.0.1
+ * Version: 1.0
  * Author: YS
- * provides: [main=main] .
 --]]
 
 --[[
@@ -15,6 +14,7 @@ _, _, sectionID, ownCommandID, _, _, _ = reaper.get_action_context()
 reaper.SetToggleCommandState(sectionID,ownCommandID,1)
 reaper.RefreshToolbar2(sectionID, ownCommandID)
 
+function miditempinfo()
 out=''
 count=reaper.CountTracks(0)
 idx=0
@@ -102,6 +102,8 @@ idx=idx+1
 end
 --reaper.ShowConsoleMsg('')
 --reaper.ShowConsoleMsg(out)
+end --function end
+miditempinfo()
 
 
 local ctx = reaper.ImGui_CreateContext('tempinfo')
@@ -110,8 +112,8 @@ function loop()
 
  local visible, open = reaper.ImGui_Begin(ctx, 'MIDI Template information', true)
  if visible then
-   --reaper.ImGui_Text(ctx, out)
-     reaper.ImGui_TextColored(ctx, 0XDCDCDCFF, out)
+   if reaper.ImGui_Button(ctx,'Refresh') then miditempinfo()  end  
+   reaper.ImGui_TextColored(ctx, 0XDCDCDCFF, out)
     reaper.ImGui_End(ctx)
   end
 

@@ -1,9 +1,7 @@
 --[[
  * ReaScript Name: Key调号检测
- * Version: 1.0
+ * Version: 1.0.1
  * Author: YS
- * Repository URI: https://github.com/zaibuyidao/YS_ReaScripts
- * provides: [main=midi_editor] .
 --]]
 
 --[[
@@ -14,6 +12,7 @@
 
 idx=0 tb_key={}  tb_key[1]=0 tb_key[2]=0 tb_key[3]=0 tb_key[4]=0 tb_key[5]=0 tb_key[6]=0 tb_key[7]=0
 tb_key[8]=0 tb_key[9]=0 tb_key[10]=0 tb_key[11]=0 tb_key[12]=0
+tb_key_note={'C','C#','D','Eb','E','F','F#','G','Ab','A','Bb','B'}
 tbtb={}
 selnum=reaper.CountSelectedMediaItems(0) 
 if selnum<1 then reaper.MB('没有选中任何对象！','错误！',0) return end
@@ -72,6 +71,7 @@ end
 keymax={key1,key2,key3,key4,key5,key6,key7}
 table.sort(keymax)
 maxnote=(keymax[1]..','..keymax[2]..','..keymax[3]..','..keymax[4]..','..keymax[5]..','..keymax[6]..','..keymax[7])
+out=(tb_key_note[keymax[1]]..','..tb_key_note[keymax[2]]..','..tb_key_note[keymax[3]]..','..tb_key_note[keymax[4]]..','..tb_key_note[keymax[5]]..','..tb_key_note[keymax[6]]..','..tb_key_note[keymax[7]])
 tb_diaohao={} 
 tb_diaohao['1,3,5,6,8,10,12']='C' 
 tb_diaohao['1,2,4,6,7,9,11']='C#' 
@@ -85,6 +85,20 @@ tb_diaohao['1,2,4,6,8,9,11']='Ab'
 tb_diaohao['2,3,5,7,9,10,12']='A'
 tb_diaohao['1,3,4,6,8,10,11']='Bb'
 tb_diaohao['2,4,5,7,9,11,12']='B'
+tb_diaohao['1,3,4,6,8,9,11']='Eb(Cm)' 
+tb_diaohao['2,4,5,7,9,10,12']='E(C#m)' 
+tb_diaohao['1,3,5,6,8,10,11']='F(Dm)' 
+tb_diaohao['2,4,6,7,9,11,12']='F#(Ebm)' 
+tb_diaohao['1,3,5,7,8,10,12']='G(Em)' 
+tb_diaohao['1,2,4,6,8,9,11']='Ab(Fm)' 
+tb_diaohao['2,3,5,7,9,10,12']='A(F#m)' 
+tb_diaohao['1,3,4,6,8,10,11']='Bb(Gm)' 
+tb_diaohao['2,4,5,7,9,11,12']='B(Abm)' 
+tb_diaohao['1,3,5,6,8,10,12']='C(Am)' 
+tb_diaohao['1,2,4,6,7,9,11']='C#(Bbm)' 
+tb_diaohao['2,3,5,7,8,10,12']='D(Bm)' 
+
+
 
 if tb_diaohao[maxnote]~=nil then reaper.MB('调号为:  '..tb_diaohao[maxnote],'仅供参考！',0) 
 else reaper.MB('无法识别调号，请重新选择参考对象！(可多选)','错误！',0) 

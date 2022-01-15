@@ -1,6 +1,6 @@
 --[[
  * ReaScript Name: slide out
- * Version: 1.0.1
+ * Version: 1.0.2
  * Author: YS
  * provides: [main=midi_editor] .
 --]]
@@ -11,10 +11,8 @@
   + Initial release
 --]]
 
---BY YS 201903
-local a=0
-local b=0
-local c=0
+c=0
+
 local editor=reaper.MIDIEditor_GetActive()
 
 local take=reaper.MIDIEditor_GetTake(editor)
@@ -32,9 +30,13 @@ retval,shuru= reaper.GetUserInputs('Slide Out Wheel 滑弦出',1,"PitchRange = (
 wanyin_num=tonumber(shuru) 
 
  if wanyin_num < 0 then jiange=wanyin_num*-1 else jiange =wanyin_num  end
- a = Thru_tick - From_tick
- a = a - (a/(jiange+1))
- b= a / wanyin_num
+ 
+if jiange==1 then buchang=1 end
+if jiange==2 then buchang=1.2 end
+if jiange==3 then buchang=1.6 end
+if jiange>=4 then buchang=1.85 end
+ juli = Thru_tick - From_tick
+
  if (Thru ~= 0) then 
 if (wanyin_num > 0)--zhengshu
 then
@@ -54,7 +56,7 @@ local yushu = math.fmod( pitch, 128 )
   local beishu = math.modf( pitch / 128 )
   local yushu = math.fmod( pitch, 128 ) 
 
- reaper.MIDI_InsertCC(take, false, false,From_tick +(c*b) , 224, 0,yushu,64+beishu)
+ reaper.MIDI_InsertCC(take, false, false,From_tick + juli*((c+c)/(jiange+c+1)), 224, 0,yushu,64+beishu)
  c=c+1  
 end
  reaper.MIDI_InsertCC(take, false, false, Thru_tick , 224, 0,0,64)
@@ -73,10 +75,10 @@ then
  if (beishu < 0)
  then beishu=beishu-1
  end
- 
-  while (c >= wanyin_num)
+ wanyin_num=wanyin_num*-1
+  while (c <= wanyin_num)
    do
-   pitch = 683*c
+   pitch = 683*c*-1
    
    if (pitch > 8191) then pitch = 8191 end
    if (pitch < -8192) then pitch = -8191 end
@@ -86,11 +88,18 @@ then
    if (beishu < 0)
    then beishu=beishu-1
    end
-  reaper.MIDI_InsertCC(take, false, false,From_tick +(c*b) , 224, 0,yushu,64+beishu)
-  c=c-1
+  reaper.MIDI_InsertCC(take, false, false,From_tick + juli*((c+c)/(jiange+c+1)) , 224, 0,yushu,64+beishu)
+  c=c+1
   end 
   reaper.MIDI_InsertCC(take, false, false, Thru_tick , 224, 0,0,64)
 end 
 end --thru fushu
 
 reaper.SN_FocusMIDIEditor()
+
+reaper.MIDIEditor_OnCommand(editor,40366)
+
+
+
+
+
