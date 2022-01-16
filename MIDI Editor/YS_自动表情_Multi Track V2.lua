@@ -1,6 +1,6 @@
 --[[
  * ReaScript Name: 自动表情_Multi Track V2
- * Version: 1.1
+ * Version: 1.1.1
  * Author: YS
 --]]
 
@@ -10,11 +10,61 @@
   + Initial release
 --]]
 
-local retval, shuzhi = reaper.GetUserInputs('自动表情(多轨) ', 8, 'CC min Val=,CC Max Val=,歌曲速度：0 慢 1 快,1:悠扬 2:强烈 3:手动,起音形状 1:正 2:反,弧度 0-100 ,音尾形状 1:正 2:反,弧度 0-100', '88,127,0,1,1,25,1,40')
-local min_sub,max_sub,qusu_sub,moshi_sub,qiyin_sub,hudu1_sub,yinwei_sub,hudu2_sub=string.match(shuzhi,"(%d+),(%d+),(%d+),(%d+),(%d+),(%d+),(%d+),(%d+)")
+function bpm_average()
+left=math.huge
+right = -1
+editor=reaper.MIDIEditor_GetActive()
+
+takeindex = 0
+take=reaper.MIDIEditor_EnumTakes(editor, takeindex, true)
+while take~=nil do
+
+reaper.MIDI_DisableSort(take)
+ i=-1
+repeat
+ integer = reaper.MIDI_EnumSelNotes(take, i)
+ if integer ~= -1 then
+ retval, selected, muted, startppqpos, endppqpos, chan, pitch, vel = reaper.MIDI_GetNote(take, integer)
+ if startppqpos < left then left = startppqpos end
+ if startppqpos > right then right = startppqpos end
+ end
+  i=integer
+  integer = reaper.MIDI_EnumSelNotes(take, i)
+until  (integer==-1)
+reaper.MIDI_Sort(take)
+
+takeindex=takeindex+1
+take=reaper.MIDIEditor_EnumTakes(editor, takeindex, true)
+  
+end -- while take end get select time
+take=reaper.MIDIEditor_EnumTakes(editor, 0, true)
+firstQN=reaper.MIDI_GetProjQNFromPPQPos(take,left)
+endpos=reaper.MIDI_GetProjTimeFromPPQPos(take,right)
+
+--------------------------------------------------------
+
+bpmadd=0  QN=0
+pos=reaper.TimeMap_QNToTime(firstQN)
+ptidx=reaper.FindTempoTimeSigMarker(0, pos)
+retval, timepos,measurepos, beatpos, bpm, timesig_num, timesig_denom, lineartempo = reaper.GetTempoTimeSigMarker(0, ptidx)
+
+while pos<endpos do
+  bpmadd=bpmadd+bpm
+  QN=QN+1  firstQN=firstQN+1
+  pos=reaper.TimeMap_QNToTime(firstQN)
+  ptidx=reaper.FindTempoTimeSigMarker(0, pos)
+  retval, timepos,measurepos, beatpos, bpm, timesig_num, timesig_denom, lineartempo = reaper.GetTempoTimeSigMarker(0, ptidx)
+  end
+  bpm_average=bpmadd/QN
+end -- function end
+
+bpm_average()
+
+
+local retval, shuzhi = reaper.GetUserInputs('自动表情 平均速度: '..bpm_average, 7, 'CC min Val=,CC Max Val=,1:悠扬 2:强烈 3:手动,起音形状 1:正 2:反,弧度 0-100 ,音尾形状 1:正 2:反,弧度 0-100', '88,127,1,1,25,1,40')
+local min_sub,max_sub,moshi_sub,qiyin_sub,hudu1_sub,yinwei_sub,hudu2_sub=string.match(shuzhi,"(%d+),(%d+),(%d+),(%d+),(%d+),(%d+),(%d+)")
 local min_val=tonumber (min_sub)
 local max_val=tonumber (max_sub)
-local qushu=tonumber (qusu_sub)
 local moshi=tonumber (moshi_sub)
 local qiyin=tonumber (qiyin_sub)
 local hudu1=tonumber (hudu1_sub)
@@ -30,9 +80,9 @@ end
 if moshi == 1 then bsl_in = -0.2  bsl_out = 0.4 end
 if moshi == 2 then bsl_in = 0.25  bsl_out = 0.4 end
 
--- qushuzhi
+-- geiinput
 
-local editor=reaper.MIDIEditor_GetActive()
+editor=reaper.MIDIEditor_GetActive()
 
 takeindex = 0
 take=reaper.MIDIEditor_EnumTakes(editor, takeindex, true)
@@ -56,13 +106,13 @@ local dur=endppqpos-startppqpos
     reaper.MIDI_InsertCC(take, true,false, startppqpos, 176, 0, 11, min_val)
     reaper.MIDI_InsertCC(take, false,false, startppqpos+360, 176, 0, 11, max_val)
     end --480-960
-    if qushu==0 then
+    if bpm_average<96 then
     if (dur >= 240 and dur < 480) then
     reaper.MIDI_InsertCC(take, true,false, startppqpos, 176, 0, 11, min_val)
    reaper.MIDI_InsertCC(take, false,false, startppqpos+190, 176, 0, 11, max_val)
    end
     end --240-480
-    if qushu==0 then notedur=240 else notedur=480 end
+    if bpm_average<96 then notedur=240 else notedur=480 end
     if (dur > 0 and dur < notedur ) then
      if biaoji == 0 then
      reaper.MIDI_InsertCC(take, false,false, startppqpos, 176, 0, 11, max_val)
@@ -119,4 +169,6 @@ take=reaper.MIDIEditor_EnumTakes(editor, takeindex, true)
 end -- while take end
 
 end
+
+reaper.MIDIEditor_OnCommand(editor, 40249)
 reaper.SN_FocusMIDIEditor()
