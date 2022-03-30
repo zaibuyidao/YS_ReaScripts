@@ -1,9 +1,7 @@
 --[[
  * ReaScript Name: Bass 包络缩短处理
- * Version: 1.0
+ * Version: 1.0.1
  * Author: YS
- * Repository URI: https://github.com/zaibuyidao/YS_ReaScripts
- * provides: [main=midi_editor] .
 --]]
 
 --[[
@@ -17,7 +15,7 @@ local editor=reaper.MIDIEditor_GetActive()
 local take=reaper.MIDIEditor_GetTake(editor)
 
 ret,scv=reaper.GetUserInputs('bass 包络缩短处理',1,'缩短 TICK 数：','4')
-scv=tonumber(scv)
+scv=tonumber(scv) if scv<0 then scv=scv*-1 end
 
 reaper.MIDI_DisableSort(take)
 

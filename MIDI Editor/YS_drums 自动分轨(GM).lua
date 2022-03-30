@@ -1,8 +1,7 @@
 --[[
  * ReaScript Name: drums 自动分轨(GM)
- * Version: 1.0
+ * Version: 1.0.1
  * Author: YS
- * provides: [main=midi_editor] .
 --]]
 
 --[[
@@ -142,6 +141,7 @@ tb_kit[126]='SN_126'
 tb_kit[127]='SN_127' 
 
 reaper.Undo_BeginBlock()
+reaper.PreventUIRefresh(1)
 
 local editor=reaper.MIDIEditor_GetActive()
 reaper.MIDIEditor_OnCommand(editor,40214)  -- unselect all
@@ -244,6 +244,7 @@ while tbkey[i]~=nil do tbkey2[i]=tbkey[i] i=i+1 end
  reaper.InsertTrackAtIndex(number0,false)
  track_new=reaper.GetTrack(0, number0)
  reaper.SetMediaTrackInfo_Value(track_new,'I_MIDIHWOUT',track0_midiport)
+ reaper.SetMediaTrackInfo_Value(track_new,'B_MAINSEND',0)
  if fold<0 and flag==0 then
  reaper.SetMediaTrackInfo_Value(track0, 'I_FOLDERDEPTH', 0)
  reaper.SetMediaTrackInfo_Value(track_new, 'I_FOLDERDEPTH', fold)
@@ -254,7 +255,7 @@ while tbkey[i]~=nil do tbkey2[i]=tbkey[i] i=i+1 end
  retval, trackname = reaper.GetSetMediaTrackInfo_String(track_new, 'P_NAME', track0name..' '..v, true)
  item_new=reaper.CreateNewMIDIItemInProj(track_new, st, st+lenth, false)
  take_new= reaper.GetMediaItemTake(item_new, 0)
- item_new2=reaper.CreateNewMIDIItemInProj(track_new, 0, 0.05, false)
+ item_new2=reaper.CreateNewMIDIItemInProj(track_new, 0, 0.00001, false)
  take_new2= reaper.GetMediaItemTake(item_new2, 0)
  reaper.MIDI_InsertEvt(take_new2,false,false,0,string.char(0xFF,0x21,0x01,0x00))
  reaper.MIDI_DisableSort(take_new)
@@ -1370,6 +1371,7 @@ while tbkey[i]~=nil do tbkey2[i]=tbkey[i] i=i+1 end
   reaper.InsertTrackAtIndex(number_cym,false)
   track_roll=reaper.GetTrack(0, number_cym)
   reaper.SetMediaTrackInfo_Value(track_roll,'I_MIDIHWOUT',track_cym_midiport)
+  reaper.SetMediaTrackInfo_Value(track_roll,'B_MAINSEND',0)
   if fold_cym<0 then
   reaper.SetMediaTrackInfo_Value(track_cym, 'I_FOLDERDEPTH', 0)
   reaper.SetMediaTrackInfo_Value(track_roll, 'I_FOLDERDEPTH', fold_cym)
@@ -1379,7 +1381,7 @@ while tbkey[i]~=nil do tbkey2[i]=tbkey[i] i=i+1 end
   retval, trackname = reaper.GetSetMediaTrackInfo_String(track_roll, 'P_NAME', track_cym_name..' ROLL', true)
   item_roll=reaper.CreateNewMIDIItemInProj(track_roll, st_cym, st_cym+lenth_cym, false)
   take_roll= reaper.GetMediaItemTake(item_roll, 0)
-  item_roll2=reaper.CreateNewMIDIItemInProj(track_roll, 0, 0.05, false)
+  item_roll2=reaper.CreateNewMIDIItemInProj(track_roll, 0, 0.00001, false)
   take_roll2= reaper.GetMediaItemTake(item_roll2, 0)
   reaper.MIDI_InsertEvt(take_roll2,false,false,0,string.char(0xFF,0x21,0x01,0x00))
   
@@ -1418,7 +1420,7 @@ while tbkey[i]~=nil do tbkey2[i]=tbkey[i] i=i+1 end
 reaper.UpdateArrange()
 reaper.MIDIEditor_OnCommand(editor,40818) 
 reaper.MIDIEditor_OnCommand(editor,40818)
-
+reaper.PreventUIRefresh(-1)
 reaper.Undo_EndBlock('',0)
 
 
