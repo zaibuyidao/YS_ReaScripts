@@ -1,8 +1,7 @@
 --[[
  * ReaScript Name: A.G 吉他和弦建立 V2
- * Version: 1.0.3
+ * Version: 1.0.4
  * Author: YS
- * provides: [main=midi_editor] .
 --]]
 
 --[[
@@ -126,7 +125,8 @@ reaper.SN_FocusMIDIEditor()
 
 end -- function 
 
-capo = reaper.GetExtState('A.G CHORD', 'capo')
+--capo = reaper.GetExtState('A.G CHORD', 'capo')
+retval, capo = reaper.GetProjExtState(0, 'A.G CHORD', 'capo')
 if capo=='' then capo=0 else capo=tonumber(capo) end
 
 ------------------------------------------------------
@@ -202,11 +202,17 @@ recst()
 ----------------------------------------------------------------
 
 local ctx = reaper.ImGui_CreateContext('A.G CHORD')
+  local size = reaper.GetAppVersion():match('OSX') and 12 or 14
+  local font = reaper.ImGui_CreateFont('sans-serif', size)
+  reaper.ImGui_AttachFont(ctx, font)
+  
 x,y=reaper.GetMousePosition()
+x, y = reaper.ImGui_PointConvertNative(ctx, x, y)
 reaper.ImGui_SetNextWindowSize(ctx, 270, 100)
   reaper.ImGui_SetNextWindowPos(ctx, x, y)
 flag=true
 function loop()
+   reaper.ImGui_PushFont(ctx, font)
   local visible, open = reaper.ImGui_Begin(ctx, 'A.Guitar Chord ~ Right audition', true)
   if visible then
 
@@ -244,11 +250,13 @@ function loop()
     if retval then  flag=false end
     reaper.ImGui_End(ctx)
  end
+   reaper.ImGui_PopFont(ctx)
 
   if open and flag then
     reaper.defer(loop)
   else
-    reaper.SetExtState('A.G CHORD', 'capo', capo, true)
+    --reaper.SetExtState('A.G CHORD', 'capo', capo, false)
+    reaper.SetProjExtState(0, 'A.G CHORD', 'capo', capo)
     reaper.ImGui_DestroyContext(ctx)
     reaper.SN_FocusMIDIEditor()
   end
