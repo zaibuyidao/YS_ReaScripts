@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<index version="1" name="YS Scripts" commit="94b74df7b1c44389f5490853fe2835627913a36e">
+<index version="1" name="YS Scripts" commit="fa805cbda610efa66af3948e1ccdb22372a7fcd2">
   <category name="Items Editing">
     <reapack name="YS_Midi Take Name From Track.lua" type="script" desc="Bass 定弦">
       <version name="1.0" author="YS" time="2021-10-14T16:59:44Z">
@@ -514,6 +514,9 @@
       <version name="1.0.2" author="YS" time="2022-01-15T15:04:19Z">
         <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/4c65d10a6ee75f3a84989a4760220daf3cb92d6b/MIDI%20Editor/YS_slide%20out.lua</source>
       </version>
+      <version name="1.0.3" author="YS" time="2022-09-19T09:11:38Z">
+        <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/fa805cbda610efa66af3948e1ccdb22372a7fcd2/MIDI%20Editor/YS_slide%20out.lua</source>
+      </version>
     </reapack>
     <reapack name="YS_slide Right 10 tick_Multi Track.lua" type="script" desc="slide Right 10 tick_Multi Track">
       <version name="1.0" author="YS" time="2021-08-29T12:17:58Z">
@@ -789,6 +792,9 @@
       </version>
       <version name="1.0.1" author="YS" time="2022-09-19T08:47:07Z">
         <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/94b74df7b1c44389f5490853fe2835627913a36e/MIDI%20Editor/YS_%E9%9F%B3%E7%AC%A6%E9%95%BF%E5%BA%A6%E6%B8%90%E5%8F%98.lua</source>
+      </version>
+      <version name="1.0.2" author="YS" time="2022-09-19T09:11:38Z">
+        <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/fa805cbda610efa66af3948e1ccdb22372a7fcd2/MIDI%20Editor/YS_%E9%9F%B3%E7%AC%A6%E9%95%BF%E5%BA%A6%E6%B8%90%E5%8F%98.lua</source>
       </version>
     </reapack>
     <reapack name="YS_音色信息批量修改.lua" type="script" desc="音色信息批量修改">
