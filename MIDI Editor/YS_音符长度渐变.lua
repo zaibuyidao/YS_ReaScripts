@@ -1,6 +1,6 @@
 --[[
  * ReaScript Name: 音符长度渐变
- * Version: 1.0.1
+ * Version: 1.0.2
  * Author: YS
 --]]
 
@@ -10,134 +10,69 @@
   + Initial release
 --]]
 
-c = 0
-
-local editor = reaper.MIDIEditor_GetActive()
-
-local take = reaper.MIDIEditor_GetTake(editor)
-
-From, Thru = reaper.GetSet_LoopTimeRange(false, true, 0, 0, true)
-
-if From == 0 and Thru == 0 then
-    reaper.MB('请设置好时间范围！', '没有设定时间范围！', 0)
-    reaper.SN_FocusMIDIEditor()
-    return
+editor=reaper.MIDIEditor_GetActive()
+take=reaper.MIDIEditor_GetTake(editor)
+notetb={}
+idx=-1
+integer=reaper.MIDI_EnumSelNotes(take,idx)
+if integer~=-1 then
+retval,selected, muted,ppqstart,endppqpos, chan, pitch, vel = reaper.MIDI_GetNote(take, integer)
 end
 
-local From_tick = reaper.MIDI_GetPPQPosFromProjTime(take, From)
-local Thru_tick = reaper.MIDI_GetPPQPosFromProjTime(take, Thru)
-
-retval, shuru = reaper.GetUserInputs('Slide Out Wheel 滑弦出', 2, "PitchRange = (-12,12),品格:0  击勾弦:1  平滑:2", '0,0')
-if retval == false then
-    reaper.SN_FocusMIDIEditor()
-    return
-end
-wanyin_num, jigou = string.match(shuru, "(.+),(.+)")
-id1, id2 = string.find(wanyin_num, "(-?%d+)")
-if id1 ~= nil and id2 ~= nil then
-    wanyin_num = string.sub(wanyin_num, id1, id2)
-    wanyin_num = tonumber(wanyin_num)
-else
-    return
+while integer~=-1 do
+retval,selected, muted,startppqpos,ppqend, chan, pitch, vel = reaper.MIDI_GetNote(take, integer)
+notedd=ppqend-startppqpos weizhi=startppqpos-ppqstart
+table.insert(notetb,integer..','..notedd..','..ppqend..','..weizhi)
+idx=integer
+integer=reaper.MIDI_EnumSelNotes(take,idx)
 end
 
-if wanyin_num < 0 then
-    jiange = wanyin_num * -1
-else
-    jiange = wanyin_num
-end
-
-juli = Thru_tick - From_tick
-
-reaper.MIDI_DisableSort(take)
-
-if (Thru ~= 0) then
-    if (wanyin_num > 0) -- zhengshu
-    then
-        pitch = 683 * wanyin_num
-
-        if (pitch > 8191) then pitch = 8191 end
-
-        local beishu = math.modf(pitch / 128)
-        local yushu = math.fmod(pitch, 128)
-
-        if jigou == '2' then
-            reaper.MIDI_InsertCC(take, false, false, From_tick, 224, 0, 0, 64)
-            retval, notecnt, ccevtcnt, textsyxevtcnt = reaper.MIDI_CountEvts(take)
-            reaper.MIDI_SetCCShape(take, ccevtcnt - 1, 5, 0.25, false)
-            reaper.MIDI_InsertCC(take, false, false, Thru_tick - 20, 224, 0, yushu, 64 + beishu)
-            reaper.MIDI_InsertCC(take, false, false, Thru_tick, 224, 0, 0, 64)
-        end
-
-        if jigou == '1' then
-            reaper.MIDI_InsertCC(take, false, false, From_tick, 224, 0, 0, 64)
-            reaper.MIDI_InsertCC(take, false, false, From_tick + (juli / 2), 224, 0, yushu, 64 + beishu)
-            reaper.MIDI_InsertCC(take, false, false, Thru_tick, 224, 0, 0, 64)
-        end
-
-        if jigou == '0' then
-            while (c <= wanyin_num) do
-                pitch = 683 * c
-
-                if (pitch > 8191) then pitch = 8191 end
-
-                local beishu = math.modf(pitch / 128)
-                local yushu = math.fmod(pitch, 128)
-
-                reaper.MIDI_InsertCC(take, false, false, From_tick + juli * ((c + c) / (jiange + c + 1)), 224, 0, yushu, 64 + beishu)
-                c = c + 1
-            end
-            reaper.MIDI_InsertCC(take, false, false, Thru_tick, 224, 0, 0, 64)
-        end
+function notedur()
+for i, v in ipairs(notetb) do
+    noteidx,notedd,noteend,noteweizhi=string.match(v,'(%d+),(%d+..),(%d+..),(%d+..)')
+    if durbili2>0 then 
+    noteddnew=notedd-((durbili2*noteweizhi)/100)
+    else
+    durbilinew=durbili2*-1
+    noteweizhi=weizhi-noteweizhi
+    noteddnew=notedd-((durbilinew*noteweizhi)/100)
     end
-end -- thru zhengshu
-if (Thru ~= 0) then
-    if (wanyin_num < 0) then
-        pitch = 683 * wanyin_num
+    noteend=noteend+(noteddnew-notedd)
+    reaper.MIDI_SetNote(take, noteidx, true, false, NULL,noteend, NULL, NULL,NULL, true)
+end 
 
-        if (pitch > 8191) then pitch = 8191 end
-        if (pitch < -8192) then pitch = -8191 end
+end --function end
 
-        local beishu = math.modf(pitch / 128)
-        local yushu = math.fmod(pitch, 128)
-        if (beishu < 0) then beishu = beishu - 1 end
-        wanyin_num = wanyin_num * -1
+local ctx = reaper.ImGui_CreateContext('Note length gradient')
+  local size = reaper.GetAppVersion():match('OSX') and 12 or 14
+  local font = reaper.ImGui_CreateFont('sans-serif', size)
+  reaper.ImGui_AttachFont(ctx, font)
+  
+x,y=reaper.GetMousePosition()
+x, y = reaper.ImGui_PointConvertNative(ctx, x, y)
+reaper.ImGui_SetNextWindowSize(ctx, 410, 55)
+  reaper.ImGui_SetNextWindowPos(ctx, x, y)
+flag=true Sliderflag=0
+function loop()
+   reaper.ImGui_PushFont(ctx, font)
+  local visible, open = reaper.ImGui_Begin(ctx, 'Note length gradient', true)
+  if visible then
+    retval, durbili= reaper.ImGui_SliderInt(ctx, 'Gradient direction', durbili, -10, 10, nil,nil)
+    durbili2=durbili*-1
+   retval_esc = reaper.ImGui_IsKeyPressed(ctx, 27, nil)
+   retval_enter = reaper.ImGui_IsKeyPressed(ctx, 13, nil)
+    if retval_esc or retval_enter then  flag=false end
+    reaper.ImGui_End(ctx)
+  end
+  reaper.ImGui_PopFont(ctx)
+  
+  if Sliderflag~=durbili then  notedur() Sliderflag=durbili end
+  if open and flag then
+    reaper.defer(loop)
+  else
+    reaper.ImGui_DestroyContext(ctx)
+    reaper.SN_FocusMIDIEditor()
+  end
+end
 
-        if jigou == '2' then
-            reaper.MIDI_InsertCC(take, false, false, From_tick, 224, 0, 0, 64)
-            retval, notecnt, ccevtcnt, textsyxevtcnt = reaper.MIDI_CountEvts(take)
-            reaper.MIDI_SetCCShape(take, ccevtcnt - 1, 5, 0.25, false)
-            reaper.MIDI_InsertCC(take, false, false, Thru_tick - 20, 224, 0, yushu, 64 + beishu)
-            reaper.MIDI_InsertCC(take, false, false, Thru_tick, 224, 0, 0, 64)
-        end
-
-        if jigou == '1' then
-            reaper.MIDI_InsertCC(take, false, false, From_tick, 224, 0, 0, 64)
-            reaper.MIDI_InsertCC(take, false, false, From_tick + (juli / 2), 224, 0, yushu, 64 + beishu)
-            reaper.MIDI_InsertCC(take, false, false, Thru_tick, 224, 0, 0, 64)
-        end
-
-        if jigou == '0' then
-            while (c <= wanyin_num) do
-                pitch = 683 * c * -1
-
-                if (pitch > 8191) then pitch = 8191 end
-                if (pitch < -8192) then pitch = -8191 end
-
-                local beishu = math.modf(pitch / 128)
-                local yushu = math.fmod(pitch, 128)
-                if (beishu < 0) then beishu = beishu - 1 end
-                reaper.MIDI_InsertCC(take, false, false, From_tick + juli * ((c + c) / (jiange + c + 1)), 224, 0, yushu, 64 + beishu)
-                c = c + 1
-            end
-            reaper.MIDI_InsertCC(take, false, false, Thru_tick, 224, 0, 0, 64)
-        end
-    end
-end -- thru fushu
-
-reaper.MIDI_Sort(take)
-
-reaper.SN_FocusMIDIEditor()
-
-reaper.MIDIEditor_OnCommand(editor, 40366)
-
+reaper.defer(loop)
