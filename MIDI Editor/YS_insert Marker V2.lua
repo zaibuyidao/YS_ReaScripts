@@ -1,6 +1,6 @@
 --[[
  * ReaScript Name: insert Marker V2
- * Version: 1.0
+ * Version: 1.0.1
  * Author: YS
  * provides: [main=main,midi_editor] .
 --]]

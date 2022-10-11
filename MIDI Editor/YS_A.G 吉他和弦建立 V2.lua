@@ -1,6 +1,6 @@
 --[[
  * ReaScript Name: A.G 吉他和弦建立 V2
- * Version: 1.0.4
+ * Version: 1.0.5
  * Author: YS
 --]]
 
