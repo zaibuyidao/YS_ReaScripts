@@ -1,6 +1,6 @@
 --[[
  * ReaScript Name: insert Marker V2
- * Version: 1.0.1
+ * Version: 1.0.2
  * Author: YS
  * provides: [main=main,midi_editor] .
 --]]
@@ -40,7 +40,7 @@ function insertKeymark()
     tb_mark['eb'] = 'Eb'
     tb_mark['gb'] = 'F#'
     tb_mark['f#'] = 'F#'
-    
+
     tb_mark['am'] = 'Am'
     tb_mark['bm'] = 'Bm'
     tb_mark['cm'] = 'Cm'
@@ -74,7 +74,9 @@ end -- function end
 function autovox()
     From, Thru = reaper.GetSet_LoopTimeRange(false, true, 0, 0, true)
     if From == 0 and Thru == 0 then
-        reaper.TrackCtl_SetToolTip( '没有设定时间范围！请设置好时间范围！', 50, 0, true)
+        reaper.TrackCtl_SetToolTip(
+            '没有设定时间范围！请设置好时间范围！', 50, 0,
+            true)
         editor = reaper.MIDIEditor_GetActive()
         if editor then reaper.SN_FocusMIDIEditor() end
         return
@@ -163,7 +165,8 @@ function markauto()
     num_maker2 = num_markers + num_regions
     poslist = {}
     while midx < num_maker2 do
-        m_retval, isrgn, pos, rgnend, name, markrgnindexnumber = reaper.EnumProjectMarkers(midx)
+        m_retval, isrgn, pos, rgnend, name, markrgnindexnumber =
+            reaper.EnumProjectMarkers(midx)
 
         name_low = string.lower(name)
         if (name == '' or name_low == 'start') and (midx ~= num_maker2 - 1) then
@@ -186,160 +189,184 @@ function markauto()
                 name_low == 'outro' then end_mark = true end
 
             if tb_mark[name_low] ~= nil then
-                reaper.SetProjectMarker(markrgnindexnumber, false, pos, 0, tb_mark[name_low])
+                reaper.SetProjectMarker(markrgnindexnumber, false, pos, 0,
+                                        tb_mark[name_low])
 
                 poslist[midx] = tb_mark[name_low]
             else
                 buf = reaper.format_timestr_pos(pos, '', 2)
-                txt = txt .. '错误：有无法识别的标签 "' .. name .. '" 在 ' .. buf .. ' ！ \n'
+                txt = txt .. '错误：有无法识别的标签 "' .. name ..  '" 在 ' .. buf .. ' ！ \n'
             end
         end
         midx = midx + 1
     end -- while end
-    m_retval, isrgn, pos, rgnend, name_end, markrgnindexnumber = reaper.EnumProjectMarkers2(0, midx)
+    m_retval, isrgn, pos, rgnend, name_end, markrgnindexnumber =
+        reaper.EnumProjectMarkers2(0, midx)
 
     -----------------------------------
     midx = 0
     jishu = 0
     repeat
-        m_retval, isrgn, pos, rgnend, name, markrgnindexnumber = reaper.EnumProjectMarkers(midx)
+        m_retval, isrgn, pos, rgnend, name, markrgnindexnumber =
+            reaper.EnumProjectMarkers(midx)
         if name == 'A' then
             if jishu ~= 0 then name = name .. jishu end
             reaper.SetProjectMarker(markrgnindexnumber, false, pos, 0, name)
             jishu = jishu + 1
         end
         midx = midx + 1
-        m_retval, isrgn, pos, rgnend, name, markrgnindexnumber = reaper.EnumProjectMarkers(midx)
+        m_retval, isrgn, pos, rgnend, name, markrgnindexnumber =
+            reaper.EnumProjectMarkers(midx)
     until m_retval == 0
     -----------------------------------
     midx = 0
     jishu = 0
     repeat
-        m_retval, isrgn, pos, rgnend, name, markrgnindexnumber = reaper.EnumProjectMarkers(midx)
+        m_retval, isrgn, pos, rgnend, name, markrgnindexnumber =
+            reaper.EnumProjectMarkers(midx)
         if name == 'B' then
             if jishu ~= 0 then name = name .. jishu end
             reaper.SetProjectMarker(markrgnindexnumber, false, pos, 0, name)
             jishu = jishu + 1
         end
         midx = midx + 1
-        m_retval, isrgn, pos, rgnend, name, markrgnindexnumber = reaper.EnumProjectMarkers(midx)
+        m_retval, isrgn, pos, rgnend, name, markrgnindexnumber =
+            reaper.EnumProjectMarkers(midx)
     until m_retval == 0
     -----------------------------------
     midx = 0
     jishu = 0
     repeat
-        m_retval, isrgn, pos, rgnend, name, markrgnindexnumber = reaper.EnumProjectMarkers(midx)
+        m_retval, isrgn, pos, rgnend, name, markrgnindexnumber =
+            reaper.EnumProjectMarkers(midx)
         if name == 'C' then
             if jishu ~= 0 then name = name .. jishu end
             reaper.SetProjectMarker(markrgnindexnumber, false, pos, 0, name)
             jishu = jishu + 1
         end
         midx = midx + 1
-        m_retval, isrgn, pos, rgnend, name, markrgnindexnumber = reaper.EnumProjectMarkers(midx)
+        m_retval, isrgn, pos, rgnend, name, markrgnindexnumber =
+            reaper.EnumProjectMarkers(midx)
     until m_retval == 0
     -----------------------------------
     midx = 0
     jishu = 0
     repeat
-        m_retval, isrgn, pos, rgnend, name, markrgnindexnumber = reaper.EnumProjectMarkers(midx)
+        m_retval, isrgn, pos, rgnend, name, markrgnindexnumber =
+            reaper.EnumProjectMarkers(midx)
         if name == 'D' then
             if jishu ~= 0 then name = name .. jishu end
             reaper.SetProjectMarker(markrgnindexnumber, false, pos, 0, name)
             jishu = jishu + 1
         end
         midx = midx + 1
-        m_retval, isrgn, pos, rgnend, name, markrgnindexnumber = reaper.EnumProjectMarkers(midx)
+        m_retval, isrgn, pos, rgnend, name, markrgnindexnumber =
+            reaper.EnumProjectMarkers(midx)
     until m_retval == 0
     -----------------------------------
     midx = 0
     jishu = 0
     repeat
-        m_retval, isrgn, pos, rgnend, name, markrgnindexnumber = reaper.EnumProjectMarkers(midx)
+        m_retval, isrgn, pos, rgnend, name, markrgnindexnumber =
+            reaper.EnumProjectMarkers(midx)
         if name == 'E' then
             if jishu ~= 0 then name = name .. jishu end
             reaper.SetProjectMarker(markrgnindexnumber, false, pos, 0, name)
             jishu = jishu + 1
         end
         midx = midx + 1
-        m_retval, isrgn, pos, rgnend, name, markrgnindexnumber = reaper.EnumProjectMarkers(midx)
+        m_retval, isrgn, pos, rgnend, name, markrgnindexnumber =
+            reaper.EnumProjectMarkers(midx)
     until m_retval == 0
     -----------------------------------
     midx = 0
     jishu = 0
     repeat
-        m_retval, isrgn, pos, rgnend, name, markrgnindexnumber = reaper.EnumProjectMarkers(midx)
+        m_retval, isrgn, pos, rgnend, name, markrgnindexnumber =
+            reaper.EnumProjectMarkers(midx)
         if name == 'F' then
             if jishu ~= 0 then name = name .. jishu end
             reaper.SetProjectMarker(markrgnindexnumber, false, pos, 0, name)
             jishu = jishu + 1
         end
         midx = midx + 1
-        m_retval, isrgn, pos, rgnend, name, markrgnindexnumber = reaper.EnumProjectMarkers(midx)
+        m_retval, isrgn, pos, rgnend, name, markrgnindexnumber =
+            reaper.EnumProjectMarkers(midx)
     until m_retval == 0
     -----------------------------------
     midx = 0
     jishu = 0
     repeat
-        m_retval, isrgn, pos, rgnend, name, markrgnindexnumber = reaper.EnumProjectMarkers(midx)
+        m_retval, isrgn, pos, rgnend, name, markrgnindexnumber =
+            reaper.EnumProjectMarkers(midx)
         if name == 'G' then
             if jishu ~= 0 then name = name .. jishu end
             reaper.SetProjectMarker(markrgnindexnumber, false, pos, 0, name)
             jishu = jishu + 1
         end
         midx = midx + 1
-        m_retval, isrgn, pos, rgnend, name, markrgnindexnumber = reaper.EnumProjectMarkers(midx)
+        m_retval, isrgn, pos, rgnend, name, markrgnindexnumber =
+            reaper.EnumProjectMarkers(midx)
     until m_retval == 0
     -----------------------------------
     midx = 0
     jishu = 0
     repeat
-        m_retval, isrgn, pos, rgnend, name, markrgnindexnumber = reaper.EnumProjectMarkers(midx)
+        m_retval, isrgn, pos, rgnend, name, markrgnindexnumber =
+            reaper.EnumProjectMarkers(midx)
         if name == 'H' then
             if jishu ~= 0 then name = name .. jishu end
             reaper.SetProjectMarker(markrgnindexnumber, false, pos, 0, name)
             jishu = jishu + 1
         end
         midx = midx + 1
-        m_retval, isrgn, pos, rgnend, name, markrgnindexnumber = reaper.EnumProjectMarkers(midx)
+        m_retval, isrgn, pos, rgnend, name, markrgnindexnumber =
+            reaper.EnumProjectMarkers(midx)
     until m_retval == 0
     -----------------------------------
     midx = 0
     jishu = 0
     repeat
-        m_retval, isrgn, pos, rgnend, name, markrgnindexnumber = reaper.EnumProjectMarkers(midx)
+        m_retval, isrgn, pos, rgnend, name, markrgnindexnumber =
+            reaper.EnumProjectMarkers(midx)
         if name == 'I' then
             if jishu ~= 0 then name = name .. jishu end
             reaper.SetProjectMarker(markrgnindexnumber, false, pos, 0, name)
             jishu = jishu + 1
         end
         midx = midx + 1
-        m_retval, isrgn, pos, rgnend, name, markrgnindexnumber = reaper.EnumProjectMarkers(midx)
+        m_retval, isrgn, pos, rgnend, name, markrgnindexnumber =
+            reaper.EnumProjectMarkers(midx)
     until m_retval == 0
     -----------------------------------
     midx = 0
     jishu = 0
     repeat
-        m_retval, isrgn, pos, rgnend, name, markrgnindexnumber = reaper.EnumProjectMarkers(midx)
+        m_retval, isrgn, pos, rgnend, name, markrgnindexnumber =
+            reaper.EnumProjectMarkers(midx)
         if name == 'J' then
             if jishu ~= 0 then name = name .. jishu end
             reaper.SetProjectMarker(markrgnindexnumber, false, pos, 0, name)
             jishu = jishu + 1
         end
         midx = midx + 1
-        m_retval, isrgn, pos, rgnend, name, markrgnindexnumber = reaper.EnumProjectMarkers(midx)
+        m_retval, isrgn, pos, rgnend, name, markrgnindexnumber =
+            reaper.EnumProjectMarkers(midx)
     until m_retval == 0
     -----------------------------------
     midx = 0
     jishu = 0
     repeat
-        m_retval, isrgn, pos, rgnend, name, markrgnindexnumber = reaper.EnumProjectMarkers(midx)
+        m_retval, isrgn, pos, rgnend, name, markrgnindexnumber =
+            reaper.EnumProjectMarkers(midx)
         if name == 'K' then
             if jishu ~= 0 then name = name .. jishu end
             reaper.SetProjectMarker(markrgnindexnumber, false, pos, 0, name)
             jishu = jishu + 1
         end
         midx = midx + 1
-        m_retval, isrgn, pos, rgnend, name, markrgnindexnumber = reaper.EnumProjectMarkers(midx)
+        m_retval, isrgn, pos, rgnend, name, markrgnindexnumber =
+            reaper.EnumProjectMarkers(midx)
     until m_retval == 0
     -----------------------------------
     reaper.Undo_EndBlock('auto marker', 8)
@@ -353,21 +380,212 @@ function markauto()
     if end_mark == nil then
         marklose = marklose .. '提醒：没有找到 Ending 标记！\n'
     end
-    reaper.ShowConsoleMsg(marklose)
+    txt = txt .. marklose
 
     if txt == '' then
         txt = '所有标记格式已规范处理！ '
         reaper.TrackCtl_SetToolTip(txt, 50, 0, true)
     else
         reaper.ShowConsoleMsg(txt)
+        function SetReaScriptConsole_FontStyle(style)
+            -- parameter style must be between 1 and 19
+            
+              local translation = reaper.JS_Localize("ReaScript console output", "DLG_437")
+            
+              local reascript_console_hwnd = reaper.JS_Window_Find(translation, true)
+              if reascript_console_hwnd==nil then return false end
+              local styles={32,33,36,31,214,37,218,1606,4373,3297,220,3492,3733,3594,35,1890,2878,3265,4392}
+              local Textfield=reaper.JS_Window_FindChildByID(reascript_console_hwnd, 1177)
+              reaper.JS_WindowMessage_Send(Textfield, "WM_SETFONT", styles[style] ,0,1,0)
+            end
+            SetReaScriptConsole_FontStyle(2)
     end
 
+end -- function end
+
+function sort_mark()
+
+    midx = 0
+    jishu = 0
+    repeat
+        m_retval, isrgn, pos, rgnend, name, markrgnindexnumber =
+            reaper.EnumProjectMarkers(midx)
+        name = string.gsub(name, '%d+', '')
+        if name == 'A' then
+            if jishu ~= 0 then name = name .. jishu end
+            reaper.SetProjectMarker(markrgnindexnumber, false, pos, 0, name)
+            jishu = jishu + 1
+        end
+        midx = midx + 1
+        m_retval, isrgn, pos, rgnend, name, markrgnindexnumber =
+            reaper.EnumProjectMarkers(midx)
+    until m_retval == 0
+    -----------------------------------
+    midx = 0
+    jishu = 0
+    repeat
+        m_retval, isrgn, pos, rgnend, name, markrgnindexnumber =
+            reaper.EnumProjectMarkers(midx)
+        name = string.gsub(name, '%d+', '')
+        if name == 'B' then
+            if jishu ~= 0 then name = name .. jishu end
+            reaper.SetProjectMarker(markrgnindexnumber, false, pos, 0, name)
+            jishu = jishu + 1
+        end
+        midx = midx + 1
+        m_retval, isrgn, pos, rgnend, name, markrgnindexnumber =
+            reaper.EnumProjectMarkers(midx)
+    until m_retval == 0
+    -----------------------------------
+    midx = 0
+    jishu = 0
+    repeat
+        m_retval, isrgn, pos, rgnend, name, markrgnindexnumber =
+            reaper.EnumProjectMarkers(midx)
+        name = string.gsub(name, '%d+', '')
+        if name == 'C' then
+            if jishu ~= 0 then name = name .. jishu end
+            reaper.SetProjectMarker(markrgnindexnumber, false, pos, 0, name)
+            jishu = jishu + 1
+        end
+        midx = midx + 1
+        m_retval, isrgn, pos, rgnend, name, markrgnindexnumber =
+            reaper.EnumProjectMarkers(midx)
+    until m_retval == 0
+    -----------------------------------
+    midx = 0
+    jishu = 0
+    repeat
+        m_retval, isrgn, pos, rgnend, name, markrgnindexnumber =
+            reaper.EnumProjectMarkers(midx)
+        name = string.gsub(name, '%d+', '')
+        if name == 'D' then
+            if jishu ~= 0 then name = name .. jishu end
+            reaper.SetProjectMarker(markrgnindexnumber, false, pos, 0, name)
+            jishu = jishu + 1
+        end
+        midx = midx + 1
+        m_retval, isrgn, pos, rgnend, name, markrgnindexnumber =
+            reaper.EnumProjectMarkers(midx)
+    until m_retval == 0
+    -----------------------------------
+    midx = 0
+    jishu = 0
+    repeat
+        m_retval, isrgn, pos, rgnend, name, markrgnindexnumber =
+            reaper.EnumProjectMarkers(midx)
+        name = string.gsub(name, '%d+', '')
+        if name == 'E' then
+            if jishu ~= 0 then name = name .. jishu end
+            reaper.SetProjectMarker(markrgnindexnumber, false, pos, 0, name)
+            jishu = jishu + 1
+        end
+        midx = midx + 1
+        m_retval, isrgn, pos, rgnend, name, markrgnindexnumber =
+            reaper.EnumProjectMarkers(midx)
+    until m_retval == 0
+    -----------------------------------
+    midx = 0
+    jishu = 0
+    repeat
+        m_retval, isrgn, pos, rgnend, name, markrgnindexnumber =
+            reaper.EnumProjectMarkers(midx)
+        name = string.gsub(name, '%d+', '')
+        if name == 'F' then
+            if jishu ~= 0 then name = name .. jishu end
+            reaper.SetProjectMarker(markrgnindexnumber, false, pos, 0, name)
+            jishu = jishu + 1
+        end
+        midx = midx + 1
+        m_retval, isrgn, pos, rgnend, name, markrgnindexnumber =
+            reaper.EnumProjectMarkers(midx)
+    until m_retval == 0
+    -----------------------------------
+    midx = 0
+    jishu = 0
+    repeat
+        m_retval, isrgn, pos, rgnend, name, markrgnindexnumber =
+            reaper.EnumProjectMarkers(midx)
+        name = string.gsub(name, '%d+', '')
+        if name == 'G' then
+            if jishu ~= 0 then name = name .. jishu end
+            reaper.SetProjectMarker(markrgnindexnumber, false, pos, 0, name)
+            jishu = jishu + 1
+        end
+        midx = midx + 1
+        m_retval, isrgn, pos, rgnend, name, markrgnindexnumber =
+            reaper.EnumProjectMarkers(midx)
+    until m_retval == 0
+    -----------------------------------
+    midx = 0
+    jishu = 0
+    repeat
+        m_retval, isrgn, pos, rgnend, name, markrgnindexnumber =
+            reaper.EnumProjectMarkers(midx)
+        name = string.gsub(name, '%d+', '')
+        if name == 'H' then
+            if jishu ~= 0 then name = name .. jishu end
+            reaper.SetProjectMarker(markrgnindexnumber, false, pos, 0, name)
+            jishu = jishu + 1
+        end
+        midx = midx + 1
+        m_retval, isrgn, pos, rgnend, name, markrgnindexnumber =
+            reaper.EnumProjectMarkers(midx)
+    until m_retval == 0
+    -----------------------------------
+    midx = 0
+    jishu = 0
+    repeat
+        m_retval, isrgn, pos, rgnend, name, markrgnindexnumber =
+            reaper.EnumProjectMarkers(midx)
+        name = string.gsub(name, '%d+', '')
+        if name == 'I' then
+            if jishu ~= 0 then name = name .. jishu end
+            reaper.SetProjectMarker(markrgnindexnumber, false, pos, 0, name)
+            jishu = jishu + 1
+        end
+        midx = midx + 1
+        m_retval, isrgn, pos, rgnend, name, markrgnindexnumber =
+            reaper.EnumProjectMarkers(midx)
+    until m_retval == 0
+    -----------------------------------
+    midx = 0
+    jishu = 0
+    repeat
+        m_retval, isrgn, pos, rgnend, name, markrgnindexnumber =
+            reaper.EnumProjectMarkers(midx)
+        name = string.gsub(name, '%d+', '')
+        if name == 'J' then
+            if jishu ~= 0 then name = name .. jishu end
+            reaper.SetProjectMarker(markrgnindexnumber, false, pos, 0, name)
+            jishu = jishu + 1
+        end
+        midx = midx + 1
+        m_retval, isrgn, pos, rgnend, name, markrgnindexnumber =
+            reaper.EnumProjectMarkers(midx)
+    until m_retval == 0
+    -----------------------------------
+    midx = 0
+    jishu = 0
+    repeat
+        m_retval, isrgn, pos, rgnend, name, markrgnindexnumber =
+            reaper.EnumProjectMarkers(midx)
+        name = string.gsub(name, '%d+', '')
+        if name == 'K' then
+            if jishu ~= 0 then name = name .. jishu end
+            reaper.SetProjectMarker(markrgnindexnumber, false, pos, 0, name)
+            jishu = jishu + 1
+        end
+        midx = midx + 1
+        m_retval, isrgn, pos, rgnend, name, markrgnindexnumber =
+            reaper.EnumProjectMarkers(midx)
+    until m_retval == 0
 end -- function end
 
 local ctx = reaper.ImGui_CreateContext('instmark')
 local size = reaper.GetAppVersion():match('OSX') and 12 or 14
 local font = reaper.ImGui_CreateFont('sans-serif', size)
-reaper.ImGui_AttachFont(ctx, font)
+reaper.ImGui_Attach(ctx, font)
 
 x, y = reaper.GetMousePosition()
 x, y = reaper.ImGui_PointConvertNative(ctx, x, y)
@@ -434,41 +652,67 @@ function loop()
 
         if reaper.ImGui_Button(ctx, 'A') then
             insertMarker('A')
+            sort_mark()
             flag = false
         end
         reaper.ImGui_SameLine(ctx)
         if reaper.ImGui_Button(ctx, 'B') then
             insertMarker('B')
+            sort_mark()
             flag = false
         end
         reaper.ImGui_SameLine(ctx)
         if reaper.ImGui_Button(ctx, 'C') then
             insertMarker('C')
+            sort_mark()
             flag = false
         end
         reaper.ImGui_SameLine(ctx)
         if reaper.ImGui_Button(ctx, 'D') then
             insertMarker('D')
+            sort_mark()
             flag = false
         end
         reaper.ImGui_SameLine(ctx)
         if reaper.ImGui_Button(ctx, 'E') then
             insertMarker('E')
+            sort_mark()
             flag = false
         end
         reaper.ImGui_SameLine(ctx)
         if reaper.ImGui_Button(ctx, 'F') then
             insertMarker('F')
+            sort_mark()
             flag = false
         end
         reaper.ImGui_SameLine(ctx)
         if reaper.ImGui_Button(ctx, 'G') then
             insertMarker('G')
+            sort_mark()
             flag = false
         end
         reaper.ImGui_SameLine(ctx)
         if reaper.ImGui_Button(ctx, 'H') then
             insertMarker('H')
+            sort_mark()
+            flag = false
+        end
+        reaper.ImGui_SameLine(ctx)
+        if reaper.ImGui_Button(ctx, 'I') then
+            insertMarker('I')
+            sort_mark()
+            flag = false
+        end
+        reaper.ImGui_SameLine(ctx)
+        if reaper.ImGui_Button(ctx, 'J') then
+            insertMarker('J')
+            sort_mark()
+            flag = false
+        end
+        reaper.ImGui_SameLine(ctx)
+        if reaper.ImGui_Button(ctx, 'K') then
+            insertMarker('K')
+            sort_mark()
             flag = false
         end
 

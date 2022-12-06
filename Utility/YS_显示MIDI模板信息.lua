@@ -1,6 +1,6 @@
 --[[
  * ReaScript Name: 显示MIDI模板信息
- * Version: 1.0.3
+ * Version: 1.0.4
  * Author: YS
 --]]
 
@@ -11,8 +11,12 @@
 --]]
 
 _, _, sectionID, ownCommandID, _, _, _ = reaper.get_action_context()
-reaper.SetToggleCommandState(sectionID, ownCommandID, 1)
-reaper.RefreshToolbar2(sectionID, ownCommandID)
+reaper.SetToggleCommandState(0, reaper.NamedCommandLookup('_RSc86451697eb9e2a4d8f6a114868b10b271c49c69'), 1)
+reaper.SetToggleCommandState(32060, reaper.NamedCommandLookup('_RS7d3c_c86451697eb9e2a4d8f6a114868b10b271c49c69'), 1)
+reaper.SetToggleCommandState(32061, reaper.NamedCommandLookup('_RS7d3d_c86451697eb9e2a4d8f6a114868b10b271c49c69'), 1)
+reaper.RefreshToolbar2(0, reaper.NamedCommandLookup('_RSc86451697eb9e2a4d8f6a114868b10b271c49c69'))
+reaper.RefreshToolbar2(32060, reaper.NamedCommandLookup('_RS7d3c_c86451697eb9e2a4d8f6a114868b10b271c49c69'))
+reaper.RefreshToolbar2(32061, reaper.NamedCommandLookup('_RS7d3d_c86451697eb9e2a4d8f6a114868b10b271c49c69'))
 
 tb_ins_bank = {}
 tb_ins_bank['1,0'] = 'SC55_Piano 1'
@@ -1512,6 +1516,15 @@ function getset_track_info(take)
 
 end -- function end
 
+function openlist(take)
+    edititem = reaper.GetMediaItemTake_Item(take)
+    reaper.SelectAllMediaItems(0,false)
+    reaper.SetMediaItemSelected(edititem , true)
+    reaper.Main_OnCommand(40153,0) -- open midi editor
+    editor=reaper.MIDIEditor_GetActive()
+    reaper.MIDIEditor_OnCommand(editor , 40056) -- list
+end  --funtion end
+
 function O_Song_Time()
     wavitem_pos = 0
     wavitem1 = reaper.GetMediaItem(0, 0)
@@ -1730,7 +1743,102 @@ function Maxsound()
     MaxEvent()
     reaper.ClearConsole()
     reaper.ShowConsoleMsg(notedata .. maxdata)
+    
+    function SetReaScriptConsole_FontStyle(style)
+    -- parameter style must be between 1 and 19
+    
+      local translation = reaper.JS_Localize("ReaScript console output", "DLG_437")
+    
+      local reascript_console_hwnd = reaper.JS_Window_Find(translation, true)
+      if reascript_console_hwnd==nil then return false end
+      local styles={32,33,36,31,214,37,218,1606,4373,3297,220,3492,3733,3594,35,1890,2878,3265,4392}
+      local Textfield=reaper.JS_Window_FindChildByID(reascript_console_hwnd, 1177)
+      reaper.JS_WindowMessage_Send(Textfield, "WM_SETFONT", styles[style] ,0,1,0)
+    end
+    SetReaScriptConsole_FontStyle(2)
+end  --function end
+
+function showmarklist()
+function Msg(param)
+  reaper.ShowConsoleMsg(tostring(param) .. "\n")
 end
+
+if not reaper.APIExists("JS_Window_Find") then
+  reaper.MB("請右鍵單擊並安裝 'js_ReaScriptAPI: API functions for ReaScripts'. 然後重新啟動 REAPER 並再次運行腳本. 謝謝!", "你必須安裝 JS_ReaScriptAPI", 0)
+  local ok, err = reaper.ReaPack_AddSetRepository("ReaTeam Extensions", "https://github.com/ReaTeam/Extensions/raw/master/index.xml", true, 1)
+  if ok then
+    reaper.ReaPack_BrowsePackages("js_ReaScriptAPI")
+  else
+    reaper.MB(err, "出了些問題...", 0)
+  end
+  return reaper.defer(function() end)
+end
+
+local _, num_markers = reaper.CountProjectMarkers(0)
+if num_markers < 1 then
+    x, y = reaper.GetMousePosition()
+    reaper.TrackCtl_SetToolTip('项目中没有任何标记', x, y - 20, true)
+  return reaper.defer(function() end)
+end
+
+ markers = {}
+local cur_pos = reaper.GetCursorPosition()
+local idx = -1
+while true do
+  idx = idx + 1
+  local ok, isrgn, pos, rgnend, name, markrgnindexnumber = reaper.EnumProjectMarkers(idx)
+  if ok == 0 then
+    break
+  else
+    if not isrgn then -- isrgn == false 為標記
+         name = string.format('%-8s',name)
+      if math.abs(cur_pos - pos) < 0.001 then
+        markers[#markers + 1] = {cur = true, pos = pos, name = name, idx = markrgnindexnumber}
+      else
+        markers[#markers + 1] = {pos = pos, name = name, idx = markrgnindexnumber}
+      end
+    end
+  end
+end
+
+local menu = "" -- #MARKERS|#[ID] [Hr:Mn:Sc:Fr] [Meas:Beat] [Name]||
+for m = 1, #markers do
+  local space = " "
+  --space = space:sub(tostring(markers[m].idx):len()*2)
+  tiemcode_proj_default = reaper.format_timestr_pos(markers[m].pos, "", -1) -- 0=time, -1=proj default
+  tiemcode_0 = reaper.format_timestr_pos(markers[m].pos, "", 0) -- 0=time, -1=proj default
+  tiemcode_1 = reaper.format_timestr_pos(markers[m].pos, "", 1) -- 1=measures.beats + time
+  tiemcode_2 = reaper.format_timestr_pos(markers[m].pos, "", 2) -- 2=measures.beats
+  tiemcode_3 = reaper.format_timestr_pos(markers[m].pos, "", 3) -- 3=seconds
+  tiemcode_4 = reaper.format_timestr_pos(markers[m].pos, "", 4) -- 4=samples
+  tiemcode_5 = reaper.format_timestr_pos(markers[m].pos, "", 5) -- 5=h:m:s:f
+  --menu = menu .. (markers[m].cur and "!" or "") .. 'Marker ' .. markers[m].idx .. ': ' .. space .. (markers[m].name == "" and "" or markers[m].name) .. space .. ' [' .. tiemcode_proj_default .. '] ' .. "|"
+  menu = menu .. (markers[m].cur and "!" or "") .. (markers[m].name == "" and "" or markers[m].name) .. space .. ' [' .. tiemcode_proj_default .. '] ' .. "|"
+end
+
+local title = "hidden " .. reaper.genGuid()
+gfx.init( title, 0, 0, 0, 0, 0 )
+local hwnd = reaper.JS_Window_Find( title, true )
+if hwnd then
+  reaper.JS_Window_Show( hwnd, "HIDE" )
+end
+gfx.x, gfx.y = gfx.mouse_x-0, gfx.mouse_y-0
+local selection = gfx.showmenu(menu)
+gfx.quit()
+
+selection = selection - 0 -- 此處selection值與標題行數關聯，標題佔用一行-1，佔用兩行則-2
+
+if selection > 0 then
+  reaper.GoToMarker(0, selection, true)
+end
+
+local window, _, _ = reaper.BR_GetMouseCursorContext()
+local _, inline_editor, _, _, _, _ = reaper.BR_GetMouseCursorContext_MIDI()
+if window == "midi_editor" and not inline_editor then reaper.SN_FocusMIDIEditor() end -- 聚焦 MIDI Editor
+reaper.defer(function() end)
+
+end -- function end
+
 
 function miditempinfo()
     out = ''
@@ -1814,7 +1922,7 @@ function miditempinfo()
 
                         ccidx = ccidx + 1
                     end -- while
-                    -- out=out..name..' Bank='..bank..' Patch='..PC..' Vol='..vol..' Pan='..pan..' Rev='..rev..' Cho='..cho..' Delay='..delay..'\n---------------------------------------------------------------------------------------\n'
+                    
                     table.insert(info_tb, name .. '|Bank=' .. bank .. '|Patch=' .. PC .. '|Vol=' .. vol .. '|Pan=' .. pan ..
                                  '|Rev=' .. rev .. '|Cho=' .. cho .. '|Delay=' .. delay)
                     table.insert(take_tb, take)
@@ -1834,20 +1942,12 @@ miditempinfo()
 local ctx = reaper.ImGui_CreateContext('tempinfo')
 local size = reaper.GetAppVersion():match('OSX') and 12 or 14
 local font = reaper.ImGui_CreateFont('sans-serif', size)
-reaper.ImGui_AttachFont(ctx, font)
+reaper.ImGui_Attach(ctx, font)
 
---[[take_hash = ''
-take_hash_old = ''
-for i, v in ipairs(take_tb) do
-    ret, hash = reaper.MIDI_GetHash(v, false)
-    take_hash_old = take_hash_old .. hash
-end
-
-item_count_old = reaper.CountMediaItems(0)--]]
 StateChangeCount_old=reaper.GetProjectStateChangeCount(0)
 
 function loop()
-    reaper.ImGui_SetNextWindowSize(ctx, 690, 70+(#take_tb*23.7))
+    reaper.ImGui_SetNextWindowSize(ctx, 730, 70+(#take_tb*23.7))
     
     StateChangeCount=reaper.GetProjectStateChangeCount(0)
     if StateChangeCount ~= StateChangeCount_old then
@@ -1855,22 +1955,6 @@ function loop()
         StateChangeCount_old = StateChangeCount
     end
     
-   --[[ item_count = reaper.CountMediaItems(0)
-    if item_count ~= item_count_old then
-        miditempinfo()
-        reaper.TrackCtl_SetToolTip('item count change', 50, 0, true)
-        item_count_old = item_count
-    end
-
-    for i, v in ipairs(take_tb) do
-        ret, hash = reaper.MIDI_GetHash(v, false)
-        take_hash = take_hash .. hash
-    end
-    if take_hash ~= take_hash_old then
-        miditempinfo()
-        take_hash_old = take_hash
-        take_hash = ''
-    end--]]
 
     reaper.ImGui_PushFont(ctx, font)
     playmode = reaper.GetToggleCommandStateEx(0, 1007)
@@ -1880,7 +1964,7 @@ function loop()
         tpos = reaper.GetCursorPosition()
     end
     for i, v in ipairs(marktb) do
-        markpos, name = string.match(v, '(%d+%.%d+),(%S+)')
+        markpos, name = string.match(v, '(%d+%.%d+),(.+)')
         if markpos and name then
             markpos = tonumber(markpos)
             if tpos > markpos then MKname = name end
@@ -1897,22 +1981,41 @@ function loop()
     local visible, open = reaper.ImGui_Begin(ctx, 'MIDI Template information', true)
     if visible then
 
-        if reaper.ImGui_Button(ctx, 'Refresh') then
-            O_Song_Time()
-            getmark()
+        if reaper.ImGui_Button(ctx, 'Jump Audio') then
+           reaper.OnStopButton()
+           ret,csv=reaper.GetUserInputs('跳转到原曲音频时间',2,'输入时间**分：,输入时间**秒：','0,0')
+                if ret then 
+                   mm,ss=string.match(csv , '(%d+),(%d+)')
+                   mm=tonumber(mm)  ss=tonumber(ss) 
+                   inputtime = mm * 60 + ss + wavitem_pos
+                   reaper.SetEditCurPos(inputtime,true,true)
+                end
         end
         reaper.ImGui_SameLine(ctx)
-        reaper.ImGui_Button(ctx, 'Project time: ' .. time_buf)
+        reaper.ImGui_Button(ctx, 'Project: ' .. time_buf)
         reaper.ImGui_SameLine(ctx)
-        reaper.ImGui_Button(ctx, 'Audio time: ' .. Original_song_time)
+        reaper.ImGui_Button(ctx, 'Audio: ' .. Original_song_time)
         reaper.ImGui_SameLine(ctx)
         reaper.ImGui_Button(ctx, 'Tempo: ' .. bpm)
         reaper.ImGui_SameLine(ctx)
         if reaper.ImGui_Button(ctx, 'Marker: ' .. MKname) then
-            reaper.Main_OnCommand(40326, 0)
+            showmarklist()
         end
         reaper.ImGui_SameLine(ctx)
         if reaper.ImGui_Button(ctx, 'MaxVoice') then Maxsound() end
+        reaper.ImGui_SameLine(ctx)
+        getlock=reaper.GetExtState('Template state', 'lock')
+        track1solo=reaper.GetToggleCommandStateEx(0, 23)
+        if getlock == 'lock'  then
+           reaper.ImGui_RadioButton(ctx, 'TPL lock',true)
+        else
+           if track1solo == 1 then
+             reaper.ImGui_RadioButton(ctx, 'TRK1 solo',true)
+           else
+             reaper.ImGui_RadioButton(ctx, 'TPL unlock',false)
+           end
+        end
+        
 
         for i, v in ipairs(info_tb) do
             reaper.ImGui_PushID(ctx, i)
@@ -2068,6 +2171,14 @@ function loop()
                 end
                 reaper.Undo_EndBlock('修改CC94数值=' .. shuru, -1)
             end
+            reaper.ImGui_SameLine(ctx)
+            if reaper.ImGui_SmallButton(ctx, 'List') then
+                openlist(take_tb[i])
+            end
+            if reaper.ImGui_IsItemHovered(ctx) then
+                reaper.ImGui_SetTooltip(ctx, a)
+            end
+            
             reaper.ImGui_PopID(ctx)
         end
 
@@ -2086,8 +2197,12 @@ end
 reaper.defer(loop)
 
 function exit()
-    reaper.SetToggleCommandState(sectionID, ownCommandID, 0)
-    reaper.RefreshToolbar2(sectionID, ownCommandID)
+    reaper.SetToggleCommandState(0, reaper.NamedCommandLookup('_RSc86451697eb9e2a4d8f6a114868b10b271c49c69'), 0)
+    reaper.SetToggleCommandState(32060, reaper.NamedCommandLookup('_RS7d3c_c86451697eb9e2a4d8f6a114868b10b271c49c69'), 0)
+    reaper.SetToggleCommandState(32061, reaper.NamedCommandLookup('_RS7d3d_c86451697eb9e2a4d8f6a114868b10b271c49c69'), 0)
+    reaper.RefreshToolbar2(0, reaper.NamedCommandLookup('_RSc86451697eb9e2a4d8f6a114868b10b271c49c69'))
+    reaper.RefreshToolbar2(32060, reaper.NamedCommandLookup('_RS7d3c_c86451697eb9e2a4d8f6a114868b10b271c49c69'))
+    reaper.RefreshToolbar2(32061, reaper.NamedCommandLookup('_RS7d3d_c86451697eb9e2a4d8f6a114868b10b271c49c69'))
 end
 reaper.atexit(exit)
 

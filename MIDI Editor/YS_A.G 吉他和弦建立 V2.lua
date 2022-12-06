@@ -1,6 +1,6 @@
 --[[
  * ReaScript Name: A.G 吉他和弦建立 V2
- * Version: 1.0.5
+ * Version: 1.0.6
  * Author: YS
 --]]
 
@@ -204,7 +204,7 @@ recst()
 local ctx = reaper.ImGui_CreateContext('A.G CHORD')
   local size = reaper.GetAppVersion():match('OSX') and 12 or 14
   local font = reaper.ImGui_CreateFont('sans-serif', size)
-  reaper.ImGui_AttachFont(ctx, font)
+  reaper.ImGui_Attach(ctx, font)
   
 x,y=reaper.GetMousePosition()
 x, y = reaper.ImGui_PointConvertNative(ctx, x, y)

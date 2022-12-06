@@ -1,6 +1,6 @@
 --[[
  * ReaScript Name: 音符长度渐变
- * Version: 1.0.2
+ * Version: 1.0.3
  * Author: YS
 --]]
 
@@ -46,7 +46,7 @@ end --function end
 local ctx = reaper.ImGui_CreateContext('Note length gradient')
   local size = reaper.GetAppVersion():match('OSX') and 12 or 14
   local font = reaper.ImGui_CreateFont('sans-serif', size)
-  reaper.ImGui_AttachFont(ctx, font)
+  reaper.ImGui_Attach(ctx, font)
   
 x,y=reaper.GetMousePosition()
 x, y = reaper.ImGui_PointConvertNative(ctx, x, y)
