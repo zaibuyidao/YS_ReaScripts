@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<index version="1" name="YS Scripts" commit="d255563cf07508f4297711546c8ed68dbb9328ec">
+<index version="1" name="YS Scripts" commit="530ebe07dc0ffe635e182ceb04c81898c25f208b">
   <category name="Items Editing">
     <reapack name="YS_Midi Take Name From Track.lua" type="script" desc="Bass 定弦">
       <version name="1.0" author="YS" time="2021-10-14T16:59:44Z">
@@ -363,6 +363,9 @@
       <version name="1.0" author="YS" time="2021-10-14T16:59:44Z">
         <changelog><![CDATA[+ Initial release]]></changelog>
         <source main="midi_eventlisteditor midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/e0c2cb8030173de0d7e0794ee7cc6a751307fd97/MIDI%20Editor/YS_insert%20NRPN%20V3.lua</source>
+      </version>
+      <version name="1.0.1" author="YS" time="2022-12-11T05:07:38Z">
+        <source main="midi_editor midi_eventlisteditor">https://github.com/zaibuyidao/YS_ReaScripts/raw/530ebe07dc0ffe635e182ceb04c81898c25f208b/MIDI%20Editor/YS_insert%20NRPN%20V3.lua</source>
       </version>
     </reapack>
     <reapack name="YS_insert NRPN.lua" type="script" desc="insert NRPN">
