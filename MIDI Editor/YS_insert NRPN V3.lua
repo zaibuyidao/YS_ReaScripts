@@ -1,6 +1,6 @@
 --[[
  * ReaScript Name: insert NRPN V3
- * Version: 1.0.1
+ * Version: 1.0.2
  * Author: YS
  * provides: [main=midi_editor,midi_eventlisteditor] .
 --]]
@@ -1007,7 +1007,7 @@ KIT["RHY86"] = "Missile"
 KIT["RHY87"] = "Space Bird"
 KIT["RHY88"] = "Flying Monster"
 
-num = reaper.GetCursorPositionEx(0)
+-- num = reaper.GetCursorPositionEx(0)
 
 local editor = reaper.MIDIEditor_GetActive()
 local take = reaper.MIDIEditor_GetTake(editor)
@@ -1020,19 +1020,36 @@ while retval == true do
         if msg1 == 0 or msg1 == 1 or msg1 == 2 or msg1 == 8 or msg1 == 16 then
             kit_type = 'ST'
         end
-        if msg1 == 9 or msg1 == 10 or msg1 == 24 or msg1 == 25 or msg1 == 26 or
-            msg1 == 27 or msg1 == 28 or msg1 == 29 or msg1 == 30 then
+        if msg1 == 9 or msg1 == 10 or msg1 == 24 or msg1 == 25 or msg1 == 26 or msg1 == 27 or msg1 == 28 or msg1 == 29 or msg1 == 30 then
             kit_type = 'E'
         end
-        if msg1 == 32 then kit_type = 'JZ' end
-        if msg1 == 40 then kit_type = 'BR' end
-        if msg1 == 48 then kit_type = 'ORC' end
-        if msg1 == 49 then kit_type = 'ETH' end
-        if msg1 == 50 then kit_type = 'KS' end
-        if msg1 == 52 then kit_type = 'ASIA' end
-        if msg1 == 53 then kit_type = 'CYM' end
-        if msg1 == 57 then kit_type = 'RHY' end
-        if msg1 == 58 then kit_type = 'RHY2' end
+        if msg1 == 32 then
+            kit_type = 'JZ'
+        end
+        if msg1 == 40 then
+            kit_type = 'BR'
+        end
+        if msg1 == 48 then
+            kit_type = 'ORC'
+        end
+        if msg1 == 49 then
+            kit_type = 'ETH'
+        end
+        if msg1 == 50 then
+            kit_type = 'KS'
+        end
+        if msg1 == 52 then
+            kit_type = 'ASIA'
+        end
+        if msg1 == 53 then
+            kit_type = 'CYM'
+        end
+        if msg1 == 57 then
+            kit_type = 'RHY'
+        end
+        if msg1 == 58 then
+            kit_type = 'RHY2'
+        end
     end
     idx = idx + 1
     retval, selected, muted, startpos, chanmsg, chan, msg1, msg2 = reaper.MIDI_GetCC(take, idx)
@@ -1078,7 +1095,7 @@ if #yingao == 0 then
     return
 end
 
-local startpos = reaper.MIDI_GetPPQPosFromProjTime(take, num)
+-- local startpos = reaper.MIDI_GetPPQPosFromProjTime(take, num)
 
 table.sort(yingao)
 
@@ -1137,7 +1154,8 @@ if ccidx == -1 then
     reaper.SN_FocusMIDIEditor()
     return
 end
-retval, selected, muted, ppqpos, chanmsg, chan, msg2, msg3 = reaper.MIDI_GetCC( take, ccidx)
+retval, selected, muted, ppqpos, chanmsg, chan, msg2, msg3 = reaper.MIDI_GetCC(take, ccidx)
+startpos = ppqpos
 retval2, selected2, muted2, ppqpos2, chanmsg2, chan2, msg22, msg32 = reaper.MIDI_GetCC(take, ccidx + 1)
 if retval2 then
     nextcc = ppqpos2 - ppqpos
@@ -1172,10 +1190,8 @@ nrpn[31] = 'Note Delay 音符 延迟'
 
 input = '128,128,128,128,128,128,128,128,128,128,128,128,128,128,128,128'
 input2 = '128,128,128,128,128,128,128,128,128,128,128,128,128,128,128,128'
-chushi =
-    "(%d+),(%d+),(%d+),(%d+),(%d+),(%d+),(%d+),(%d+),(%d+),(%d+),(%d+),(%d+),(%d+),(%d+),(%d+),(%d+)"
-chushi2 =
-    "(%d+),(%d+),(%d+),(%d+),(%d+),(%d+),(%d+),(%d+),(%d+),(%d+),(%d+),(%d+),(%d+),(%d+),(%d+),(%d+)"
+chushi = "(%d+),(%d+),(%d+),(%d+),(%d+),(%d+),(%d+),(%d+),(%d+),(%d+),(%d+),(%d+),(%d+),(%d+),(%d+),(%d+)"
+chushi2 = "(%d+),(%d+),(%d+),(%d+),(%d+),(%d+),(%d+),(%d+),(%d+),(%d+),(%d+),(%d+),(%d+),(%d+),(%d+),(%d+)"
 if nrpn[msg3] ~= nil then
     retval, shuzhi = reaper.GetUserInputs(nrpn[msg3], 16, jianhao, input)
     if retval == false then
