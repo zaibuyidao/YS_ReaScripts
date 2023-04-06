@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<index version="1" name="YS Scripts" commit="65dc041deaebe4384b9d778c4f4e88f8464153a1">
+<index version="1" name="YS Scripts" commit="fc41e3d9e3c698a7f501b278b24477dfaee9b2f9">
   <category name="Items Editing">
     <reapack name="YS_Midi Take Name From Track.lua" type="script" desc="Bass 定弦">
       <version name="1.0" author="YS" time="2021-10-14T16:59:44Z">
@@ -192,6 +192,9 @@
       </version>
       <version name="1.0.6" author="YS" time="2022-12-06T14:13:57Z">
         <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/d255563cf07508f4297711546c8ed68dbb9328ec/MIDI%20Editor/YS_Chord%20Tools.lua</source>
+      </version>
+      <version name="1.0.7" author="YS" time="2023-04-06T16:17:12Z">
+        <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/fc41e3d9e3c698a7f501b278b24477dfaee9b2f9/MIDI%20Editor/YS_Chord%20Tools.lua</source>
       </version>
     </reapack>
     <reapack name="YS_Copy X_Multi Track.lua" type="script" desc="Copy X_Multi Track">
