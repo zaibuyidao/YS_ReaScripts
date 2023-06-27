@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<index version="1" name="YS Scripts" commit="4c427076f9345c0b241088867c7eb17e2887bc79">
+<index version="1" name="YS Scripts" commit="55e07fe1b4b1566f4758cdcec883df0ac8d72e82">
   <category name="Items Editing">
     <reapack name="YS_Midi Take Name From Track.lua" type="script" desc="Bass 定弦">
       <version name="1.0" author="YS" time="2021-10-14T16:59:44Z">
@@ -201,6 +201,9 @@
       </version>
       <version name="1.0.8" author="YS" time="2023-05-10T09:30:52Z">
         <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/4c427076f9345c0b241088867c7eb17e2887bc79/MIDI%20Editor/YS_Chord%20Tools.lua</source>
+      </version>
+      <version name="1.0.9" author="YS" time="2023-06-27T05:35:58Z">
+        <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/55e07fe1b4b1566f4758cdcec883df0ac8d72e82/MIDI%20Editor/YS_Chord%20Tools.lua</source>
       </version>
     </reapack>
     <reapack name="YS_Copy X_Multi Track.lua" type="script" desc="Copy X_Multi Track">
@@ -804,6 +807,12 @@
       <version name="1.0" author="YS" time="2021-08-29T12:17:58Z">
         <changelog><![CDATA[+ Initial release]]></changelog>
         <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/d3f6cedd65e29e252170f14943a7eb21ff2ba29a/MIDI%20Editor/YS_%E7%9B%B8%E5%90%8C%E9%9F%B3%E9%AB%98%E9%9F%B3%E7%AC%A6%E7%BC%A9%E7%9F%AD5tick.lua</source>
+      </version>
+    </reapack>
+    <reapack name="YS_线性单音.lua" type="script" desc="线性单音">
+      <version name="1.0" author="YS" time="2023-06-27T05:35:58Z">
+        <changelog><![CDATA[+ Initial release]]></changelog>
+        <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/55e07fe1b4b1566f4758cdcec883df0ac8d72e82/MIDI%20Editor/YS_%E7%BA%BF%E6%80%A7%E5%8D%95%E9%9F%B3.lua</source>
       </version>
     </reapack>
     <reapack name="YS_自动表情_Attack Multi Track.lua" type="script" desc="自动表情_Attack Multi Track">
