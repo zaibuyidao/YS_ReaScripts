@@ -1,6 +1,6 @@
 --[[
  * ReaScript Name: 显示MIDI模板信息
- * Version: 1.0.5
+ * Version: 1.0.6
  * Author: YS
 --]]
 
@@ -1483,6 +1483,1471 @@ tb_ins_bank['12291,30'] = 'SC88Pro_Rh_Power Guitar'
 tb_ins_bank['13315,30'] = 'SC88Pro_Rh_Rock Rhythm'
 tb_ins_bank['13443,30'] = 'SC88Pro_Rh_Rock Rhythm2'
 
+tb_ins_show = {}
+tb_ins_show[0] = [[    1 SC55_Piano 1
+    2 SC88_Piano 1
+    3 SC88Pro_Piano 1
+ 1025 SC55_Piano 1w
+ 1026 SC88_Piano 1w
+ 1027 SC88Pro_Piano 1w
+ 2049 SC55_Piano 1d
+ 2050 SC88_Piano 1d
+ 2051 SC88Pro_European Pf
+ 3075 SC88Pro_Piano + Str.]]
+tb_ins_show[1] = [[    1 SC55_Piano 2
+    2 SC88_Piano 2
+    3 SC88Pro_Piano 2
+ 1025 SC55_Piano 2w
+ 1026 SC88_Piano 2w
+ 1027 SC88Pro_Piano 2w
+ 2051 SC88Pro_Dance Piano]]
+tb_ins_show[2] = [[    1 SC55_Piano 3
+    2 SC88_Piano 3
+    3 SC88Pro_Piano 3
+   130 SC88_EG+Rhodes 1
+   131 SC88Pro_EG+Rhodes 1
+   258 SC88_EG+Rhodes 2
+   259 SC88Pro_EG+Rhodes 2
+ 1025 SC55_Piano 3w
+ 1026 SC88_Piano 3w
+ 1027 SC88Pro_Piano 3w]]
+tb_ins_show[3] = [[    1 SC55_Honky-tonk
+    2 SC88_Honky-tonk
+    3 SC88Pro_Honky-tonk
+ 1025 SC55_Honky-tonk w
+ 1026 SC88_Old Upright
+ 1027 SC88Pro_Honky-tonk 2]]
+tb_ins_show[4] = [[    1 SC55_E.Piano 1
+    2 SC88_E.Piano 1
+    3 SC88Pro_E.Piano 1
+ 1025 SC55_Detuned EP 1
+ 1026 SC88_St.Soft EP
+ 1027 SC88Pro_St.Soft EP
+ 1155 SC88Pro_Cho. E.Piano
+ 1283 SC88Pro_SilentRhodes
+ 2049 SC55_E.Piano 1w
+ 2050 SC88_FM+SA EP
+ 2051 SC88Pro_FM+SA EP
+ 2179 SC88Pro_Dist E.Piano
+ 3073 SC55_60\'s E.Piano
+ 3074 SC88_60\'s E.Piano
+ 3075 SC88Pro_Wurly
+ 3202 SC88_Hard Rhodes
+ 3203 SC88Pro_Hard Rhodes
+ 3330 SC88_MellowRhodes
+ 3331 SC88Pro_MellowRhodes]]
+tb_ins_show[5] = [[    1 SC55_E.Piano 2
+    2 SC88_E.Piano 2
+    3 SC88Pro_E.Piano 2
+ 1025 SC55_Detuned EP 2
+ 1026 SC88_Detuned EP 2
+ 1027 SC88Pro_Detuned EP 2
+ 2049 SC55_E.Piano 2w
+ 2050 SC88_St.FM EP
+ 2051 SC88Pro_St.FM EP
+ 3074 SC88_Hard FM EP
+ 3075 SC88Pro_Hard FM EP]]
+tb_ins_show[6] = [[    1 SC55_Harpsichord
+    2 SC88_Harpsichord
+    3 SC88Pro_Harpsichord
+   131 SC88Pro_Harpsichord2
+ 1025 SC55_Coupled Hps.
+ 1026 SC88_Coupled Hps
+ 1027 SC88Pro_Coupled Hps.
+ 2049 SC55_Harpsi.w
+ 2050 SC88_Harpsi.w
+ 2051 SC88Pro_Harpsi.w
+ 3073 SC55_Harpsi.o
+ 3074 SC88_Harpsi.o
+ 3075 SC88Pro_Harpsi.o
+ 4099 SC88Pro_Synth Harpsi]]
+tb_ins_show[7] = [[    1 SC55_Clav.
+    2 SC88_Clav.
+    3 SC88Pro_Clav.
+ 1027 SC88Pro_Comp Clav.
+ 2051 SC88Pro_Reso Clav.
+ 3075 SC88Pro_Clav.o
+ 4099 SC88Pro_Analog Clav.
+ 4227 SC88Pro_JP8 Clav. 1
+ 4483 SC88Pro_JP8 Clav. 2]]
+tb_ins_show[8] = [[    1 SC55_Celesta
+    2 SC88_Celesta
+    3 SC88Pro_Celesta
+   131 SC88Pro_Pop Celesta]]
+tb_ins_show[9] = [[    1 SC55_Glockenspiel
+    2 SC88_Glockenspiel
+    3 SC88Pro_Glockenspiel]]
+tb_ins_show[10] = [[    1 SC55_Music Box
+    2 SC88_Music Box
+    3 SC88Pro_Music Box]]
+tb_ins_show[11] = [[    1 SC55_Vibraphone
+    2 SC88_Vibraphone
+    3 SC88Pro_Vibraphone
+   130 SC88_Hard Vibe
+   131 SC88Pro_Pop Vibe.
+ 1025 SC55_Vib.w
+ 1026 SC88_Vib.w
+ 1027 SC88Pro_Vibraphone w
+ 1155 SC88Pro_Vibraphones
+10241 SC55_Guide Vibraphone
+10242 SC88_Guide Vibraphone
+10243 SC88Pro_Guide Vibraphone]]
+tb_ins_show[12] = [[    1 SC55_Marimba
+    2 SC88_Marimba
+    3 SC88Pro_Marimba
+ 1025 SC55_Marimba w
+ 1026 SC88_Marimba w
+ 1027 SC88Pro_Marimba w
+ 2050 SC88_Barafon
+ 2051 SC88Pro_Barafon
+ 2178 SC88_Barafon 2
+ 2179 SC88Pro_Barafon 2
+ 3074 SC88_Log Drum
+ 3075 SC88Pro_Log drum]]
+tb_ins_show[13] = [[    1 SC55_Xylophone
+    2 SC88_Xylophone
+    3 SC88Pro_Xylophone]]
+tb_ins_show[14] = [[    1 SC55_Tubular-bell
+    2 SC88_Tubular-bell
+    3 SC88Pro_Tubular-bell
+ 1025 SC55_Church Bell
+ 1026 SC88_Church Bell
+ 1027 SC88Pro_Church Bell
+ 1153 SC55_Carillon
+ 1154 SC88_Carillon
+ 1155 SC88Pro_Carillon]]
+tb_ins_show[15] = [[    1 SC55_Santur
+    2 SC88_Santur
+    3 SC88Pro_Santur
+   130 SC88_Santur 2
+   131 SC88Pro_Santur 2
+ 1026 SC88_Cimbalom
+ 1027 SC88Pro_Cimbalom
+ 2051 SC88Pro_Zither 1
+ 2179 SC88Pro_Zither 2
+ 3075 SC88Pro_Dulcimer]]
+tb_ins_show[16] = [[    1 SC55_Organ 1
+    2 SC88_Organ 1
+    3 SC88Pro_Organ 1
+   130 SC88_Organ 101
+   131 SC88Pro_Organ 101
+ 1025 SC55_Detuned Or.1
+ 1026 SC88_Detuned Or.1
+ 1027 SC88Pro_Trem. Organ
+ 1154 SC88_Organ 109
+ 1155 SC88Pro_Organ o
+ 2049 SC55_60\'s Organ 1
+ 2050 SC88_60\'s Organ 1
+ 2051 SC88Pro_60\'s Organ 1
+ 2178 SC88_60\'s Organ 2
+ 2179 SC88Pro_60\'s Organ 2
+ 2306 SC88_60\'s Organ 3
+ 2307 SC88Pro_60\'s Organ 3
+ 2435 SC88Pro_Farf Organ
+ 3074 SC88_Cheese Organ
+ 3075 SC88Pro_Cheese Organ
+ 3203 SC88Pro_D-50 Organ
+ 3331 SC88Pro_JUNO Organ
+ 3459 SC88Pro_Hybrid Organ
+ 3587 SC88Pro_VS Organ
+ 3715 SC88Pro_Digi Church
+ 4097 SC55_Organ 4
+ 4098 SC88_Organ 4
+ 4099 SC88Pro_70\'s E.Organ
+ 4226 SC88_Even Bar
+ 4227 SC88Pro_Even Bar
+ 5122 SC88_Organ Bass
+ 5123 SC88Pro_Organ Bass
+ 6147 SC88Pro_5th Organ]]
+tb_ins_show[17] = [[    1 SC55_Organ 2
+    2 SC88_Organ 2
+    3 SC88Pro_Organ 2
+   130 SC88_Organ 201
+   131 SC88Pro_Jazz Organ
+   259 SC88Pro_E.Organ 16+2
+ 1025 SC55_Detuned Or.2
+ 1026 SC88_Detuned Or.2
+ 1027 SC88Pro_Chorus Or.2
+ 1155 SC88Pro_Octave Organ
+ 4097 SC55_Organ 5
+ 4098 SC88_Organ 5
+ 4099 SC88Pro_Perc. Organ]]
+tb_ins_show[18] = [[    1 SC55_Organ 3
+    2 SC88_Organ 3
+    3 SC88Pro_Organ 3
+ 1026 SC88_Rotary Org.
+ 1027 SC88Pro_Rotary Org.
+ 2050 SC88_Rotary Org.S
+ 2051 SC88Pro_Rotary Org.S
+ 2179 SC88Pro_Rock Organ 1
+ 2307 SC88Pro_Rock Organ 2
+ 3074 SC88_Rotary Org.F
+ 3075 SC88Pro_Rotary Org.F]]
+tb_ins_show[19] = [[    1 SC55_Church Org.1
+    2 SC88_Church Org.1
+    3 SC88Pro_Church Org.1
+ 1025 SC55_Church Org.2
+ 1026 SC88_Church Org.2
+ 1027 SC88Pro_Church Org.2
+ 2049 SC55_Church Org.3
+ 2050 SC88_Church Org.3
+ 2051 SC88Pro_Church Org.3
+ 3074 SC88_Organ Flute
+ 3075 SC88Pro_Organ Flute
+ 4098 SC88_Trem.Flute
+ 4099 SC88Pro_Trem.Flute
+ 4227 SC88Pro_Theater Org.]]
+tb_ins_show[20] = [[    1 SC55_Reed Organ
+    2 SC88_Reed Organ
+    3 SC88Pro_Reed Organ
+ 1027 SC88Pro_Wind Organ]]
+tb_ins_show[21] = [[    1 SC55_Accordion Fr
+    2 SC88_Accordion Fr
+    3 SC88Pro_Accordion Fr
+ 1025 SC55_Accordion It
+ 1026 SC88_Accordion It
+ 1027 SC88Pro_Accordion It
+ 1155 SC88Pro_Dist. Accord
+ 2051 SC88Pro_Cho. Accord
+ 3075 SC88Pro_Hard Accord
+ 3203 SC88Pro_Soft Accord]]
+tb_ins_show[22] = [[    1 SC55_Harmonica
+    2 SC88_Harmonica
+    3 SC88Pro_Harmonica
+   130 SC88_Harmonica 2
+   131 SC88Pro_Harmonica 2
+10241 SC55_Guide Harmonica
+10242 SC88_Guide Harmonica
+10243 SC88Pro_Guide Harmonica]]
+tb_ins_show[23] = [[    1 SC55_Bandoneon
+    2 SC88_Bandoneon
+    3 SC88Pro_Bandoneon
+ 1027 SC88Pro_Bandoneon 2
+ 2051 SC88Pro_Bandoneon 3]]
+tb_ins_show[24] = [[    1 SC55_Nylon-str.Gt
+    2 SC88_Nylon-str.Gt
+    3 SC88Pro_Nylon-str.Gt
+ 1025 SC55_Ukulele
+ 1026 SC88_Ukulele
+ 1027 SC88Pro_Ukulele
+ 2049 SC55_Nylon Gt.o
+ 2050 SC88_Nylon Gt.o
+ 2051 SC88Pro_Nylon Gt.o
+ 3074 SC88_Velo Harmnix
+ 3075 SC88Pro_Velo Harmnix
+ 4097 SC55_Nylon Gt.2
+ 4098 SC88_Nylon Gt.2
+ 4099 SC88Pro_Nylon Gt.2
+ 5122 SC88_Lequint Gt.
+ 5123 SC88Pro_Lequint Gt.]]
+tb_ins_show[25] = [[    1 SC55_Steel-str.Gt
+    2 SC88_Steel-str.Gt
+    3 SC88Pro_Steel-str.Gt
+ 1025 SC55_12-str.Gt
+ 1026 SC88_12-str.Gt
+ 1027 SC88Pro_12-str.Gt
+ 1154 SC88_Nylon+Steel
+ 1155 SC88Pro_Nylon+Steel
+ 2049 SC55_Mandolin
+ 2050 SC88_Mandolin
+ 2051 SC88Pro_Mandolin
+ 2179 SC88Pro_Mandolin 2
+ 2307 SC88Pro_MandolinTrem
+ 4098 SC88_Steel Gt.2
+ 4099 SC88Pro_Steel Gt.2]]
+tb_ins_show[26] = [[    1 SC55_Jazz Gt.
+    2 SC88_Jazz Gt.
+    3 SC88Pro_Jazz Gt.
+   130 SC88_Mellow Gt.
+   131 SC88Pro_Mellow Gt.
+ 1025 SC55_Hawaiian Gt.
+ 1026 SC88_Pedal Steel
+ 1027 SC88Pro_Pedal Steel]]
+tb_ins_show[27] = [[    1 SC55_Clean Gt.
+    2 SC88_Clean Gt.
+    3 SC88Pro_Clean Gt.
+   131 SC88Pro_Clean Half
+   259 SC88Pro_Open Hard 1
+   387 SC88Pro_Open Hard 2
+   515 SC88Pro_JC Clean Gt.
+ 1025 SC55_Chorus Gt.
+ 1026 SC88_Chorus Gt.
+ 1027 SC88Pro_Chorus Gt.
+ 1155 SC88Pro_JC Chorus Gt
+ 2051 SC88Pro_TC FrontPick
+ 2179 SC88Pro_TC Rear Pick
+ 2307 SC88Pro_TC Clean ff
+ 2435 SC88Pro_TC Clean 2:]]
+tb_ins_show[28] = [[    1 SC55_Muted Gt.
+    2 SC88_Muted Gt.
+    3 SC88Pro_Muted Gt.
+   130 SC88_Muted Dis.Gt
+   131 SC88Pro_Muted Dis.Gt
+   259 SC88Pro_TC Muted Gt.
+ 1025 SC55_Funk Gt.
+ 1026 SC88_Funk Pop
+ 1027 SC88Pro_Funk Pop
+ 2049 SC55_Funk Gt.2
+ 2050 SC88_Funk Gt.2
+ 2051 SC88Pro_Funk Gt.2
+10370 SC88_Rh Mt_Muted Dis.Gt
+10371 SC88Pro_Rh Mt_Muted Dis.Gt]]
+tb_ins_show[29] = [[    1 SC55_Overdrive Gt
+    2 SC88_Overdrive Gt
+    3 SC88Pro_Overdrive Gt
+   131 SC88Pro_Overdrive 2
+   259 SC88Pro_Overdrive 3
+   387 SC88Pro_More Drive
+ 1027 SC88Pro_LP OverDrvGt
+ 1155 SC88Pro_LP OverDrv:
+10241 SC55_Fh_OverdriveGt
+10242 SC88_Rh_OverdriveGt
+10243 SC88Pro_Fh_Overdrive Gt
+10371 SC88Pro_Rh_Overdrive 2
+10499 SC88Pro_Rh_Overdrive 3
+10627 SC88Pro_Rh_More Drive
+11267 SC88Pro_Fh_LP OverDrvGt
+11395 SC88Pro_Fh_LP OverDrv:]]
+tb_ins_show[30] = [[    1 SC55_DistortionGt
+    2 SC88_DistortionGt
+    3 SC88Pro_DistortionGt
+   130 SC88_Dist.Gt2
+   131 SC88Pro_Dist. Gt2 :
+   258 SC88_Dazed Guitar
+   259 SC88Pro_Dazed Guitar
+   387 SC88Pro_Distortion:
+   515 SC88Pro_Dist.Fast :
+ 1025 SC55_Feedback Gt.
+ 1026 SC88_Feedback Gt.
+ 1027 SC88Pro_Feedback Gt.
+ 1154 SC88_Feedback Gt2
+ 1155 SC88Pro_Feedback Gt2
+ 2050 SC88_Power Guitar
+ 2051 SC88Pro_Power Guitar
+ 2178 SC88_Power.Gt.2
+ 2179 SC88Pro_Power Gt.2
+ 2306 SC88_5th Dist.
+ 2307 SC88Pro_5th Dist.
+ 3074 SC88_Rock Rhythm
+ 3074 SC88_M.G
+ 3075 SC88Pro_Rock Rhythm
+ 3075 SC88Pro_M.G
+ 3202 SC88_Rock Rhythm2
+ 3202 SC88_M.G
+ 3203 SC88Pro_Rock Rhythm2
+10241 SC55_Rh2_Dist.Gt.
+10242 SC88_Rh2_DistortionGt
+10243 SC88Pro_Rh_DistortionGt
+10370 SC88_Rh2_Dist. Gt2
+10371 SC88Pro_Rh2_Dist. Gt2 :
+10627 SC88Pro_Rh_Distortion:
+10755 SC88Pro_Rh_Dist.Fast :
+11265 SC55_Rh_Feedback Gt.
+11266 SC88_Rh_Feedback Gt
+11267 SC88Pro_Rh_Feedback Gt.
+11394 SC88_Rh_Feedback Gt2
+11395 SC88Pro_Rh_Feedback Gt2
+12290 SC88_Rh_Power Guitar
+12291 SC88Pro_Rh_Power Guitar
+13314 SC88_Rh_Rock Rhythm
+13315 SC88Pro_Rh_Rock Rhythm
+13442 SC88_Rh_Rock Rhythm2
+13443 SC88Pro_Rh_Rock Rhythm2]]
+tb_ins_show[31] = [[    1 SC55_Gt.Harmonics
+    2 SC88_Gt.Harmonics
+    3 SC88Pro_Gt.Harmonics
+ 1025 SC55_Gt.Feedback
+ 1026 SC88_Gt. Feedback
+ 1027 SC88Pro_Gt. Feedback
+ 1155 SC88Pro_Gt.Feedback2
+ 2050 SC88_Ac.Gt.Harmnx
+ 2051 SC88Pro_Ac.Gt.Harmnx
+ 3075 SC88Pro_E.Bass Harm.]]
+tb_ins_show[32] = [[    1 SC55_Acoustic Bs.
+    2 SC88_Acoustic Bs.
+    3 SC88Pro_Acoustic Bs.
+   131 SC88Pro_Rockabilly
+ 1027 SC88Pro_Wild A.Bass
+ 2051 SC88Pro_Bass + OHH]]
+tb_ins_show[33] = [[    1 SC55_Fingered Bs.
+    2 SC88_Fingered Bs.
+    3 SC88Pro_Fingered Bs.
+   130 SC88_Fingered Bs2
+   131 SC88Pro_Fingered Bs2
+   258 SC88_Jazz Bass
+   259 SC88Pro_Jazz Bass
+   387 SC88Pro_Jazz Bass 2
+   515 SC88Pro_Rock Bass
+ 1027 SC88Pro_ChorusJazzBs
+ 2051 SC88Pro_F.Bass/Harm.]]
+tb_ins_show[34] = [[    1 SC55_Picked Bass
+    2 SC88_Picked Bass
+    3 SC88Pro_Picked Bass
+   131 SC88Pro_Picked Bass2
+   259 SC88Pro_Picked Bass3
+   387 SC88Pro_Picked Bass4
+ 1026 SC88_Mute PickBs.
+ 1027 SC88Pro_Muted PickBs
+ 2051 SC88Pro_P.Bass/Harm.
+10243 SC88Pro_Pingered Bs.
+12291 SC88Pro_Pingered Bs./Harm.]]
+tb_ins_show[35] = [[    1 SC55_Fretless Bs.
+    2 SC88_Fretless Bs.
+    3 SC88Pro_Fretless Bs.
+   130 SC88_Fretless Bs2
+   131 SC88Pro_Fretless Bs2
+   258 SC88_Fretless Bs3
+   259 SC88Pro_Fretless Bs3
+   386 SC88_Fretless Bs4
+   387 SC88Pro_Fretless Bs4
+   514 SC88_Syn Fretless
+   515 SC88Pro_Syn Fretless
+   642 SC88_Mr.Smooth
+   643 SC88Pro_Mr.Smooth
+ 1027 SC88Pro_Wood+FlessBs]]
+tb_ins_show[36] = [[    1 SC55_Slap Bass 1
+    2 SC88_Slap Bass 1
+    3 SC88Pro_Slap Bass 1
+   131 SC88Pro_Slap Pop
+ 1026 SC88_Reso Slap
+ 1027 SC88Pro_Reso Slap
+ 1155 SC88Pro_Unison Slap]]
+tb_ins_show[37] = [[    1 SC55_Slap Bass 2
+    2 SC88_Slap Bass 2
+    3 SC88Pro_Slap Bass 2
+ 1027 SC88Pro_FM Slap]]
+tb_ins_show[38] = [[    1 SC55_Synth Bass 1
+    2 SC88_Synth Bass 1
+    3 SC88Pro_Synth Bass 1
+   129 SC55_Synth Bass101
+   130 SC88_Synth Bass101
+   131 SC88Pro_SynthBass101
+   259 SC88Pro_CS Bass
+   387 SC88Pro_JP-4 Bass
+   515 SC88Pro_JP-8 Bass
+   643 SC88Pro_P5 Bass
+   771 SC88Pro_JPMG Bass
+ 1025 SC55_Synth Bass 3
+ 1026 SC88_Acid Bass
+ 1027 SC88Pro_Acid Bass
+ 1154 SC88_TB303 Bass
+ 1155 SC88Pro_TB303 Bass
+ 1282 SC88_Tekno Bass
+ 1283 SC88Pro_Tekno Bass
+ 1411 SC88Pro_TB303 Bass 2
+ 1539 SC88Pro_Kicked TB303
+ 1667 SC88Pro_TB303 Saw Bs
+ 1795 SC88Pro_Rubber303 Bs
+ 1923 SC88Pro_Reso 303 Bs
+ 2050 SC88_Reso SH Bass
+ 2051 SC88Pro_Reso SH Bass
+ 2179 SC88Pro_TB303 Sqr Bs
+ 2307 SC88Pro_TB303 DistBs
+ 3075 SC88Pro_Arpeggio Bs]]
+tb_ins_show[39] = [[    1 SC55_Synth Bass 2
+    2 SC88_Synth Bass 2
+    3 SC88Pro_Synth Bass 2
+   130 SC88_SynthBass201
+   131 SC88Pro_SynthBass201
+   258 SC88_Modular Bass
+   259 SC88Pro_Modular Bass
+   386 SC88_Seq Bass
+   387 SC88Pro_Seq Bass
+   515 SC88Pro_MG Bass
+   643 SC88Pro_Mg Oct Bass1
+   771 SC88Pro_MG Oct Bass2
+   899 SC88Pro_MG Blip Bs:
+ 1025 SC55_Synth Bass 4
+ 1026 SC88_Beef FM Bass
+ 1027 SC88Pro_Beef FM Bass
+ 1154 SC88_X Wire Bass
+ 1155 SC88Pro_Dly Bass
+ 1283 SC88Pro_X Wire Bass
+ 1411 SC88Pro_WireStr Bass
+ 1539 SC88Pro_Blip Bass :
+ 1667 SC88Pro_RubberBass 1
+ 2049 SC55_Rubber Bass
+ 2050 SC88_Rubber Bass
+ 2051 SC88Pro_RubberBass 2
+ 2178 SC88_SH101 Base 1
+ 2179 SC88Pro_SH101 Bass 1
+ 2306 SC88_SH101 Bass 2
+ 2307 SC88Pro_SH101 Bass 2
+ 2434 SC88_Smooth Bass
+ 2435 SC88Pro_Smooth Bass
+ 2563 SC88Pro_SH101 Bass 3
+ 2691 SC88Pro_Spike Bass
+ 2819 SC88Pro_House Bass:
+ 2947 SC88Pro_KG Bass
+ 3075 SC88Pro_Sync Bass
+ 3203 SC88Pro_MG 5th Bass
+ 3331 SC88Pro_RND Bass
+ 3459 SC88Pro_WowMG Bass
+ 3587 SC88Pro_Bubble Bass]]
+tb_ins_show[40] = [[    1 SC55_Violin
+    2 SC88_Violin
+    3 SC88Pro_Violin    :
+   131 SC88Pro_Violin Atk:
+ 1025 SC55_Slow Violine
+ 1026 SC88_Slow Violin
+ 1027 SC88Pro_Slow Violin]]
+tb_ins_show[41] = [[    1 SC55_Viola
+    2 SC88_Viola
+    3 SC88Pro_Viola     :
+   131 SC88Pro_Viola Atk.:]]
+tb_ins_show[42] = [[    1 SC55_Cello
+    2 SC88_Cello
+    3 SC88Pro_Cello     :
+   131 SC88Pro_Cello Atk.:]]
+tb_ins_show[43] = [[    1 SC55_Contrabass
+    2 SC88_Contrabass
+    3 SC88Pro_Contrabass]]
+tb_ins_show[44] = [[    1 SC55_Tremolo Str
+    2 SC88_Tremolo Str
+    3 SC88Pro_Tremolo Str
+ 1026 SC88_Slow Tremolo
+ 1027 SC88Pro_Slow Tremolo
+ 1154 SC88_Suspense Str
+ 1155 SC88Pro_Suspense Str]]
+tb_ins_show[45] = [[    1 SC55_PizzicatoStr
+    2 SC88_PizzicatoStr
+    3 SC88Pro_PizzicatoStr
+   131 SC88Pro_Vcs&Cbs Pizz
+   259 SC88Pro_Chamber Pizz
+   387 SC88Pro_St.Pizzicato
+ 1027 SC88Pro_Solo Pizz.
+ 2051 SC88Pro_Solo Spic.]]
+tb_ins_show[46] = [[    1 SC55_Harp
+    2 SC88_Harp
+    3 SC88Pro_Harp
+ 2051 SC88Pro_Synth Harp]]
+tb_ins_show[47] = [[    1 SC55_Timpani
+    2 SC88_Timpani
+    3 SC88Pro_Timpani]]
+tb_ins_show[48] = [[    1 SC55_Strings
+    2 SC88_Strings
+    3 SC88Pro_Strings   :
+   130 SC88_Strings 2
+   131 SC88Pro_Bright Str:
+   259 SC88Pro_ChamberStr:
+   387 SC88Pro_Cello sect.
+ 1025 SC55_Orchestra
+ 1026 SC88_Orchestra
+ 1027 SC88Pro_Orchestra
+ 1154 SC88_Orchestra 2
+ 1155 SC88Pro_Orchestra 2
+ 1282 SC88_Tremolo Orch
+ 1283 SC88Pro_Tremolo Orch
+ 1410 SC88_Choir Str.
+ 1411 SC88Pro_Choir Str.
+ 1539 SC88Pro_Strings+Horn
+ 2050 SC88_St.Strings
+ 2051 SC88Pro_St. Strings
+ 3074 SC88_Velo Strings
+ 3075 SC88Pro_Velo Strings
+ 4099 SC88Pro_Oct Strings1
+ 4227 SC88Pro_Oct Strings2]]
+tb_ins_show[49] = [[    1 SC55_Slow Strings
+    2 SC88_Slow Strings
+    3 SC88Pro_Slow Strings
+   130 SC88_SlowStrings2
+   131 SC88Pro_SlowStrings2
+ 1026 SC88_Legato Str.
+ 1027 SC88Pro_Legato Str.
+ 1154 SC88_Warm Strings
+ 1155 SC88Pro_Warm Strings
+ 1282 SC88_St.Slow Str.
+ 1283 SC88Pro_St.Slow Str.]]
+tb_ins_show[50] = [[    1 SC55_Syn.Strings1
+    2 SC88_Syn.Strings1
+    3 SC88Pro_Syn.Strings1
+   130 SC88_OB Strings
+   131 SC88Pro_OB Strings
+   259 SC88Pro_StackStrings
+   387 SC88Pro_JP Strings
+ 1025 SC55_Syn.Strings3
+ 1026 SC88_Syn.Strings3
+ 1027 SC88Pro_Syn.Strings3
+ 1155 SC88Pro_Syn.Strings4
+ 2051 SC88Pro_High Strings
+ 2179 SC88Pro_Hybrid Str.
+ 3075 SC88Pro_Tron Strings
+ 3203 SC88Pro_Noiz Strings]]
+tb_ins_show[51] = [[    1 SC55_Syn.Strings2
+    2 SC88_Syn.Strings2
+    3 SC88Pro_Syn.Strings2
+   131 SC88Pro_Syn.Strings5
+   259 SC88Pro_JUNO Strings
+ 1027 SC88Pro_Air Strings]]
+tb_ins_show[52] = [[    1 SC55_Choir Aahs
+    2 SC88_Choir Aahs
+    3 SC88Pro_Choir Aahs
+ 1026 SC88_St.Choir
+ 1027 SC88Pro_St.ChoirAahs
+ 1154 SC88_Mello Choir
+ 1155 SC88Pro_Melted Choir
+ 1283 SC88Pro_Church Choir
+ 2051 SC88Pro_Choir Hahs
+ 3075 SC88Pro_Chorus Lahs
+ 4097 SC55_Choir Aahs 2
+ 4099 SC88Pro_Chorus Aahs
+ 4227 SC88Pro_Male Aah+Str]]
+tb_ins_show[53] = [[    1 SC55_Voice Oohs
+    2 SC88_Voice Oohs
+    3 SC88Pro_Voice Oohs
+ 1027 SC88Pro_Voice Dahs]]
+tb_ins_show[54] = [[    1 SC55_SynVox
+    2 SC88_SynVox
+    3 SC88Pro_SynVox
+ 1026 SC88_Syn.Voice
+ 1027 SC88Pro_Syn.Voice
+ 1155 SC88Pro_Silent Night
+ 2051 SC88Pro_VP330 Choir
+ 2179 SC88Pro_Vinyl Choir]]
+tb_ins_show[55] = [[    1 SC55_OrchestraHit
+    2 SC88_OrchestraHit
+    3 SC88Pro_OrchestraHit
+ 1026 SC88_Impact Hit
+ 1027 SC88Pro_Impact Hit
+ 1154 SC88_Philly Hit
+ 1155 SC88Pro_Philly Hit
+ 1282 SC88_Double Hit
+ 1283 SC88Pro_Double Hit
+ 1411 SC88Pro_Perc. Hit
+ 1539 SC88Pro_Shock Wave
+ 2050 SC88_Lo Fi Rave
+ 2051 SC88Pro_Lo Fi Rave
+ 2179 SC88Pro_Techno Hit
+ 2307 SC88Pro_Dist. Hit
+ 2435 SC88Pro_Bam Hit
+ 2563 SC88Pro_Bit Hit
+ 2691 SC88Pro_Bim Hit
+ 2819 SC88Pro_Technorg Hit
+ 2947 SC88Pro_Rave Hit
+ 3075 SC88Pro_Strings Hit
+ 3203 SC88Pro_Stack Hit]]
+tb_ins_show[56] = [[    1 SC55_Trumpet
+    2 SC88_Trumpet
+    3 SC88Pro_Trumpet
+   130 SC88_Trumpet 2
+   131 SC88Pro_Trumpet 2
+   259 SC88Pro_Trumpet   :
+ 1026 SC88_Flugel Horn
+ 1027 SC88Pro_Flugel Horn
+ 2051 SC88Pro_4th Trumpets
+ 3074 SC88_Bright Tp.
+ 3075 SC88Pro_Bright Tp.
+ 3202 SC88_Warm Tp.
+ 3203 SC88Pro_Warm Tp.
+ 4099 SC88Pro_Syn. Trumpet]]
+tb_ins_show[57] = [[    1 SC55_Trombone
+    2 SC88_Trombone
+    3 SC88Pro_Trombone
+   129 SC55_Trombone 2
+   130 SC88_Trombone 2
+   131 SC88Pro_Trombone 2
+   259 SC88Pro_Twin bones
+ 1027 SC88Pro_Bs. Trombone]]
+tb_ins_show[58] = [[    1 SC55_Tuba
+    2 SC88_Tuba
+    3 SC88Pro_Tuba
+   130 SC88_Tuba 2
+   131 SC88Pro_Tuba 2]]
+tb_ins_show[59] = [[    1 SC55_MutedTrumpet
+    2 SC88_MutedTrumpet
+    3 SC88Pro_MutedTrumpet
+ 1027 SC88Pro_Muted Horns]]
+tb_ins_show[60] = [[    1 SC55_French Horn
+    2 SC88_French Horn
+    3 SC88Pro_French Horns
+   129 SC55_French Horn2
+   130 SC88_French Horn2
+   131 SC88Pro_Fr.Horn 2
+   259 SC88Pro_Horn + Orche
+   387 SC88Pro_Wide FreHrns
+ 1026 SC88_Fr.Horn Solo
+ 1027 SC88Pro_F.Hrn Slow:
+ 1155 SC88Pro_Dual Horns
+ 2050 SC88_Horn Orch
+ 2051 SC88Pro_Synth Horn
+ 3075 SC88Pro_F.Horn Rip]]
+tb_ins_show[61] = [[    1 SC55_Brass 1
+    2 SC88_Brass 1
+    3 SC88Pro_Brass 1
+   131 SC88Pro_Brass ff
+   259 SC88Pro_Bones Sect.
+ 1025 SC55_Brass 2
+ 1026 SC88_Brass 2
+ 1027 SC88Pro_Brass 2
+ 1155 SC88Pro_Brass 3
+ 1283 SC88Pro_Brass sfz
+ 2050 SC88_Brass Fall
+ 2051 SC88Pro_Brass Fall
+ 2179 SC88Pro_Trumpet Fall
+ 3075 SC88Pro_Octave Brass
+ 3203 SC88Pro_Brass + Reed]]
+tb_ins_show[62] = [[    1 SC55_Synth Brass 1
+    2 SC88_Synth Brass 1
+    3 SC88Pro_Synth Brass1
+   130 SC88_Poly Brass
+   131 SC88Pro_JUNO Brass
+   259 SC88Pro_Stack Brass
+   387 SC88Pro_SH-5 Brass
+   515 SC88Pro_MKS Brass
+ 1025 SC55_Synth Brass3
+ 1026 SC88_Synth Brass3
+ 1027 SC88Pro_Pro Brass
+ 1154 SC88_Quack Brass
+ 1155 SC88Pro_P5 Brass
+ 2049 SC55_AnalogBrass1
+ 2050 SC88_Octave Brass
+ 2051 SC88Pro_Oct SynBrass
+ 2179 SC88Pro_Hybrid Brass]]
+tb_ins_show[63] = [[    1 SC55_Synth Brass 2
+    2 SC88_Synth Brass 2
+    3 SC88Pro_Synth Brass2
+   130 SC88_Soft Brass
+   131 SC88Pro_Soft Brass
+   259 SC88Pro_Warm Brass
+ 1025 SC55_Synth Brass4
+ 1026 SC88_Synth Brass4
+ 1027 SC88Pro_SynBrass sfz
+ 1155 SC88Pro_OB Brass
+ 1283 SC88Pro_Reso Brass
+ 2049 SC55_AnalogBrass2
+ 2050 SC88_Velo Brass 1
+ 2051 SC88Pro_Velo Brass 1
+ 2178 SC88_Velo Brass 2
+ 2179 SC88Pro_Transbrass]]
+tb_ins_show[64] = [[    1 SC55_Soprano Sax
+    2 SC88_Soprano Sax
+    3 SC88Pro_Soprano Sax
+ 1027 SC88Pro_Soprano Exp.
+10241 SC55_Guide Soprano Sax
+10242 SC88_Guide Soprano Sax
+10243 SC88Pro_Guide Soprano Sax]]
+tb_ins_show[65] = [[    1 SC55_Alto Sax
+    2 SC88_Alto Sax
+    3 SC88Pro_Alto Sax
+ 1026 SC88_Hyper Alto
+ 1027 SC88Pro_AltoSax Exp.
+ 1155 SC88Pro_Grow Sax
+ 2051 SC88Pro_AltoSax + Tp]]
+tb_ins_show[66] = [[    1 SC55_Tenor Sax
+    2 SC88_Tenor Sax
+    3 SC88Pro_Tenor Sax
+   131 SC88Pro_Tenor Sax :
+ 1026 SC88_BreathyTenor
+ 1027 SC88Pro_BreathyTn.:
+ 1155 SC88Pro_St.Tenor Sax]]
+tb_ins_show[67] = [[    1 SC55_Baritone Sax
+    2 SC88_Baritone Sax
+    3 SC88Pro_Baritone Sax
+   131 SC88Pro_Bari. Sax :]]
+tb_ins_show[68] = [[    1 SC55_Oboe
+    2 SC88_Oboe
+    3 SC88Pro_Oboe
+ 1027 SC88Pro_Oboe Exp.
+ 2051 SC88Pro_Multi Reed
+10241 SC55_Guide Oboe
+10242 SC88_Guide Oboe
+10243 SC88Pro_Guide Oboe]]
+tb_ins_show[69] = [[    1 SC55_English Horn
+    2 SC88_English Horn
+    3 SC88Pro_English Horn]]
+tb_ins_show[70] = [[    1 SC55_Bassoon
+    2 SC88_Bassoon
+    3 SC88Pro_Bassoon]]
+tb_ins_show[71] = [[    1 SC55_Clarinet
+    2 SC88_Clarinet
+    3 SC88Pro_Clarinet
+ 1026 SC88_Bs Clarinet
+ 1027 SC88Pro_Bs Clarinet
+ 2051 SC88Pro_Multi Wind]]
+tb_ins_show[72] = [[    1 SC55_Piccolo
+    2 SC88_Piccolo
+    3 SC88Pro_Piccolo
+   131 SC88Pro_Piccolo   :
+ 1027 SC88Pro_Nay
+ 1155 SC88Pro_Nay Tremolo
+ 2051 SC88Pro_Di]]
+tb_ins_show[73] = [[    1 SC55_Flute
+    2 SC88_Flute
+    3 SC88Pro_Flute
+   131 SC88Pro_Flute 2   :
+   259 SC88Pro_Flute Exp.
+   387 SC88Pro_Flt Travelso
+ 1027 SC88Pro_Flute + Vln
+ 2051 SC88Pro_Tron Flute
+10241 SC55_Guide Flute
+10242 SC88_Guide Flute
+10243 SC88Pro_Guide Flute
+10369 SC55_Guide Flute
+10370 SC88_Guide Flute
+10371 SC88Pro_Guide Flute]]
+tb_ins_show[74] = [[    1 SC55_Recorder
+    2 SC88_Recorder
+    3 SC88Pro_Recorder]]
+tb_ins_show[75] = [[    1 SC55_Pan Flute
+    2 SC88_Pan Flute
+    3 SC88Pro_Pan Flute
+ 1026 SC88_Kawala
+ 1027 SC88Pro_Kawala
+ 2051 SC88Pro_Zampona
+ 2179 SC88Pro_Zampona Atk]]
+tb_ins_show[76] = [[    1 SC55_Bottle Blow
+    2 SC88_Bottle Blow
+    3 SC88Pro_Bottle Blow]]
+tb_ins_show[77] = [[    1 SC55_Shakuhachi
+    2 SC88_Shakuhachi
+    3 SC88Pro_Shakuhachi
+   131 SC88Pro_Shakuhachi:]]
+tb_ins_show[78] = [[    1 SC55_Whistle
+    2 SC88_Whistle
+    3 SC88Pro_Whistle
+   131 SC88Pro_Whistle 2]]
+tb_ins_show[79] = [[    1 SC55_Ocarina
+    2 SC88_Ocarina
+    3 SC88Pro_Ocarina]]
+tb_ins_show[80] = [[    1 SC55_Square Wave
+    2 SC88_Square Wave
+    3 SC88Pro_Square Wave
+   129 SC55_Square
+   130 SC88_Square
+   131 SC88Pro_MG Square
+   258 SC88_Hollow Mini
+   259 SC88Pro_Hollow Mini
+   386 SC88_Mellow FM
+   387 SC88Pro_Mellow FM
+   514 SC88_CC Solo
+   515 SC88Pro_CC Solo
+   642 SC88_Shmoog
+   643 SC88Pro_Shmoog
+   770 SC88_LM Square
+   771 SC88Pro_LM Square
+ 1025 SC55_Sine Wave
+ 1026 SC88_Sine Wave
+ 1027 SC88Pro_2600 Sine
+ 1155 SC88Pro_Sine Lead
+ 1283 SC88Pro_KG Lead
+ 2051 SC88Pro_P5 Square
+ 2179 SC88Pro_OB Square
+ 2307 SC88Pro_JP-8 Square
+ 3075 SC88Pro_Pulse Lead
+ 3203 SC88Pro_JP8 PulseLd1
+ 3331 SC88Pro_JP8 PulseLd2
+ 3459 SC88Pro_MG Reso. Pls]]
+tb_ins_show[81] = [[    1 SC55_Saw Wave
+    2 SC88_Saw Wave
+    3 SC88Pro_Saw Wave
+   129 SC55_Saw
+   130 SC88_Saw
+   131 SC88Pro_OB2 Saw
+   258 SC88_Pulse Saw
+   259 SC88Pro_Pulse Saw
+   386 SC88_Feline GR
+   387 SC88Pro_Feline GR
+   514 SC88_Big Lead
+   515 SC88Pro_Big Lead
+   642 SC88_Velo Lead
+   643 SC88Pro_Velo Lead
+   770 SC88_GR-300
+   771 SC88Pro_GR-300
+   898 SC88_LA Saw
+   899 SC88Pro_LA Saw
+ 1025 SC55_Doctor Solo
+ 1026 SC88_Doctor Solo
+ 1027 SC88Pro_Doctor Solo
+ 1155 SC88Pro_Fat Saw Lead
+ 1411 SC88Pro_D-50 Fat Saw
+ 2050 SC88_Waspy Synth
+ 2051 SC88Pro_Waspy Synth
+ 2179 SC88Pro_PM Lead
+ 2307 SC88Pro_CS Saw Lead
+ 3075 SC88Pro_MG Saw 1
+ 3203 SC88Pro_MG Saw 2
+ 3331 SC88Pro_OB Saw 1
+ 3459 SC88Pro_OB Saw 2
+ 3587 SC88Pro_D-50 Saw
+ 3715 SC88Pro_SH-101 Saw
+ 3843 SC88Pro_CS Saw
+ 3971 SC88Pro_MG Saw Lead
+ 4099 SC88Pro_OB Saw Lead
+ 4227 SC88Pro_P5 Saw Lead
+ 4355 SC88Pro_MG unison
+ 4483 SC88Pro_Oct Saw Lead
+ 5123 SC88Pro_SequenceSaw1
+ 5251 SC88Pro_SequenceSaw2
+ 5379 SC88Pro_Reso Saw
+ 5507 SC88Pro_Cheese Saw 1
+ 5635 SC88Pro_Cheese Saw 2
+ 5763 SC88Pro_Rhythmic Saw]]
+tb_ins_show[82] = [[    1 SC55_Syn.Calliope
+    2 SC88_Syn.Calliope
+    3 SC88Pro_Syn.Calliope
+   130 SC88_Vent Synth
+   131 SC88Pro_Vent Synth
+   258 SC88_Pure PanLead
+   259 SC88Pro_Pure PanLead]]
+tb_ins_show[83] = [[    1 SC55_Chiffer Lead
+    2 SC88_Chiffer Lead
+    3 SC88Pro_Chiffer Lead
+   131 SC88Pro_TB Lead
+ 1027 SC88Pro_Mad Lead]]
+tb_ins_show[84] = [[    1 SC55_Charang
+    2 SC88_Charang
+    3 SC88Pro_Charang
+ 1026 SC88_Dist.Lead
+ 1027 SC88Pro_Dist.Lead
+ 1155 SC88Pro_Acid Guitar1
+ 1283 SC88Pro_Acid Guitar2
+ 2051 SC88Pro_P5 Sync Lead
+ 2179 SC88Pro_Fat SyncLead
+ 2307 SC88Pro_Rock Lead
+ 2435 SC88Pro_5th DecaSync
+ 2563 SC88Pro_Dirty Sync
+ 3075 SC88Pro_JUNO Sub Osc]]
+tb_ins_show[85] = [[    1 SC55_Solo Vox
+    2 SC88_Solo Vox
+    3 SC88Pro_Solo Vox
+ 1027 SC88Pro_Vox Lead
+ 1155 SC88Pro_LFO Vox]]
+tb_ins_show[86] = [[    1 SC55_5th Saw Wave
+    2 SC88_5th Saw Wave
+    3 SC88Pro_5th Saw Wave
+   130 SC88_Big Fives
+   131 SC88Pro_Big Fives
+   259 SC88Pro_5th Lead
+   387 SC88Pro_5th Ana.Clav
+ 1027 SC88Pro_4th Lead]]
+tb_ins_show[87] = [[    1 SC55_Bass & Lead
+    2 SC88_Bass & Lead
+    3 SC88Pro_Bass & Lead
+   130 SC88_Big & Raw
+   131 SC88Pro_Big & Raw
+   258 SC88_Fat & Perky
+   259 SC88Pro_Fat & Perky
+   387 SC88Pro_JUNO Rave
+   515 SC88Pro_JP8 BsLead 1
+   643 SC88Pro_JP8 BsLead 2
+   771 SC88Pro_SH-5 Bs.Lead]]
+tb_ins_show[88] = [[    1 SC55_Fantasia
+    2 SC88_Fantasia
+    3 SC88Pro_Fantasia
+   130 SC88_Fantasia 2
+   131 SC88Pro_Fantasia 2
+   259 SC88Pro_New Age Pad
+   387 SC88Pro_Bell Heaven]]
+tb_ins_show[89] = [[    1 SC55_Warm Pad
+    2 SC88_Warm Pad
+    3 SC88Pro_Warm Pad
+   130 SC88_Thick Pad
+   131 SC88Pro_Thick Matrix
+   258 SC88_Horn Pad
+   259 SC88Pro_Horn Pad
+   386 SC88_Rotary Strng
+   387 SC88Pro_Rotary Strng
+   514 SC88_Soft Pad
+   515 SC88Pro_OB Soft Pad
+ 1027 SC88Pro_Octave Pad
+ 1155 SC88Pro_Stack Pad]]
+tb_ins_show[90] = [[    1 SC55_Polysynth
+    2 SC88_Polysynth
+    3 SC88Pro_Polysynth
+   130 SC88_80\'s PolySyn
+   131 SC88Pro_80\'s PolySyn
+   259 SC88Pro_Polysynth 2
+   387 SC88Pro_Poly King
+ 1027 SC88Pro_Power Stack
+ 1155 SC88Pro_Octave Stack
+ 1283 SC88Pro_Reso Stack
+ 1411 SC88Pro_Techno Stack]]
+tb_ins_show[91] = [[    1 SC55_Space Voice
+    2 SC88_Space Voice
+    3 SC88Pro_Space Voice
+   130 SC88_Heaven II
+   131 SC88Pro_Heaven II
+   259 SC88Pro_SC Heaven
+ 1027 SC88Pro_Cosmic Voice
+ 1155 SC88Pro_Auh Vox
+ 1283 SC88Pro_AuhAuh
+ 1411 SC88Pro_Vocorderman]]
+tb_ins_show[92] = [[    1 SC55_Bowed Glass
+    2 SC88_Bowed Glass
+    3 SC88Pro_Bowed Glass
+   131 SC88Pro_SoftBellPad
+   259 SC88Pro_JP8 Sqr Pad
+   387 SC88Pro_7thBelPad]]
+tb_ins_show[93] = [[    1 SC55_Metal Pad
+    2 SC88_Metal Pad
+    3 SC88Pro_Metal Pad
+   130 SC88_Tine Pad
+   131 SC88Pro_Tine Pad
+   258 SC88_Panner Pad
+   259 SC88Pro_Panner Pad]]
+tb_ins_show[94] = [[    1 SC55_Halo Pad
+    2 SC88_Halo Pad
+    3 SC88Pro_Halo Pad
+   131 SC88Pro_Vox Pad
+   259 SC88Pro_Vox Sweep
+ 1027 SC88Pro_Horror Pad]]
+tb_ins_show[95] = [[    1 SC55_Sweep Pad
+    2 SC88_Sweep Pad
+    3 SC88Pro_Sweep Pad
+   130 SC88_Polar Pad
+   131 SC88Pro_Polar Pad
+ 1026 SC88_Converge
+ 1027 SC88Pro_Converge
+ 1154 SC88_Shwimmer
+ 1155 SC88Pro_Shwimmer
+ 1282 SC88_Celestial Pd
+ 1283 SC88Pro_Celestial Pd
+ 1411 SC88Pro_Bag Sweep]]
+tb_ins_show[96] = [[    1 SC55_Ice Rain
+    2 SC88_Ice Rain
+    3 SC88Pro_Ice Rain
+   130 SC88_Harmo Rain
+   131 SC88Pro_Harmo Rain
+   258 SC88_African Wood
+   259 SC88Pro_African wood
+   387 SC88Pro_Anklung Pad
+   515 SC88Pro_Rattle Pad
+ 1026 SC88_Clavi Pad
+ 1027 SC88Pro_Clavi Pad]]
+tb_ins_show[97] = [[    1 SC55_Soundtrack
+    2 SC88_Soundtrack
+    3 SC88Pro_Soundtrack
+   130 SC88_Ancestral
+   131 SC88Pro_Ancestral
+   258 SC88_Prologue
+   259 SC88Pro_Prologue
+   387 SC88Pro_Prologue 2
+   515 SC88Pro_Hols Strings
+ 1026 SC88_Rave
+ 1027 SC88Pro_Rave]]
+tb_ins_show[98] = [[    1 SC55_Crystal
+    2 SC88_Crystal
+    3 SC88Pro_Crystal
+   129 SC55_Syn Mallet
+   130 SC88_Syn Mallet
+   131 SC88Pro_Syn Mallet
+   258 SC88_Soft Crystal
+   259 SC88Pro_Soft Crystal
+   386 SC88_Round Glock
+   387 SC88Pro_Round Glock
+   514 SC88_Loud Glock
+   515 SC88Pro_Loud Glock
+   642 SC88_GlockenChime
+   643 SC88Pro_GlockenChime
+   770 SC88_Clear Bells
+   771 SC88Pro_Clear Bells
+   898 SC88_ChristmasBel
+   899 SC88Pro_ChristmasBel
+ 1026 SC88_Vibra Bells
+ 1027 SC88Pro_Vibra Bells
+ 1154 SC88_Digi Bells
+ 1155 SC88Pro_Digi Bells
+ 1283 SC88Pro_Music Bell
+ 1411 SC88Pro_Analog Bell
+ 2050 SC88_Choral Bells
+ 2051 SC88Pro_Choral Bells
+ 2178 SC88_Air Bells
+ 2179 SC88Pro_Air Bells
+ 2306 SC88_Bell Harp
+ 2307 SC88Pro_Bell Harp
+ 2434 SC88_Gamelimba
+ 2435 SC88Pro_Gamelimba
+ 2563 SC88Pro_JUNO Bell]]
+tb_ins_show[99] = [[    1 SC55_Atmosphere
+    2 SC88_Atmosphere
+    3 SC88Pro_Atmosphere
+   130 SC88_Warm Atmos
+   131 SC88Pro_Warm Atmos
+   258 SC88_Nylon Harp
+   259 SC88Pro_Nylon Harp
+   386 SC88_Harpvox
+   387 SC88Pro_Harpvox
+   514 SC88_HollowReleas
+   515 SC88Pro_HollowReleas
+   642 SC88_Nylon+Rhodes
+   643 SC88Pro_Nylon+Rhodes
+   770 SC88_Ambient Pad
+   771 SC88Pro_Ambient Pad
+   899 SC88Pro_Invisible
+ 1027 SC88Pro_Pulsey Key
+ 1155 SC88Pro_Noise Piano]]
+tb_ins_show[100] = [[    1 SC55_Brightness
+    2 SC88_Brightness
+    3 SC88Pro_Brightness
+   131 SC88Pro_Shining Star
+   259 SC88Pro_OB Stab
+ 1027 SC88Pro_Org Bell]]
+tb_ins_show[101] = [[    1 SC55_Goblin
+    2 SC88_Goblin
+    3 SC88Pro_Goblin
+   130 SC88_Goblinson
+   131 SC88Pro_Goblinson
+   258 SC88_50\'s Sci-Fi
+   259 SC88Pro_50\'s Sci-Fi
+   387 SC88Pro_Abduction
+   515 SC88Pro_Auhbient
+   643 SC88Pro_LFO Pad
+   771 SC88Pro_Random Str
+   899 SC88Pro_Random Pad
+ 1027 SC88Pro_LowBirds Pad
+ 1155 SC88Pro_Falling Down
+ 1283 SC88Pro_LFO RAVE
+ 1411 SC88Pro_LFO Horror
+ 1539 SC88Pro_LFO Techno
+ 1667 SC88Pro_Alternative
+ 1795 SC88Pro_UFO FX
+ 1923 SC88Pro_Gargle Man
+ 2051 SC88Pro_Sweep FX]]
+tb_ins_show[102] = [[    1 SC55_Echo Drops
+    2 SC88_Echo Drops
+    3 SC88Pro_Echo Drops
+   129 SC55_Echo Bell
+   130 SC88_Echo Bell
+   131 SC88Pro_Echo Bell
+   257 SC55_Echo Pan
+   258 SC88_Echo Pan
+   259 SC88Pro_Echo Pan
+   386 SC88_Echo Pan 2
+   387 SC88Pro_Echo Pan 2
+   514 SC88_Big Panner
+   515 SC88Pro_Big Panner
+   642 SC88_Reso Panner
+   643 SC88Pro_Reso Panner
+   770 SC88_Water Piano
+   771 SC88Pro_Water Piano
+ 1027 SC88Pro_Pan Sequence
+ 1155 SC88Pro_Aqua]]
+tb_ins_show[103] = [[    1 SC55_Star Theme
+    2 SC88_Star Theme
+    3 SC88Pro_Star Theme
+   130 SC88_Star Theme 2
+   131 SC88Pro_Star Theme 2
+ 1027 SC88Pro_Dream Pad
+ 1155 SC88Pro_Silky Pad
+ 2051 SC88Pro_New Century
+ 2179 SC88Pro_7th Atmos.
+ 2307 SC88Pro_Galaxy Way]]
+tb_ins_show[104] = [[    1 SC55_Sitar
+    2 SC88_Sitar
+    3 SC88Pro_Sitar
+   129 SC55_Sitar 2
+   130 SC88_Sitar 2
+   131 SC88Pro_Sitar 2
+   259 SC88Pro_Detune Sitar
+   387 SC88Pro_Sitar 3
+ 1026 SC88_Tambra
+ 1027 SC88Pro_Tambra
+ 2050 SC88_Tamboura
+ 2051 SC88Pro_Tamboura]]
+tb_ins_show[105] = [[    1 SC55_Banjo
+    2 SC88_Banjo
+    3 SC88Pro_Banjo
+   130 SC88_Muted Banjo
+   131 SC88Pro_Muted Banjo
+ 1026 SC88_Rabab
+ 1027 SC88Pro_Rabab
+ 1155 SC88Pro_San Xian
+ 2050 SC88_Gopichant
+ 2051 SC88Pro_Gopichant
+ 3074 SC88_Oud
+ 3075 SC88Pro_Oud
+ 3587 SC88Pro_Oud+Strings
+ 4099 SC88Pro_Pi Pa]]
+tb_ins_show[106] = [[    1 SC55_Shamisen
+    2 SC88_Shamisen
+    3 SC88Pro_Shamisen
+   130 SC88_Tsugaru
+   131 SC88Pro_Tsugaru
+ 1027 SC88Pro_Syn Shamisen]]
+tb_ins_show[107] = [[    1 SC55_Koto
+    2 SC88_Koto
+    3 SC88Pro_Koto
+   131 SC88Pro_Gu Zheng
+ 1025 SC55_Taisho Koto
+ 1026 SC88_Taisho Koto
+ 1027 SC88Pro_Taisho Koto
+ 2050 SC88_Kanoon
+ 2051 SC88Pro_Kanoon
+ 2435 SC88Pro_Kanoon+Choir
+ 3075 SC88Pro_Oct Harp]]
+tb_ins_show[108] = [[    1 SC55_Kalimba
+    2 SC88_Kalimba
+    3 SC88Pro_Kalimba
+ 1027 SC88Pro_Sanza]]
+tb_ins_show[109] = [[    1 SC55_Bag Pipe
+    2 SC88_Bag Pipe
+    3 SC88Pro_Bagpipe
+ 1027 SC88Pro_Didgeridoo]]
+tb_ins_show[110] = [[    1 SC55_Fiddle
+    2 SC88_Fiddle
+    3 SC88Pro_Fiddle
+ 1027 SC88Pro_Er Hu
+ 1155 SC88Pro_Gao Hu]]
+tb_ins_show[111] = [[    1 SC55_Shanai
+    2 SC88_Shanai
+    3 SC88Pro_Shanai
+   130 SC88_Shannai 2
+   131 SC88Pro_Shanai 2
+ 1026 SC88_Pungi
+ 1027 SC88Pro_Pungi
+ 2050 SC88_Hichiriki
+ 2051 SC88Pro_Hichiriki
+ 3075 SC88Pro_Mizmar
+ 4099 SC88Pro_Suona 1
+ 4227 SC88Pro_Suona 2]]
+tb_ins_show[112] = [[    1 SC55_Tinkle Bell
+    2 SC88_Tinkle Bell
+    3 SC88Pro_Tinkle Bell
+ 1026 SC88_Bonang
+ 1027 SC88Pro_Bonang
+ 1154 SC88_Gender
+ 1155 SC88Pro_Gender
+ 1282 SC88_Gamelan Gong
+ 1283 SC88Pro_Gamelan Gong
+ 1410 SC88_St.Gamelan
+ 1411 SC88Pro_St.Gamelan
+ 1539 SC88Pro_Jang Gu
+ 2050 SC88_RAMA Cymbal
+ 2051 SC88Pro_RAMA Cymbal]]
+tb_ins_show[113] = [[    1 SC55_Agogo
+    2 SC88_Agogo
+    3 SC88Pro_Agogo
+ 1026 SC88_Atarigane
+ 1027 SC88Pro_Atarigane
+ 2051 SC88Pro_Tambourine]]
+tb_ins_show[114] = [[    1 SC55_Steel Drums
+    2 SC88_Steel Drums
+    3 SC88Pro_Steel Drums
+   131 SC88Pro_Island Mlt]]
+tb_ins_show[115] = [[    1 SC55_Woodblock
+    2 SC88_Woodblock
+    3 SC88Pro_Woodblock
+ 1025 SC55_Castanets
+ 1026 SC88_Castanets
+ 1027 SC88Pro_Castanets
+ 2051 SC88Pro_Angklung
+ 2179 SC88Pro_Angkl Rhythm
+ 3075 SC88Pro_Finger Snaps
+ 4099 SC88Pro_909 HandClap]]
+tb_ins_show[116] = [[    1 SC55_Taiko
+    2 SC88_Taiko
+    3 SC88Pro_Taiko
+   131 SC88Pro_Small Taiko
+ 1025 SC55_Concert BD
+ 1026 SC88_Concert BD
+ 1027 SC88Pro_Concert BD
+ 2051 SC88Pro_Jungle BD
+ 2179 SC88Pro_Techno BD
+ 2307 SC88Pro_Bounce]]
+tb_ins_show[117] = [[    1 SC55_Melo. Tom 1
+    2 SC88_Melo. Tom 1
+    3 SC88Pro_Melo. Tom 1
+   130 SC88_Real Tom
+   131 SC88Pro_Real Tom
+ 1025 SC55_Melo. Tom 2
+ 1026 SC88_Melo. Tom 2
+ 1027 SC88Pro_Melo. Tom 2
+ 1154 SC88_Rock Tom
+ 1155 SC88Pro_Rock Tom
+ 2051 SC88Pro_Rash SD
+ 2179 SC88Pro_House SD
+ 2307 SC88Pro_Jungle SD
+ 2435 SC88Pro_909 SD]]
+tb_ins_show[118] = [[    1 SC55_Synth Drum
+    2 SC88_Synth Drum
+    3 SC88Pro_Synth Drum
+ 1025 SC55_808 Tom
+ 1026 SC88_808 Tom
+ 1027 SC88Pro_808 Tom
+ 1153 SC55_Elec Perc
+ 1154 SC88_Elec Perc
+ 1155 SC88Pro_Elec Perc
+ 1283 SC88Pro_Sine Perc.
+ 1411 SC88Pro_606 Tom
+ 1539 SC88Pro_909 Tom]]
+tb_ins_show[119] = [[    1 SC55_Reverse Cym.
+    2 SC88_Reverse Cym.
+    3 SC88Pro_Reverse Cym.
+   130 SC88_Reverse Cym2
+   131 SC88Pro_Reverse Cym2
+   259 SC88Pro_Reverse Cym3
+ 1026 SC88_Rev.Snare 1
+ 1027 SC88Pro_Rev.Snare 1
+ 1154 SC88_Rev.Snare 2
+ 1155 SC88Pro_Rev.Snare 2
+ 2050 SC88_Rev.Kick 1
+ 2051 SC88Pro_Rev.Kick 1
+ 2178 SC88_Rev.ConBD
+ 2179 SC88Pro_Rev.ConBD
+ 3074 SC88_Rev.Tom 1
+ 3075 SC88Pro_Rev.Tom 1
+ 3202 SC88_Rev.Tom 2
+ 3203 SC88Pro_Rev.Tom 2]]
+tb_ins_show[120] = [[    1 SC55_Gt.FretNoise
+    2 SC88_Gt.FretNoise
+    3 SC88Pro_Gt.FretNoise
+   129 SC55_Gt.Cut Noise
+   130 SC88_Gt.Cut Noise
+   131 SC88Pro_Gt.Cut Noise
+   257 SC55_String Slap
+   258 SC88_String Slap
+   259 SC88Pro_String Slap
+   386 SC88_Gt.CutNoise2
+   387 SC88Pro_Gt.CutNoise2
+   514 SC88_Dist.CutNoiz
+   515 SC88Pro_Dist.CutNoiz
+   642 SC88_Bass Slide
+   643 SC88Pro_Bass Slide
+   770 SC88_Pick Scrape
+   771 SC88Pro_Pick Scrape
+ 1027 SC88Pro_Gt. FX Menu
+ 1155 SC88Pro_Bartok Pizz.
+ 1283 SC88Pro_Guitar Slap
+ 1411 SC88Pro_Chord Stroke
+ 1539 SC88Pro_Biwa Stroke
+ 1667 SC88Pro_Biwa Tremolo]]
+tb_ins_show[121] = [[    1 SC55_Breath Noise
+    2 SC88_Breath Noise
+    3 SC88Pro_Breath Noise
+   129 SC55_Fl.Key Click
+   130 SC88_Fl.Key Click
+   131 SC88Pro_Fl.Key Click]]
+tb_ins_show[122] = [[    1 SC55_Seashore
+    2 SC88_Seashore
+    3 SC88Pro_Seashore
+   129 SC55_Rain
+   130 SC88_Rain
+   131 SC88Pro_Rain
+   257 SC55_Thunder
+   258 SC88_Thunder
+   259 SC88Pro_Thunder
+   385 SC55_Wind
+   386 SC88_Wind
+   387 SC88Pro_Wind
+   513 SC55_Stream
+   514 SC88_Stream
+   515 SC88Pro_Stream
+   642 SC88_Bubble
+   643 SC88Pro_Bubble
+   771 SC88Pro_Wind 2
+ 2051 SC88Pro_Pink Noise
+ 2179 SC88Pro_White Noise]]
+tb_ins_show[123] = [[    1 SC55_Bird
+    2 SC88_Bird
+    3 SC88Pro_Bird
+   129 SC55_Dog
+   130 SC88_Dog
+   131 SC88Pro_Dog
+   257 SC55_Horse-Gallop
+   258 SC88_Horse-Gallop
+   259 SC88Pro_Horse-Gallop
+   385 SC55_Bird 2
+   386 SC88_Bird 2
+   387 SC88Pro_Bird 2
+   514 SC88_Kitty
+   515 SC88Pro_Kitty
+   642 SC88_Growl
+   643 SC88Pro_Growl]]
+tb_ins_show[124] = [[    1 SC55_Telephone 1
+    2 SC88_Telephone 1
+    3 SC88Pro_Telephone 1
+   129 SC55_Telephone 2
+   130 SC88_Telephone 2
+   131 SC88Pro_Telephone 2
+   257 SC55_DoorCreaking
+   258 SC88_DoorCreaking
+   259 SC88Pro_DoorCreaking
+   385 SC55_Door
+   386 SC88_Door
+   387 SC88Pro_Door
+   513 SC55_Scratch
+   514 SC88_Scratch
+   515 SC88Pro_Scratch
+   642 SC88_Wind Chimes
+   643 SC88Pro_Wind Chimes
+   898 SC88_Scratch 2
+   899 SC88Pro_Scratch 2
+ 1027 SC88Pro_ScratchKey
+ 1155 SC88Pro_TapeRewind
+ 1283 SC88Pro_Phono Noise
+ 1411 SC88Pro_MC-500 Beep]]
+tb_ins_show[125] = [[    1 SC55_Helicopter
+    2 SC88_Helicopter
+    3 SC88Pro_Helicopter
+   129 SC55_Car-Engine
+   130 SC88_Car-Engine
+   131 SC88Pro_Car-Engine
+   257 SC55_Car-Stop
+   258 SC88_Car-Stop
+   259 SC88Pro_Car-Stop
+   385 SC55_Car-Pass
+   386 SC88_Car-Pass
+   387 SC88Pro_Car-Pass
+   513 SC55_Car-Crash
+   514 SC88_Car-Crash
+   515 SC88Pro_Car-Crash
+   642 SC88_Siren
+   643 SC88Pro_Siren
+   769 SC55_Train
+   770 SC88_Train
+   771 SC88Pro_Train
+   897 SC55_Jetplane
+   898 SC88_Jetplane
+   899 SC88Pro_Jetplane
+ 1025 SC55_Starship
+ 1026 SC88_Starship
+ 1027 SC88Pro_Starship
+ 1153 SC55_Burst Noise
+ 1154 SC88_Burst Noise
+ 1155 SC88Pro_Burst Noise
+ 1283 SC88Pro_Calculating
+ 1411 SC88Pro_Perc. Bang]]
+tb_ins_show[126] = [[    1 SC55_Applause
+    2 SC88_Applause
+    3 SC88Pro_Applause
+   129 SC55_Laughing
+   130 SC88_Laughing
+   131 SC88Pro_Laughing
+   257 SC55_Screaming
+   258 SC88_Screaming
+   259 SC88Pro_Screaming
+   385 SC55_Punch
+   386 SC88_Punch
+   387 SC88Pro_Punch
+   513 SC55_Heart Beat
+   514 SC88_Heart Beat
+   515 SC88Pro_Heart Beat
+   642 SC88_Footsteps
+   643 SC88Pro_Footsteps
+   770 SC88_Applause 2
+   771 SC88Pro_Applause 2
+   899 SC88Pro_Small Club
+ 1027 SC88Pro_ApplauseWave
+ 2051 SC88Pro_Voice One
+ 2179 SC88Pro_Voice Two
+ 2307 SC88Pro_Voice Three
+ 2435 SC88Pro_Voice Tah
+ 2563 SC88Pro_Voice Whey]]
+tb_ins_show[127] = [[    1 SC55_Gun Shot
+    2 SC88_Gun Shot
+    3 SC88Pro_Gun Shot
+   129 SC55_Machine Gun
+   130 SC88_Machine Gun
+   131 SC88Pro_Machine Gun
+   257 SC55_Lasergun
+   258 SC88_Lasergun
+   259 SC88Pro_Lasergun
+   385 SC55_Explosion
+   386 SC88_Explosion
+   387 SC88Pro_Explosion
+   515 SC88Pro_Eruption
+   643 SC88Pro_Big Shot]]
+
 function getset_track_info(take)
     reaper.Undo_BeginBlock()
     MediaTrack = reaper.GetMediaItemTake_Track(take)
@@ -1761,8 +3226,7 @@ function Maxsound()
     end
     average = noteall / count
     average = math.floor(average + 0.5)
-    notedata = '最大发音数在 ' .. timemax .. ' 同时音符数量为： ' .. maxnote .. '\n' .. '平均发音数：' .. average ..
-                   '\n'
+    notedata = '最大发音数在 ' .. timemax .. ' 同时音符数量为： ' .. maxnote .. '\n' .. '平均发音数：' .. average .. '\n'
     MaxEvent()
     reaper.ClearConsole()
     reaper.ShowConsoleMsg(notedata .. maxdata)
@@ -1792,8 +3256,7 @@ function showmarklist()
         reaper.MB(
             "請右鍵單擊並安裝 'js_ReaScriptAPI: API functions for ReaScripts'. 然後重新啟動 REAPER 並再次運行腳本. 謝謝!",
             "你必須安裝 JS_ReaScriptAPI", 0)
-        local ok, err = reaper.ReaPack_AddSetRepository("ReaTeam Extensions", "https://github.com/ReaTeam/Extensions/raw/master/index.xml",
-            true, 1)
+        local ok, err = reaper.ReaPack_AddSetRepository("ReaTeam Extensions", "https://github.com/ReaTeam/Extensions/raw/master/index.xml", true, 1)
         if ok then
             reaper.ReaPack_BrowsePackages("js_ReaScriptAPI")
         else
@@ -1852,8 +3315,9 @@ function showmarklist()
         tiemcode_4 = reaper.format_timestr_pos(markers[m].pos, "", 4) -- 4=samples
         tiemcode_5 = reaper.format_timestr_pos(markers[m].pos, "", 5) -- 5=h:m:s:f
         -- menu = menu .. (markers[m].cur and "!" or "") .. 'Marker ' .. markers[m].idx .. ': ' .. space .. (markers[m].name == "" and "" or markers[m].name) .. space .. ' [' .. tiemcode_proj_default .. '] ' .. "|"
-        menu = menu .. (markers[m].cur and "!" or "") .. (markers[m].name == "" and "" or markers[m].name) .. space .. ' [' ..
-                   tiemcode_proj_default .. '] ' .. "|"
+        menu =
+            menu .. (markers[m].cur and "!" or "") .. (markers[m].name == "" and "" or markers[m].name) .. space .. ' [' .. tiemcode_proj_default ..
+                '] ' .. "|"
     end
 
     local title = "hidden " .. reaper.genGuid()
@@ -1897,17 +3361,20 @@ function miditempinfo()
             take = reaper.GetMediaItemTake(item, 0)
             if take and reaper.TakeIsMIDI(take) then
                 retval, name = reaper.GetSetMediaTrackInfo_String(track, 'P_NAME', '', false)
+                if name == '' then
+                    name = '_'
+                end
 
                 retval, notecnt, ccevtcnt, textsyxevtcnt = reaper.MIDI_CountEvts(take)
                 ccidx = 0
                 if ccevtcnt ~= 0 then
-                    bank = '-1    '
-                    PC = '-1  '
-                    vol = '-1  '
-                    pan = '-1  '
-                    rev = '-1  '
-                    cho = '-1  '
-                    delay = '-1  '
+                    bank = '-1'
+                    PC = '-1'
+                    vol = '-1'
+                    pan = '-1'
+                    rev = '-1'
+                    cho = '-1'
+                    delay = '-1'
                     cc7_idx, cc10_idx, cc91_idx, cc93_idx, cc94_idx, cc0_idx, cc32_idx, pc_idx = '', '', '', '', '', '', '', ''
                     while ccidx < ccevtcnt do
                         retval, selected, muted, ppqpos, chanmsg, chan, msg2, msg3 = reaper.MIDI_GetCC(take, ccidx)
@@ -1965,13 +3432,11 @@ function miditempinfo()
                         ccidx = ccidx + 1
                     end -- while
 
-                    table.insert(info_tb,
-                        name .. '|Bank=' .. bank .. '|Patch=' .. PC .. '|Vol=' .. vol .. '|Pan=' .. pan .. '|Rev=' .. rev .. '|Cho=' .. cho ..
-                            '|Delay=' .. delay)
+                    table.insert(info_tb, name .. '|' .. bank .. '|' .. PC .. '|' .. vol .. '|' .. pan .. '|' .. rev .. '|' .. cho .. '|' .. delay)
                     table.insert(take_tb, take)
                     table.insert(ccidx_tb,
-                        'cc7_idx=' .. cc7_idx .. 'cc10_idx=' .. cc10_idx .. 'cc91_idx=' .. cc91_idx .. 'cc93_idx=' .. cc93_idx ..
-                            'cc94_idx=' .. cc94_idx .. 'pc_idx=' .. pc_idx .. 'cc0_idx=' .. cc0_idx .. 'cc32_idx=' .. cc32_idx)
+                        'cc7_idx=' .. cc7_idx .. 'cc10_idx=' .. cc10_idx .. 'cc91_idx=' .. cc91_idx .. 'cc93_idx=' .. cc93_idx .. 'cc94_idx=' ..
+                            cc94_idx .. 'pc_idx=' .. pc_idx .. 'cc0_idx=' .. cc0_idx .. 'cc32_idx=' .. cc32_idx)
                 end -- ccevtcnt~=0
             end -- TakeIsMIDI
         end -- item~=nil
@@ -1988,8 +3453,12 @@ local font = reaper.ImGui_CreateFont('sans-serif', size)
 reaper.ImGui_Attach(ctx, font)
 
 StateChangeCount_old = reaper.GetProjectStateChangeCount(0)
+txt_title = '        Track Name        ' .. '              Bank' .. '        Patch' .. '    Volume' .. '     Pan' .. '       Reverb' .. '   Chorus' ..
+                '   Delay'
 
 function loop()
+    AnyPopup = reaper.ImGui_IsPopupOpen(ctx, '', reaper.ImGui_PopupFlags_AnyPopup())
+
     window_flag = reaper.ImGui_WindowFlags_AlwaysAutoResize()
     -- reaper.ImGui_SetNextWindowSize(ctx, 730, 70+(#take_tb*23.7))
 
@@ -2019,49 +3488,70 @@ function loop()
     end
 
     O_pos = tpos - wavitem_pos
-    time_buf = reaper.format_timestr_pos(tpos, '', 5)
-    Original_song_time = reaper.format_timestr_pos(O_pos, '', 5)
+    time_buf = reaper.format_timestr_pos(tpos, '', 0)
+    Original_song_time = reaper.format_timestr_pos(O_pos, '', 0)
     ptidx = reaper.FindTempoTimeSigMarker(0, tpos)
     retval, timepos, measurepos, beatpos, bpm, timesig_num, timesig_denom, lineartempo = reaper.GetTempoTimeSigMarker(0, ptidx)
     bpm = string.format("%3.3f", bpm)
 
-    local visible, open = reaper.ImGui_Begin(ctx, 'MIDI Template information', true, window_flag)
+    local visible, open = reaper.ImGui_Begin(ctx, 'MIDI Mixers', true, window_flag)
     if visible then
         reaper.ImGui_PushStyleColor(ctx, reaper.ImGui_Col_Button(), 0x8080807F)
         reaper.ImGui_PushStyleColor(ctx, reaper.ImGui_Col_ButtonHovered(), 0x808080FF)
         reaper.ImGui_PushStyleColor(ctx, reaper.ImGui_Col_ButtonActive(), 0xD2691ECF)
-        if reaper.ImGui_Button(ctx, 'Project Time:') then
+        if reaper.ImGui_Button(ctx, 'Project:') then
             reaper.Main_OnCommand(40069, 0)
         end
         reaper.ImGui_SameLine(ctx)
         reaper.ImGui_Text(ctx, time_buf)
 
         reaper.ImGui_SameLine(ctx)
-        if reaper.ImGui_Button(ctx, 'Audio Time:') then
-            ret, csv = reaper.GetUserInputs('跳转到原曲音频时间', 2, '输入时间**分：,输入时间**秒：', '0,0')
-            if ret then
-                mm, ss = string.match(csv, '(%d+),(%d+)')
-                mm = tonumber(mm)
-                ss = tonumber(ss)
+        if reaper.ImGui_Button(ctx, 'Audio:') then
+            mm, ss = 0, 0
+            reaper.ImGui_OpenPopup(ctx, 'Jump To Audio Time')
+        end
+        x, y = reaper.GetMousePosition()
+        x, y = reaper.ImGui_PointConvertNative(ctx, x, y)
+        reaper.ImGui_SetNextWindowPos(ctx, x, y, reaper.ImGui_Cond_Appearing())
+        if reaper.ImGui_BeginPopupModal(ctx, 'Jump To Audio Time', true) then
+            if reaper.ImGui_IsWindowAppearing(ctx) then
+                reaper.ImGui_SetKeyboardFocusHere(ctx, 0)
+            end
+            retval, mm, ss = reaper.ImGui_InputInt2(ctx, 'mm:ss', mm, ss)
+            Key_Escape = reaper.ImGui_IsKeyPressed(ctx, reaper.ImGui_Key_Escape())
+            if reaper.ImGui_Button(ctx, 'Cancel', 80, 0) or Key_Escape then
+                reaper.ImGui_CloseCurrentPopup(ctx)
+            end
+            reaper.ImGui_SameLine(ctx)
+            Key_Enter = reaper.ImGui_IsKeyPressed(ctx, reaper.ImGui_Key_Enter())
+            KeypadEnter = reaper.ImGui_IsKeyPressed(ctx, reaper.ImGui_Key_KeypadEnter())
+            if reaper.ImGui_Button(ctx, 'Ok', 80, 0) or Key_Enter or KeypadEnter then
                 inputtime = mm * 60 + ss + wavitem_pos
                 reaper.SetEditCurPos(inputtime, true, true)
+                reaper.ImGui_CloseCurrentPopup(ctx)
             end
+            reaper.ImGui_EndPopup(ctx)
         end
+
         reaper.ImGui_SameLine(ctx)
         reaper.ImGui_Text(ctx, Original_song_time)
 
         reaper.ImGui_SameLine(ctx)
-        if reaper.ImGui_Button(ctx, 'Tempo: ' .. bpm) then
+        if reaper.ImGui_Button(ctx, 'Tempo:') then
             reaper.Main_OnCommand(reaper.NamedCommandLookup('_RS4293099acb34ec98e33a7b31449e21878f4165df'), 0)
         end
+        reaper.ImGui_SameLine(ctx)
+        reaper.ImGui_Text(ctx, bpm)
 
         reaper.ImGui_SameLine(ctx)
-        if reaper.ImGui_Button(ctx, 'Marker: ' .. MKname) then
+        if reaper.ImGui_Button(ctx, 'Marker:') then
             showmarklist()
         end
+        reaper.ImGui_SameLine(ctx)
+        reaper.ImGui_Text(ctx, MKname)
 
         reaper.ImGui_SameLine(ctx)
-        if reaper.ImGui_Button(ctx, 'MaxVoice') then
+        if reaper.ImGui_Button(ctx, 'Poly') then
             Maxsound()
         end
         switch = 0
@@ -2086,36 +3576,116 @@ function loop()
         getlock = reaper.GetExtState('Template state', 'lock')
         track1solo = reaper.GetToggleCommandStateEx(0, 23)
         if getlock == 'lock' then
-            reaper.ImGui_RadioButton(ctx, 'TPL lock', true)
+            reaper.ImGui_RadioButton(ctx, 'lock', true)
         else
             if track1solo == 1 then
                 reaper.ImGui_RadioButton(ctx, 'TRK1 solo', true)
             else
-                reaper.ImGui_RadioButton(ctx, 'TPL unlock', false)
+                reaper.ImGui_RadioButton(ctx, 'unlock', false)
             end
         end
+
+        reaper.ImGui_TextColored(ctx, 0xFA8072FF, txt_title)
 
         for i, v in ipairs(info_tb) do
             reaper.ImGui_PushID(ctx, i)
             a, b, c, d, e, f, g, h = string.match(v, '(.+)|(.+)|(.+)|(.+)|(.+)|(.+)|(.+)|(.+)')
-            if reaper.ImGui_Button(ctx, a, 180) then
-                getset_track_info(take_tb[i])
+            reaper.ImGui_PushStyleVar(ctx, reaper.ImGui_StyleVar_ButtonTextAlign(), 0.0, 0)
+            if reaper.ImGui_Button(ctx, a, 140) then
+                MediaTrack = reaper.GetMediaItemTake_Track(take_tb[i])
+                retval, TKname_input = reaper.GetSetMediaTrackInfo_String(MediaTrack, 'P_NAME', '', false)
+                TKname_input = string.gsub(TKname_input, '\'', '\a')
+                num = reaper.GetMediaTrackInfo_Value(MediaTrack, 'I_MIDIHWOUT')
+                if num == -1 then
+                    midiport_input = 0
+                    midichan_input = 0
+                else
+                    midiport_input = math.modf(num / 32) + 1
+                    midichan_input = math.fmod(num, 32)
+                end
+                OpenPopup = reaper.ImGui_OpenPopup(ctx, 'GetSet Track info')
+            end
+            reaper.ImGui_PopStyleVar(ctx, 1)
+            x, y = reaper.GetMousePosition()
+            x, y = reaper.ImGui_PointConvertNative(ctx, x, y)
+            reaper.ImGui_SetNextWindowPos(ctx, x, y, reaper.ImGui_Cond_Appearing())
+            if reaper.ImGui_BeginPopupModal(ctx, 'GetSet Track info', nil, window_flag) then
+                retval, TKname_input = reaper.ImGui_InputText(ctx, 'Track Name', TKname_input)
+                retval, midiport_input = reaper.ImGui_InputInt(ctx, 'MIDI Port', midiport_input)
+                if midiport_input > 16 then
+                    midiport_input = 16
+                end
+                if midiport_input < 0 then
+                    midiport_input = 0
+                end
+                retval, midichan_input = reaper.ImGui_InputInt(ctx, 'MIDI Channel', midichan_input)
+                if midichan_input > 16 then
+                    midichan_input = 16
+                end
+                if midichan_input < 0 then
+                    midichan_input = 0
+                end
+                Key_Escape = reaper.ImGui_IsKeyPressed(ctx, reaper.ImGui_Key_Escape())
+                if reaper.ImGui_Button(ctx, 'Cancel', 108, 0) or Key_Escape then
+                    reaper.ImGui_CloseCurrentPopup(ctx)
+                end
+                reaper.ImGui_SameLine(ctx)
+                Key_Enter = reaper.ImGui_IsKeyPressed(ctx, reaper.ImGui_Key_Enter())
+                KeypadEnter = reaper.ImGui_IsKeyPressed(ctx, reaper.ImGui_Key_KeypadEnter())
+                if reaper.ImGui_Button(ctx, 'Ok', 108, 0) or Key_Enter or KeypadEnter then
+                    reaper.GetSetMediaTrackInfo_String(MediaTrack, 'P_NAME', TKname_input, true)
+                    midiport_input = midiport_input - 1
+                    num_new = midiport_input * 32 + midichan_input
+                    reaper.SetMediaTrackInfo_Value(MediaTrack, 'I_MIDIHWOUT', num_new)
+                    reaper.ImGui_CloseCurrentPopup(ctx)
+                    miditempinfo()
+                end
+                reaper.ImGui_EndPopup(ctx)
+
             end
 
             reaper.ImGui_SameLine(ctx)
-            if reaper.ImGui_Button(ctx, b, 80) then
+            reaper.ImGui_PushID(ctx, 'Bank')
+            -- reaper.ImGui_SetNextWindowSize(ctx, 195, 600)
+            if reaper.ImGui_Button(ctx, b, 50) and b ~= '-1' then
                 reaper.Undo_BeginBlock()
-                retval, Val = reaper.GetUserInputs('Edit Val', 1, '输入 Bank = ', string.gsub(b, 'Bank=', ''))
-                shuru = tonumber(Val)
-                if shuru then
+                OpenPopup = reaper.ImGui_OpenPopup(ctx, 'Edit Bank')
+                val = tonumber(b)
+            end
+            x, y = reaper.GetMousePosition()
+            x, y = reaper.ImGui_PointConvertNative(ctx, x, y)
+            reaper.ImGui_SetNextWindowPos(ctx, x, y, reaper.ImGui_Cond_Appearing())
+            if reaper.ImGui_BeginPopupModal(ctx, 'Edit Bank', nil) then
+                if reaper.ImGui_IsWindowAppearing(ctx) then
+                    reaper.ImGui_SetKeyboardFocusHere(ctx, 0)
+                end
+                retval, val = reaper.ImGui_InputInt(ctx, 'Bank', val, 128)
+
+                if val > 16383 then
+                    val = 16383
+                end
+                if val < 1 then
+                    val = 1
+                end
+                getbank = val
+                getpatch = c
+                reaper.ImGui_TextColored(ctx, 0xFA8072FF, tb_ins_bank[getbank .. ',' .. getpatch])
+                Key_Escape = reaper.ImGui_IsKeyPressed(ctx, reaper.ImGui_Key_Escape())
+                if reaper.ImGui_Button(ctx, 'Cancel', 70, 0) or Key_Escape then
+                    reaper.ImGui_CloseCurrentPopup(ctx)
+                end
+                reaper.ImGui_SameLine(ctx)
+                Key_Enter = reaper.ImGui_IsKeyPressed(ctx, reaper.ImGui_Key_Enter())
+                KeypadEnter = reaper.ImGui_IsKeyPressed(ctx, reaper.ImGui_Key_KeypadEnter())
+                if reaper.ImGui_Button(ctx, 'Ok', 70, 0) or Key_Enter or KeypadEnter then
                     cc0_idx = string.match(ccidx_tb[i], 'cc0_idx=%d+')
                     cc0_idx = string.gsub(cc0_idx, 'cc0_idx=', '')
                     cc0_idx = tonumber(cc0_idx)
                     cc32_idx = string.match(ccidx_tb[i], 'cc32_idx=%d+')
                     cc32_idx = string.gsub(cc32_idx, 'cc32_idx=', '')
                     cc32_idx = tonumber(cc32_idx)
-                    MSB = math.modf(shuru / 128)
-                    LSB = shuru % 128
+                    MSB = math.modf(val / 128)
+                    LSB = val % 128
                     reaper.MIDI_SetCC(take_tb[i], cc0_idx, NULL, false, NULL, NULL, NULL, NULL, MSB, true)
                     reaper.MIDI_SetCC(take_tb[i], cc32_idx, NULL, false, NULL, NULL, NULL, NULL, LSB, true)
                     reaper.MIDI_SetCC(take_tb[i], pc_idx, NULL, false, NULL, NULL, NULL, NULL, NULL, true)
@@ -2123,143 +3693,326 @@ function loop()
                         reaper.Main_OnCommand(1008, 0)
                         reaper.Main_OnCommand(1008, 0)
                     end
+                    miditempinfo()
+                    reaper.ImGui_CloseCurrentPopup(ctx)
                 end
-                reaper.Undo_EndBlock('修改Bank=' .. shuru, -1)
+                reaper.ImGui_Text(ctx, tb_ins_show[tonumber(getpatch)])
+                reaper.ImGui_EndPopup(ctx)
+                reaper.Undo_EndBlock('修改Bank' .. val, -1)
             end
+            reaper.ImGui_PopID(ctx)
             if reaper.ImGui_IsItemHovered(ctx) then
-                getbank = string.match(v, 'Bank=%d+')
-                if getbank == nil then
-                    getbank = 0
-                else
-                    getbank = string.gsub(getbank, 'Bank=', '')
-                end
-                getpatch = string.match(v, 'Patch=%d+')
-                if getpatch == nil then
-                    getpatch = 0
-                else
-                    getpatch = string.gsub(getpatch, 'Patch=', '')
-                end
+                getbank = b
+                getpatch = c
                 reaper.ImGui_SetTooltip(ctx, tb_ins_bank[getbank .. ',' .. getpatch])
             end
-            reaper.ImGui_SameLine(ctx)
-            if reaper.ImGui_Button(ctx, c, 70) then
-                reaper.Undo_BeginBlock()
-                retval, Val = reaper.GetUserInputs('Edit Val', 1, '输入 Patch = ', string.gsub(c, 'Patch=', ''))
-                shuru = tonumber(Val)
-                pc_idx = string.match(ccidx_tb[i], 'pc_idx=%d+')
-                pc_idx = string.gsub(pc_idx, 'pc_idx=', '')
-                pc_idx = tonumber(pc_idx)
-                reaper.MIDI_SetCC(take_tb[i], pc_idx, NULL, false, NULL, NULL, NULL, shuru, NULL, true)
-                if playmode == 1 then
-                    reaper.Main_OnCommand(1008, 0)
-                    reaper.Main_OnCommand(1008, 0)
-                end
-                reaper.Undo_EndBlock('修改PC=' .. shuru, -1)
-            end
-            if reaper.ImGui_IsItemHovered(ctx) then
-                getbank = string.match(v, 'Bank=%d+')
-                if getbank == nil then
-                    getbank = 0
-                else
-                    getbank = string.gsub(getbank, 'Bank=', '')
-                end
-                getpatch = string.match(v, 'Patch=%d+')
-                if getpatch == nil then
-                    getpatch = 0
-                else
-                    getpatch = string.gsub(getpatch, 'Patch=', '')
-                end
-                reaper.ImGui_SetTooltip(ctx, tb_ins_bank[getbank .. ',' .. getpatch])
-            end
-            reaper.ImGui_SameLine(ctx)
-            if reaper.ImGui_Button(ctx, d, 56) then
-                reaper.Undo_BeginBlock()
-                retval, Val = reaper.GetUserInputs('Edit Val', 1, '输入 CC7 = ', string.gsub(d, 'Vol=', ''))
-                shuru = tonumber(Val)
-                cc7_idx = string.match(ccidx_tb[i], 'cc7_idx=%d+')
-                cc7_idx = string.gsub(cc7_idx, 'cc7_idx=', '')
-                cc7_idx = tonumber(cc7_idx)
-                reaper.MIDI_SetCC(take_tb[i], cc7_idx, NULL, NULL, NULL, NULL, NULL, NULL, shuru, true)
-                if playmode == 1 then
-                    reaper.Main_OnCommand(1008, 0)
-                    reaper.Main_OnCommand(1008, 0)
-                end
-                reaper.Undo_EndBlock('修改CC7数值=' .. shuru, -1)
 
-            end
             reaper.ImGui_SameLine(ctx)
-            if reaper.ImGui_Button(ctx, e, 56) then
+            reaper.ImGui_PushID(ctx, 'Patch')
+            reaper.ImGui_SetNextWindowSize(ctx, 175, 100)
+            if reaper.ImGui_Button(ctx, c, 40) and c ~= '-1' then
                 reaper.Undo_BeginBlock()
-                retval, Val = reaper.GetUserInputs('Edit Val', 1, '输入 CC10 = ', string.gsub(e, 'Pan=', ''))
-                shuru = tonumber(Val)
-                cc10_idx = string.match(ccidx_tb[i], 'cc10_idx=%d+')
-                cc10_idx = string.gsub(cc10_idx, 'cc10_idx=', '')
-                cc10_idx = tonumber(cc10_idx)
-                reaper.MIDI_SetCC(take_tb[i], cc10_idx, NULL, NULL, NULL, NULL, NULL, NULL, shuru, true)
-                if playmode == 1 then
-                    reaper.Main_OnCommand(1008, 0)
-                    reaper.Main_OnCommand(1008, 0)
-                end
-                reaper.Undo_EndBlock('修改CC10数值=' .. shuru, -1)
+                OpenPopup = reaper.ImGui_OpenPopup(ctx, 'Edit Patch')
+                val = tonumber(c)
             end
+            x, y = reaper.GetMousePosition()
+            x, y = reaper.ImGui_PointConvertNative(ctx, x, y)
+            reaper.ImGui_SetNextWindowPos(ctx, x, y, reaper.ImGui_Cond_Appearing())
+            if reaper.ImGui_BeginPopupModal(ctx, 'Edit Patch', nil) then
+                if reaper.ImGui_IsWindowAppearing(ctx) then
+                    reaper.ImGui_SetKeyboardFocusHere(ctx, 0)
+                end
+                retval, val = reaper.ImGui_InputInt(ctx, 'Patch', val)
+
+                if val > 127 then
+                    val = 127
+                end
+                if val < 0 then
+                    val = 0
+                end
+                getbank = b
+                getpatch = val
+                reaper.ImGui_TextColored(ctx, 0xFA8072FF, tb_ins_bank[getbank .. ',' .. getpatch])
+                Key_Escape = reaper.ImGui_IsKeyPressed(ctx, reaper.ImGui_Key_Escape())
+                if reaper.ImGui_Button(ctx, 'Cancel', 70, 0) or Key_Escape then
+                    reaper.ImGui_CloseCurrentPopup(ctx)
+                end
+                reaper.ImGui_SameLine(ctx)
+                Key_Enter = reaper.ImGui_IsKeyPressed(ctx, reaper.ImGui_Key_Enter())
+                KeypadEnter = reaper.ImGui_IsKeyPressed(ctx, reaper.ImGui_Key_KeypadEnter())
+                if reaper.ImGui_Button(ctx, 'Ok', 70, 0) or Key_Enter or KeypadEnter then
+                    cc0_idx = string.match(ccidx_tb[i], 'cc0_idx=%d+')
+                    pc_idx = string.match(ccidx_tb[i], 'pc_idx=%d+')
+                    pc_idx = string.gsub(pc_idx, 'pc_idx=', '')
+                    pc_idx = tonumber(pc_idx)
+                    reaper.MIDI_SetCC(take_tb[i], pc_idx, NULL, false, NULL, NULL, NULL, val, NULL, true)
+                    if playmode == 1 then
+                        reaper.Main_OnCommand(1008, 0)
+                        reaper.Main_OnCommand(1008, 0)
+                    end
+                    miditempinfo()
+                    reaper.ImGui_CloseCurrentPopup(ctx)
+                end
+                reaper.ImGui_EndPopup(ctx)
+                reaper.Undo_EndBlock('修改Patch' .. val, -1)
+            end
+            reaper.ImGui_PopID(ctx)
+            if reaper.ImGui_IsItemHovered(ctx) then
+                getbank = b
+                getpatch = c
+                reaper.ImGui_SetTooltip(ctx, tb_ins_bank[getbank .. ',' .. getpatch])
+            end
+
             reaper.ImGui_SameLine(ctx)
-            if reaper.ImGui_Button(ctx, f, 56) then
+            reaper.ImGui_PushID(ctx, 'cc7')
+            reaper.ImGui_SetNextWindowSize(ctx, 165, 80)
+            if reaper.ImGui_Button(ctx, d, 40) and d ~= '-1' then
                 reaper.Undo_BeginBlock()
-                retval, Val = reaper.GetUserInputs('Edit Val', 1, '输入 CC91 = ', string.gsub(f, 'Rev=', ''))
-                shuru = tonumber(Val)
-                cc91_idx = string.match(ccidx_tb[i], 'cc91_idx=%d+')
-                cc91_idx = string.gsub(cc91_idx, 'cc91_idx=', '')
-                cc91_idx = tonumber(cc91_idx)
-                reaper.MIDI_SetCC(take_tb[i], cc91_idx, NULL, NULL, NULL, NULL, NULL, NULL, shuru, true)
-                if playmode == 1 then
-                    reaper.Main_OnCommand(1008, 0)
-                    reaper.Main_OnCommand(1008, 0)
-                end
-                reaper.Undo_EndBlock('修改CC91数值=' .. shuru, -1)
+                OpenPopup = reaper.ImGui_OpenPopup(ctx, 'Edit CC7 Volume')
+                val = tonumber(d)
             end
+            x, y = reaper.GetMousePosition()
+            x, y = reaper.ImGui_PointConvertNative(ctx, x, y)
+            reaper.ImGui_SetNextWindowPos(ctx, x, y, reaper.ImGui_Cond_Appearing())
+            if reaper.ImGui_BeginPopupModal(ctx, 'Edit CC7 Volume', nil) then
+                if reaper.ImGui_IsWindowAppearing(ctx) then
+                    reaper.ImGui_SetKeyboardFocusHere(ctx, 0)
+                end
+                retval, val = reaper.ImGui_InputInt(ctx, 'CC7', val)
+
+                if val > 127 then
+                    val = 127
+                end
+                if val < 0 then
+                    val = 0
+                end
+                Key_Escape = reaper.ImGui_IsKeyPressed(ctx, reaper.ImGui_Key_Escape())
+                if reaper.ImGui_Button(ctx, 'Cancel', 70, 0) or Key_Escape then
+                    reaper.ImGui_CloseCurrentPopup(ctx)
+                end
+                reaper.ImGui_SameLine(ctx)
+                Key_Enter = reaper.ImGui_IsKeyPressed(ctx, reaper.ImGui_Key_Enter())
+                KeypadEnter = reaper.ImGui_IsKeyPressed(ctx, reaper.ImGui_Key_KeypadEnter())
+                if reaper.ImGui_Button(ctx, 'Ok', 70, 0) or Key_Enter or KeypadEnter then
+                    cc7_idx = string.match(ccidx_tb[i], 'cc7_idx=%d+')
+                    cc7_idx = string.gsub(cc7_idx, 'cc7_idx=', '')
+                    cc7_idx = tonumber(cc7_idx)
+                    reaper.MIDI_SetCC(take_tb[i], cc7_idx, NULL, NULL, NULL, NULL, NULL, NULL, val, true)
+                    if playmode == 1 then
+                        reaper.Main_OnCommand(1008, 0)
+                        reaper.Main_OnCommand(1008, 0)
+                    end
+                    miditempinfo()
+                    reaper.ImGui_CloseCurrentPopup(ctx)
+                end
+                reaper.ImGui_EndPopup(ctx)
+                reaper.Undo_EndBlock('修改CC7数值=' .. val, -1)
+            end
+            reaper.ImGui_PopID(ctx)
+
             reaper.ImGui_SameLine(ctx)
-            if reaper.ImGui_Button(ctx, g, 56) then
+            reaper.ImGui_PushID(ctx, 'cc10')
+            reaper.ImGui_SetNextWindowSize(ctx, 165, 80)
+            if reaper.ImGui_Button(ctx, e, 40) and e ~= '-1' then
                 reaper.Undo_BeginBlock()
-                retval, Val = reaper.GetUserInputs('Edit Val', 1, '输入 CC93 = ', string.gsub(g, 'Cho=', ''))
-                shuru = tonumber(Val)
-                cc93_idx = string.match(ccidx_tb[i], 'cc93_idx=%d+')
-                cc93_idx = string.gsub(cc93_idx, 'cc93_idx=', '')
-                cc93_idx = tonumber(cc93_idx)
-                reaper.MIDI_SetCC(take_tb[i], cc93_idx, NULL, NULL, NULL, NULL, NULL, NULL, shuru, true)
-                if playmode == 1 then
-                    reaper.Main_OnCommand(1008, 0)
-                    reaper.Main_OnCommand(1008, 0)
-                end
-                reaper.Undo_EndBlock('修改CC93数值=' .. shuru, -1)
+                OpenPopup = reaper.ImGui_OpenPopup(ctx, 'Edit CC10 Pan')
+                val = tonumber(e)
             end
+            x, y = reaper.GetMousePosition()
+            x, y = reaper.ImGui_PointConvertNative(ctx, x, y)
+            reaper.ImGui_SetNextWindowPos(ctx, x, y, reaper.ImGui_Cond_Appearing())
+            if reaper.ImGui_BeginPopupModal(ctx, 'Edit CC10 Pan', nil) then
+                if reaper.ImGui_IsWindowAppearing(ctx) then
+                    reaper.ImGui_SetKeyboardFocusHere(ctx, 0)
+                end
+                retval, val = reaper.ImGui_InputInt(ctx, 'CC10', val)
+
+                if val > 127 then
+                    val = 127
+                end
+                if val < 0 then
+                    val = 0
+                end
+                Key_Escape = reaper.ImGui_IsKeyPressed(ctx, reaper.ImGui_Key_Escape())
+                if reaper.ImGui_Button(ctx, 'Cancel', 70, 0) or Key_Escape then
+                    reaper.ImGui_CloseCurrentPopup(ctx)
+                end
+                reaper.ImGui_SameLine(ctx)
+                Key_Enter = reaper.ImGui_IsKeyPressed(ctx, reaper.ImGui_Key_Enter())
+                KeypadEnter = reaper.ImGui_IsKeyPressed(ctx, reaper.ImGui_Key_KeypadEnter())
+                if reaper.ImGui_Button(ctx, 'Ok', 70, 0) or Key_Enter or KeypadEnter then
+                    cc10_idx = string.match(ccidx_tb[i], 'cc10_idx=%d+')
+                    cc10_idx = string.gsub(cc10_idx, 'cc10_idx=', '')
+                    cc10_idx = tonumber(cc10_idx)
+                    reaper.MIDI_SetCC(take_tb[i], cc10_idx, NULL, NULL, NULL, NULL, NULL, NULL, val, true)
+                    if playmode == 1 then
+                        reaper.Main_OnCommand(1008, 0)
+                        reaper.Main_OnCommand(1008, 0)
+                    end
+                    miditempinfo()
+                    reaper.ImGui_CloseCurrentPopup(ctx)
+                end
+                reaper.ImGui_EndPopup(ctx)
+                reaper.Undo_EndBlock('修改CC10数值=' .. val, -1)
+            end
+            reaper.ImGui_PopID(ctx)
+
             reaper.ImGui_SameLine(ctx)
-            if reaper.ImGui_Button(ctx, h, 65) then
+            reaper.ImGui_PushID(ctx, 'cc91')
+            reaper.ImGui_SetNextWindowSize(ctx, 165, 80)
+            if reaper.ImGui_Button(ctx, f, 40) and f ~= '-1' then
                 reaper.Undo_BeginBlock()
-                retval, Val = reaper.GetUserInputs('Edit Val', 1, '输入 CC94 = ', string.gsub(h, 'Delay=', ''))
-                shuru = tonumber(Val)
-                cc94_idx = string.match(ccidx_tb[i], 'cc94_idx=%d+')
-                cc94_idx = string.gsub(cc94_idx, 'cc94_idx=', '')
-                cc94_idx = tonumber(cc94_idx)
-                reaper.MIDI_SetCC(take_tb[i], cc94_idx, NULL, NULL, NULL, NULL, NULL, NULL, shuru, true)
-                if playmode == 1 then
-                    reaper.Main_OnCommand(1008, 0)
-                    reaper.Main_OnCommand(1008, 0)
-                end
-                reaper.Undo_EndBlock('修改CC94数值=' .. shuru, -1)
+                OpenPopup = reaper.ImGui_OpenPopup(ctx, 'Edit CC91 Reverb')
+                val = tonumber(f)
             end
+            x, y = reaper.GetMousePosition()
+            x, y = reaper.ImGui_PointConvertNative(ctx, x, y)
+            reaper.ImGui_SetNextWindowPos(ctx, x, y, reaper.ImGui_Cond_Appearing())
+            if reaper.ImGui_BeginPopupModal(ctx, 'Edit CC91 Reverb', nil) then
+                if reaper.ImGui_IsWindowAppearing(ctx) then
+                    reaper.ImGui_SetKeyboardFocusHere(ctx, 0)
+                end
+                retval, val = reaper.ImGui_InputInt(ctx, 'CC91', val)
+
+                if val > 127 then
+                    val = 127
+                end
+                if val < 0 then
+                    val = 0
+                end
+                Key_Escape = reaper.ImGui_IsKeyPressed(ctx, reaper.ImGui_Key_Escape())
+                if reaper.ImGui_Button(ctx, 'Cancel', 70, 0) or Key_Escape then
+                    reaper.ImGui_CloseCurrentPopup(ctx)
+                end
+                reaper.ImGui_SameLine(ctx)
+                Key_Enter = reaper.ImGui_IsKeyPressed(ctx, reaper.ImGui_Key_Enter())
+                KeypadEnter = reaper.ImGui_IsKeyPressed(ctx, reaper.ImGui_Key_KeypadEnter())
+                if reaper.ImGui_Button(ctx, 'Ok', 70, 0) or Key_Enter or KeypadEnter then
+                    cc91_idx = string.match(ccidx_tb[i], 'cc91_idx=%d+')
+                    cc91_idx = string.gsub(cc91_idx, 'cc91_idx=', '')
+                    cc91_idx = tonumber(cc91_idx)
+                    reaper.MIDI_SetCC(take_tb[i], cc91_idx, NULL, NULL, NULL, NULL, NULL, NULL, val, true)
+                    if playmode == 1 then
+                        reaper.Main_OnCommand(1008, 0)
+                        reaper.Main_OnCommand(1008, 0)
+                    end
+                    miditempinfo()
+                    reaper.ImGui_CloseCurrentPopup(ctx)
+                end
+                reaper.ImGui_EndPopup(ctx)
+                reaper.Undo_EndBlock('修改cc91数值=' .. val, -1)
+            end
+            reaper.ImGui_PopID(ctx)
+
             reaper.ImGui_SameLine(ctx)
+            reaper.ImGui_PushID(ctx, 'CC93')
+            reaper.ImGui_SetNextWindowSize(ctx, 165, 80)
+            if reaper.ImGui_Button(ctx, g, 40) and g ~= '-1' then
+                reaper.Undo_BeginBlock()
+                OpenPopup = reaper.ImGui_OpenPopup(ctx, 'Edit CC93 Chorus')
+                val = tonumber(g)
+            end
+            x, y = reaper.GetMousePosition()
+            x, y = reaper.ImGui_PointConvertNative(ctx, x, y)
+            reaper.ImGui_SetNextWindowPos(ctx, x, y, reaper.ImGui_Cond_Appearing())
+            if reaper.ImGui_BeginPopupModal(ctx, 'Edit CC93 Chorus', nil) then
+                if reaper.ImGui_IsWindowAppearing(ctx) then
+                    reaper.ImGui_SetKeyboardFocusHere(ctx, 0)
+                end
+                retval, val = reaper.ImGui_InputInt(ctx, 'CC93', val)
+
+                if val > 127 then
+                    val = 127
+                end
+                if val < 0 then
+                    val = 0
+                end
+                Key_Escape = reaper.ImGui_IsKeyPressed(ctx, reaper.ImGui_Key_Escape())
+                if reaper.ImGui_Button(ctx, 'Cancel', 70, 0) or Key_Escape then
+                    reaper.ImGui_CloseCurrentPopup(ctx)
+                end
+                reaper.ImGui_SameLine(ctx)
+                Key_Enter = reaper.ImGui_IsKeyPressed(ctx, reaper.ImGui_Key_Enter())
+                KeypadEnter = reaper.ImGui_IsKeyPressed(ctx, reaper.ImGui_Key_KeypadEnter())
+                if reaper.ImGui_Button(ctx, 'Ok', 70, 0) or Key_Enter or KeypadEnter then
+                    cc93_idx = string.match(ccidx_tb[i], 'cc93_idx=%d+')
+                    cc93_idx = string.gsub(cc93_idx, 'cc93_idx=', '')
+                    cc93_idx = tonumber(cc93_idx)
+                    reaper.MIDI_SetCC(take_tb[i], cc93_idx, NULL, NULL, NULL, NULL, NULL, NULL, val, true)
+                    if playmode == 1 then
+                        reaper.Main_OnCommand(1008, 0)
+                        reaper.Main_OnCommand(1008, 0)
+                    end
+                    miditempinfo()
+                    reaper.ImGui_CloseCurrentPopup(ctx)
+                end
+                reaper.ImGui_EndPopup(ctx)
+                reaper.Undo_EndBlock('修改CC93数值=' .. val, -1)
+            end
+            reaper.ImGui_PopID(ctx)
+
+            reaper.ImGui_SameLine(ctx)
+            reaper.ImGui_PushID(ctx, 'CC94')
+            reaper.ImGui_SetNextWindowSize(ctx, 165, 80)
+            if reaper.ImGui_Button(ctx, h, 40) and h ~= '-1' then
+                reaper.Undo_BeginBlock()
+                OpenPopup = reaper.ImGui_OpenPopup(ctx, 'Edit CC94 Chorus')
+                val = tonumber(h)
+            end
+            x, y = reaper.GetMousePosition()
+            x, y = reaper.ImGui_PointConvertNative(ctx, x, y)
+            reaper.ImGui_SetNextWindowPos(ctx, x, y, reaper.ImGui_Cond_Appearing())
+            if reaper.ImGui_BeginPopupModal(ctx, 'Edit CC94 Chorus', nil) then
+                if reaper.ImGui_IsWindowAppearing(ctx) then
+                    reaper.ImGui_SetKeyboardFocusHere(ctx, 0)
+                end
+                retval, val = reaper.ImGui_InputInt(ctx, 'CC94', val)
+
+                if val > 127 then
+                    val = 127
+                end
+                if val < 0 then
+                    val = 0
+                end
+                Key_Escape = reaper.ImGui_IsKeyPressed(ctx, reaper.ImGui_Key_Escape())
+                if reaper.ImGui_Button(ctx, 'Cancel', 70, 0) or Key_Escape then
+                    reaper.ImGui_CloseCurrentPopup(ctx)
+                end
+                reaper.ImGui_SameLine(ctx)
+                Key_Enter = reaper.ImGui_IsKeyPressed(ctx, reaper.ImGui_Key_Enter())
+                KeypadEnter = reaper.ImGui_IsKeyPressed(ctx, reaper.ImGui_Key_KeypadEnter())
+                if reaper.ImGui_Button(ctx, 'Ok', 70, 0) or Key_Enter or KeypadEnter then
+                    cc94_idx = string.match(ccidx_tb[i], 'cc94_idx=%d+')
+                    cc94_idx = string.gsub(cc94_idx, 'cc94_idx=', '')
+                    cc94_idx = tonumber(cc94_idx)
+                    reaper.MIDI_SetCC(take_tb[i], cc94_idx, NULL, NULL, NULL, NULL, NULL, NULL, val, true)
+                    if playmode == 1 then
+                        reaper.Main_OnCommand(1008, 0)
+                        reaper.Main_OnCommand(1008, 0)
+                    end
+                    miditempinfo()
+                    reaper.ImGui_CloseCurrentPopup(ctx)
+                end
+                reaper.ImGui_EndPopup(ctx)
+                reaper.Undo_EndBlock('修改CC94数值=' .. val, -1)
+            end
+            reaper.ImGui_PopID(ctx)
+
+            reaper.ImGui_SameLine(ctx)
+            reaper.ImGui_PushID(ctx, 'List')
             if reaper.ImGui_SmallButton(ctx, 'List') then
                 openlist(take_tb[i])
             end
             if reaper.ImGui_IsItemHovered(ctx) then
                 reaper.ImGui_SetTooltip(ctx, a)
             end
+            reaper.ImGui_PopID(ctx)
 
             reaper.ImGui_PopID(ctx)
         end
 
         Tab_Key = reaper.ImGui_IsKeyPressed(ctx, 512, nil)
-        if Tab_Key then
+        if Tab_Key and AnyPopup == false then
             reaper.Main_OnCommand(23, 0)
         end
 
