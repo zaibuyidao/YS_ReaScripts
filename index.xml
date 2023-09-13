@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<index version="1" name="YS Scripts" commit="7f2437b3fc77c716a0d16ea0ec6d094455a8af5e">
+<index version="1" name="YS Scripts" commit="58f0da3d24fa65d77ba79ee2651b6af224f2d75c">
   <category name="Items Editing">
     <reapack name="YS_Midi Take Name From Track.lua" type="script" desc="Bass 定弦">
       <version name="1.0" author="YS" time="2021-10-14T16:59:44Z">
@@ -171,39 +171,6 @@
       </version>
       <version name="1.1.1" author="YS" time="2021-11-20T08:42:52Z">
         <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/d278dabc035d5db47add36ed100af60835a1c4c9/MIDI%20Editor/YS_Chord%20Show(%E5%8E%9F%E4%BD%8D%E5%92%8C%E5%BC%A6%E8%AF%86%E5%88%AB).lua</source>
-      </version>
-    </reapack>
-    <reapack name="YS_Chord Tools.lua" type="script" desc="Chord Tools">
-      <version name="1.0" author="YS" time="2021-11-03T11:45:03Z">
-        <changelog><![CDATA[+ Initial release]]></changelog>
-        <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/e016aff3746ddbb708da130a0deaa4ab6f253669/MIDI%20Editor/YS_Chord%20Tools.lua</source>
-      </version>
-      <version name="1.0.1" author="YS" time="2021-11-12T14:23:53Z">
-        <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/327e02bfef57768dbf04a4a1a7fa6acf950c5342/MIDI%20Editor/YS_Chord%20Tools.lua</source>
-      </version>
-      <version name="1.0.2" author="YS" time="2021-11-20T08:42:52Z">
-        <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/d278dabc035d5db47add36ed100af60835a1c4c9/MIDI%20Editor/YS_Chord%20Tools.lua</source>
-      </version>
-      <version name="1.0.3" author="YS" time="2021-11-26T11:59:15Z">
-        <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/80324c81e5153564714cb0b53c38110d3db86b16/MIDI%20Editor/YS_Chord%20Tools.lua</source>
-      </version>
-      <version name="1.0.4" author="YS" time="2021-12-09T14:38:23Z">
-        <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/39fdcdc68135ae56c3ec14bd6833b34699e645c7/MIDI%20Editor/YS_Chord%20Tools.lua</source>
-      </version>
-      <version name="1.0.5" author="YS" time="2022-01-02T17:05:15Z">
-        <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/3e57988e53752c84cc1f64d56e8a5c694f687f69/MIDI%20Editor/YS_Chord%20Tools.lua</source>
-      </version>
-      <version name="1.0.6" author="YS" time="2022-12-06T14:13:57Z">
-        <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/d255563cf07508f4297711546c8ed68dbb9328ec/MIDI%20Editor/YS_Chord%20Tools.lua</source>
-      </version>
-      <version name="1.0.7" author="YS" time="2023-04-06T16:17:12Z">
-        <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/fc41e3d9e3c698a7f501b278b24477dfaee9b2f9/MIDI%20Editor/YS_Chord%20Tools.lua</source>
-      </version>
-      <version name="1.0.8" author="YS" time="2023-05-10T09:30:52Z">
-        <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/4c427076f9345c0b241088867c7eb17e2887bc79/MIDI%20Editor/YS_Chord%20Tools.lua</source>
-      </version>
-      <version name="1.0.9" author="YS" time="2023-06-27T05:35:58Z">
-        <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/55e07fe1b4b1566f4758cdcec883df0ac8d72e82/MIDI%20Editor/YS_Chord%20Tools.lua</source>
       </version>
     </reapack>
     <reapack name="YS_Copy X_Multi Track.lua" type="script" desc="Copy X_Multi Track">
@@ -1165,6 +1132,19 @@
       </version>
       <version name="1.0.2" author="YS" time="2022-10-17T14:07:43Z">
         <source main="main midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/5c403560766aaad21a81bdf17957af4872c0189c/Utility/YS_%E8%87%AA%E5%8A%A8%E6%A8%A1%E6%9D%BF%E9%94%81%E5%AE%9A.lua</source>
+      </version>
+    </reapack>
+  </category>
+  <category name="Various">
+    <reapack name="Chord Tools Bundle.lua" type="script" desc="Chord Tools Bundle">
+      <metadata>
+        <link rel="website">https://www.soundengine.cn/user/%E5%86%8D%E8%A3%9C%E4%B8%80%E5%88%80</link>
+        <link rel="website">https://github.com/zaibuyidao/ReaScripts</link>
+      </metadata>
+      <version name="1.0" author="YS" time="2023-09-13T01:33:36Z">
+        <changelog><![CDATA[Initial release]]></changelog>
+        <source main="midi_editor" file="Chord Tools/YS_Chord Tools.lua">https://github.com/zaibuyidao/YS_ReaScripts/raw/58f0da3d24fa65d77ba79ee2651b6af224f2d75c/Various/Chord%20Tools/YS_Chord%20Tools.lua</source>
+        <source file="Chord Tools/keyboard.jpg">https://github.com/zaibuyidao/YS_ReaScripts/raw/58f0da3d24fa65d77ba79ee2651b6af224f2d75c/Various/Chord%20Tools/keyboard.jpg</source>
       </version>
     </reapack>
   </category>
