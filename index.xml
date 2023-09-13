@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<index version="1" name="YS Scripts" commit="9f654ffa48dff3d042edd8940e9818664bdbf76f">
+<index version="1" name="YS Scripts" commit="a7d2f7ae6711d5a082a694ddff8d57e8ba0a8ce1">
   <category name="Items Editing">
     <reapack name="YS_Midi Take Name From Track.lua" type="script" desc="Bass 定弦">
       <version name="1.0" author="YS" time="2021-10-14T16:59:44Z">
@@ -1137,10 +1137,7 @@
   </category>
   <category name="Various">
     <reapack name="Chord Tools Bundle.lua" type="script" desc="Chord Tools Bundle">
-      <metadata>
-        <link rel="website">https://www.soundengine.cn/user/%E5%86%8D%E8%A3%9C%E4%B8%80%E5%88%80</link>
-        <link rel="website">https://github.com/zaibuyidao/ReaScripts</link>
-      </metadata>
+      <metadata/>
       <version name="1.0" author="YS" time="2023-09-13T01:33:36Z">
         <changelog><![CDATA[Initial release]]></changelog>
         <source main="midi_editor" file="Chord Tools/YS_Chord Tools.lua">https://github.com/zaibuyidao/YS_ReaScripts/raw/58f0da3d24fa65d77ba79ee2651b6af224f2d75c/Various/Chord%20Tools/YS_Chord%20Tools.lua</source>
@@ -1150,6 +1147,11 @@
         <changelog><![CDATA[Initial release]]></changelog>
         <source main="midi_editor" file="Chord Tools/YS_Chord Tools.lua">https://github.com/zaibuyidao/YS_ReaScripts/raw/9f654ffa48dff3d042edd8940e9818664bdbf76f/Various/Chord%20Tools/YS_Chord%20Tools.lua</source>
         <source file="Chord Tools/keyboard.jpg">https://github.com/zaibuyidao/YS_ReaScripts/raw/9f654ffa48dff3d042edd8940e9818664bdbf76f/Various/Chord%20Tools/keyboard.jpg</source>
+      </version>
+      <version name="1.0.2" author="YS" time="2023-09-13T04:27:21Z">
+        <changelog><![CDATA[Initial release]]></changelog>
+        <source main="midi_editor" file="Chord Tools/YS_Chord Tools.lua">https://github.com/zaibuyidao/YS_ReaScripts/raw/a7d2f7ae6711d5a082a694ddff8d57e8ba0a8ce1/Various/Chord%20Tools/YS_Chord%20Tools.lua</source>
+        <source file="Chord Tools/keyboard.jpg">https://github.com/zaibuyidao/YS_ReaScripts/raw/a7d2f7ae6711d5a082a694ddff8d57e8ba0a8ce1/Various/Chord%20Tools/keyboard.jpg</source>
       </version>
     </reapack>
   </category>
