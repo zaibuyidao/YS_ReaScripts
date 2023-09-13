@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<index version="1" name="YS Scripts" commit="58f0da3d24fa65d77ba79ee2651b6af224f2d75c">
+<index version="1" name="YS Scripts" commit="9f654ffa48dff3d042edd8940e9818664bdbf76f">
   <category name="Items Editing">
     <reapack name="YS_Midi Take Name From Track.lua" type="script" desc="Bass 定弦">
       <version name="1.0" author="YS" time="2021-10-14T16:59:44Z">
@@ -1145,6 +1145,11 @@
         <changelog><![CDATA[Initial release]]></changelog>
         <source main="midi_editor" file="Chord Tools/YS_Chord Tools.lua">https://github.com/zaibuyidao/YS_ReaScripts/raw/58f0da3d24fa65d77ba79ee2651b6af224f2d75c/Various/Chord%20Tools/YS_Chord%20Tools.lua</source>
         <source file="Chord Tools/keyboard.jpg">https://github.com/zaibuyidao/YS_ReaScripts/raw/58f0da3d24fa65d77ba79ee2651b6af224f2d75c/Various/Chord%20Tools/keyboard.jpg</source>
+      </version>
+      <version name="1.0.1" author="YS" time="2023-09-13T01:39:08Z">
+        <changelog><![CDATA[Initial release]]></changelog>
+        <source main="midi_editor" file="Chord Tools/YS_Chord Tools.lua">https://github.com/zaibuyidao/YS_ReaScripts/raw/9f654ffa48dff3d042edd8940e9818664bdbf76f/Various/Chord%20Tools/YS_Chord%20Tools.lua</source>
+        <source file="Chord Tools/keyboard.jpg">https://github.com/zaibuyidao/YS_ReaScripts/raw/9f654ffa48dff3d042edd8940e9818664bdbf76f/Various/Chord%20Tools/keyboard.jpg</source>
       </version>
     </reapack>
   </category>
