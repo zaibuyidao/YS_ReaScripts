@@ -1,15 +1,4 @@
---[[
- * ReaScript Name: Chord Tools
- * Version: 1.0.9
- * Author: YS
---]]
-
---[[
- * Changelog:
- * v1.0 (2021-11-3)
-  + Initial release
---]]
-
+-- NoIndex: true
 chord = {}
 chord[''] = '4,7,0,0,0,0'
 chord['M'] = '4,7,0,0,0,0'
