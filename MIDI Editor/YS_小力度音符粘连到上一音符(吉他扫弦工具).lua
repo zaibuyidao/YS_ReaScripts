@@ -1,6 +1,6 @@
 --[[
  * ReaScript Name: 小力度音符粘连到上一音符(吉他扫弦工具)
- * Version: 1.0.2
+ * Version: 1.0.3
  * Author: YS
 --]]
 
@@ -169,7 +169,7 @@ while take ~= nil do
         retval, selected, muted, startppqpos, endppqpos, chan, pitch, vel = reaper.MIDI_GetNote(take, integer)
         dur = endppqpos - startppqpos
         jiange = startppqpos - note['st']
-        if vel < shuzhi and pitch == note['pitch'] and dur > 30 and jiange < 60 then
+        if vel <= shuzhi and pitch == note['pitch'] and dur > 30 and jiange < 60 then
             reaper.MIDI_DeleteNote(take, integer)
             reaper.MIDI_SetNote(take, note['idx'], true, false, NULL, endppqpos, NULL, NULL, NULL, false)
         else
