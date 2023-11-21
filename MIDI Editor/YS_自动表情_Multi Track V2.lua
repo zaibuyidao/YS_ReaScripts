@@ -1,6 +1,6 @@
 --[[
  * ReaScript Name: 自动表情_Multi Track V2
- * Version: 1.1.2
+ * Version: 1.1.3
  * Author: YS
 --]]
 
@@ -66,6 +66,90 @@ end -- function end
 
 bpm_average()
 
+function selTopNote()
+    i, idx = 2, -1
+
+    tbidx = {}
+    tbst = {}
+    tbpitch = {}
+    selidx = {}
+    tempst = -11
+    integer = reaper.MIDI_EnumSelNotes(take, idx)
+
+    while (integer ~= -1) do
+
+        integer = reaper.MIDI_EnumSelNotes(take, idx)
+
+        retval, selected, muted, startppqpos, endppqpos, chan, pitch, vel = reaper.MIDI_GetNote(take, integer)
+        juli = startppqpos - tempst
+        if juli < 0 then
+            juli = juli * -1
+        end
+        if juli <= 10 then
+            tbidx[i] = integer
+            tbpitch[i] = pitch
+            tbst[i] = startppqpos
+            i = i + 1
+        else
+            -- STRUM it
+            top = tbpitch[1]
+
+            for i, v in ipairs(tbpitch) do
+                if (top > v) then
+                    top = top
+                else
+                    top = v
+                end
+            end -- get top note
+
+            for i, vv in ipairs(tbidx) do
+                retval, _, _, _, _, _, pitch_b, _ = reaper.MIDI_GetNote(take, vv)
+                if pitch_b == top then
+                    table.insert(selidx, vv)
+                end -- select end
+            end -- for end
+            tbidx = {}
+            tbpitch = {}
+            tbst = {}
+
+            tbidx[1] = integer
+            tbst[1] = startppqpos
+            tbpitch[1] = pitch
+            i = 2
+        end -- if end
+        tempst = startppqpos
+        idx = integer
+    end -- while end
+    reaper.MIDI_SelectAll(take, false)
+    for i, v in ipairs(selidx) do
+        reaper.MIDI_SetNote(take, v, true, NULL, NULL, NULL, NULL, NULL, NULL, false)
+    end
+
+    ------------------------------------------------------
+    noteidx = -1
+    tempend = -1
+    temppitch = 0
+
+    integer = reaper.MIDI_EnumSelNotes(take, noteidx)
+
+    while (integer ~= -1) do
+
+        retval, selected, muted, startppqpos, endppqpos, chan, pitch, vel = reaper.MIDI_GetNote(take, integer)
+
+        if startppqpos < tempend and pitch < temppitch then
+            reaper.MIDI_SetNote(take, integer, false, NULL, NULL, NULL, NULL, NULL, NULL, false)
+        else
+            tempend = endppqpos
+            temppitch = pitch
+        end
+
+        noteidx = integer
+        integer = reaper.MIDI_EnumSelNotes(take, noteidx)
+    end
+end
+
+--  sel Top Note
+
 local retval, shuzhi = reaper.GetUserInputs('自动表情 平均速度: ' .. bpm_average, 7,
     'CC min Val=,CC Max Val=,1:悠扬 2:强烈 3:手动,起音形状 1:正 2:反,弧度 0-100 ,音尾形状 1:正 2:反,弧度 0-100',
     '88,127,1,1,25,1,40')
@@ -108,6 +192,7 @@ if retval then
     takeindex = 0
     take = reaper.MIDIEditor_EnumTakes(editor, takeindex, true)
     while take ~= nil do
+        selTopNote()
 
         local idx = -1
         biaoji = 0
@@ -132,11 +217,11 @@ if retval then
             if bpm_average < 96 then
                 if dur >= 240 and dur < 480 then
                     if quaver == false then
-                    reaper.MIDI_InsertCC(take, true, false, startppqpos, 176, 0, 11, min_val)
-                    quaver = true
+                        reaper.MIDI_InsertCC(take, true, false, startppqpos, 176, 0, 11, min_val)
+                        quaver = true
                     else
-                        reaper.MIDI_InsertCC(take, true, false, startppqpos, 176, 0, 11, math.modf(min_val+((max_val-min_val)/3)))
-                    end    
+                        reaper.MIDI_InsertCC(take, true, false, startppqpos, 176, 0, 11, math.modf(min_val + ((max_val - min_val) / 3)))
+                    end
                     reaper.MIDI_InsertCC(take, false, false, startppqpos + 190, 176, 0, 11, max_val)
                 else
                     quaver = false
