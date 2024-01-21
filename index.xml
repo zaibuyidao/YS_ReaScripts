@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<index version="1" name="YS Scripts" commit="40f63b168751f10903730f64fb6075e621290290">
+<index version="1" name="YS Scripts" commit="65624cc1747639731bd0b97690974e92f8ccef9a">
   <category name="Items Editing">
     <reapack name="YS_Midi Take Name From Track.lua" type="script" desc="Bass 定弦">
       <version name="1.0" author="YS" time="2021-10-14T16:59:44Z">
@@ -744,6 +744,12 @@
       <version name="1.0" author="YS" time="2021-10-14T16:59:44Z">
         <changelog><![CDATA[+ Initial release]]></changelog>
         <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/e0c2cb8030173de0d7e0794ee7cc6a751307fd97/MIDI%20Editor/YS_%E6%8C%82%E5%9B%9B%E5%92%8C%E5%BC%A6.lua</source>
+      </version>
+    </reapack>
+    <reapack name="YS_揉弦数量增减.lua" type="script" desc="揉弦数量增减">
+      <version name="1.0" author="YS" time="2024-01-21T10:07:10Z">
+        <changelog><![CDATA[+ Initial release]]></changelog>
+        <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/65624cc1747639731bd0b97690974e92f8ccef9a/MIDI%20Editor/YS_%E6%8F%89%E5%BC%A6%E6%95%B0%E9%87%8F%E5%A2%9E%E5%87%8F.lua</source>
       </version>
     </reapack>
     <reapack name="YS_插入音符切换音色.lua" type="script" desc="插入音符切换音色">
