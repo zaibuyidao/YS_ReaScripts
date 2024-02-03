@@ -1,6 +1,6 @@
 --[[
  * ReaScript Name: 揉弦数量增减
- * Version: 1.0
+ * Version: 1.0.1
  * Author: YS
 --]]
 
@@ -39,7 +39,7 @@ function vibadd()
         ccidx = reaper.MIDI_EnumSelCC(take, ccidx)
     end
     tblen = #cctb
-    if tblen == 2 then
+    if tblen <= 2 then
         return
     end
     Total_length = ppqpos - firstcc
@@ -102,7 +102,7 @@ function vibminus()
         ccidx = reaper.MIDI_EnumSelCC(take, ccidx)
     end
     tblen = #cctb
-    if tblen == 1 then
+    if tblen <= 1 then
         return
     end
     Total_length = ppqpos - firstcc
@@ -131,6 +131,9 @@ function vibminus()
             reaper.MIDI_SetCC(take, ccidx, NULL, NULL, newcctick, NULL, NULL, NULL, NULL, false)
             tbidx = tbidx - 1
         end
+        ccval, cctick, lastccidx = string.match(cctb[#cctb], '(%d+,%d+),(%d+%.%d+),(%d+)')
+        lastccidx = tonumber(lastccidx)
+        reaper.MIDI_SetCCShape(take, lastccidx, 0, 0, false)
     else
         x, y = reaper.GetMousePosition()
         reaper.TrackCtl_SetToolTip('没有多个揉弦', x, y + 20, true)
@@ -181,4 +184,3 @@ function loop()
 end
 
 reaper.defer(loop)
-
