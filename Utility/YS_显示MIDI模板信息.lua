@@ -1,6 +1,6 @@
 --[[
  * ReaScript Name: 显示MIDI模板信息
- * Version: 1.0.7
+ * Version: 1.0.8
  * Author: YS
 --]]
 
@@ -1434,6 +1434,7 @@ tb_ins_bank['1282,49'] = 'SC88_St.Slow Str.'
 tb_ins_bank['1282,55'] = 'SC88_Double Hit'
 tb_ins_bank['1282,95'] = 'SC88_Celestial Pd'
 tb_ins_bank['1282,112'] = 'SC88_Gamelan Gong'
+
 tb_ins_bank['10243,22'] = 'SC88Pro_Guide Harmonica'
 tb_ins_bank['10242,22'] = 'SC88_Guide Harmonica'
 tb_ins_bank['10241,22'] = 'SC55_Guide Harmonica'
@@ -1483,6 +1484,73 @@ tb_ins_bank['12291,30'] = 'SC88Pro_Rh_Power Guitar'
 tb_ins_bank['13315,30'] = 'SC88Pro_Rh_Rock Rhythm'
 tb_ins_bank['13443,30'] = 'SC88Pro_Rh_Rock Rhythm2'
 
+tb_ins_bank['4,0'] = "XING_Studio Grand (XL2)"
+tb_ins_bank['4,14'] = "XING_Tubular bell (XL2)"
+-- tb_ins_bank['4,32'] = "XING_Acoustic Bs. (XL2)"
+tb_ins_bank['4,40'] = "XING_Violin: (XL2)"
+tb_ins_bank['4,41'] = "XING_Viola: (XL2)"
+tb_ins_bank['4,42'] = "XING_Cello: (XL2)"
+tb_ins_bank['4,43'] = "XING_Contrabass (XL2)"
+tb_ins_bank['4,44'] = "XING_Tremolo Str (XL2)"
+tb_ins_bank['4,45'] = "XING_PizzicatoStr (XL2)"
+tb_ins_bank['4,46'] = "XING_Harp (XL2)"
+tb_ins_bank['4,47'] = "XING_Timpani (XL2)"
+tb_ins_bank['4,48'] = "XING_Strings: (XL2)"
+tb_ins_bank['4,56'] = "XING_Trumpet (XL2)"
+tb_ins_bank['4,57'] = "XING_Trombone (XL2)"
+tb_ins_bank['4,58'] = "XING_Tuba (XL2)"
+tb_ins_bank['4,59'] = "XING_MutedTrumpet (XL2)"
+tb_ins_bank['4,60'] = "XING_French Horns (XL2)"
+tb_ins_bank['4,61'] = "XING_Brass 1 (XL2)"
+tb_ins_bank['4,64'] = "XING_Soprano Sax (XL2)"
+tb_ins_bank['4,65'] = "XING_Alto Sax (XL2)"
+tb_ins_bank['4,66'] = "XING_Tenor Sax (XL2)"
+tb_ins_bank['4,67'] = "XING_Baritone Sax (XL2)"
+tb_ins_bank['4,68'] = "XING_Oboe (XL2)"
+tb_ins_bank['4,69'] = "XING_English Horn (XL2)"
+tb_ins_bank['4,70'] = "XING_Bassoon (XL2)"
+tb_ins_bank['4,71'] = "XING_Clarinet (XL2)"
+tb_ins_bank['4,72'] = "XING_Piccolo (XL2)"
+tb_ins_bank['4,73'] = "XING_Flute (XL2)"
+tb_ins_bank['132,40'] = "XING_Violin Atk: (XL2)"
+tb_ins_bank['132,41'] = "XING_Viola Atk: (XL2)"
+tb_ins_bank['132,42'] = "XING_Cello Atk: (XL2)"
+tb_ins_bank['132,73'] = "XING_Flute 2: (XL2)"
+tb_ins_bank['388,48'] = "XING_Cello sect. (XL2)"
+tb_ins_bank['1028,0'] = "XING_Studio Grand w (XL2)"
+tb_ins_bank['1028,45'] = "XING_Solo Pizz. (XL2)"
+tb_ins_bank['1028,56'] = "XING_Flugel Horn (XL2)"
+tb_ins_bank['1028,71'] = "XING_Bs Clarinet (XL2)"
+tb_ins_bank['1156,65'] = "XING_Grow Sax (XL2)"
+tb_ins_bank['2052,0'] = "XING_Std Grand Solo (XL2)"
+tb_ins_bank['2052,40'] = "XING_Violin Vib: (XL2)"
+tb_ins_bank['2052,41'] = "XING_Viola Vib: (XL2)"
+tb_ins_bank['2052,61'] = "XING_Brass Fall (XL2)"
+tb_ins_bank['2052,68'] = "XING_Oboe Vib (XL2)"
+tb_ins_bank['2052,69'] = "XING_EnglishHorn Vib (XL2)"
+tb_ins_bank['2180,61'] = "XING_Trumpet Fall (XL2)"
+tb_ins_bank['3076,60'] = "XING_F.Horn Rip (XL2)"
+tb_ins_bank['4100,25'] = "XING_Bright Steel Gt (XL2)"
+tb_ins_bank['8196,38'] = "XING_P5 Emu Bs (XL2)"
+tb_ins_bank['8324,38'] = "XING_Erosion Bs (XL2)"
+tb_ins_bank['8452,38'] = "XING_Radiant Bs (XL2)"
+tb_ins_bank['8580,38'] = "XING_Dirty Saw Bs 1 (XL2)"
+tb_ins_bank['8708,38'] = "XING_Dirty Saw Bs 2 (XL2)"
+tb_ins_bank['8836,38'] = "XING_Dirty Saw Bs 6 (XL2)"
+tb_ins_bank['8964,38'] = "XING_Elec Saw Bs (XL2)"
+tb_ins_bank['9092,38'] = "XING_FM Saw Bs 2 (XL2)"
+tb_ins_bank['9220,38'] = "XING_FM Saw Bs 3 (XL2)"
+tb_ins_bank['9348,38'] = "XING_FM Saw Bs 4 (XL2)"
+tb_ins_bank['9476,38'] = "XING_MTL Saw Bs 1 (XL2)"
+tb_ins_bank['9604,38'] = "XING_MTL Saw Bs 2 (XL2)"
+tb_ins_bank['9732,38'] = "XING_MTL Saw Bs 5 (XL2)"
+tb_ins_bank['9860,38'] = "XING_Scrambler Bs (XL2)"
+tb_ins_bank['9988,38'] = "XING_Sweep Bs 4 (XL2)"
+tb_ins_bank['10116,38'] = "XING_Sweep Bs 5 (XL2)"
+tb_ins_bank['10244,38'] = "XING_Vowel Bs 2 (XL2)"
+tb_ins_bank['10372,38'] = "XING_Vox Bs 1 (XL2)"
+tb_ins_bank['10500,38'] = "XING_Vox Bs 2 (XL2)"
+
 tb_ins_show = {}
 tb_ins_show[0] = [[    1 Piano 1  sc55
     2 Piano 1  sc88
@@ -1493,7 +1561,10 @@ tb_ins_show[0] = [[    1 Piano 1  sc55
  2049 Piano 1d  sc55
  2050 Piano 1d  sc88
  2051 European Pf  sc88pro
- 3075 Piano + Str.  sc88pro]]
+ 3075 Piano + Str.  sc88pro
+ 4 Studio Grand (XL2)
+1028 Studio Grand w (XL2)
+2052 Std Grand Solo (XL2)]]
 tb_ins_show[1] = [[    1 Piano 2  sc55
     2 Piano 2  sc88
     3 Piano 2  sc88pro
@@ -1615,7 +1686,8 @@ tb_ins_show[14] = [[    1 Tubular-bell  sc55
  1027 Church Bell  sc88pro
  1153 Carillon  sc55
  1154 Carillon  sc88
- 1155 Carillon  sc88pro]]
+ 1155 Carillon  sc88pro
+ 4 Tubular bell (XL2)]]
 tb_ins_show[15] = [[    1 Santur  sc55
     2 Santur  sc88
     3 Santur  sc88pro
@@ -1754,7 +1826,8 @@ tb_ins_show[25] = [[    1 Steel-str.Gt  sc55
  2179 Mandolin 2  sc88pro
  2307 MandolinTrem  sc88pro
  4098 Steel Gt.2  sc88
- 4099 Steel Gt.2  sc88pro]]
+ 4099 Steel Gt.2  sc88pro
+ 4100 Bright Steel Gt (XL2)]]
 tb_ins_show[26] = [[    1 Jazz Gt.  sc55
     2 Jazz Gt.  sc88
     3 Jazz Gt.  sc88pro
@@ -1869,6 +1942,7 @@ tb_ins_show[32] = [[    1 Acoustic Bs.  sc55
   131 Rockabilly  sc88pro
  1027 Wild A.Bass  sc88pro
  2051 Bass + OHH  sc88pro]]
+--  4 Acoustic Bs. (XL2)
 tb_ins_show[33] = [[    1 Fingered Bs.  sc55
     2 Fingered Bs.  sc88
     3 Fingered Bs.  sc88pro
@@ -1943,7 +2017,26 @@ tb_ins_show[38] = [[    1 Synth Bass 1  sc55
  2051 Reso SH Bass  sc88pro
  2179 TB303 Sqr Bs  sc88pro
  2307 TB303 DistBs  sc88pro
- 3075 Arpeggio Bs  sc88pro]]
+ 3075 Arpeggio Bs  sc88pro
+ 8196 P5 Emu Bs (XL2)
+8324 Erosion Bs (XL2)
+8452 Radiant Bs (XL2)
+8580 Dirty Saw Bs 1 (XL2)
+8708 Dirty Saw Bs 2 (XL2)
+8836 Dirty Saw Bs 6 (XL2)
+8964 Elec Saw Bs (XL2)
+9092 FM Saw Bs 2 (XL2)
+9220 FM Saw Bs 3 (XL2)
+9348 FM Saw Bs 4 (XL2)
+9476 MTL Saw Bs 1 (XL2)
+9604 MTL Saw Bs 2 (XL2)
+9732 MTL Saw Bs 5 (XL2)
+9860 Scrambler Bs (XL2)
+9988 Sweep Bs 4 (XL2)
+10116 Sweep Bs 5 (XL2)
+10244 Vowel Bs 2 (XL2)
+10372 Vox Bs 1 (XL2)
+10500 Vox Bs 2 (XL2)]]
 tb_ins_show[39] = [[    1 Synth Bass 2  sc55
     2 Synth Bass 2  sc88
     3 Synth Bass 2  sc88pro
@@ -1990,25 +2083,35 @@ tb_ins_show[40] = [[    1 Violin  sc55
   131 Violin Atk:  sc88pro
  1025 Slow Violine  sc55
  1026 Slow Violin  sc88
- 1027 Slow Violin  sc88pro]]
+ 1027 Slow Violin  sc88pro
+ 4 Violin: (XL2)
+132 Violin Atk: (XL2)
+2052 Violin Vib: (XL2)]]
 tb_ins_show[41] = [[    1 Viola  sc55
     2 Viola  sc88
     3 Viola     :  sc88pro
-  131 Viola Atk.:  sc88pro]]
+  131 Viola Atk.:  sc88pro
+  4 Viola: (XL2)
+132 Viola Atk: (XL2)
+2052 Viola Vib: (XL2)]]
 tb_ins_show[42] = [[    1 Cello  sc55
     2 Cello  sc88
     3 Cello     :  sc88pro
-  131 Cello Atk.:  sc88pro]]
+  131 Cello Atk.:  sc88pro
+  4 Cello: (XL2)
+132 Cello Atk: (XL2)]]
 tb_ins_show[43] = [[    1 Contrabass  sc55
     2 Contrabass  sc88
-    3 Contrabass  sc88pro]]
+    3 Contrabass  sc88pro
+    4 Contrabass (XL2)]]
 tb_ins_show[44] = [[    1 Tremolo Str  sc55
     2 Tremolo Str  sc88
     3 Tremolo Str  sc88pro
  1026 Slow Tremolo  sc88
  1027 Slow Tremolo  sc88pro
  1154 Suspense Str  sc88
- 1155 Suspense Str  sc88pro]]
+ 1155 Suspense Str  sc88pro
+ 4 Tremolo Str (XL2)]]
 tb_ins_show[45] = [[    1 PizzicatoStr  sc55
     2 PizzicatoStr  sc88
     3 PizzicatoStr  sc88pro
@@ -2016,14 +2119,18 @@ tb_ins_show[45] = [[    1 PizzicatoStr  sc55
   259 Chamber Pizz  sc88pro
   387 St.Pizzicato  sc88pro
  1027 Solo Pizz.  sc88pro
- 2051 Solo Spic.  sc88pro]]
+ 2051 Solo Spic.  sc88pro
+ 4 PizzicatoStr (XL2)
+1028 Solo Pizz. (XL2)]]
 tb_ins_show[46] = [[    1 Harp  sc55
     2 Harp  sc88
     3 Harp  sc88pro
- 2051 Synth Harp  sc88pro]]
+ 2051 Synth Harp  sc88pro
+ 4 Harp (XL2)]]
 tb_ins_show[47] = [[    1 Timpani  sc55
     2 Timpani  sc88
-    3 Timpani  sc88pro]]
+    3 Timpani  sc88pro
+    4 Timpani (XL2)]]
 tb_ins_show[48] = [[    1 Strings  sc55
     2 Strings  sc88
     3 Strings   :  sc88pro
@@ -2046,7 +2153,9 @@ tb_ins_show[48] = [[    1 Strings  sc55
  3074 Velo Strings  sc88
  3075 Velo Strings  sc88pro
  4099 Oct Strings1  sc88pro
- 4227 Oct Strings2  sc88pro]]
+ 4227 Oct Strings2  sc88pro
+ 4 Strings: (XL2)
+388 Cello sect. (XL2)]]
 tb_ins_show[49] = [[    1 Slow Strings  sc55
     2 Slow Strings  sc88
     3 Slow Strings  sc88pro
@@ -2139,7 +2248,9 @@ tb_ins_show[56] = [[    1 Trumpet  sc55
  3075 Bright Tp.  sc88pro
  3202 Warm Tp.  sc88
  3203 Warm Tp.  sc88pro
- 4099 Syn. Trumpet  sc88pro]]
+ 4099 Syn. Trumpet  sc88pro
+ 4 Trumpet (XL2)
+1028 Flugel Horn (XL2)]]
 tb_ins_show[57] = [[    1 Trombone  sc55
     2 Trombone  sc88
     3 Trombone  sc88pro
@@ -2147,16 +2258,19 @@ tb_ins_show[57] = [[    1 Trombone  sc55
   130 Trombone 2  sc88
   131 Trombone 2  sc88pro
   259 Twin bones  sc88pro
- 1027 Bs. Trombone  sc88pro]]
+ 1027 Bs. Trombone  sc88pro
+ 4 Trombone (XL2)]]
 tb_ins_show[58] = [[    1 Tuba  sc55
     2 Tuba  sc88
     3 Tuba  sc88pro
   130 Tuba 2  sc88
-  131 Tuba 2  sc88pro]]
+  131 Tuba 2  sc88pro
+  4 Tuba (XL2)]]
 tb_ins_show[59] = [[    1 MutedTrumpet  sc55
     2 MutedTrumpet  sc88
     3 MutedTrumpet  sc88pro
- 1027 Muted Horns  sc88pro]]
+ 1027 Muted Horns  sc88pro
+ 4 MutedTrumpet (XL2)]]
 tb_ins_show[60] = [[    1 French Horn  sc55
     2 French Horn  sc88
     3 French Horns  sc88pro
@@ -2170,7 +2284,9 @@ tb_ins_show[60] = [[    1 French Horn  sc55
  1155 Dual Horns  sc88pro
  2050 Horn Orch  sc88
  2051 Synth Horn  sc88pro
- 3075 F.Horn Rip  sc88pro]]
+ 3075 F.Horn Rip  sc88pro
+ 4 French Horns (XL2)
+3076 F.Horn Rip (XL2)]]
 tb_ins_show[61] = [[    1 Brass 1  sc55
     2 Brass 1  sc88
     3 Brass 1  sc88pro
@@ -2185,7 +2301,10 @@ tb_ins_show[61] = [[    1 Brass 1  sc55
  2051 Brass Fall  sc88pro
  2179 Trumpet Fall  sc88pro
  3075 Octave Brass  sc88pro
- 3203 Brass + Reed  sc88pro]]
+ 3203 Brass + Reed  sc88pro
+ 4 Brass 1 (XL2)
+2052 Brass Fall (XL2)
+2180 Trumpet Fall (XL2)]]
 tb_ins_show[62] = [[    1 Synth Brass 1  sc55
     2 Synth Brass 1  sc88
     3 Synth Brass1  sc88pro
@@ -2225,25 +2344,30 @@ tb_ins_show[64] = [[    1 Soprano Sax  sc55
  1027 Soprano Exp.  sc88pro
 10241 Guide Soprano Sax  sc55
 10242 Guide Soprano Sax  sc88
-10243 Guide Soprano Sax  sc88pro]]
+10243 Guide Soprano Sax  sc88pro
+4 Soprano Sax (XL2)]]
 tb_ins_show[65] = [[    1 Alto Sax  sc55
     2 Alto Sax  sc88
     3 Alto Sax  sc88pro
  1026 Hyper Alto  sc88
  1027 AltoSax Exp.  sc88pro
  1155 Grow Sax  sc88pro
- 2051 AltoSax + Tp  sc88pro]]
+ 2051 AltoSax + Tp  sc88pro
+ 4 Alto Sax (XL2)
+ 1156 Grow Sax (XL2)]]
 tb_ins_show[66] = [[    1 Tenor Sax  sc55
     2 Tenor Sax  sc88
     3 Tenor Sax  sc88pro
   131 Tenor Sax :  sc88pro
  1026 BreathyTenor  sc88
  1027 BreathyTn.:  sc88pro
- 1155 St.Tenor Sax  sc88pro]]
+ 1155 St.Tenor Sax  sc88pro
+ 4 Tenor Sax (XL2)]]
 tb_ins_show[67] = [[    1 Baritone Sax  sc55
     2 Baritone Sax  sc88
     3 Baritone Sax  sc88pro
-  131 Bari. Sax :  sc88pro]]
+  131 Bari. Sax :  sc88pro
+  4 Baritone Sax (XL2)]]
 tb_ins_show[68] = [[    1 Oboe  sc55
     2 Oboe  sc88
     3 Oboe  sc88pro
@@ -2251,26 +2375,34 @@ tb_ins_show[68] = [[    1 Oboe  sc55
  2051 Multi Reed  sc88pro
 10241 Guide Oboe  sc55
 10242 Guide Oboe  sc88
-10243 Guide Oboe  sc88pro]]
+10243 Guide Oboe  sc88pro
+4 Oboe (XL2)
+2052 Oboe Vib (XL2)]]
 tb_ins_show[69] = [[    1 English Horn  sc55
     2 English Horn  sc88
-    3 English Horn  sc88pro]]
+    3 English Horn  sc88pro
+    4 English Horn (XL2)
+2052 EnglishHorn Vib (XL2)]]
 tb_ins_show[70] = [[    1 Bassoon  sc55
     2 Bassoon  sc88
-    3 Bassoon  sc88pro]]
+    3 Bassoon  sc88pro
+    4 Bassoon (XL2)]]
 tb_ins_show[71] = [[    1 Clarinet  sc55
     2 Clarinet  sc88
     3 Clarinet  sc88pro
  1026 Bs Clarinet  sc88
  1027 Bs Clarinet  sc88pro
- 2051 Multi Wind  sc88pro]]
+ 2051 Multi Wind  sc88pro
+ 4 Clarinet (XL2)
+1028 Bs Clarinet (XL2)]]
 tb_ins_show[72] = [[    1 Piccolo  sc55
     2 Piccolo  sc88
     3 Piccolo  sc88pro
   131 Piccolo   :  sc88pro
  1027 Nay  sc88pro
  1155 Nay Tremolo  sc88pro
- 2051 Di  sc88pro]]
+ 2051 Di  sc88pro
+ 4 Piccolo (XL2)]]
 tb_ins_show[73] = [[    1 Flute  sc55
     2 Flute  sc88
     3 Flute  sc88pro
@@ -2279,6 +2411,8 @@ tb_ins_show[73] = [[    1 Flute  sc55
   387 Flt Travelso  sc88pro
  1027 Flute + Vln  sc88pro
  2051 Tron Flute  sc88pro
+ 4 Flute (XL2)
+132 Flute 2: (XL2)
 10241 Guide Flute  sc55
 10242 Guide Flute  sc88
 10243 Guide Flute  sc88pro
@@ -3856,7 +3990,7 @@ function loop()
 
             reaper.ImGui_SameLine(ctx)
             reaper.ImGui_PushID(ctx, 'Patch')
-             reaper.ImGui_SetNextWindowSize(ctx, 175, 220)
+            reaper.ImGui_SetNextWindowSize(ctx, 175, 220)
             if reaper.ImGui_Button(ctx, c, 40) and c ~= '-1' then
                 reaper.Undo_BeginBlock()
                 OpenPopup = reaper.ImGui_OpenPopup(ctx, 'Edit Patch')
@@ -4208,7 +4342,7 @@ function loop()
             reaper.ImGui_PopID(ctx)
         end
 
-        Tab_Key = reaper.ImGui_IsKeyPressed(ctx, 512, nil)
+        Tab_Key = reaper.ImGui_IsKeyPressed(ctx, reaper.ImGui_Key_Tab(), nil)
         if Tab_Key and AnyPopup == false then
             reaper.Main_OnCommand(23, 0)
         end
@@ -4218,10 +4352,7 @@ function loop()
     reaper.ImGui_PopFont(ctx)
 
     if open then
-
         reaper.defer(loop)
-    else
-        reaper.ImGui_DestroyContext(ctx)
     end
 end
 

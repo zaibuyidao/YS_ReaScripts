@@ -1,6 +1,6 @@
 --[[
  * ReaScript Name: A.G 吉他和弦建立 V2
- * Version: 1.0.7
+ * Version: 1.0.8
  * Author: YS
 --]]
 
@@ -711,7 +711,7 @@ Ukulele 模式为标准调弦常用指法。]]
         reaper.ImGui_Spacing(ctx)
 
         retval, capo = reaper.ImGui_SliderInt(ctx, 'capo', capo, -2, 11, nil, nil)
-        retval = reaper.ImGui_IsKeyPressed(ctx, 27, nil)
+        retval = reaper.ImGui_IsKeyPressed(ctx, reaper.ImGui_Key_Escape(), nil)
         if retval then
             flag = false
         end

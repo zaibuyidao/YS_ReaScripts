@@ -1,6 +1,6 @@
 --[[
  * ReaScript Name: insert Marker V2
- * Version: 1.0.3
+ * Version: 1.0.4
  * Author: YS
  * provides: [main=main,midi_editor] .
 --]]
@@ -105,6 +105,7 @@ function markauto()
     tb_mark['birdge'] = 'Bridge'
     tb_mark['in'] = 'Intro'
     tb_mark['br'] = 'Bridge'
+    tb_mark['bri'] = 'Bridge'
     tb_mark['out'] = 'Ending'
     tb_mark['ending'] = 'Ending'
     tb_mark['fo'] = 'FO'
@@ -183,7 +184,7 @@ function markauto()
             if name_low == 'intro' or name_low == 'in' then
                 intro_mark = true
             end
-            if name_low == 'bridge' or name_low == 'birdge' or name_low == 'br' then
+            if name_low == 'bridge' or name_low == 'birdge' or name_low == 'br' or name_low == 'bri' then
                 bridge_mark = true
             end
             if name_low == 'end' or name_low == 'ending' or name_low == 'out' or name_low == 'outro' then
@@ -631,6 +632,7 @@ function loop()
         if reaper.ImGui_IsItemHovered(ctx) then
             reaper.ImGui_SetTooltip(ctx, 'Marker Format Specification')
         end
+        reaper.ImGui_Spacing(ctx)
         reaper.ImGui_PopStyleColor(ctx, 3)
         reaper.ImGui_PushStyleColor(ctx, reaper.ImGui_Col_Button(), 0xFFD7007F)
         reaper.ImGui_PushStyleColor(ctx, reaper.ImGui_Col_ButtonHovered(), 0xFFD700AF)
@@ -671,6 +673,8 @@ function loop()
             flag = false
         end
         reaper.ImGui_PopStyleColor(ctx, 3)
+        
+        reaper.ImGui_Spacing(ctx)
 
         if reaper.ImGui_Button(ctx, 'A') then
             insertMarker('A')
@@ -751,7 +755,7 @@ function loop()
             flag = false
         end
 
-        retval = reaper.ImGui_IsKeyPressed(ctx, 27, nil)
+        retval = reaper.ImGui_IsKeyPressed(ctx, reaper.ImGui_Key_Escape(), nil)
         if retval then
             flag = false
         end
@@ -768,8 +772,7 @@ function loop()
             reaper.MIDIEditor_OnCommand(editor, 40185)
             reaper.SN_FocusMIDIEditor()
         end
-        reaper.ImGui_DestroyContext(ctx)
-    end
+     end
 end
 reaper.defer(loop)
 

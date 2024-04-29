@@ -1,8 +1,7 @@
 --[[
  * ReaScript Name: 鼓键号选择
- * Version: 1.0
+ * Version: 1.0.1
  * Author: YS
- * provides: [main=midi_editor] .
 --]]
 
 --[[
@@ -193,54 +192,63 @@ end -- funtion end
 
 local ctx = reaper.ImGui_CreateContext('Select Drums')
 local size = reaper.GetAppVersion():match('OSX') and 12 or 14
-local font = reaper.ImGui_CreateFont('sans-serif', size)
+local font = reaper.ImGui_CreateFont('sans-serif', 14)
 reaper.ImGui_Attach(ctx, font)
 
 x, y = reaper.GetMousePosition()
 x, y = reaper.ImGui_PointConvertNative(ctx, x, y)
 reaper.ImGui_SetNextWindowSize(ctx, 340, 210)
 reaper.ImGui_SetNextWindowPos(ctx, x, y)
+windowflag = reaper.ImGui_WindowFlags_TopMost()
+windowflag = windowflag | reaper.ImGui_WindowFlags_AlwaysAutoResize()
 flag = true
 function loop()
     reaper.ImGui_PushFont(ctx, font)
-    local visible, open = reaper.ImGui_Begin(ctx, 'Select Drums Notes (GM)', true)
+    local visible, open = reaper.ImGui_Begin(ctx, 'Select Drums Notes (GM)', true, windowflag)
     if visible then
-
-        if reaper.ImGui_Button(ctx, 'KICK ') then
+        
+        reaper.ImGui_PushStyleColor(ctx, reaper.ImGui_Col_Button(),        0x8080807F)
+        reaper.ImGui_PushStyleColor(ctx, reaper.ImGui_Col_ButtonHovered(), 0x808080FF)
+        reaper.ImGui_PushStyleColor(ctx, reaper.ImGui_Col_ButtonActive(),  0xD2691ECF)
+        
+        if reaper.ImGui_Button(ctx, ' KICK ') then
             selectdrumnote('KICK')
             flag = false
         end
         reaper.ImGui_SameLine(ctx)
-        if reaper.ImGui_Button(ctx, 'SN ') then
+        if reaper.ImGui_Button(ctx, ' SN ') then
             selectdrumnote('SN')
             flag = false
         end
         reaper.ImGui_SameLine(ctx)
-        if reaper.ImGui_Button(ctx, 'HI HAT ') then
+        if reaper.ImGui_Button(ctx, ' HI HAT ') then
             selectdrumnote('HI HAT')
             flag = false
         end
         reaper.ImGui_SameLine(ctx)
-        if reaper.ImGui_Button(ctx, 'TOM ') then
+        if reaper.ImGui_Button(ctx, ' TOM ') then
             selectdrumnote('TOM')
             flag = false
         end
         reaper.ImGui_SameLine(ctx)
-        if reaper.ImGui_Button(ctx, 'CYM ') then
+        if reaper.ImGui_Button(ctx, ' CYM ') then
             selectdrumnote('CYM')
             flag = false
         end
         reaper.ImGui_SameLine(ctx)
-        if reaper.ImGui_Button(ctx, 'RIDE ') then
+        if reaper.ImGui_Button(ctx, ' RIDE ') then
             selectdrumnote('RIDE')
             flag = false
         end
-        if reaper.ImGui_Button(ctx, 'Vox ') then
+        
+        reaper.ImGui_PopStyleColor(ctx,3)
+        
+        if reaper.ImGui_Button(ctx, ' Vox ') then
             selectdrumnote('VOX')
             flag = false
         end
         reaper.ImGui_SameLine(ctx)
-        if reaper.ImGui_Button(ctx, 'MC-500 Beep ') then
+        if reaper.ImGui_Button(ctx, 'MC-500 Beep') then
             selectdrumnote('MC-500 BEEP')
             flag = false
         end
@@ -394,9 +402,13 @@ function loop()
             selectdrumnote('APPLAUS')
             flag = false
         end
-
-        retval = reaper.ImGui_IsKeyPressed(ctx, 27, nil)
+        
+        retval = reaper.ImGui_IsKeyPressed(ctx, reaper.ImGui_Key_Escape(), nil)
         if retval then flag = false end
+        
+        editor = reaper.MIDIEditor_GetActive()
+        if not editor then flag = false end
+           
         reaper.ImGui_End(ctx)
     end
     reaper.ImGui_PopFont(ctx)
@@ -404,7 +416,6 @@ function loop()
     if open and flag then
         reaper.defer(loop)
     else
-        reaper.ImGui_DestroyContext(ctx)
         reaper.SN_FocusMIDIEditor()
     end
 end

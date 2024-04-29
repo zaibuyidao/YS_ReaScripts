@@ -1,6 +1,6 @@
 --[[
  * ReaScript Name: 揉弦数量增减
- * Version: 1.0.1
+ * Version: 1.0.2
  * Author: YS
 --]]
 
@@ -74,6 +74,7 @@ function vibadd()
         ccevtcnt = ccevtcnt + 1
     end
     reaper.MIDI_Sort(take)
+    reaper.SN_FocusMIDIEditor()
 end
 
 function vibminus()
@@ -139,6 +140,7 @@ function vibminus()
         reaper.TrackCtl_SetToolTip('没有多个揉弦', x, y + 20, true)
     end
     reaper.MIDI_Sort(take)
+    reaper.SN_FocusMIDIEditor()
 end
 
 local ctx = reaper.ImGui_CreateContext('vibratonum')
@@ -162,7 +164,7 @@ function loop()
             vibminus()
         end
 
-        retval = reaper.ImGui_IsKeyPressed(ctx, 27, nil)
+        retval = reaper.ImGui_IsKeyPressed(ctx, reaper.ImGui_Key_Escape(), nil)
         if retval then
             closeflag = false
         end
@@ -184,3 +186,4 @@ function loop()
 end
 
 reaper.defer(loop)
+

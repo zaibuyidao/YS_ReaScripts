@@ -72,6 +72,11 @@ chord['mM7add11'] = '3,7,11,17,0,0'
 chord['mM7add13'] = '3,7,11,21,0,0'
 chord['mM9'] = '3,7,11,14,0,0'
 chord['sus4add9'] = '2,5,7,0,0,0'
+chord['5'] = '7,0,0,0,0,0'
+chord['add11'] = '4,7,17,0,0,0'
+chord['madd11'] = '3,7,17,0,0,0'
+chord['add#11'] = '4,7,18,0,0,0'
+chord['madd#11'] = '3,7,18,0,0,0'
 
 help =
     [[和弦输入必须是原位的完整和弦音，可以根据所选音符作为根音用脚本写入，也可以手动写入，根音不要低于Key48。目前只支持列表中的和弦类型。和弦之间最小间隔为八分音符。
@@ -152,6 +157,11 @@ chordtype[64430] = 'mM7add11'
 chordtype[104430] = 'mM7add13'
 chordtype[34430] = 'mM9'
 chordtype[2320] = 'sus4add9'
+chordtype[70] = '5'
+chordtype[10340] = 'add11'
+chordtype[10430] = 'madd11'
+chordtype[11340] = 'add#11'
+chordtype[11430] = 'madd#11'
 
 piano_list = {}
 piano_list['CM'] = '48,60,64,67,0,0,0'
@@ -1007,6 +1017,68 @@ piano_list['BmM7add13'] = '47,58,62,66,68,0,0'
 piano_list['BmM9'] = '47,58,61,62,66,0,0'
 piano_list['Bsus4add9'] = '47,61,64,66,0,0,0'
 
+piano_list['C5']='48,60,67,0,0,0,0'
+piano_list['Cadd11']='48,60,64,65,67,0,0,0'
+piano_list['Cmadd11']='48,60,63,65,67,0,0,0'
+piano_list['Cadd#11']='48,60,64,66,67,0,0,0'
+piano_list['Cmadd#11']='48,60,63,66,67,0,0,0'
+piano_list['C#5']='49,61,68,0,0,0,0'
+piano_list['C#add11']='49,61,65,66,68,0,0,0'
+piano_list['C#madd11']='49,61,64,66,68,0,0,0'
+piano_list['C#add#11']='49,61,65,67,68,0,0,0'
+piano_list['C#madd#11']='49,61,64,67,68,0,0,0'
+piano_list['D5']='50,62,69,0,0,0,0'
+piano_list['Dadd11']='50,62,66,67,69,0,0,0'
+piano_list['Dmadd11']='50,62,65,67,69,0,0,0'
+piano_list['Dadd#11']='50,62,66,68,69,0,0,0'
+piano_list['Dmadd#11']='50,62,65,68,69,0,0,0'
+piano_list['Eb5']='39,58,63,0,0,0,0'
+piano_list['Ebadd11']='39,58,63,67,68,0,0,0'
+piano_list['Ebmadd11']='39,58,63,66,68,0,0,0'
+piano_list['Ebadd#11']='39,58,63,67,69,0,0,0'
+piano_list['Ebmadd#11']='39,58,63,66,69,0,0,0'
+piano_list['E5']='40,59,64,0,0,0,0'
+piano_list['Eadd11']='40,59,64,68,69,0,0,0'
+piano_list['Emadd11']='40,59,64,67,69,0,0,0'
+piano_list['Eadd#11']='40,58,59,64,68,0,0,0'
+piano_list['Emadd#11']='40,58,59,64,67,0,0,0'
+piano_list['F5']='41,60,65,0,0,0,0'
+piano_list['Fadd11']='41,58,60,65,69,0,0,0'
+piano_list['Fmadd11']='41,58,60,65,68,0,0,0'
+piano_list['Fadd#11']='41,59,60,65,69,0,0,0'
+piano_list['Fmadd#11']='41,59,60,65,68,0,0,0'
+piano_list['F#5']='42,61,66,0,0,0,0'
+piano_list['F#add11']='42,58,59,61,66,0,0,0'
+piano_list['F#madd11']='42,59,61,66,69,0,0,0'
+piano_list['F#add#11']='42,58,60,61,66,0,0,0'
+piano_list['F#madd#11']='42,60,61,66,69,0,0,0'
+piano_list['G5']='43,62,67,0,0,0,0'
+piano_list['Gadd11']='43,59,60,62,67,0,0,0'
+piano_list['Gmadd11']='43,58,60,62,67,0,0,0'
+piano_list['Gadd#11']='43,59,61,62,67,0,0,0'
+piano_list['Gmadd#11']='43,58,61,62,67,0,0,0'
+piano_list['Ab5']='44,63,68,0,0,0,0'
+piano_list['Abadd11']='44,60,61,63,68,0,0,0'
+piano_list['Abmadd11']='44,59,61,63,68,0,0,0'
+piano_list['Abadd#11']='44,60,62,63,68,0,0,0'
+piano_list['Abmadd#11']='44,59,62,63,68,0,0,0'
+piano_list['A5']='45,64,69,0,0,0,0'
+piano_list['Aadd11']='45,61,62,64,69,0,0,0'
+piano_list['Amadd11']='45,60,62,64,69,0,0,0'
+piano_list['Aadd#11']='45,61,63,64,69,0,0,0'
+piano_list['Amadd#11']='45,60,63,64,69,0,0,0'
+piano_list['Bb5']='46,58,65,0,0,0,0'
+piano_list['Bbadd11']='46,58,62,63,65,0,0,0'
+piano_list['Bbmadd11']='46,58,61,63,65,0,0,0'
+piano_list['Bbadd#11']='46,58,62,64,65,0,0,0'
+piano_list['Bbmadd#11']='46,58,61,64,65,0,0,0'
+piano_list['B5']='47,59,66,0,0,0,0'
+piano_list['Badd11']='47,59,63,64,66,0,0,0'
+piano_list['Bmadd11']='47,59,62,64,66,0,0,0'
+piano_list['Badd#11']='47,59,63,65,66,0,0,0'
+piano_list['Bmadd#11']='47,59,62,65,66,0,0,0'
+
+
 piano_mode = reaper.GetExtState('Chord Tools', 'piano mode')
 if piano_mode == 'true' then
     piano_mode = true
@@ -1177,6 +1249,20 @@ function chordtolyrics()
     local editor = reaper.MIDIEditor_GetActive()
 
     local take = reaper.MIDIEditor_GetTake(editor)
+    
+    reaper.MIDI_DisableSort(take)
+    retval, notecnt, ccevtcnt, textsyxevtcnt = reaper.MIDI_CountEvts(take)
+    noteidx = 0
+    while noteidx < notecnt do
+        retval, selected, muted, startppqpos, endppqpos, chan, pitch, vel = reaper.MIDI_GetNote(take, noteidx)
+        EndOfMeasure = reaper.MIDI_GetPPQPos_EndOfMeasure(take, startppqpos + 5)
+        if endppqpos > EndOfMeasure then
+            reaper.MIDI_SetNote(take, noteidx, NULL, NULL, NULL, EndOfMeasure, NULL, NULL, NULL, false)
+            reaper.MIDI_InsertNote(take, selected, muted, EndOfMeasure, endppqpos, chan, pitch, vel, false)
+        end
+        noteidx = noteidx + 1
+    end
+    reaper.MIDI_Sort(take) --fix measure note
 
     key_list = {}
     key_list['key=c'] = 'Db,Eb,F#,Ab,Bb'
@@ -2343,7 +2429,7 @@ local size = reaper.GetAppVersion():match('OSX') and 12 or 14
 local font = reaper.ImGui_CreateFont('sans-serif', 14)
 reaper.ImGui_Attach(ctx, font)
 is_new_value, filename, sectionID, cmdID, mode, resolution, val = reaper.get_action_context()
-filename = string.gsub(filename, 'YS_Chord Tools.lua', 'keyboard.jpg')
+filename = string.gsub(filename, 'Chord Tools.lua', 'keyboard.jpg')
 filename = string.gsub(filename, '\\', '\\\\')
 img = reaper.ImGui_CreateImage(filename)
 
@@ -2427,7 +2513,17 @@ function loop()
             Audition()
         end
         reaper.ImGui_SameLine(ctx)
-        if reaper.ImGui_Button(ctx, " 6 ") then
+        if reaper.ImGui_Button(ctx, "5") then
+            leixing = '5'
+            chordin()
+            flag = false
+        end
+        if reaper.ImGui_IsItemClicked(ctx, reaper.ImGui_MouseButton_Right()) then
+            leixing = '5'
+            Audition()
+        end
+        reaper.ImGui_SameLine(ctx)
+        if reaper.ImGui_Button(ctx, "6") then
             leixing = '6'
             chordin()
             flag = false
@@ -2437,7 +2533,7 @@ function loop()
             Audition()
         end
         reaper.ImGui_SameLine(ctx)
-        if reaper.ImGui_Button(ctx, " m6 ") then
+        if reaper.ImGui_Button(ctx, "m6") then
             leixing = 'm6'
             chordin()
             flag = false
@@ -3068,6 +3164,46 @@ function loop()
             leixing = 'sus4add9'
             Audition()
         end
+        if reaper.ImGui_Button(ctx, "add11") then
+            leixing = 'add11'
+            chordin()
+            flag = false
+        end
+        if reaper.ImGui_IsItemClicked(ctx, reaper.ImGui_MouseButton_Right()) then
+            leixing = 'add11'
+            Audition()
+        end
+        reaper.ImGui_SameLine(ctx)
+        if reaper.ImGui_Button(ctx, "madd11") then
+            leixing = 'madd11'
+            chordin()
+            flag = false
+        end
+        if reaper.ImGui_IsItemClicked(ctx, reaper.ImGui_MouseButton_Right()) then
+            leixing = 'madd11'
+            Audition()
+        end
+        reaper.ImGui_SameLine(ctx)
+        if reaper.ImGui_Button(ctx, "add#11") then
+            leixing = 'add#11'
+            chordin()
+            flag = false
+        end
+        if reaper.ImGui_IsItemClicked(ctx, reaper.ImGui_MouseButton_Right()) then
+            leixing = 'add#11'
+            Audition()
+        end
+        reaper.ImGui_SameLine(ctx)
+        if reaper.ImGui_Button(ctx, "madd#11") then
+            leixing = 'madd#11'
+            chordin()
+            flag = false
+        end
+        if reaper.ImGui_IsItemClicked(ctx, reaper.ImGui_MouseButton_Right()) then
+            leixing = 'madd#11'
+            Audition()
+        end
+        
         reaper.ImGui_PushStyleColor(ctx, reaper.ImGui_Col_Button(), 0x9400D36F)
         reaper.ImGui_PushStyleColor(ctx, reaper.ImGui_Col_ButtonHovered(), 0x9400D3DF)
         reaper.ImGui_PushStyleColor(ctx, reaper.ImGui_Col_ButtonActive(), 0xFF00FFFF)
@@ -3102,7 +3238,7 @@ function loop()
         end
         reaper.ImGui_PopStyleColor(ctx, 3)
 
-        retval = reaper.ImGui_IsKeyPressed(ctx, 27, nil)
+        retval = reaper.ImGui_IsKeyPressed(ctx, reaper.ImGui_Key_Escape(), nil)
         if retval then
             flag = false
         end

@@ -1,6 +1,6 @@
 -- @description Chord Tools Bundle
 -- @author YS
--- @version 1.0.2
+-- @version 1.0.3
 -- @changelog
 --   Initial release
 -- @metapackage
