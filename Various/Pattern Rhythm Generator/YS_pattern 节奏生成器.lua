@@ -1,15 +1,4 @@
---[[
- * ReaScript Name: pattern 节奏生成器
- * Version: 1.0.1
- * Author: YS
---]]
-
---[[
- * Changelog:
- * v1.0 (2024-4-29)
-  + Initial release
---]]
-
+-- NoIndex: true
 editor = reaper.MIDIEditor_GetActive()
 
 pattern = {}
