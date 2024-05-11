@@ -1,0 +1,11 @@
+-- @description pattern 节奏生成器
+-- @author YS
+-- @version 1.0
+-- @changelog
+--   Initial release
+-- @metapackage
+-- @provides
+--   [main=midi_editor] Pattern Generator/YS_pattern 节奏生成器.lua
+--   Pattern Generator/*.jpg
+
+-- Licensed under the GNU GPL v3
