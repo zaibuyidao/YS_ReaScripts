@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<index version="1" name="YS Scripts" commit="26fa89d3186382b69f6d7683becba910054c7f82">
+<index version="1" name="YS Scripts" commit="940c378d11db2c71bc1d2a40f62d846084afa5c7">
   <category name="Items Editing">
-    <reapack name="YS_Midi Take Name From Track.lua" type="script" desc="Bass 定弦">
+    <reapack name="YS_Midi Take Name From Track.lua" type="script" desc="Midi Take Name From Track">
       <version name="1.0" author="YS" time="2021-10-14T16:59:44Z">
         <changelog><![CDATA[+ Initial release]]></changelog>
         <source main="main">https://github.com/zaibuyidao/YS_ReaScripts/raw/e0c2cb8030173de0d7e0794ee7cc6a751307fd97/Items%20Editing/YS_Midi%20Take%20Name%20From%20Track.lua</source>
+      </version>
+      <version name="1.0.1" author="YS" time="2024-05-11T05:44:06Z">
+        <source main="main">https://github.com/zaibuyidao/YS_ReaScripts/raw/940c378d11db2c71bc1d2a40f62d846084afa5c7/Items%20Editing/YS_Midi%20Take%20Name%20From%20Track.lua</source>
       </version>
     </reapack>
     <reapack name="YS_Rename Sel Take.lua" type="script" desc="Rename Sel Take">
@@ -471,6 +474,9 @@
       <version name="1.0" author="YS" time="2024-04-29T06:06:23Z">
         <changelog><![CDATA[+ Initial release]]></changelog>
         <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/26fa89d3186382b69f6d7683becba910054c7f82/MIDI%20Editor/YS_pattern%20%E8%8A%82%E5%A5%8F%E7%94%9F%E6%88%90%E5%99%A8.lua</source>
+      </version>
+      <version name="1.0.1" author="YS" time="2024-05-11T05:44:06Z">
+        <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/940c378d11db2c71bc1d2a40f62d846084afa5c7/MIDI%20Editor/YS_pattern%20%E8%8A%82%E5%A5%8F%E7%94%9F%E6%88%90%E5%99%A8.lua</source>
       </version>
     </reapack>
     <reapack name="YS_sel Note insert CC 64(sustain).lua" type="script" desc="sel Note insert CC 64(sustain)">
@@ -1250,6 +1256,11 @@
         <changelog><![CDATA[Initial release]]></changelog>
         <source main="midi_editor" file="Chord Tools/YS_Chord Tools.lua">https://github.com/zaibuyidao/YS_ReaScripts/raw/26fa89d3186382b69f6d7683becba910054c7f82/Various/Chord%20Tools/YS_Chord%20Tools.lua</source>
         <source file="Chord Tools/keyboard.jpg">https://github.com/zaibuyidao/YS_ReaScripts/raw/26fa89d3186382b69f6d7683becba910054c7f82/Various/Chord%20Tools/keyboard.jpg</source>
+      </version>
+      <version name="1.0.4" author="YS" time="2024-05-11T05:44:06Z">
+        <changelog><![CDATA[Initial release]]></changelog>
+        <source main="midi_editor" file="Chord Tools/YS_Chord Tools.lua">https://github.com/zaibuyidao/YS_ReaScripts/raw/940c378d11db2c71bc1d2a40f62d846084afa5c7/Various/Chord%20Tools/YS_Chord%20Tools.lua</source>
+        <source file="Chord Tools/keyboard.jpg">https://github.com/zaibuyidao/YS_ReaScripts/raw/940c378d11db2c71bc1d2a40f62d846084afa5c7/Various/Chord%20Tools/keyboard.jpg</source>
       </version>
     </reapack>
   </category>
