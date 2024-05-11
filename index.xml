@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<index version="1" name="YS Scripts" commit="940c378d11db2c71bc1d2a40f62d846084afa5c7">
+<index version="1" name="YS Scripts" commit="2a2a13cf5c37f7053fa38a79b041499dbe40a4ce">
   <category name="Items Editing">
     <reapack name="YS_Midi Take Name From Track.lua" type="script" desc="Midi Take Name From Track">
       <version name="1.0" author="YS" time="2021-10-14T16:59:44Z">
@@ -468,15 +468,6 @@
       <version name="1.0" author="YS" time="2021-10-14T16:59:44Z">
         <changelog><![CDATA[+ Initial release]]></changelog>
         <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/e0c2cb8030173de0d7e0794ee7cc6a751307fd97/MIDI%20Editor/YS_Note%20Vel%20to%20Envelope%20%E9%9F%B3%E7%AC%A6%E5%8A%9B%E5%BA%A6%E8%BD%AC%E9%9F%B3%E9%A2%91%E5%8C%85%E7%BB%9C.lua</source>
-      </version>
-    </reapack>
-    <reapack name="YS_pattern 节奏生成器.lua" type="script" desc="pattern 节奏生成器">
-      <version name="1.0" author="YS" time="2024-04-29T06:06:23Z">
-        <changelog><![CDATA[+ Initial release]]></changelog>
-        <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/26fa89d3186382b69f6d7683becba910054c7f82/MIDI%20Editor/YS_pattern%20%E8%8A%82%E5%A5%8F%E7%94%9F%E6%88%90%E5%99%A8.lua</source>
-      </version>
-      <version name="1.0.1" author="YS" time="2024-05-11T05:44:06Z">
-        <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/940c378d11db2c71bc1d2a40f62d846084afa5c7/MIDI%20Editor/YS_pattern%20%E8%8A%82%E5%A5%8F%E7%94%9F%E6%88%90%E5%99%A8.lua</source>
       </version>
     </reapack>
     <reapack name="YS_sel Note insert CC 64(sustain).lua" type="script" desc="sel Note insert CC 64(sustain)">
@@ -1261,6 +1252,19 @@
         <changelog><![CDATA[Initial release]]></changelog>
         <source main="midi_editor" file="Chord Tools/YS_Chord Tools.lua">https://github.com/zaibuyidao/YS_ReaScripts/raw/940c378d11db2c71bc1d2a40f62d846084afa5c7/Various/Chord%20Tools/YS_Chord%20Tools.lua</source>
         <source file="Chord Tools/keyboard.jpg">https://github.com/zaibuyidao/YS_ReaScripts/raw/940c378d11db2c71bc1d2a40f62d846084afa5c7/Various/Chord%20Tools/keyboard.jpg</source>
+      </version>
+    </reapack>
+    <reapack name="pattern 节奏生成器 Bundle.lua" type="script" desc="pattern 节奏生成器 Bundle">
+      <version name="1.0" author="YS" time="2024-05-11T06:27:15Z">
+        <changelog><![CDATA[Initial release]]></changelog>
+        <source main="midi_editor" file="Pattern Rhythm Generator/YS_pattern 节奏生成器.lua">https://github.com/zaibuyidao/YS_ReaScripts/raw/2a2a13cf5c37f7053fa38a79b041499dbe40a4ce/Various/Pattern%20Rhythm%20Generator/YS_pattern%20%E8%8A%82%E5%A5%8F%E7%94%9F%E6%88%90%E5%99%A8.lua</source>
+        <source file="Pattern Rhythm Generator/pattern1.jpg">https://github.com/zaibuyidao/YS_ReaScripts/raw/2a2a13cf5c37f7053fa38a79b041499dbe40a4ce/Various/Pattern%20Rhythm%20Generator/pattern1.jpg</source>
+        <source file="Pattern Rhythm Generator/pattern2.jpg">https://github.com/zaibuyidao/YS_ReaScripts/raw/2a2a13cf5c37f7053fa38a79b041499dbe40a4ce/Various/Pattern%20Rhythm%20Generator/pattern2.jpg</source>
+        <source file="Pattern Rhythm Generator/pattern3.jpg">https://github.com/zaibuyidao/YS_ReaScripts/raw/2a2a13cf5c37f7053fa38a79b041499dbe40a4ce/Various/Pattern%20Rhythm%20Generator/pattern3.jpg</source>
+        <source file="Pattern Rhythm Generator/pattern4.jpg">https://github.com/zaibuyidao/YS_ReaScripts/raw/2a2a13cf5c37f7053fa38a79b041499dbe40a4ce/Various/Pattern%20Rhythm%20Generator/pattern4.jpg</source>
+        <source file="Pattern Rhythm Generator/pattern5.jpg">https://github.com/zaibuyidao/YS_ReaScripts/raw/2a2a13cf5c37f7053fa38a79b041499dbe40a4ce/Various/Pattern%20Rhythm%20Generator/pattern5.jpg</source>
+        <source file="Pattern Rhythm Generator/pattern_AGRhythm1.jpg">https://github.com/zaibuyidao/YS_ReaScripts/raw/2a2a13cf5c37f7053fa38a79b041499dbe40a4ce/Various/Pattern%20Rhythm%20Generator/pattern_AGRhythm1.jpg</source>
+        <source file="Pattern Rhythm Generator/pattern_AGRhythm2.jpg">https://github.com/zaibuyidao/YS_ReaScripts/raw/2a2a13cf5c37f7053fa38a79b041499dbe40a4ce/Various/Pattern%20Rhythm%20Generator/pattern_AGRhythm2.jpg</source>
       </version>
     </reapack>
   </category>
