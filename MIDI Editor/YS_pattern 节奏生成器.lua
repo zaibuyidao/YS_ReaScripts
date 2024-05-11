@@ -1,8 +1,7 @@
 --[[
  * ReaScript Name: pattern 节奏生成器
- * Version: 1.0
+ * Version: 1.0.1
  * Author: YS
- * Repository URI: https://github.com/zaibuyidao/YS_ReaScripts
 --]]
 
 --[[
@@ -131,25 +130,25 @@ windows_flag = windows_flag | reaper.ImGui_WindowFlags_AlwaysAutoResize()
 local font = reaper.ImGui_CreateFont('sans-serif', 14)
 reaper.ImGui_Attach(ctx, font)
 is_new_value, filename, sectionID, cmdID, mode, resolution, val = reaper.get_action_context()
-filename1 = string.gsub(filename, 'pattern 节奏生成器.lua', 'pattern1.jpg')
+filename1 = string.gsub(filename, 'YS_pattern 节奏生成器.lua', 'pattern1.jpg')
 filename1 = string.gsub(filename1, '\\', '\\\\')
 img1 = reaper.ImGui_CreateImage(filename1)
-filename2 = string.gsub(filename, 'pattern 节奏生成器.lua', 'pattern2.jpg')
+filename2 = string.gsub(filename, 'YS_pattern 节奏生成器.lua', 'pattern2.jpg')
 filename2 = string.gsub(filename2, '\\', '\\\\')
 img2 = reaper.ImGui_CreateImage(filename2)
-filename3 = string.gsub(filename, 'pattern 节奏生成器.lua', 'pattern3.jpg')
+filename3 = string.gsub(filename, 'YS_pattern 节奏生成器.lua', 'pattern3.jpg')
 filename3 = string.gsub(filename3, '\\', '\\\\')
 img3 = reaper.ImGui_CreateImage(filename3)
-filename4 = string.gsub(filename, 'pattern 节奏生成器.lua', 'pattern_AGRhythm1.jpg')
+filename4 = string.gsub(filename, 'YS_pattern 节奏生成器.lua', 'pattern_AGRhythm1.jpg')
 filename4 = string.gsub(filename4, '\\', '\\\\')
 img4 = reaper.ImGui_CreateImage(filename4)
-filename5 = string.gsub(filename, 'pattern 节奏生成器.lua', 'pattern_AGRhythm2.jpg')
+filename5 = string.gsub(filename, 'YS_pattern 节奏生成器.lua', 'pattern_AGRhythm2.jpg')
 filename5 = string.gsub(filename5, '\\', '\\\\')
 img5 = reaper.ImGui_CreateImage(filename5)
-filename6 = string.gsub(filename, 'pattern 节奏生成器.lua', 'pattern4.jpg')
+filename6 = string.gsub(filename, 'YS_pattern 节奏生成器.lua', 'pattern4.jpg')
 filename6 = string.gsub(filename6, '\\', '\\\\')
 img6 = reaper.ImGui_CreateImage(filename6)
-filename7 = string.gsub(filename, 'pattern 节奏生成器.lua', 'pattern5.jpg')
+filename7 = string.gsub(filename, 'YS_pattern 节奏生成器.lua', 'pattern5.jpg')
 filename7 = string.gsub(filename7, '\\', '\\\\')
 img7 = reaper.ImGui_CreateImage(filename7)
 

@@ -1,9 +1,7 @@
 --[[
- * ReaScript Name: Bass 定弦
- * Version: 1.0
+ * ReaScript Name: Midi Take Name From Track
+ * Version: 1.0.1
  * Author: YS
- * Repository URI: https://github.com/zaibuyidao/YS_ReaScripts
- * provides: [main=main] .
 --]]
 
 --[[

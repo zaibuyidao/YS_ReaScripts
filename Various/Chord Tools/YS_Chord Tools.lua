@@ -2429,7 +2429,7 @@ local size = reaper.GetAppVersion():match('OSX') and 12 or 14
 local font = reaper.ImGui_CreateFont('sans-serif', 14)
 reaper.ImGui_Attach(ctx, font)
 is_new_value, filename, sectionID, cmdID, mode, resolution, val = reaper.get_action_context()
-filename = string.gsub(filename, 'Chord Tools.lua', 'keyboard.jpg')
+filename = string.gsub(filename, 'YS_Chord Tools.lua', 'keyboard.jpg')
 filename = string.gsub(filename, '\\', '\\\\')
 img = reaper.ImGui_CreateImage(filename)
 
