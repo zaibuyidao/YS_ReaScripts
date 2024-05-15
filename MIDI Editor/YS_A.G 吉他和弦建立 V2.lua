@@ -1,13 +1,7 @@
 --[[
  * ReaScript Name: A.G 吉他和弦建立 V2
- * Version: 1.0.8
+ * Version: 1.0.9
  * Author: YS
---]]
-
---[[
- * Changelog:
- * v1.0 (2021-8-29)
-  + Initial release
 --]]
 
 leixing_tb = {}
@@ -534,6 +528,9 @@ function recst()
     end
 end -- recst end
 recst()
+function recend()
+    retval = reaper.SetMediaTrackInfo_Value(TK, 'I_RECARM', 0)
+end
 ----------------------------------------------------------------
 
 local ctx = reaper.ImGui_CreateContext('A.G CHORD')
@@ -728,6 +725,7 @@ Ukulele 模式为标准调弦常用指法。]]
     if open and flag then
         reaper.defer(loop)
     else
+        recend()
         reaper.SetProjExtState(0, 'A.G CHORD', 'capo', capo)
         reaper.SetProjExtState(0, 'A.G CHORD', 'chord_mode', chord_mode)
         reaper.SN_FocusMIDIEditor()
