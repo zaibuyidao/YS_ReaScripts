@@ -1,6 +1,6 @@
 --[[
  * ReaScript Name: 自动表情_Multi Track V2
- * Version: 1.1.3
+ * Version: 1.1.4
  * Author: YS
 --]]
 
@@ -67,6 +67,7 @@ end -- function end
 bpm_average()
 
 function selTopNote()
+    reaper.MIDI_DisableSort(take)
     i, idx = 2, -1
 
     tbidx = {}
@@ -147,6 +148,7 @@ function selTopNote()
         integer = reaper.MIDI_EnumSelNotes(take, noteidx)
     end
 end
+reaper.MIDI_Sort(take)
 
 --  sel Top Note
 

@@ -2424,6 +2424,10 @@ function recst()
 end -- recst end
 recst()
 
+function recend()
+    retval = reaper.SetMediaTrackInfo_Value(TK, 'I_RECARM', 0)
+end
+
 local ctx = reaper.ImGui_CreateContext('Chord Tools')
 local size = reaper.GetAppVersion():match('OSX') and 12 or 14
 local font = reaper.ImGui_CreateFont('sans-serif', 14)
@@ -3260,6 +3264,7 @@ function loop()
         else
             piano_mode = 'false'
         end
+        recend()
         reaper.SetExtState('Chord Tools', 'piano mode', piano_mode, true)
         reaper.SN_FocusMIDIEditor()
     end

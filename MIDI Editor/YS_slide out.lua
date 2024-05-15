@@ -1,6 +1,6 @@
 --[[
  * ReaScript Name: slide out
- * Version: 1.0.4
+ * Version: 1.0.5
  * Author: YS
 --]]
 
@@ -27,7 +27,12 @@ end
 local From_tick = reaper.MIDI_GetPPQPosFromProjTime(take, From)
 local Thru_tick = reaper.MIDI_GetPPQPosFromProjTime(take, Thru)
 
-retval, shuru = reaper.GetUserInputs('Slide Out Wheel 滑弦出', 2, "PitchRange = (-12,12),品格:0  击勾弦:1  平滑:2", '0,0')
+retval, mode = reaper.GetProjExtState(0, 'slide out', 'mode')
+if mode == '' then
+    mode = '0'
+end
+
+retval, shuru = reaper.GetUserInputs('Slide Out Wheel 滑弦出', 2, "PitchRange = (-12,12),品格:0  击勾弦:1  平滑:2", '0,'..mode)
 if retval == false then
     reaper.SN_FocusMIDIEditor()
     return
@@ -136,6 +141,8 @@ if (Thru ~= 0) then
 end -- thru fushu
 
 reaper.MIDI_Sort(take)
+
+reaper.SetProjExtState(0, 'slide out', 'mode', jigou)
 
 reaper.SN_FocusMIDIEditor()
 

@@ -1,6 +1,6 @@
 --[[
  * ReaScript Name: 显示MIDI模板信息
- * Version: 1.0.8
+ * Version: 1.0.9
  * Author: YS
 --]]
 
@@ -4287,13 +4287,13 @@ function loop()
             reaper.ImGui_SetNextWindowSize(ctx, 165, 80)
             if reaper.ImGui_Button(ctx, h, 40) and h ~= '-1' then
                 reaper.Undo_BeginBlock()
-                OpenPopup = reaper.ImGui_OpenPopup(ctx, 'Edit CC94 Chorus')
+                OpenPopup = reaper.ImGui_OpenPopup(ctx, 'Edit CC94 Delay')
                 val = tonumber(h)
             end
             x, y = reaper.GetMousePosition()
             x, y = reaper.ImGui_PointConvertNative(ctx, x, y)
             reaper.ImGui_SetNextWindowPos(ctx, x, y, reaper.ImGui_Cond_Appearing())
-            if reaper.ImGui_BeginPopupModal(ctx, 'Edit CC94 Chorus', nil) then
+            if reaper.ImGui_BeginPopupModal(ctx, 'Edit CC94 Delay', nil) then
                 if reaper.ImGui_IsWindowAppearing(ctx) then
                     reaper.ImGui_SetKeyboardFocusHere(ctx, 0)
                 end

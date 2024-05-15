@@ -1,6 +1,6 @@
 -- @description Chord Tools
 -- @author YS
--- @version 1.0
+-- @version 1.0.1
 -- @changelog
 --   Initial release
 -- @metapackage
