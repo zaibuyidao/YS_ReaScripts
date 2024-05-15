@@ -1,8 +1,8 @@
 --[[
  * ReaScript Name: delay 计算
- * Version: 1.0
+ * Version: 1.0.1
  * Author: YS
- * provides: [main=main, midi_editor] .
+ * provides: [main=main,midi_editor] .
 --]]
 
 --[[
