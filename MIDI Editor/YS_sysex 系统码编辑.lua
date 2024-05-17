@@ -1,6 +1,6 @@
 --[[
  * ReaScript Name: sysex 系统码编辑
- * Version: 1.0
+ * Version: 1.0.1
  * Author: YS
 --]]
 
@@ -14,7 +14,7 @@ local editor = reaper.MIDIEditor_GetActive()
 
 local take = reaper.MIDIEditor_GetTake(editor)
 
-idx = reaper.MIDI_EnumSelTextSysexEvts(take, 0)
+idx = reaper.MIDI_EnumSelTextSysexEvts(take, -1)
 
 newmsg = ''
 
