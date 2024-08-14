@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<index version="1" name="YS Scripts" commit="658aa6d3514ef07edeea0210dcb2947c8af5c23d">
+<index version="1" name="YS Scripts" commit="61f539e2caba122ad60e0fc97d69aaa73cfb0cbd">
   <category name="Items Editing">
     <reapack name="YS_Midi Take Name From Track.lua" type="script" desc="Midi Take Name From Track">
       <version name="1.0" author="YS" time="2021-10-14T16:59:44Z">
@@ -729,6 +729,9 @@
       <version name="1.0" author="YS" time="2024-04-01T05:38:25Z">
         <changelog><![CDATA[+ Initial release]]></changelog>
         <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/cda747364f0f60928865ff50fb73ae29b013e608/MIDI%20Editor/YS_%E5%AE%9E%E9%9F%B3%E5%8F%98%E6%BB%91%E5%BC%A6.lua</source>
+      </version>
+      <version name="1.0.1" author="YS" time="2024-08-14T05:54:39Z">
+        <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/61f539e2caba122ad60e0fc97d69aaa73cfb0cbd/MIDI%20Editor/YS_%E5%AE%9E%E9%9F%B3%E5%8F%98%E6%BB%91%E5%BC%A6.lua</source>
       </version>
     </reapack>
     <reapack name="YS_小七和弦.lua" type="script" desc="小七和弦">
