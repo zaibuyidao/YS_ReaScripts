@@ -1,6 +1,6 @@
 --[[
  * ReaScript Name: 实音变滑弦
- * Version: 1.0
+ * Version: 1.0.1
  * Author: YS
 --]]
 
@@ -91,6 +91,7 @@ for ii = 2, i do
             oldtick = wheeltick
 
         until iii > tbpn[ii]
+        fuiii = fuiii - 1
     else
         repeat
             chazhi = prevpitch - tbpn[ii]
@@ -119,6 +120,7 @@ for ii = 2, i do
             iiii = iiii + 1
             oldtick = wheeltick
         until fuiii < tbpn[ii]
+        iii = iii + 1
     end
     iiii = 0
     prevpitch = tbpn[ii]
