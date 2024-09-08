@@ -1,6 +1,6 @@
 --[[
  * ReaScript Name: slide in V2
- * Version: 1.0
+ * Version: 1.0.1
  * Author: YS
 --]]
 
@@ -42,6 +42,8 @@ function slideIn()
 
     juli = Thru_tick - From_tick
     b = juli / wanyin_num
+    
+    reaper.Undo_BeginBlock()
     reaper.MIDI_DisableSort(take)
     if (Thru ~= 0) then
         if (wanyin_num > 0) -- zhengshu
@@ -163,6 +165,9 @@ function slideIn()
         end
     end -- thru fushu
     reaper.MIDI_Sort(take)
+    
+    reaper.MarkTrackItemsDirty( reaper.GetMediaItemTake_Track(take), reaper.GetMediaItemTake_Item(take))
+    reaper.Undo_EndBlock('slide in', -1)
     reaper.SetProjExtState(0, 'slide in', 'mode', slide_mode)
 
     if txt ~= '' then

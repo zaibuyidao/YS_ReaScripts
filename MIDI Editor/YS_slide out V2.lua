@@ -1,6 +1,6 @@
 --[[
  * ReaScript Name: slide out V2
- * Version: 1.0
+ * Version: 1.0.1
  * Author: YS
 --]]
 
@@ -41,7 +41,8 @@ function slideout()
     end
 
     juli = Thru_tick - From_tick
-
+    
+    reaper.Undo_BeginBlock()
     reaper.MIDI_DisableSort(take)
 
     if (Thru ~= 0) then
@@ -170,6 +171,9 @@ function slideout()
     end -- thru fushu
 
     reaper.MIDI_Sort(take)
+    
+    reaper.MarkTrackItemsDirty( reaper.GetMediaItemTake_Track(take), reaper.GetMediaItemTake_Item(take))
+    reaper.Undo_EndBlock('slide out', -1)
 
     reaper.SetProjExtState(0, 'slide out', 'mode', slide_mode)
 
@@ -188,7 +192,7 @@ end
 ----------------------------------------------------------------
 
 local ctx = reaper.ImGui_CreateContext('SLIDEOUT')
-local size = reaper.GetAppVersion():match('OSX') and 12 or 14
+ size = reaper.GetAppVersion():match('OSX') and 12 or 14
 local font = reaper.ImGui_CreateFont('sans-serif', size)
 reaper.ImGui_Attach(ctx, font)
 

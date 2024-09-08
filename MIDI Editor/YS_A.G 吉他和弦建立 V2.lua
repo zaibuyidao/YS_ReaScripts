@@ -1,6 +1,6 @@
 --[[
  * ReaScript Name: A.G 吉他和弦建立 V2
- * Version: 1.0.9
+ * Version: 1.0.10
  * Author: YS
 --]]
 
@@ -364,7 +364,9 @@ function chordin()
     local editor = reaper.MIDIEditor_GetActive()
 
     local take = reaper.MIDIEditor_GetTake(editor)
-
+    
+    reaper.Undo_BeginBlock()
+    
     reaper.MIDI_DisableSort(take)
 
     idx = -1
@@ -410,6 +412,10 @@ function chordin()
     until integer == -1
 
     reaper.MIDI_Sort(take)
+    
+    reaper.MarkTrackItemsDirty( reaper.GetMediaItemTake_Track(take), reaper.GetMediaItemTake_Item(take))
+    reaper.Undo_EndBlock('A.G CHORD', -1)
+    
 
     reaper.SN_FocusMIDIEditor()
 
