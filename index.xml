@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<index version="1" name="YS Scripts" commit="c22e30dff515b7c7db9c7a6e3f8f73cd51a59069">
+<index version="1" name="YS Scripts" commit="9f7b33bf8a6aafdb16cdae14d9a6dcd4b77c9a20">
   <category name="Items Editing">
     <reapack name="YS_Midi Take Name From Track.lua" type="script" desc="Midi Take Name From Track">
       <version name="1.0" author="YS" time="2021-10-14T16:59:44Z">
@@ -66,6 +66,9 @@
       </version>
       <version name="1.0.9" author="YS" time="2024-05-15T07:45:58Z">
         <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/3383b50193d518c44b151653e4fb3aea350f6e30/MIDI%20Editor/YS_A.G%20%E5%90%89%E4%BB%96%E5%92%8C%E5%BC%A6%E5%BB%BA%E7%AB%8B%20V2.lua</source>
+      </version>
+      <version name="1.0.10" author="YS" time="2024-09-08T11:28:29Z">
+        <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/9f7b33bf8a6aafdb16cdae14d9a6dcd4b77c9a20/MIDI%20Editor/YS_A.G%20%E5%90%89%E4%BB%96%E5%92%8C%E5%BC%A6%E5%BB%BA%E7%AB%8B%20V2.lua</source>
       </version>
     </reapack>
     <reapack name="YS_A.G 吉他和弦建立.lua" type="script" desc="A.G 吉他和弦建立">
@@ -532,6 +535,9 @@
         <changelog><![CDATA[+ Initial release]]></changelog>
         <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/c22e30dff515b7c7db9c7a6e3f8f73cd51a59069/MIDI%20Editor/YS_slide%20in%20V2.lua</source>
       </version>
+      <version name="1.0.1" author="YS" time="2024-09-08T11:28:29Z">
+        <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/9f7b33bf8a6aafdb16cdae14d9a6dcd4b77c9a20/MIDI%20Editor/YS_slide%20in%20V2.lua</source>
+      </version>
     </reapack>
     <reapack name="YS_slide in.lua" type="script" desc="slide in">
       <version name="1.0" author="YS" time="2021-08-29T12:17:58Z">
@@ -564,6 +570,9 @@
       <version name="1.0" author="YS" time="2024-08-28T05:41:03Z">
         <changelog><![CDATA[+ Initial release]]></changelog>
         <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/c22e30dff515b7c7db9c7a6e3f8f73cd51a59069/MIDI%20Editor/YS_slide%20out%20V2.lua</source>
+      </version>
+      <version name="1.0.1" author="YS" time="2024-09-08T11:28:29Z">
+        <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/9f7b33bf8a6aafdb16cdae14d9a6dcd4b77c9a20/MIDI%20Editor/YS_slide%20out%20V2.lua</source>
       </version>
     </reapack>
     <reapack name="YS_slide out.lua" type="script" desc="slide out">
@@ -1134,6 +1143,18 @@
       <version name="1.0" author="YS" time="2021-10-15T18:15:27Z">
         <changelog><![CDATA[+ Initial release]]></changelog>
         <source main="main">https://github.com/zaibuyidao/YS_ReaScripts/raw/4aa621c6b4b22f16af3977b768fa84dbfced12de/Utility/YS_Un-Mute%20All%20item%20Track.lua</source>
+      </version>
+    </reapack>
+    <reapack name="YS_允许多轨试听(Take) main.lua" type="script" desc="允许多轨试听(Take) main">
+      <version name="1.0" author="YS" time="2024-09-08T11:28:29Z">
+        <changelog><![CDATA[+ Initial release]]></changelog>
+        <source main="main">https://github.com/zaibuyidao/YS_ReaScripts/raw/9f7b33bf8a6aafdb16cdae14d9a6dcd4b77c9a20/Utility/YS_%E5%85%81%E8%AE%B8%E5%A4%9A%E8%BD%A8%E8%AF%95%E5%90%AC(Take)%20main.lua</source>
+      </version>
+    </reapack>
+    <reapack name="YS_允许多轨试听(Take) midieditor.lua" type="script" desc="允许多轨试听(Take) midieditor">
+      <version name="1.0" author="YS" time="2024-09-08T11:28:29Z">
+        <changelog><![CDATA[+ Initial release]]></changelog>
+        <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/9f7b33bf8a6aafdb16cdae14d9a6dcd4b77c9a20/Utility/YS_%E5%85%81%E8%AE%B8%E5%A4%9A%E8%BD%A8%E8%AF%95%E5%90%AC(Take)%20midieditor.lua</source>
       </version>
     </reapack>
     <reapack name="YS_允许多轨试听(Take).lua" type="script" desc="允许多轨试听(Take)">
