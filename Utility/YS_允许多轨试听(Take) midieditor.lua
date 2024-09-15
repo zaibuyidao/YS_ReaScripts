@@ -1,6 +1,6 @@
 --[[
  * ReaScript Name: 允许多轨试听(Take) midieditor
- * Version: 1.0
+ * Version: 1.0.1
  * Author: YS
  * provides: [main=midi_editor] .
 --]]
@@ -92,7 +92,8 @@ function unsolo_all_items()
         end
     end
     reaper.PreventUIRefresh(-1)
-    reaper.MIDIEditor_SetSetting_int(reaper.MIDIEditor_GetActive(), 'active_note_row', 60)
+    note_row =  reaper.MIDIEditor_GetSetting_int(reaper.MIDIEditor_GetActive(), 'active_note_row')
+    reaper.MIDIEditor_SetSetting_int(reaper.MIDIEditor_GetActive(), 'active_note_row', note_row)
     reaper.UpdateArrange()
 end
 
