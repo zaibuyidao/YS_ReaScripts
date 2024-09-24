@@ -1,6 +1,6 @@
 --[[
  * ReaScript Name: slide out
- * Version: 1.0.5
+ * Version: 1.0.6
  * Author: YS
 --]]
 
@@ -11,6 +11,7 @@
 --]]
 
 c = 0
+txt = ''
 
 local editor = reaper.MIDIEditor_GetActive()
 
@@ -24,15 +25,15 @@ if From == 0 and Thru == 0 then
     return
 end
 
-local From_tick = reaper.MIDI_GetPPQPosFromProjTime(take, From)
-local Thru_tick = reaper.MIDI_GetPPQPosFromProjTime(take, Thru)
+From_tick = reaper.MIDI_GetPPQPosFromProjTime(take, From)
+Thru_tick = reaper.MIDI_GetPPQPosFromProjTime(take, Thru)
 
 retval, mode = reaper.GetProjExtState(0, 'slide out', 'mode')
 if mode == '' then
     mode = '0'
 end
 
-retval, shuru = reaper.GetUserInputs('Slide Out Wheel 滑弦出', 2, "PitchRange = (-12,12),品格:0  击勾弦:1  平滑:2", '0,'..mode)
+retval, shuru = reaper.GetUserInputs('Slide Out Wheel 滑弦出', 2, "PitchRange = (-12,12),品格:0  击勾弦:1  平滑:2", '0,' .. mode)
 if retval == false then
     reaper.SN_FocusMIDIEditor()
     return
@@ -61,7 +62,9 @@ if (Thru ~= 0) then
     then
         pitch = 683 * wanyin_num
 
-        if (pitch > 8191) then pitch = 8191 end
+        if (pitch > 8191) then
+            pitch = 8191
+        end
 
         local beishu = math.modf(pitch / 128)
         local yushu = math.fmod(pitch, 128)
@@ -81,16 +84,28 @@ if (Thru ~= 0) then
         end
 
         if jigou == '0' then
+            TempTick = -10
             while (c <= wanyin_num) do
                 pitch = 683 * c
 
-                if (pitch > 8191) then pitch = 8191 end
+                if (pitch > 8191) then
+                    pitch = 8191
+                end
 
                 local beishu = math.modf(pitch / 128)
                 local yushu = math.fmod(pitch, 128)
 
-                reaper.MIDI_InsertCC(take, false, false, From_tick + juli * ((c + c) / (jiange + c + 1)), 224, 0, yushu, 64 + beishu)
+                InsertTick = From_tick + juli * ((c + c) / (jiange + c + 1))
+                if InsertTick - TempTick < 10 then
+                    txt = txt .. '弯音 ' .. pitch .. ' 距离低于 10 tick!\n'
+                end
+                TempTick = InsertTick
+                reaper.MIDI_InsertCC(take, false, false, InsertTick, 224, 0, yushu, 64 + beishu)
+
                 c = c + 1
+            end
+            if Thru_tick - TempTick < 9 then
+                txt = txt .. '弯音 ' .. '0' .. ' 距离低于 10 tick!\n'
             end
             reaper.MIDI_InsertCC(take, false, false, Thru_tick, 224, 0, 0, 64)
         end
@@ -100,12 +115,18 @@ if (Thru ~= 0) then
     if (wanyin_num < 0) then
         pitch = 683 * wanyin_num
 
-        if (pitch > 8191) then pitch = 8191 end
-        if (pitch < -8192) then pitch = -8191 end
+        if (pitch > 8191) then
+            pitch = 8191
+        end
+        if (pitch < -8192) then
+            pitch = -8191
+        end
 
         local beishu = math.modf(pitch / 128)
         local yushu = math.fmod(pitch, 128)
-        if (beishu < 0) then beishu = beishu - 1 end
+        if (beishu < 0) then
+            beishu = beishu - 1
+        end
         wanyin_num = wanyin_num * -1
 
         if jigou == '2' then
@@ -123,17 +144,40 @@ if (Thru ~= 0) then
         end
 
         if jigou == '0' then
+            TempTick = -10
             while (c <= wanyin_num) do
                 pitch = 683 * c * -1
 
-                if (pitch > 8191) then pitch = 8191 end
-                if (pitch < -8192) then pitch = -8191 end
+                if (pitch > 8191) then
+                    pitch = 8191
+                end
+                if (pitch < -8192) then
+                    pitch = -8191
+                end
 
                 local beishu = math.modf(pitch / 128)
                 local yushu = math.fmod(pitch, 128)
-                if (beishu < 0) then beishu = beishu - 1 end
-                reaper.MIDI_InsertCC(take, false, false, From_tick + juli * ((c + c) / (jiange + c + 1)), 224, 0, yushu, 64 + beishu)
+                if (beishu < 0) then
+                    beishu = beishu - 1
+                end
+                
+                if jiange > 3 then
+                    subjiange = jiange * 2
+                else
+                    subjiange = jiange + (c * 0.8) + 1
+                end
+                InsertTick = From_tick + juli * c / (subjiange - (c * 0.65)) * 1.2
+
+                --InsertTick = From_tick + juli * ((c + c) / (jiange + c + 1))
+                if InsertTick - TempTick < 10 then
+                    txt = txt .. '弯音 ' .. pitch .. ' 距离低于 10 tick!\n'
+                end
+                TempTick = InsertTick
+                reaper.MIDI_InsertCC(take, false, false, InsertTick, 224, 0, yushu, 64 + beishu)
                 c = c + 1
+            end
+            if Thru_tick - TempTick < 9 then
+                txt = txt .. '弯音 ' .. '0' .. ' 距离低于 10 tick!\n'
             end
             reaper.MIDI_InsertCC(take, false, false, Thru_tick, 224, 0, 0, 64)
         end
@@ -143,6 +187,10 @@ end -- thru fushu
 reaper.MIDI_Sort(take)
 
 reaper.SetProjExtState(0, 'slide out', 'mode', jigou)
+
+if txt ~= '' then
+    reaper.MB(txt, '警告!', 0)
+end
 
 reaper.SN_FocusMIDIEditor()
 
