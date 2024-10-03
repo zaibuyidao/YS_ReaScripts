@@ -1,6 +1,6 @@
 --[[
  * ReaScript Name: A.G 吉他和弦建立 V2
- * Version: 1.0.10
+ * Version: 1.0.11
  * Author: YS
 --]]
 
@@ -210,6 +210,62 @@ chord['Abm7-5'] = '44,50,54,59,66,68'
 chord['Am7-5'] = '0,45,51,55,60,67'
 chord['Bbm7-5'] = '0,46,52,56,61,64'
 chord['Bm7-5'] = '0,47,50,57,59,65'
+-- 7sus4
+chord['C7sus4'] = '0,48,55,58,65,67'
+chord['Db7sus4'] = '0,49,54,59,66,68'
+chord['D7sus4'] = '0,0,50,57,60,67'
+chord['Eb7sus4'] = '0,0,51,58,61,68'
+chord['E7sus4'] = '40,45,50,57,59,64'
+chord['F7sus4'] = '41,46,51,58,60,65'
+chord['Gb7sus4'] = '42,47,52,59,61,66'
+chord['G7sus4'] = '43,48,53,60,62,67'
+chord['Ab7sus4'] = '44,49,54,61,63,68'
+chord['A7sus4'] = '0,45,50,55,62,64'
+chord['Bb7sus4'] = '0,46,51,56,63,65'
+chord['B7sus4'] = '0,47,52,57,64,66'
+
+-- 7sus2
+chord['C7sus2'] = '0,48,55,58,62,67'
+chord['Db7sus2'] = '0,49,56,59,63,68'
+chord['D7sus2'] = '0,0,50,57,60,64'
+chord['Eb7sus2'] = '0,0,51,58,61,65'
+chord['E7sus2'] = '0,0,52,59,62,66'
+chord['F7sus2'] = '0,0,53,60,63,67'
+chord['Gb7sus2'] = '0,0,54,56,61,64'
+chord['G7sus2'] = '0,0,55,62,65,69'
+chord['Ab7sus2'] = '0,0,56,63,66,70'
+chord['A7sus2'] = '0,45,52,55,59,64'
+chord['Bb7sus2'] = '0,46,53,56,60,65'
+chord['B7sus2'] = '0,47,54,57,61,66'
+
+-- 6
+chord['C6'] = '0,48,55,60,64,69'
+chord['Db6'] = '0,49,56,61,65,70'
+chord['D6'] = '0,0,50,57,59,66'
+chord['Eb6'] = '0,0,51,58,60,67'
+chord['E6'] = '40,49,52,56,59,64'
+chord['F6'] = '0,0,53,60,62,69'
+chord['Gb6'] = '0,0,54,61,63,70'
+chord['G6'] = '43,47,50,55,59,64'
+chord['Ab6'] = '44,48,51,56,60,65'
+chord['A6'] = '0,45,52,57,61,66'
+chord['Bb6'] = '0,46,50,55,62,65'
+chord['B6'] = '47,51,54,59,63,68'
+
+--m6
+chord['Cm6'] = '0,48,51,57,60,67'
+chord['Dbm6'] = '0,49,52,58,61,68'
+chord['Dm6'] = '0,0,50,57,59,65'
+chord['Ebm6'] = '0,0,51,58,60,66'
+chord['Em6'] = '40,47,52,55,61,64'
+chord['Fm6'] = '0,0,53,60,62,68'
+chord['Gbm6'] = '0,0,54,61,63,69'
+chord['Gm6'] = '0,0,55,62,64,70'
+chord['Abm6'] = '0,0,56,63,65,71'
+chord['Am6'] = '0,45,54,57,60,64'
+chord['Bbm6'] = '0,46,53,55,61,65'
+chord['Bm6'] = '0,47,50,56,59,66'
+
 
 chord_ukulele = {}
 chord_ukulele['C'] = '0,0,0,64,67,72'
@@ -414,7 +470,8 @@ function chordin()
     reaper.MIDI_Sort(take)
     
     reaper.MarkTrackItemsDirty( reaper.GetMediaItemTake_Track(take), reaper.GetMediaItemTake_Item(take))
-    reaper.Undo_EndBlock('A.G CHORD', -1)
+    if leixing == '' then leixing_sub = 'Maj' else leixing_sub=leixing end
+    reaper.Undo_EndBlock('A.G Chord : ' .. leixing_sub, -1)
     
 
     reaper.SN_FocusMIDIEditor()
@@ -706,6 +763,45 @@ Ukulele 模式为标准调弦常用指法。]]
                 end
                 if reaper.ImGui_IsItemClicked(ctx, reaper.ImGui_MouseButton_Right()) then
                     leixing = 'm7-5'
+                    Audition()
+                end
+                if reaper.ImGui_Button(ctx, '7sus4') then
+                    leixing = '7sus4'
+                    chordin()
+                    flag = false
+                end
+                if reaper.ImGui_IsItemClicked(ctx, reaper.ImGui_MouseButton_Right()) then
+                    leixing = '7sus4'
+                    Audition()
+                end
+                reaper.ImGui_SameLine(ctx)
+                if reaper.ImGui_Button(ctx, '7sus2') then
+                    leixing = '7sus2'
+                    chordin()
+                    flag = false
+                end
+                if reaper.ImGui_IsItemClicked(ctx, reaper.ImGui_MouseButton_Right()) then
+                    leixing = '7sus2'
+                    Audition()
+                end
+                reaper.ImGui_SameLine(ctx)
+                if reaper.ImGui_Button(ctx, '6') then
+                    leixing = '6'
+                    chordin()
+                    flag = false
+                end
+                if reaper.ImGui_IsItemClicked(ctx, reaper.ImGui_MouseButton_Right()) then
+                    leixing = '6'
+                    Audition()
+                end
+                reaper.ImGui_SameLine(ctx)
+                if reaper.ImGui_Button(ctx, 'm6') then
+                    leixing = 'm6'
+                    chordin()
+                    flag = false
+                end
+                if reaper.ImGui_IsItemClicked(ctx, reaper.ImGui_MouseButton_Right()) then
+                    leixing = 'm6'
                     Audition()
                 end
             end -- chord mode 1
