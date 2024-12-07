@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<index version="1" name="YS Scripts" commit="55a9d028c00a9396c674af259d8ba2a243eaf876">
+<index version="1" name="YS Scripts" commit="43a022563905725bb4e22763142f990fc1f159d3">
   <category name="Items Editing">
     <reapack name="YS_Midi Take Name From Track.lua" type="script" desc="Midi Take Name From Track">
       <version name="1.0" author="YS" time="2021-10-14T16:59:44Z">
@@ -1307,6 +1307,12 @@
         <changelog><![CDATA[Initial release]]></changelog>
         <source main="midi_editor" file="Chord Tools/YS_Chord Tools.lua">https://github.com/zaibuyidao/YS_ReaScripts/raw/c790ac53afd8396ef6204f800ce237b67a9e881d/Various/Chord%20Tools/YS_Chord%20Tools.lua</source>
         <source file="Chord Tools/keyboard.jpg">https://github.com/zaibuyidao/YS_ReaScripts/raw/c790ac53afd8396ef6204f800ce237b67a9e881d/Various/Chord%20Tools/keyboard.jpg</source>
+      </version>
+      <version name="1.0.2" author="YS" time="2024-12-07T13:51:08Z">
+        <changelog><![CDATA[增加hold模式，以及和弦识别范围扩大，不同的排列以及省略音的识别。
+Added hold mode, expanded chord recognition range, and improved detection of different voicings and omitted notes.]]></changelog>
+        <source main="midi_editor" file="Chord Tools/YS_Chord Tools.lua">https://github.com/zaibuyidao/YS_ReaScripts/raw/43a022563905725bb4e22763142f990fc1f159d3/Various/Chord%20Tools/YS_Chord%20Tools.lua</source>
+        <source file="Chord Tools/keyboard.jpg">https://github.com/zaibuyidao/YS_ReaScripts/raw/43a022563905725bb4e22763142f990fc1f159d3/Various/Chord%20Tools/keyboard.jpg</source>
       </version>
     </reapack>
     <reapack name="pattern 节奏生成器.lua" type="script" desc="pattern 节奏生成器">
