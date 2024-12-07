@@ -39,12 +39,12 @@ chord['13#9'] = '4,7,10,15,17,21'
 chord['13b5b9'] = '4,6,10,13,17,21'
 chord['13b9'] = '4,7,10,13,17,21'
 chord['6sus4'] = '5,7,9,0,0,0'
-chord['7#11'] = '4,7,10,18,0,0'
+chord['7#11'] = '4,6,7,10,0,0'
 chord['7#5'] = '4,8,10,0,0,0'
 chord['7#5#9'] = '4,8,10,15,0,0'
 chord['7#5b9'] = '4,8,10,13,0,0'
-chord['7add11'] = '4,7,10,17,0,0'
-chord['7add13'] = '4,7,10,21,0,0'
+chord['7add11'] = '4,5,7,10,0,0'
+chord['7add13'] = '4,7,9,10,0,0'
 chord['7b5#9'] = '4,6,10,15,0,0'
 chord['7b5b9'] = '4,6,10,13,0,0'
 chord['9#11'] = '4,7,10,14,18,0'
@@ -55,21 +55,21 @@ chord['9sus4'] = '5,7,10,14,0,0'
 chord['M11'] = '4,7,11,14,17,0'
 chord['M13'] = '4,7,11,14,17,21'
 chord['M7#11'] = '4,7,11,18,0,0'
-chord['M7add13'] = '4,7,11,21,0,0'
+chord['M7add13'] = '4,7,9,11,0,0'
 chord['M7b5'] = '4,6,11,0,0,0'
 chord['M9#11'] = '4,8,11,14,18,0'
 chord['M9#5'] = '4,8,11,14,0,0'
 chord['M9sus4'] = '5,7,11,14,0,0'
 chord['m13'] = '3,7,10,14,17,21'
 chord['m6add9'] = '3,7,9,14,0,0'
-chord['m7add11'] = '3,7,10,17,0,0'
-chord['m7add13'] = '3,7,10,21,0,0'
+chord['m7add11'] = '3,5,7,10,0,0'
+chord['m7add13'] = '3,7,9,10,0,0'
 chord['m7b9'] = '3,7,10,13,0,0'
 chord['m9b5'] = '3,6,10,14,0,0'
 chord['mM11'] = '3,7,11,14,17,0'
 chord['mM13'] = '3,7,11,14,17,21'
 chord['mM7add11'] = '3,7,11,17,0,0'
-chord['mM7add13'] = '3,7,11,21,0,0'
+chord['mM7add13'] = '3,7,9,11,0,0'
 chord['mM9'] = '3,7,11,14,0,0'
 chord['sus4add9'] = '2,5,7,0,0,0'
 chord['5'] = '7,0,0,0,0,0'
@@ -79,12 +79,13 @@ chord['add#11'] = '4,7,18,0,0,0'
 chord['madd#11'] = '3,7,18,0,0,0'
 
 help =
-    [[和弦输入必须是原位的完整和弦音，可以根据所选音符作为根音用脚本写入，也可以手动写入，根音不要低于Key48。目前只支持列表中的和弦类型。和弦之间最小间隔为八分音符。
+    [[和弦输入必须是原位，可以根据所选音符作为根音用脚本写入，也可以手动写入，根音不要低于Key48。目前只支持列表中的和弦类型。和弦之间最小间隔为八分音符。
 转位根音请写在Key48键号以下（C3 or C4）。
 Chord Note To Lyrics 需要读取调号标记，第一个标记放在工程头部，格式为 Key=** ，必须写自然大调，中途变调的地方在小节头写入同样的格式。
 鼠标右键为试听和弦，轨道录音监听，MIDI输入所有通道会自动识别并设置好。]]
 
 chordtype = {}
+chordtype[70] = '5'
 chordtype[340] = ''
 chordtype[430] = 'm'
 chordtype[250] = 'sus4'
@@ -96,12 +97,16 @@ chordtype[3340] = '7'
 chordtype[3430] = 'm7'
 chordtype[4340] = 'M7'
 chordtype[43340] = '9'
+chordtype[33220] = '9'
 chordtype[43430] = 'm9'
 chordtype[4240] = '7b5'
 chordtype[4330] = 'm7b5'
 chordtype[34340] = 'M9'
+chordtype[43220] = 'M9'
+chordtype[4520] = 'M9'
 chordtype[3250] = '7sus4'
 chordtype[4250] = 'M7sus4'
+chordtype[3330] = 'dim7'
 chordtype[520] = 'sus2'
 chordtype[3220] = 'add9'
 chordtype[3520] = '7sus2'
@@ -110,54 +115,126 @@ chordtype[3330] = 'dim7'
 chordtype[4120] = 'madd9'
 chordtype[240] = '-5'
 chordtype[52340] = '69'
+chordtype[23220] = '69'
+chordtype[5540] = '69'
+chordtype[5220] = '69'
 chordtype[4430] = 'mM7'
 chordtype[53340] = '7#9'
+chordtype[5640] = '7#9'
 chordtype[3440] = 'M7#5'
 chordtype[33340] = '7b9'
 chordtype[343340] = '11'
+chordtype[34370] = '11'
+chordtype[4550] = '11'
+chordtype[34640] = '11'
 chordtype[343430] = 'm11'
+chordtype[45230] = 'm11'
 chordtype[4343340] = '13'
+chordtype[434370] = '13'
+chordtype[43500] = '13'
+chordtype[434640] = '13'
+chordtype[43770] = '13'
+chordtype[743250] = '13'
+chordtype[524370] = '13'
+chordtype[743340] = '13'
+chordtype[52500] = '13'
+chordtype[74640] = '13'
+chordtype[5700] = '13'
 chordtype[33250] = '7sus4b9'
 chordtype[433340] = '11b9'
+chordtype[43370] = '11b9'
+chordtype[43640] = '11b9'
 chordtype[4253340] = '13#9'
+chordtype[425370] = '13#9'
+chordtype[425640] = '13#9'
 chordtype[4434240] = '13b5b9'
 chordtype[4433340] = '13b9'
+chordtype[443370] = '13b9'
+chordtype[443640] = '13b9'
 chordtype[2250] = '6sus4'
 chordtype[83340] = '7#11'
+chordtype[31240] = '7#11'
+chordtype[26370] = '7#11'
 chordtype[2440] = '7#5'
 chordtype[52440] = '7#5#9'
 chordtype[32440] = '7#5b9'
 chordtype[73340] = '7add11'
+chordtype[32140] = '7add11'
 chordtype[113340] = '7add13'
+chordtype[12340] = '7add13'
+chordtype[56370] = '7add13'
+chordtype[23700] = '7add13'
 chordtype[54240] = '7b5#9'
+chordtype[35640] = '7b5#9'
 chordtype[34240] = '7b5b9'
+chordtype[33460] = '7b5b9'
+chordtype[23400] = '7b5b9'
 chordtype[443340] = '9#11'
+chordtype[224370] = '9#11'
+chordtype[44370] = '9#11'
+chordtype[44640] = '9#11'
 chordtype[42440] = '9#5'
+chordtype[24280] = '9#5'
 chordtype[643340] = '9b13'
+chordtype[421340] = '9b13'
+chordtype[64370] = '9b13'
+chordtype[424370] = '9b13'
+chordtype[42500] = '9b13'
 chordtype[44240] = '9b5'
+chordtype[24460] = '9b5'
+chordtype[22500] = '9b5'
 chordtype[43250] = '9sus4'
+chordtype[23500] = '9sus4'
 chordtype[334340] = 'M11'
+chordtype[33470] = 'M11'
 chordtype[4334340] = 'M13'
+chordtype[433470] = 'M13'
+chordtype[523470] = 'M13'
+chordtype[734340] = 'M13'
+chordtype[43410] = 'M13'
 chordtype[74340] = 'M7#11'
+chordtype[25470] = 'M7#11'
+chordtype[7470] = 'M7#11'
 chordtype[104340] = 'M7add13'
+chordtype[22340] = 'M7add13'
+chordtype[55470] = 'M7add13'
+chordtype[23610] = 'M7add13'
 chordtype[5240] = 'M7b5'
-chordtype[34340] = 'M9'
 chordtype[433440] = 'M9#11'
+chordtype[43380] = 'M9#11'
+chordtype[223380] = 'M9#11'
 chordtype[33440] = 'M9#5'
 chordtype[34250] = 'M9sus4'
 chordtype[4343430] = 'm13'
+chordtype[341270] = 'm13'
+chordtype[223500] = 'm13'
 chordtype[52430] = 'm6add9'
+chordtype[55630] = 'm6add9'
+chordtype[41590] = 'm6add9'
 chordtype[73430] = 'm7add11'
+chordtype[32230] = 'm7add11'
+chordtype[25370] = 'm7add11'
+chordtype[22600] = 'm7add11'
+chordtype[7370] = 'm7add11'
 chordtype[113430] = 'm7add13'
+chordtype[12430] = 'm7add13'
+chordtype[65370] = 'm7add13'
+chordtype[24600] = 'm7add13'
 chordtype[33430] = 'm7b9'
+chordtype[3370] = 'm7b9'
 chordtype[44330] = 'm9b5'
 chordtype[334430] = 'mM11'
 chordtype[4334430] = 'mM13'
 chordtype[64430] = 'mM7add11'
+chordtype[24470] = 'mM7add11'
+chordtype[44250] = 'mM7add11'
 chordtype[104430] = 'mM7add13'
+chordtype[22430] = 'mM7add13'
+chordtype[64470] = 'mM7add13'
 chordtype[34430] = 'mM9'
+chordtype[13470] = 'mM9'
+chordtype[3470] = 'mM9'
 chordtype[2320] = 'sus4add9'
-chordtype[70] = '5'
 chordtype[10340] = 'add11'
 chordtype[10430] = 'madd11'
 chordtype[11340] = 'add#11'
@@ -1017,67 +1094,66 @@ piano_list['BmM7add13'] = '47,58,62,66,68,0,0'
 piano_list['BmM9'] = '47,58,61,62,66,0,0'
 piano_list['Bsus4add9'] = '47,61,64,66,0,0,0'
 
-piano_list['C5']='48,60,67,0,0,0,0'
-piano_list['Cadd11']='48,60,64,65,67,0,0,0'
-piano_list['Cmadd11']='48,60,63,65,67,0,0,0'
-piano_list['Cadd#11']='48,60,64,66,67,0,0,0'
-piano_list['Cmadd#11']='48,60,63,66,67,0,0,0'
-piano_list['C#5']='49,61,68,0,0,0,0'
-piano_list['C#add11']='49,61,65,66,68,0,0,0'
-piano_list['C#madd11']='49,61,64,66,68,0,0,0'
-piano_list['C#add#11']='49,61,65,67,68,0,0,0'
-piano_list['C#madd#11']='49,61,64,67,68,0,0,0'
-piano_list['D5']='50,62,69,0,0,0,0'
-piano_list['Dadd11']='50,62,66,67,69,0,0,0'
-piano_list['Dmadd11']='50,62,65,67,69,0,0,0'
-piano_list['Dadd#11']='50,62,66,68,69,0,0,0'
-piano_list['Dmadd#11']='50,62,65,68,69,0,0,0'
-piano_list['Eb5']='39,58,63,0,0,0,0'
-piano_list['Ebadd11']='39,58,63,67,68,0,0,0'
-piano_list['Ebmadd11']='39,58,63,66,68,0,0,0'
-piano_list['Ebadd#11']='39,58,63,67,69,0,0,0'
-piano_list['Ebmadd#11']='39,58,63,66,69,0,0,0'
-piano_list['E5']='40,59,64,0,0,0,0'
-piano_list['Eadd11']='40,59,64,68,69,0,0,0'
-piano_list['Emadd11']='40,59,64,67,69,0,0,0'
-piano_list['Eadd#11']='40,58,59,64,68,0,0,0'
-piano_list['Emadd#11']='40,58,59,64,67,0,0,0'
-piano_list['F5']='41,60,65,0,0,0,0'
-piano_list['Fadd11']='41,58,60,65,69,0,0,0'
-piano_list['Fmadd11']='41,58,60,65,68,0,0,0'
-piano_list['Fadd#11']='41,59,60,65,69,0,0,0'
-piano_list['Fmadd#11']='41,59,60,65,68,0,0,0'
-piano_list['F#5']='42,61,66,0,0,0,0'
-piano_list['F#add11']='42,58,59,61,66,0,0,0'
-piano_list['F#madd11']='42,59,61,66,69,0,0,0'
-piano_list['F#add#11']='42,58,60,61,66,0,0,0'
-piano_list['F#madd#11']='42,60,61,66,69,0,0,0'
-piano_list['G5']='43,62,67,0,0,0,0'
-piano_list['Gadd11']='43,59,60,62,67,0,0,0'
-piano_list['Gmadd11']='43,58,60,62,67,0,0,0'
-piano_list['Gadd#11']='43,59,61,62,67,0,0,0'
-piano_list['Gmadd#11']='43,58,61,62,67,0,0,0'
-piano_list['Ab5']='44,63,68,0,0,0,0'
-piano_list['Abadd11']='44,60,61,63,68,0,0,0'
-piano_list['Abmadd11']='44,59,61,63,68,0,0,0'
-piano_list['Abadd#11']='44,60,62,63,68,0,0,0'
-piano_list['Abmadd#11']='44,59,62,63,68,0,0,0'
-piano_list['A5']='45,64,69,0,0,0,0'
-piano_list['Aadd11']='45,61,62,64,69,0,0,0'
-piano_list['Amadd11']='45,60,62,64,69,0,0,0'
-piano_list['Aadd#11']='45,61,63,64,69,0,0,0'
-piano_list['Amadd#11']='45,60,63,64,69,0,0,0'
-piano_list['Bb5']='46,58,65,0,0,0,0'
-piano_list['Bbadd11']='46,58,62,63,65,0,0,0'
-piano_list['Bbmadd11']='46,58,61,63,65,0,0,0'
-piano_list['Bbadd#11']='46,58,62,64,65,0,0,0'
-piano_list['Bbmadd#11']='46,58,61,64,65,0,0,0'
-piano_list['B5']='47,59,66,0,0,0,0'
-piano_list['Badd11']='47,59,63,64,66,0,0,0'
-piano_list['Bmadd11']='47,59,62,64,66,0,0,0'
-piano_list['Badd#11']='47,59,63,65,66,0,0,0'
-piano_list['Bmadd#11']='47,59,62,65,66,0,0,0'
-
+piano_list['C5'] = '48,60,67,0,0,0,0'
+piano_list['Cadd11'] = '48,60,64,65,67,0,0,0'
+piano_list['Cmadd11'] = '48,60,63,65,67,0,0,0'
+piano_list['Cadd#11'] = '48,60,64,66,67,0,0,0'
+piano_list['Cmadd#11'] = '48,60,63,66,67,0,0,0'
+piano_list['C#5'] = '49,61,68,0,0,0,0'
+piano_list['C#add11'] = '49,61,65,66,68,0,0,0'
+piano_list['C#madd11'] = '49,61,64,66,68,0,0,0'
+piano_list['C#add#11'] = '49,61,65,67,68,0,0,0'
+piano_list['C#madd#11'] = '49,61,64,67,68,0,0,0'
+piano_list['D5'] = '50,62,69,0,0,0,0'
+piano_list['Dadd11'] = '50,62,66,67,69,0,0,0'
+piano_list['Dmadd11'] = '50,62,65,67,69,0,0,0'
+piano_list['Dadd#11'] = '50,62,66,68,69,0,0,0'
+piano_list['Dmadd#11'] = '50,62,65,68,69,0,0,0'
+piano_list['Eb5'] = '39,58,63,0,0,0,0'
+piano_list['Ebadd11'] = '39,58,63,67,68,0,0,0'
+piano_list['Ebmadd11'] = '39,58,63,66,68,0,0,0'
+piano_list['Ebadd#11'] = '39,58,63,67,69,0,0,0'
+piano_list['Ebmadd#11'] = '39,58,63,66,69,0,0,0'
+piano_list['E5'] = '40,59,64,0,0,0,0'
+piano_list['Eadd11'] = '40,59,64,68,69,0,0,0'
+piano_list['Emadd11'] = '40,59,64,67,69,0,0,0'
+piano_list['Eadd#11'] = '40,58,59,64,68,0,0,0'
+piano_list['Emadd#11'] = '40,58,59,64,67,0,0,0'
+piano_list['F5'] = '41,60,65,0,0,0,0'
+piano_list['Fadd11'] = '41,58,60,65,69,0,0,0'
+piano_list['Fmadd11'] = '41,58,60,65,68,0,0,0'
+piano_list['Fadd#11'] = '41,59,60,65,69,0,0,0'
+piano_list['Fmadd#11'] = '41,59,60,65,68,0,0,0'
+piano_list['F#5'] = '42,61,66,0,0,0,0'
+piano_list['F#add11'] = '42,58,59,61,66,0,0,0'
+piano_list['F#madd11'] = '42,59,61,66,69,0,0,0'
+piano_list['F#add#11'] = '42,58,60,61,66,0,0,0'
+piano_list['F#madd#11'] = '42,60,61,66,69,0,0,0'
+piano_list['G5'] = '43,62,67,0,0,0,0'
+piano_list['Gadd11'] = '43,59,60,62,67,0,0,0'
+piano_list['Gmadd11'] = '43,58,60,62,67,0,0,0'
+piano_list['Gadd#11'] = '43,59,61,62,67,0,0,0'
+piano_list['Gmadd#11'] = '43,58,61,62,67,0,0,0'
+piano_list['Ab5'] = '44,63,68,0,0,0,0'
+piano_list['Abadd11'] = '44,60,61,63,68,0,0,0'
+piano_list['Abmadd11'] = '44,59,61,63,68,0,0,0'
+piano_list['Abadd#11'] = '44,60,62,63,68,0,0,0'
+piano_list['Abmadd#11'] = '44,59,62,63,68,0,0,0'
+piano_list['A5'] = '45,64,69,0,0,0,0'
+piano_list['Aadd11'] = '45,61,62,64,69,0,0,0'
+piano_list['Amadd11'] = '45,60,62,64,69,0,0,0'
+piano_list['Aadd#11'] = '45,61,63,64,69,0,0,0'
+piano_list['Amadd#11'] = '45,60,63,64,69,0,0,0'
+piano_list['Bb5'] = '46,58,65,0,0,0,0'
+piano_list['Bbadd11'] = '46,58,62,63,65,0,0,0'
+piano_list['Bbmadd11'] = '46,58,61,63,65,0,0,0'
+piano_list['Bbadd#11'] = '46,58,62,64,65,0,0,0'
+piano_list['Bbmadd#11'] = '46,58,61,64,65,0,0,0'
+piano_list['B5'] = '47,59,66,0,0,0,0'
+piano_list['Badd11'] = '47,59,63,64,66,0,0,0'
+piano_list['Bmadd11'] = '47,59,62,64,66,0,0,0'
+piano_list['Badd#11'] = '47,59,63,65,66,0,0,0'
+piano_list['Bmadd#11'] = '47,59,62,65,66,0,0,0'
 
 piano_mode = reaper.GetExtState('Chord Tools', 'piano mode')
 if piano_mode == 'true' then
@@ -1085,8 +1161,16 @@ if piano_mode == 'true' then
 else
     piano_mode = false
 end
+hold = reaper.GetExtState('Chord Tools', 'hold')
+if hold == 'true' then
+    hold = true
+else
+    hold = false
+end
 
 function chordin()
+    reaper.Undo_BeginBlock()
+
     local editor = reaper.MIDIEditor_GetActive()
     local take = reaper.MIDIEditor_GetTake(editor)
     reaper.MIDI_DisableSort(take)
@@ -1173,6 +1257,9 @@ function chordin()
 
     reaper.MIDI_Sort(take)
 
+    reaper.MarkTrackItemsDirty(reaper.GetMediaItemTake_Track(take), reaper.GetMediaItemTake_Item(take))
+    reaper.Undo_EndBlock('Chord Note In', -1)
+
 end -- function end
 
 --------------------------------------------------------------------------------------
@@ -1249,7 +1336,9 @@ function chordtolyrics()
     local editor = reaper.MIDIEditor_GetActive()
 
     local take = reaper.MIDIEditor_GetTake(editor)
-    
+
+    reaper.Undo_BeginBlock()
+
     reaper.MIDI_DisableSort(take)
     retval, notecnt, ccevtcnt, textsyxevtcnt = reaper.MIDI_CountEvts(take)
     noteidx = 0
@@ -1262,7 +1351,7 @@ function chordtolyrics()
         end
         noteidx = noteidx + 1
     end
-    reaper.MIDI_Sort(take) --fix measure note
+    reaper.MIDI_Sort(take) -- fix measure note
 
     key_list = {}
     key_list['key=c'] = 'Db,Eb,F#,Ab,Bb'
@@ -1279,6 +1368,24 @@ function chordtolyrics()
     key_list['key=b'] = 'C#,D#,F#,G#,A#'
     key_list['key=c#'] = 'C#,D#,F#,G#,A#'
     key_list['key=f#'] = 'C#,D#,F#,G#,A#'
+
+    key_list['key=am'] = 'Db,Eb,F#,Ab,Bb'
+    key_list['key=bbm'] = 'C#,D#,F#,G#,A#'
+    key_list['key=a#m'] = 'C#,D#,F#,G#,A#'
+    key_list['key=bm'] = 'C#,Eb,F#,G#,Bb'
+    key_list['key=cm'] = 'Db,Eb,Gb,Ab,Bb'
+    key_list['key=dbm'] = 'C#,D#,F#,G#,A#'
+    key_list['key=c#m'] = 'C#,D#,F#,G#,A#'
+    key_list['key=dm'] = 'Db,Eb,Gb,Ab,Bb'
+    key_list['key=em'] = 'C#,Eb,F#,Ab,Bb'
+    key_list['key=fm'] = 'Db,Eb,Gb,Ab,Bb'
+    key_list['key=gbm'] = 'C#,D#,F#,G#,Bb'
+    key_list['key=f#m'] = 'C#,D#,F#,G#,Bb'
+    key_list['key=gm'] = 'Db,Eb,Gb,Ab,Bb'
+    key_list['key=abm'] = 'C#,D#,F#,G#,A#'
+    key_list['key=g#m'] = 'C#,D#,F#,G#,A#'
+    key_list['key=d#m'] = 'C#,D#,F#,G#,A#'
+    key_list['key=ebm'] = 'C#,D#,F#,G#,A#'
 
     marklist = {}
     ticklist = {}
@@ -1326,7 +1433,7 @@ function chordtolyrics()
 
         zhuanweikey = ''
 
-        chord = ''
+        chord_val = ''
 
         while noteidx <= notecnt do
 
@@ -1515,9 +1622,9 @@ function chordtolyrics()
                         ii = ii + 1
                     end -- while end   
                     ii = 1
-                    chord = chordtype[chordnum]
+                    chord_val = chordtype[chordnum]
 
-                    if chord == nil then
+                    if chord_val == nil then
                         num = reaper.GetCursorPositionEx(0)
                         num_new = reaper.MIDI_GetProjTimeFromPPQPos(take, tempst)
                         move = num_new - num
@@ -1530,7 +1637,7 @@ function chordtolyrics()
                     end
 
                     if notest ~= nil then
-                        reaper.MIDI_InsertTextSysexEvt(take, false, false, notest, 5, chordkey .. chord .. zhuanweikey)
+                        reaper.MIDI_InsertTextSysexEvt(take, false, false, notest, 5, chordkey .. chord_val .. zhuanweikey)
                         -- reaper.MIDI_InsertTextSysexEvt(take, false, false, notest, 5, chordnum)
                     end -- insert end
                 end -- #notepitch > 1
@@ -1556,6 +1663,9 @@ function chordtolyrics()
     reaper.MIDIEditor_OnCommand(editor, 40370)
     reaper.SN_FocusMIDIEditor()
 
+    reaper.MarkTrackItemsDirty(reaper.GetMediaItemTake_Track(take), reaper.GetMediaItemTake_Item(take))
+    reaper.Undo_EndBlock('音符转和弦标记', -1)
+
 end -- chordtolyrics
 ---------------------------------------------------------------------------
 function chordtolyrics_series()
@@ -1563,6 +1673,9 @@ function chordtolyrics_series()
     local editor = reaper.MIDIEditor_GetActive()
 
     local take = reaper.MIDIEditor_GetTake(editor)
+
+    reaper.Undo_BeginBlock()
+    take = reaper.MIDIEditor_GetTake(editor)
 
     key_list = {}
     key_list['key=c'] = 'Ⅰ,#Ⅰ,Ⅱ,bⅢ,Ⅲ,Ⅳ,#Ⅳ,Ⅴ,bⅥ,Ⅵ,bⅦ,Ⅶ'
@@ -1626,7 +1739,7 @@ function chordtolyrics_series()
 
         zhuanweikey = ''
 
-        chord = ''
+        chord_val2 = ''
 
         while noteidx <= notecnt do
 
@@ -1947,9 +2060,9 @@ function chordtolyrics_series()
                         ii = ii + 1
                     end -- while end   
                     ii = 1
-                    chord = chordtype[chordnum]
+                    chord_val2 = chordtype[chordnum]
 
-                    if chord == nil then
+                    if chord_val2 == nil then
                         num = reaper.GetCursorPositionEx(0)
                         num_new = reaper.MIDI_GetProjTimeFromPPQPos(take, tempst)
                         move = num_new - num
@@ -1962,7 +2075,7 @@ function chordtolyrics_series()
                     end
 
                     if notest ~= nil then
-                        reaper.MIDI_InsertTextSysexEvt(take, false, false, notest, 5, chordkey .. chord .. zhuanweikey)
+                        reaper.MIDI_InsertTextSysexEvt(take, false, false, notest, 5, chordkey .. chord_val2 .. zhuanweikey)
                         -- reaper.MIDI_InsertTextSysexEvt(take, false, false, notest, 5, chordnum)
                     end -- insert end
                 end -- #notepitch > 1
@@ -1988,12 +2101,18 @@ function chordtolyrics_series()
     reaper.MIDIEditor_OnCommand(editor, 40370)
     reaper.SN_FocusMIDIEditor()
 
+    reaper.MarkTrackItemsDirty(reaper.GetMediaItemTake_Track(take), reaper.GetMediaItemTake_Item(take))
+    reaper.Undo_EndBlock('音符转和弦级数', -1)
+
 end -- chordtolyrics_series
 -----------------------------------------------------------------
 function LyricsToNote()
 
     local editor = reaper.MIDIEditor_GetActive()
     local take = reaper.MIDIEditor_GetTake(editor)
+
+    reaper.Undo_BeginBlock()
+
     roottb = {}
     roottb['C'] = 60
     roottb['C#'] = 61
@@ -2041,13 +2160,14 @@ function LyricsToNote()
     repeat
         tb_note = {}
         if retval and txt_type == 5 then
+            chord_txt = string.gsub(chord_txt, 'Maj', 'M')
             chord_txt = string.gsub(chord_txt, '%s', '')
             zhuanwei_sub = string.match(chord_txt, '%/%S+')
             if zhuanwei_sub ~= nil then
-                zhuanwei = string.gsub(zhuanwei_sub, '%/', '')
+                zhuanwei2 = string.gsub(zhuanwei_sub, '%/', '')
                 chord_new = string.gsub(chord_txt, zhuanwei_sub, '')
-                if zhuanweitb[zhuanwei] ~= nil then
-                    reaper.MIDI_InsertNote(take, false, false, ppqpos, ppqpos + 240, 0, zhuanweitb[zhuanwei], 100, false)
+                if zhuanweitb[zhuanwei2] ~= nil then
+                    reaper.MIDI_InsertNote(take, false, false, ppqpos, ppqpos + 240, 0, zhuanweitb[zhuanwei2], 100, false)
                 else
                     ProjTime = reaper.MIDI_GetProjTimeFromPPQPos(take, ppqpos)
                     hahahaha, measures, cml, fullbeats, cdenom = reaper.TimeMap2_timeToBeats(0, ProjTime)
@@ -2111,6 +2231,9 @@ function LyricsToNote()
     if message ~= '' then
         reaper.MB(message, '提示！', 0)
     end
+
+    reaper.MarkTrackItemsDirty(reaper.GetMediaItemTake_Track(take), reaper.GetMediaItemTake_Item(take))
+    reaper.Undo_EndBlock('和弦标记转音符', -1)
 
 end -- LyricsToNote
 -----------------------------------------------------------
@@ -2182,7 +2305,8 @@ function LyricsToChordTrack()
     reaper.Main_OnCommand(40421, 0)
     reaper.Main_OnCommand(40705, 0)
 
-    reaper.Undo_EndBlock('', 0)
+    reaper.MarkTrackItemsDirty(reaper.GetMediaItemTake_Track(take), reaper.GetMediaItemTake_Item(take))
+    reaper.Undo_EndBlock('和弦标记转和弦轨', -1)
 
 end -- LyricsToChordTrack
 --------------------------------------------------------
@@ -2234,7 +2358,8 @@ function LyricsToregion()
 
     reaper.PreventUIRefresh(-1)
 
-    reaper.Undo_EndBlock('', 0)
+    reaper.MarkTrackItemsDirty(reaper.GetMediaItemTake_Track(take), reaper.GetMediaItemTake_Item(take))
+    reaper.Undo_EndBlock('和弦标记转区域标记', -1)
 end -- Lyrics To region
 -----------------------------------------------------------
 function Audition()
@@ -2433,16 +2558,19 @@ local size = reaper.GetAppVersion():match('OSX') and 12 or 14
 local font = reaper.ImGui_CreateFont('sans-serif', 14)
 reaper.ImGui_Attach(ctx, font)
 is_new_value, filename, sectionID, cmdID, mode, resolution, val = reaper.get_action_context()
-filename = string.gsub(filename, 'YS_Chord Tools.lua', 'keyboard.jpg')
+filename = string.gsub(filename, 'Chord Tools.lua', 'keyboard.jpg')
 filename = string.gsub(filename, '\\', '\\\\')
 img = reaper.ImGui_CreateImage(filename)
 
 x, y = reaper.GetMousePosition()
 x, y = reaper.ImGui_PointConvertNative(ctx, x, y)
 -- reaper.ImGui_SetNextWindowSize(ctx, 385, 340)
-reaper.ImGui_SetNextWindowPos(ctx, x, y)
+if not hold then
+    reaper.ImGui_SetNextWindowPos(ctx, x, y)
+end
 windows_flag = reaper.ImGui_WindowFlags_AlwaysAutoResize()
 windows_flag = windows_flag | reaper.ImGui_WindowFlags_NoCollapse()
+windows_flag = windows_flag | reaper.ImGui_WindowFlags_TopMost()
 flag = true
 function loop()
     reaper.ImGui_PushFont(ctx, font)
@@ -2456,8 +2584,10 @@ function loop()
         end
         reaper.ImGui_SameLine(ctx)
         reaper.ImGui_Image(ctx, img, 200, 20, 0.0, 0.0, 1.0, 1.0, tint_col_rgba, 0x00000000)
+        reaper.ImGui_SameLine(ctx)
+        retval, hold = reaper.ImGui_Checkbox(ctx, 'Hold', hold)
 
-        if reaper.ImGui_Button(ctx, "Maj") then
+        if reaper.ImGui_Button(ctx, "M") then
             leixing = 'M'
             chordin()
             flag = false
@@ -3207,7 +3337,7 @@ function loop()
             leixing = 'madd#11'
             Audition()
         end
-        
+
         reaper.ImGui_PushStyleColor(ctx, reaper.ImGui_Col_Button(), 0x9400D36F)
         reaper.ImGui_PushStyleColor(ctx, reaper.ImGui_Col_ButtonHovered(), 0x9400D3DF)
         reaper.ImGui_PushStyleColor(ctx, reaper.ImGui_Col_ButtonActive(), 0xFF00FFFF)
@@ -3242,6 +3372,10 @@ function loop()
         end
         reaper.ImGui_PopStyleColor(ctx, 3)
 
+        if hold then
+            flag = true
+        end
+
         retval = reaper.ImGui_IsKeyPressed(ctx, reaper.ImGui_Key_Escape(), nil)
         if retval then
             flag = false
@@ -3264,8 +3398,14 @@ function loop()
         else
             piano_mode = 'false'
         end
+        if hold then
+            hold = 'true'
+        else
+            hold = 'false'
+        end
         recend()
         reaper.SetExtState('Chord Tools', 'piano mode', piano_mode, true)
+        reaper.SetExtState('Chord Tools', 'hold', hold, true)
         reaper.SN_FocusMIDIEditor()
     end
 end
