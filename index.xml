@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<index version="1" name="YS Scripts" commit="43a022563905725bb4e22763142f990fc1f159d3">
+<index version="1" name="YS Scripts" commit="09388aa73681d89ba2d01f922165621295af162f">
   <category name="Items Editing">
     <reapack name="YS_Midi Take Name From Track.lua" type="script" desc="Midi Take Name From Track">
       <version name="1.0" author="YS" time="2021-10-14T16:59:44Z">
@@ -977,10 +977,10 @@
         <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/d3f6cedd65e29e252170f14943a7eb21ff2ba29a/MIDI%20Editor/YS_%E9%9F%B3%E7%AC%A6%E5%AF%B9%E4%BD%8D.lua</source>
       </version>
     </reapack>
-    <reapack name="YS_音符碎拨(mandolin，guitar..).lua" type="script" desc="音符碎拨(mandolin，guitar..)">
-      <version name="1.0" author="YS" time="2024-02-18T05:45:28Z">
-        <changelog><![CDATA[+ Initial release]]></changelog>
-        <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/4c0897c813917a4384976ea63c434902bfe0edb2/MIDI%20Editor/YS_%E9%9F%B3%E7%AC%A6%E7%A2%8E%E6%8B%A8(mandolin,guitar..).lua</source>
+    <reapack name="YS_音符碎拨(mandolin,guitar..).lua" type="script" desc="音符碎拨(mandolin,guitar..)">
+      <version name="1.0" author="YS" time="2024-12-09T01:26:18Z">
+        <changelog><![CDATA[New Script]]></changelog>
+        <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/09388aa73681d89ba2d01f922165621295af162f/MIDI%20Editor/YS_%E9%9F%B3%E7%AC%A6%E7%A2%8E%E6%8B%A8(mandolin,guitar..).lua</source>
       </version>
     </reapack>
     <reapack name="YS_音符长度渐变.lua" type="script" desc="音符长度渐变">
