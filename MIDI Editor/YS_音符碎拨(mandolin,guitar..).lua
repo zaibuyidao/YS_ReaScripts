@@ -1,14 +1,8 @@
---[[
- * ReaScript Name: 音符碎拨(mandolin，guitar..)
- * Version: 1.0
- * Author: YS
---]]
-
---[[
- * Changelog:
- * v1.0 (2024-2-18)
-  + Initial release
---]]
+-- @description 音符碎拨(mandolin,guitar..)
+-- @version 1.0
+-- @author YS
+-- @changelog
+--   New Script
 
 local editor = reaper.MIDIEditor_GetActive()
 
