@@ -12,11 +12,19 @@
   + Initial release
 --]]
 
-reaper.Undo_BeginBlock()
 reaper.PreventUIRefresh(1)
 editor = reaper.MIDIEditor_GetActive()
 
 take = reaper.MIDIEditor_GetTake(editor)
+SelEvtsidx = reaper.MIDI_EnumSelEvts(take, -1)
+if SelEvtsidx == -1 then
+    Track = reaper.GetMediaItemTake_Track(take)
+    ret, TrackName = reaper.GetTrackName(Track)
+    reaper.MB('当前激活轨 ' .. TrackName .. ' 没有数据被选中!', '错误', 0)
+    reaper.SN_FocusMIDIEditor()
+    return
+end
+reaper.Undo_BeginBlock()
 item = reaper.GetMediaItemTake_Item(take)
 st = reaper.GetMediaItemInfo_Value(item, 'D_POSITION')
 lenth = reaper.GetMediaItemInfo_Value(item, 'D_LENGTH')
@@ -47,8 +55,10 @@ reaper.MIDIEditor_OnCommand(editor, 40834) -- previos item
 take = reaper.MIDIEditor_GetTake(editor)
 reaper.MIDI_InsertEvt(take, false, false, 0, string.char(0xFF, 0x21, 0x01, 0x00))
 
-reaper.Main_OnCommand(reaper.NamedCommandLookup("_XENAKIOS_RENAMETRAXDLG"), 0) -- rename
+reaper.Main_OnCommand(reaper.NamedCommandLookup("_RSef1aec96f066dc8e49b748c76d569a141369e1fb"), 0) -- rename
+--reaper.Main_OnCommand(reaper.NamedCommandLookup("_XENAKIOS_RENAMETRAXDLG"), 0) -- rename
 reaper.MIDIEditor_OnCommand(editor, 40836) -- up track midi 
 -- reaper.Main_OnCommand(40418, 0) -- up track
 reaper.PreventUIRefresh(-1)
-reaper.Undo_EndBlock('分轨！', 0)
+reaper.SN_FocusMIDIEditor()
+reaper.Undo_EndBlock('手动分轨', -1)
