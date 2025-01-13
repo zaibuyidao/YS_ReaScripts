@@ -1,6 +1,6 @@
 --[[
  * ReaScript Name: 允许多轨试听(Take) midieditor
- * Version: 1.0.1
+ * Version: 1.0.2
  * Author: YS
  * provides: [main=midi_editor] .
 --]]
@@ -14,6 +14,7 @@
 local start_time = reaper.time_precise()
 local key_state = reaper.JS_VKeys_GetState(start_time - 2)
 local is_playing = false
+Editor = reaper.MIDIEditor_GetActive()
 
 -- 检测被按下的按键
 local function detect_key_press()
@@ -106,9 +107,9 @@ end
 function main()
     if is_key_held() then
         if CountSelectedMediaItems == 0 then
-            reaper.MIDIEditor_OnCommand(reaper.MIDIEditor_GetActive(), reaper.NamedCommandLookup('_BR_ME_CONT_PLAY_MOUSE_SOLO_TRACK'))
+            reaper.MIDIEditor_OnCommand(Editor, reaper.NamedCommandLookup('_BR_ME_CONT_PLAY_MOUSE_SOLO_TRACK'))
         else
-            reaper.MIDIEditor_OnCommand(reaper.MIDIEditor_GetActive(), reaper.NamedCommandLookup('_BR_ME_CONT_PLAY_MOUSE'))
+            reaper.MIDIEditor_OnCommand(Editor, reaper.NamedCommandLookup('_BR_ME_CONT_PLAY_MOUSE'))
             -- reaper.ShowConsoleMsg('solo') 
         end
         reaper.defer(main)
