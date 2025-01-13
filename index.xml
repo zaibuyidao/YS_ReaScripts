@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<index version="1" name="YS Scripts" commit="8a3451ec773338d54bb0f85ba1260640bea59eb2">
+<index version="1" name="YS Scripts" commit="2dcdfd1aeee617543be624c488ce10f5d3b358ae">
   <category name="Items Editing">
     <reapack name="YS_Midi Take Name From Track.lua" type="script" desc="Midi Take Name From Track">
       <version name="1.0" author="YS" time="2021-10-14T16:59:44Z">
@@ -1173,6 +1173,9 @@
       </version>
       <version name="1.0.1" author="YS" time="2024-09-15T10:44:04Z">
         <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/c83f52e0b720be7d0e1ef8fe7cfba6f82d946ad9/Utility/YS_%E5%85%81%E8%AE%B8%E5%A4%9A%E8%BD%A8%E8%AF%95%E5%90%AC(Take)%20midieditor.lua</source>
+      </version>
+      <version name="1.0.2" author="YS" time="2025-01-13T09:55:05Z">
+        <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/2dcdfd1aeee617543be624c488ce10f5d3b358ae/Utility/YS_%E5%85%81%E8%AE%B8%E5%A4%9A%E8%BD%A8%E8%AF%95%E5%90%AC(Take)%20midieditor.lua</source>
       </version>
     </reapack>
     <reapack name="YS_允许多轨试听(Take).lua" type="script" desc="允许多轨试听(Take)">
