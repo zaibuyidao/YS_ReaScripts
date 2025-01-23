@@ -1,6 +1,6 @@
 --[[
  * ReaScript Name: CYM ROLL 滚擦生成器
- * Version: 1.0
+ * Version: 1.0.1
  * Author: YS
 --]]
 
@@ -21,12 +21,13 @@ function cymroll()
         reaper.TrackCtl_SetToolTip('没有设定时间范围！', x, y + 20, true)
         return
     end
+    ms = ms_sub / 1000
     minvel = 5
     juli = Thru - From
-    note_num = juli / 0.09
+    note_num = juli / ms
     note_num_int = math.floor(note_num + 0.5)
     vel = (maxvel - minvel) / note_num
-    buchang = 0.02 / note_num
+    buchang = 0.008 / note_num -- 补偿+毫秒值=下面的计算值
 
     if not dub then
         c = 1
@@ -45,7 +46,7 @@ function cymroll()
         reaper.MIDI_InsertNote(take, true, false, noteST1, noteST1 + 10, 0, notepitch, minvel, false)
     end
     while c < note_num_int do
-        noteST = From + (0.11 - (buchang * c)) * c
+        noteST = From + ((ms + 0.008) - (buchang * c)) * c
         noteST = reaper.MIDI_GetPPQPosFromProjTime(take, noteST)
         notevel = math.modf(minvel + (vel * c))
         if dub then
@@ -78,6 +79,13 @@ windows_flag = reaper.ImGui_WindowFlags_TopMost()
 windows_flag = windows_flag | reaper.ImGui_WindowFlags_AlwaysAutoResize()
 flag = true
 maxvel = 100
+
+retval, ms_sub = reaper.GetProjExtState(0, 'CYM Roll', 'ms_sub')
+if ms_sub == '' then
+    ms_sub = 75
+else
+    ms_sub = tonumber(ms_sub)
+end
 function loop()
     reaper.ImGui_PushFont(ctx, font)
     local visible, open = reaper.ImGui_Begin(ctx, 'CYM Roll', true, windows_flag)
@@ -100,6 +108,7 @@ function loop()
         end
         reaper.ImGui_Spacing(ctx)
         retval, maxvel = reaper.ImGui_SliderInt(ctx, 'Max Velocity', maxvel, 40, 127, "%d")
+        retval, ms_sub = reaper.ImGui_SliderInt(ctx, 'Interval ms', ms_sub, 60, 90, "%d")
 
         retval = reaper.ImGui_IsKeyPressed(ctx, reaper.ImGui_Key_Escape(), nil)
         if retval then
@@ -118,6 +127,7 @@ function loop()
     if open and flag then
         reaper.defer(loop)
     else
+        reaper.SetProjExtState(0, 'CYM Roll', 'ms_sub', ms_sub)
         reaper.SN_FocusMIDIEditor()
     end
 end

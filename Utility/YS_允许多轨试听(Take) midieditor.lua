@@ -1,6 +1,6 @@
 --[[
  * ReaScript Name: 允许多轨试听(Take) midieditor
- * Version: 1.0.2
+ * Version: 1.0.3
  * Author: YS
  * provides: [main=midi_editor] .
 --]]
@@ -12,8 +12,7 @@
 --]]
 
 local start_time = reaper.time_precise()
-local key_state = reaper.JS_VKeys_GetState(start_time - 2)
-local is_playing = false
+local key_state = reaper.JS_VKeys_GetState(-1)
 Editor = reaper.MIDIEditor_GetActive()
 
 -- 检测被按下的按键
@@ -34,7 +33,7 @@ end -- 如果没有检测到按键，结束脚本
 
 -- 检查按键是否被持续按住
 local function is_key_held()
-    key_state = reaper.JS_VKeys_GetState(start_time - 2)
+    key_state = reaper.JS_VKeys_GetState(0.1)
     return key_state:byte(key) == 1
 end
 
@@ -98,7 +97,7 @@ function unsolo_all_items()
     reaper.UpdateArrange()
 end
 
-CountSelectedMediaItems = reaper.CountSelectedMediaItems(0)
+CountSelectedMediaItems = reaper.CountSelectedMediaItems(0) 
 
 if CountSelectedMediaItems ~= 0 then
     solo_selected_items()
