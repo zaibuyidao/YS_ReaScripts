@@ -1,6 +1,6 @@
 --[[
  * ReaScript Name: drums 自动分轨(GM)
- * Version: 1.0.2
+ * Version: 1.0.3
  * Author: YS
 --]]
 
@@ -1939,85 +1939,129 @@ if take_cym ~= nil then
     idx_55_n = {}
     idx_57_n = {}
     repeat
-        retval, selected, muted, startppqpos, endppqpos, chan, pitch, vel = reaper.MIDI_GetNote(take_cym, idx)
-        if pitch == 49 then
-            table.insert(cym_49, startppqpos .. ',' .. endppqpos .. ',' .. chan .. ',' .. pitch .. ',' .. vel)
-            startppqpos_ms = reaper.MIDI_GetProjTimeFromPPQPos(take_cym, startppqpos)
-            table.insert(cym_49_tick, startppqpos_ms)
-            table.insert(idx_49, idx)
+    retval, selected, muted, startppqpos, endppqpos, chan, pitch, vel = reaper.MIDI_GetNote(take_cym, idx)
+    if pitch == 49 then
+        table.insert(cym_49, startppqpos .. ',' .. endppqpos .. ',' .. chan .. ',' .. pitch .. ',' .. vel)
+        startppqpos_ms = reaper.MIDI_GetProjTimeFromPPQPos(take_cym, startppqpos)
+        if startppqpos == reaper.MIDI_GetPPQPos_StartOfMeasure(take_cym, startppqpos) then
+            StartOfMeasure = true
+        else
+            StartOfMeasure = false
         end
-        if pitch == 52 then
-            table.insert(cym_52, startppqpos .. ',' .. endppqpos .. ',' .. chan .. ',' .. pitch .. ',' .. vel)
-            startppqpos_ms = reaper.MIDI_GetProjTimeFromPPQPos(take_cym, startppqpos)
-            table.insert(cym_52_tick, startppqpos_ms)
-            table.insert(idx_52, idx)
+        table.insert(cym_49_tick, startppqpos_ms)
+        table.insert(idx_49, {
+            idx = idx,
+            vel = vel,
+            StartOfMeasure = StartOfMeasure
+        })
+    end
+    if pitch == 52 then
+        table.insert(cym_52, startppqpos .. ',' .. endppqpos .. ',' .. chan .. ',' .. pitch .. ',' .. vel)
+        startppqpos_ms = reaper.MIDI_GetProjTimeFromPPQPos(take_cym, startppqpos)
+        if startppqpos == reaper.MIDI_GetPPQPos_StartOfMeasure(take_cym, startppqpos) then
+            StartOfMeasure = true
+        else
+            StartOfMeasure = false
         end
-        if pitch == 55 then
-            table.insert(cym_55, startppqpos .. ',' .. endppqpos .. ',' .. chan .. ',' .. pitch .. ',' .. vel)
-            startppqpos_ms = reaper.MIDI_GetProjTimeFromPPQPos(take_cym, startppqpos)
-            table.insert(cym_55_tick, startppqpos_ms)
-            table.insert(idx_55, idx)
+        table.insert(cym_52_tick, startppqpos_ms)
+        table.insert(idx_52, {
+            idx = idx,
+            vel = vel,
+            StartOfMeasure = StartOfMeasure
+        })
+    end
+    if pitch == 55 then
+        table.insert(cym_55, startppqpos .. ',' .. endppqpos .. ',' .. chan .. ',' .. pitch .. ',' .. vel)
+        startppqpos_ms = reaper.MIDI_GetProjTimeFromPPQPos(take_cym, startppqpos)
+        if startppqpos == reaper.MIDI_GetPPQPos_StartOfMeasure(take_cym, startppqpos) then
+            StartOfMeasure = true
+        else
+            StartOfMeasure = false
         end
-        if pitch == 57 then
-            table.insert(cym_57, startppqpos .. ',' .. endppqpos .. ',' .. chan .. ',' .. pitch .. ',' .. vel)
-            startppqpos_ms = reaper.MIDI_GetProjTimeFromPPQPos(take_cym, startppqpos)
-            table.insert(cym_57_tick, startppqpos_ms)
-            table.insert(idx_57, idx)
+        table.insert(cym_55_tick, startppqpos_ms)
+        table.insert(idx_55, {
+            idx = idx,
+            vel = vel,
+            StartOfMeasure = StartOfMeasure
+        })
+    end
+    if pitch == 57 then
+        table.insert(cym_57, startppqpos .. ',' .. endppqpos .. ',' .. chan .. ',' .. pitch .. ',' .. vel)
+        startppqpos_ms = reaper.MIDI_GetProjTimeFromPPQPos(take_cym, startppqpos)
+        if startppqpos == reaper.MIDI_GetPPQPos_StartOfMeasure(take_cym, startppqpos) then
+            StartOfMeasure = true
+        else
+            StartOfMeasure = false
         end
-        idx = idx + 1
-    until retval == false
+        table.insert(cym_57_tick, startppqpos_ms)
+        table.insert(idx_57, {
+            idx = idx,
+            vel = vel,
+            StartOfMeasure = StartOfMeasure
+        })
+    end
+    idx = idx + 1
+until retval == false
 
-    if #cym_49_tick > 0 then
-        i = 0
-        max = #cym_49_tick
-        table.insert(cym_49_tick, cym_49_tick[max] + 0.13)
-        while i < max do
-            if cym_49_tick[i + 1] - cym_49_tick[i] < 0.12 or cym_49_tick[i + 2] - cym_49_tick[i + 1] < 0.12 then
+if #cym_49_tick > 0 then
+    i = 0
+    max = #cym_49_tick
+    table.insert(cym_49_tick, cym_49_tick[max] + 0.13)
+    while i < max do
+        if cym_49_tick[i + 1] - cym_49_tick[i] < 0.12 or cym_49_tick[i + 2] - cym_49_tick[i + 1] < 0.12 then
+            if not (idx_49[i + 1].vel > 95 and idx_49[i + 1].StartOfMeasure and cym_49_tick[i + 2] - cym_49_tick[i + 1] > 0.12) then
                 table.insert(cym_49_n, cym_49[i + 1])
-                reaper.MIDI_SetNote(take_cym, idx_49[i + 1], true, false, NULL, NULL, NULL, NULL, NULL, false)
+                reaper.MIDI_SetNote(take_cym, idx_49[i + 1].idx, true, false, NULL, NULL, NULL, NULL, NULL, false)
             end
-            i = i + 1
         end
+        i = i + 1
     end
+end
 
-    if #cym_52_tick > 0 then
-        i = 0
-        max = #cym_52_tick
-        table.insert(cym_52_tick, cym_52_tick[max] + 0.13)
-        while i < max do
-            if cym_52_tick[i + 1] - cym_52_tick[i] < 0.12 or cym_52_tick[i + 2] - cym_52_tick[i + 1] < 0.12 then
+if #cym_52_tick > 0 then
+    i = 0
+    max = #cym_52_tick
+    table.insert(cym_52_tick, cym_52_tick[max] + 0.13)
+    while i < max do
+        if cym_52_tick[i + 1] - cym_52_tick[i] < 0.12 or cym_52_tick[i + 2] - cym_52_tick[i + 1] < 0.12 then
+            if not (idx_52[i + 1].vel > 95 and idx_52[i + 1].StartOfMeasure) then
                 table.insert(cym_52_n, cym_52[i + 1])
-                reaper.MIDI_SetNote(take_cym, idx_52[i + 1], true, false, NULL, NULL, NULL, NULL, NULL, false)
+                reaper.MIDI_SetNote(take_cym, idx_52[i + 1].idx, true, false, NULL, NULL, NULL, NULL, NULL, false)
             end
-            i = i + 1
         end
+        i = i + 1
     end
+end
 
-    if #cym_55_tick > 0 then
-        i = 0
-        max = #cym_55_tick
-        table.insert(cym_55_tick, cym_55_tick[max] + 0.13)
-        while i < max do
-            if cym_55_tick[i + 1] - cym_55_tick[i] < 0.12 or cym_55_tick[i + 2] - cym_55_tick[i + 1] < 0.12 then
+if #cym_55_tick > 0 then
+    i = 0
+    max = #cym_55_tick
+    table.insert(cym_55_tick, cym_55_tick[max] + 0.13)
+    while i < max do
+        if cym_55_tick[i + 1] - cym_55_tick[i] < 0.12 or cym_55_tick[i + 2] - cym_55_tick[i + 1] < 0.12 then
+            if not (idx_55[i + 1].vel > 95 and idx_55[i + 1].StartOfMeasure) then
                 table.insert(cym_55_n, cym_55[i + 1])
-                reaper.MIDI_SetNote(take_cym, idx_55[i + 1], true, false, NULL, NULL, NULL, NULL, NULL, false)
+                reaper.MIDI_SetNote(take_cym, idx_55[i + 1].idx, true, false, NULL, NULL, NULL, NULL, NULL, false)
             end
-            i = i + 1
         end
+        i = i + 1
     end
+end
 
-    if #cym_57_tick > 0 then
-        i = 0
-        max = #cym_57_tick
-        table.insert(cym_57_tick, cym_57_tick[max] + 0.13)
-        while i < max do
-            if cym_57_tick[i + 1] - cym_57_tick[i] < 0.12 or cym_57_tick[i + 2] - cym_57_tick[i + 1] < 0.12 then
+if #cym_57_tick > 0 then
+    i = 0
+    max = #cym_57_tick
+    table.insert(cym_57_tick, cym_57_tick[max] + 0.13)
+    while i < max do
+        if cym_57_tick[i + 1] - cym_57_tick[i] < 0.12 or cym_57_tick[i + 2] - cym_57_tick[i + 1] < 0.12 then
+            if not (idx_57[i + 1].vel > 95 and idx_57[i + 1].StartOfMeasure and cym_57_tick[i + 2] - cym_57_tick[i + 1] > 0.12) then
                 table.insert(cym_57_n, cym_57[i + 1])
-                reaper.MIDI_SetNote(take_cym, idx_57[i + 1], true, false, NULL, NULL, NULL, NULL, NULL, false)
+                reaper.MIDI_SetNote(take_cym, idx_57[i + 1].idx, true, false, NULL, NULL, NULL, NULL, NULL, false)
             end
-            i = i + 1
         end
+        i = i + 1
     end
+end
     selnoteidx = reaper.MIDI_EnumSelNotes(take_cym, -1)
     while selnoteidx ~= -1 do
         reaper.MIDI_DeleteNote(take_cym, selnoteidx)
@@ -2118,5 +2162,5 @@ reaper.UpdateArrange()
 -- reaper.MIDIEditor_OnCommand(editor,40818) 
 -- reaper.MIDIEditor_OnCommand(editor,40818)
 reaper.PreventUIRefresh(-1)
-reaper.Undo_EndBlock('', 0)
+reaper.Undo_EndBlock('Drums 自动分轨', -1)
 

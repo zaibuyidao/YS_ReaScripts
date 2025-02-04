@@ -1,6 +1,6 @@
 --[[
  * ReaScript Name: 鼓组 NRPN 检测
- * Version: 1.0
+ * Version: 1.0.1
  * Author: YS
  * Repository URI: https://github.com/zaibuyidao/YS_ReaScripts
  * provides: [main=main,midi_editor] .
@@ -74,6 +74,7 @@ end -- while end
 tb_level = {}
 tb_pan = {}
 tb_reverb = {}
+tb_pitch = {} -- 新增的用于存储 pitch 设置的表
 
 reaper.MIDI_DisableSort(take)
 retval, notecnt, ccevtcnt, extsyxevtcnt = reaper.MIDI_CountEvts(take)
@@ -90,6 +91,9 @@ while ccidx <= ccevtcnt do
         if msg2 == 99 and msg3 == 29 then
             NRPN = 'reverb'
         end
+        if msg2 == 99 and msg3 == 24 then -- 新增的 pitch 设置判断
+            NRPN = 'pitch'
+        end
         if msg2 == 98 then
             ccidx2 = ccidx
             repeat
@@ -104,6 +108,9 @@ while ccidx <= ccevtcnt do
                     end
                     if NRPN == 'reverb' then
                         tb_reverb[msg3] = msg5
+                    end
+                    if NRPN == 'pitch' then -- 新增的 pitch 设置存储
+                        tb_pitch[msg3] = msg5
                     end
                 end
             until msg4 == 98 or retval == false
@@ -132,19 +139,25 @@ end
 
 for i, v in pairs(tb_level) do
     if effective_pitch[i] == nil then
-        txt_out = txt_out .. '有多余的 level 设置，CC98=' .. i .. '，CC6='..v..'\n'
+        txt_out = txt_out .. '有多余的 level 设置，CC98=' .. i .. '，CC6=' .. v .. '\n'
     end
 end
 
 for i, v in pairs(tb_pan) do
     if effective_pitch[i] == nil then
-        txt_out = txt_out .. '有多余的 pan 设置，CC98=' .. i .. '，CC6='..v..'\n'
+        txt_out = txt_out .. '有多余的 pan 设置，CC98=' .. i .. '，CC6=' .. v .. '\n'
     end
 end
 
 for i, v in pairs(tb_reverb) do
     if effective_pitch[i] == nil then
-        txt_out = txt_out .. '有多余的 reverb 设置，CC98=' .. i .. '，CC6='..v..'\n'
+        txt_out = txt_out .. '有多余的 reverb 设置，CC98=' .. i .. '，CC6=' .. v .. '\n'
+    end
+end
+
+for i, v in pairs(tb_pitch) do -- 新增的 pitch 设置多余检查
+    if effective_pitch[i] == nil then
+        txt_out = txt_out .. '有多余的 pitch 设置，CC98=' .. i .. '，CC6=' .. v .. '\n'
     end
 end
 
@@ -159,11 +172,12 @@ if txt_out ~= '' then
         if reascript_console_hwnd == nil then
             return false
         end
-        local styles = {32, 33, 36, 31, 214, 37, 218, 1606, 4373, 3297, 220, 3492, 3733, 3594, 35, 1890, 2878, 3265, 4392}
+        local styles = {32, 0, 36, 31, 214, 37, 218, 1606, 4373, 3297, 220, 3492, 3733, 3594, 35, 1890, 2878, 3265, 4392}
         local Textfield = reaper.JS_Window_FindChildByID(reascript_console_hwnd, 1177)
         reaper.JS_WindowMessage_Send(Textfield, "WM_SETFONT", styles[style], 0, 1, 0)
     end
     SetReaScriptConsole_FontStyle(2)
 else
-reaper.MB('NRPN 格式正确！','提示',0)
+    reaper.MB('NRPN 格式正确！', '提示', 0)
+    reaper.SN_FocusMIDIEditor()
 end
