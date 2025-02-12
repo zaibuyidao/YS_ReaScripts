@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<index version="1" name="YS Scripts" commit="56b472a26d7f5578d45097a90b68a889a64a0937">
+<index version="1" name="YS Scripts" commit="865d02cf2f0d0a989d50c81e0f4e1c38c7ba5fcf">
   <category name="Items Editing">
     <reapack name="YS_Midi Take Name From Track.lua" type="script" desc="Midi Take Name From Track">
       <version name="1.0" author="YS" time="2021-10-14T16:59:44Z">
@@ -1047,6 +1047,14 @@
       </version>
       <version name="1.0.1" author="YS" time="2024-04-29T06:06:23Z">
         <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/26fa89d3186382b69f6d7683becba910054c7f82/MIDI%20Editor/YS_%E9%BC%93%E9%94%AE%E5%8F%B7%E9%80%89%E6%8B%A9.lua</source>
+      </version>
+    </reapack>
+  </category>
+  <category name="MIDI Event List Editor">
+    <reapack name="YS_鼓模板数据规范.lua" type="script" desc="鼓模板数据规范">
+      <version name="1.0" author="YS" time="2025-02-12T10:47:31Z">
+        <changelog><![CDATA[+ Initial release]]></changelog>
+        <source main="midi_eventlisteditor">https://github.com/zaibuyidao/YS_ReaScripts/raw/865d02cf2f0d0a989d50c81e0f4e1c38c7ba5fcf/MIDI%20Event%20List%20Editor/YS_%E9%BC%93%E6%A8%A1%E6%9D%BF%E6%95%B0%E6%8D%AE%E8%A7%84%E8%8C%83.lua</source>
       </version>
     </reapack>
   </category>
