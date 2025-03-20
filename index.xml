@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<index version="1" name="YS Scripts" commit="865d02cf2f0d0a989d50c81e0f4e1c38c7ba5fcf">
+<index version="1" name="YS Scripts" commit="1c6634f789032be3055ba02dc660e5d37ebd8841">
   <category name="Items Editing">
     <reapack name="YS_Midi Take Name From Track.lua" type="script" desc="Midi Take Name From Track">
       <version name="1.0" author="YS" time="2021-10-14T16:59:44Z">
@@ -228,6 +228,9 @@
       </version>
       <version name="1.0.2" author="YS" time="2025-01-04T02:43:49Z">
         <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/8a3451ec773338d54bb0f85ba1260640bea59eb2/MIDI%20Editor/YS_drums%20%E5%88%86%E8%BD%A8.lua</source>
+      </version>
+      <version name="1.0.3" author="YS" time="2025-03-20T14:32:42Z">
+        <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/1c6634f789032be3055ba02dc660e5d37ebd8841/MIDI%20Editor/YS_drums%20%E5%88%86%E8%BD%A8.lua</source>
       </version>
     </reapack>
     <reapack name="YS_drums 自动分轨(GM).lua" type="script" desc="drums 自动分轨(GM)">
