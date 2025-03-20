@@ -1,8 +1,7 @@
 --[[
  * ReaScript Name: drums 分轨
- * Version: 1.0.2
+ * Version: 1.0.3
  * Author: YS
- * Repository URI: https://github.com/zaibuyidao/YS_ReaScripts
  * provides: [main=midi_editor] .
 --]]
 
@@ -12,10 +11,37 @@
   + Initial release
 --]]
 
-reaper.PreventUIRefresh(1)
 editor = reaper.MIDIEditor_GetActive()
-
 take = reaper.MIDIEditor_GetTake(editor)
+
+function getnotename()
+    local pitchnum = 0
+    local temppitch = -1
+    local noteidx = -1
+    noteidx = reaper.MIDI_EnumSelNotes(take, noteidx)
+    while noteidx ~= -1 do
+        retval, selected, muted, startppqpos, endppqpos, chan, pitch, vel = reaper.MIDI_GetNote(take, noteidx)
+        if pitch ~= temppitch then
+            pitchnum = pitchnum + 1
+        end
+        if pitchnum > 1 then
+            return
+        end
+        temppitch = pitch
+        noteidx = reaper.MIDI_EnumSelNotes(take, noteidx)
+    end
+    if pitchnum == 1 then
+        track = reaper.GetMediaItemTake_Track(take)
+        MIDINoteName = reaper.GetTrackMIDINoteNameEx(0, track, pitch, -1)
+        if MIDINoteName and MIDINoteName ~= '' then
+            MIDINoteName = string.upper(MIDINoteName)
+        end
+    end
+end
+getnotename()
+
+reaper.PreventUIRefresh(1)
+
 SelEvtsidx = reaper.MIDI_EnumSelEvts(take, -1)
 if SelEvtsidx == -1 then
     Track = reaper.GetMediaItemTake_Track(take)
@@ -50,13 +76,53 @@ else
     reaper.MIDIEditor_OnCommand(editor, 40449) -- normal mode
 end
 
-reaper.CreateNewMIDIItemInProj(track2, 0, 0.00001, false)
+reaper.CreateNewMIDIItemInProj(track2, 0, 0.001, false)
 reaper.MIDIEditor_OnCommand(editor, 40834) -- previos item
 take = reaper.MIDIEditor_GetTake(editor)
 reaper.MIDI_InsertEvt(take, false, false, 0, string.char(0xFF, 0x21, 0x01, 0x00))
 
-reaper.Main_OnCommand(reaper.NamedCommandLookup("_RSef1aec96f066dc8e49b748c76d569a141369e1fb"), 0) -- rename
---reaper.Main_OnCommand(reaper.NamedCommandLookup("_XENAKIOS_RENAMETRAXDLG"), 0) -- rename
+function getsettrackinfo()
+    MediaTrack = reaper.GetSelectedTrack(0, 0)
+    retval, tk_name = reaper.GetSetMediaTrackInfo_String(MediaTrack, 'P_NAME', '', false)
+    tk_name = string.gsub(tk_name, '\'', '\a')
+    num = reaper.GetMediaTrackInfo_Value(MediaTrack, 'I_MIDIHWOUT')
+    if num == -1 then
+        port = 0
+        chan = 0
+    else
+        port = math.modf(num / 32) + 1
+        chan = math.fmod(num, 32)
+        chan = string.match(chan, '%d+')
+    end
+    if MIDINoteName then
+        tk_name = tk_name .. ' ' .. MIDINoteName
+    end
+    msg = tk_name .. ',' .. port .. ',' .. chan
+    bl, input = reaper.GetUserInputs('修改轨道信息', 3,
+        'Track Name 轨道名称:,Track Midi Port 端口:,Track Midi Channel 通道 :,extrawidth=200', msg)
+    if bl == false then
+        reaper.SN_FocusMIDIEditor()
+        return
+    end
+    idx = string.find(input, ',', 1)
+    name_in = string.sub(input, 0, idx - 1)
+    name_in = string.gsub(name_in, '\a', '\'')
+    reaper.GetSetMediaTrackInfo_String(MediaTrack, 'P_NAME', name_in, true)
+    input2 = string.sub(input, idx + 1)
+    port_new, chan_new = string.match(input2, '(%d+),(%d+)')
+    port_new = tonumber(port_new) - 1
+    if port_new > 15 then
+        port_new = 15
+    end
+    chan_new = tonumber(chan_new)
+    if chan_new > 16 then
+        chan_new = 16
+    end
+    num_new = port_new * 32 + chan_new
+    reaper.SetMediaTrackInfo_Value(MediaTrack, 'I_MIDIHWOUT', num_new)
+end
+getsettrackinfo()
+
 reaper.MIDIEditor_OnCommand(editor, 40836) -- up track midi 
 -- reaper.Main_OnCommand(40418, 0) -- up track
 reaper.PreventUIRefresh(-1)
