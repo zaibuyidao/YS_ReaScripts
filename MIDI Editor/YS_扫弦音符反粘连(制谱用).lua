@@ -2,7 +2,7 @@
 -- @version 1.0
 -- @author YS
 -- @changelog New Script
--- @provides [main=main, midi_editor] .
+-- @provides [main=main,midi_editor] .
 
 local editor = reaper.MIDIEditor_GetActive()
 
