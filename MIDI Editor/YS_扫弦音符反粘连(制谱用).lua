@@ -1,8 +1,8 @@
 -- @description 扫弦音符反粘连(制谱用)
--- @version 1.0
+-- @version 1.0.1
 -- @author YS
 -- @changelog New Script
--- @provides [main=main,midi_editor] .
+-- @provides [main=main,midi_editor,midi_inlineeditor] .
 
 local editor = reaper.MIDIEditor_GetActive()
 
