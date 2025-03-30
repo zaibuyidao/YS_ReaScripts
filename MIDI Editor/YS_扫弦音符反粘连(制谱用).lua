@@ -1,5 +1,5 @@
 -- @description 扫弦音符反粘连(制谱用)
--- @version 1.0.2
+-- @version 1.0.3
 -- @author YS
 -- @changelog New Script
 
@@ -35,6 +35,8 @@ function Reactionglue()
     local notepossort = {}
     local notevel = {}
     local temppos = -40
+    editnote = {}
+    insertnote = {}
     noteidx = reaper.MIDI_EnumSelNotes(take, noteidx)
     while noteidx ~= -1 do
         retval, _, _, startppqpos, endppqpos, chan, pitch, vel = reaper.MIDI_GetNote(take, noteidx)
@@ -77,12 +79,18 @@ function Reactionglue()
         i = 1
         while i < #notepossort do
             if startppqpos == notepossort[i].pos and endppqpos > notepossort[i + 1].pos then
-                reaper.MIDI_SetNote(take, noteidx, nil, nil, nil, notepossort[i + 1].pos, nil, nil, nil, false)
+                editnote[noteidx] = notepossort[i + 1].pos
                 ii = i + 1
                 while endppqpos > notepossort[ii].pos and ii < #notepossort do
                     newvel = notepossort[ii].vel
                     if type(newvel) ~= 'string' then
-                        reaper.MIDI_InsertNote(take, true, false, notepossort[ii].pos, notepossort[ii + 1].pos, chan, pitch, newvel, false)
+                        table.insert(insertnote, {
+                            notestart = notepossort[ii].pos,
+                            noteend = notepossort[ii + 1].pos,
+                            notechan = chan,
+                            notepitch = pitch,
+                            notevel = newvel
+                        })
                     end
                     ii = ii + 1
                 end
@@ -91,6 +99,13 @@ function Reactionglue()
         end
         noteidx = reaper.MIDI_EnumSelNotes(take, noteidx)
     end
+    for i, v in pairs(editnote) do
+        reaper.MIDI_SetNote(take, i, nil, nil, nil, v, nil, nil, nil, false)
+    end
+    for i, v in ipairs(insertnote) do
+        reaper.MIDI_InsertNote(take, true, false, v.notestart, v.noteend, v.notechan, v.notepitch, v.notevel, false)
+    end
+
     reaper.MIDI_Sort(take)
 end
 
@@ -136,13 +151,12 @@ end
 
 -- tick对齐
 reaper.Undo_BeginBlock()
-new = 0
 old = 6
 takeindex = 0
 take = reaper.MIDIEditor_EnumTakes(editor, takeindex, true)
 while take ~= nil do
     reaper.MIDI_DisableSort(take)
-
+    notes = {}
     first = 0
     tempst, i, idx = -1, 1, -1
     integer = reaper.MIDI_EnumSelNotes(take, idx)
@@ -154,10 +168,10 @@ while take ~= nil do
         retval, selected, muted, startppqpos, endppqpos, chan, pitch, vel = reaper.MIDI_GetNote(take, integer)
         juli = startppqpos - tempst
         if juli <= old and juli >= 0 then
-            if endppqpos < first + (i * new) then
-                endppqpos = first + (i * new) + 1
+            if endppqpos < first then
+                endppqpos = first + 1
             end
-            reaper.MIDI_SetNote(take, integer, true, false, first + (i * new), endppqpos, NULL, NULL, NULL, false)
+            notes[integer] = first
             i = i + 1
         else
             first = startppqpos
@@ -168,6 +182,10 @@ while take ~= nil do
 
         idx = integer
     end -- while end
+
+    for i, v in pairs(notes) do
+        reaper.MIDI_SetNote(take, i, NULL, NULL, v, NULL, NULL, NULL, NULL, false)
+    end
 
     OverNoteFix2() -- 处理重叠音符
     reaper.MIDI_Sort(take)
