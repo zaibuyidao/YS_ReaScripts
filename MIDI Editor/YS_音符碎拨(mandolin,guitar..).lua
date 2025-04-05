@@ -1,18 +1,20 @@
 -- @description 音符碎拨(mandolin,guitar..)
--- @version 1.0
+-- @version 1.0.1
 -- @author YS
 -- @changelog
 --   New Script
 
 local editor = reaper.MIDIEditor_GetActive()
 
-retval, userinput = reaper.GetUserInputs('音符碎拨技巧', 1, 'Split Ms (毫秒建议值 80-100)', '90')
+retval, userinput = reaper.GetUserInputs('震音，碎拨，tremolo技巧', 1, 'Split Ms (毫秒建议值 60-110)', '80')
 if retval == false then
     reaper.SN_FocusMIDIEditor()
     return
 end
 note_ms = tonumber(userinput / 1000)
 ms_buchang = {0.012, 0.009, 0.006, 0.003}
+
+reaper.Undo_BeginBlock()
 
 takeindex = 0
 take = reaper.MIDIEditor_EnumTakes(editor, takeindex, true)
@@ -39,21 +41,21 @@ while take ~= nil do
 
         vel2 = vel
 
-        if dur_ms > note_ms + ms_buchang[1] then
+        if dur_ms > note_ms * 1.8 then 
 
-            if dur_ms > note_ms * 4 then
+            if dur_ms > note_ms * 4 then 
                 vel1 = math.floor(vel * bili)
             else
                 vel1 = vel
             end
-            noteend = reaper.MIDI_GetPPQPosFromProjTime(take, startppqpos_ms + note_ms + ms_buchang[1])
+            noteend = reaper.MIDI_GetPPQPosFromProjTime(take, startppqpos_ms + note_ms + ms_buchang[1]) 
 
-            reaper.MIDI_SetNote(take, integer, NULL, NULL, NULL, noteend-1, NULL, NULL, vel1, false)
+            reaper.MIDI_SetNote(take, integer, NULL, NULL, NULL, (noteend - 1), NULL, NULL, vel1, false)
 
             notestart_ms = startppqpos_ms + note_ms + ms_buchang[1]
 
             i = 2
-            while notestart_ms < endppqpos_ms-0.003 do
+            while notestart_ms < (endppqpos_ms - 0.003) do
                 if ms_buchang[i] then
                     buchang2 = ms_buchang[i]
                 else
@@ -62,10 +64,10 @@ while take ~= nil do
 
                 lastend_ms = notestart_ms + note_ms + buchang2
                 if lastend_ms > endppqpos_ms then
-                 if lastend_ms - endppqpos_ms > note_ms / 2 then
+                    if lastend_ms - endppqpos_ms > note_ms / 2 then
                         lastend = reaper.MIDI_GetPPQPosFromProjTime(take, endppqpos_ms)
                         retval, notecnt, ccevtcnt, textsyxevtcnt = reaper.MIDI_CountEvts(take)
-                        reaper.MIDI_SetNote(take, notecnt - 1, NULL, NULL, NULL, lastend, NULL, NULL, NULL, false)
+                        reaper.MIDI_SetNote(take, (notecnt - 1), NULL, NULL, NULL, lastend, NULL, NULL, NULL, false)
                     else
                         lastend_ms = endppqpos_ms
                         lastend = reaper.MIDI_GetPPQPosFromProjTime(take, lastend_ms)
@@ -81,14 +83,14 @@ while take ~= nil do
 
                 notestart = reaper.MIDI_GetPPQPosFromProjTime(take, notestart_ms)
 
-                reaper.MIDI_InsertNote(take, false, muted, notestart, lastend-1, chan, pitch, vel2, false)
+                reaper.MIDI_InsertNote(take, false, muted, notestart, (lastend - 1), chan, pitch, vel2, false)
                 i = i + 1
 
                 notestart_ms = lastend_ms
 
             end -- while end
             bili = 0.8
-            if dur_ms > note_ms * 12 then
+            if dur_ms > (note_ms * 12) then
                 retval, notecnt, ccevtcnt, textsyxevtcnt = reaper.MIDI_CountEvts(take)
                 reaper.MIDI_SetNote(take, notecnt - 1, NULL, NULL, NULL, NULL, NULL, NULL, math.floor(vel * 0.85), false)
                 reaper.MIDI_SetNote(take, notecnt - 2, NULL, NULL, NULL, NULL, NULL, NULL, math.floor(vel * 0.89), false)
@@ -104,11 +106,14 @@ while take ~= nil do
     until integer == -1
 
     reaper.MIDI_Sort(take)
+    reaper.MarkTrackItemsDirty(reaper.GetMediaItemTake_Track(take), reaper.GetMediaItemTake_Item(take))
 
     takeindex = takeindex + 1
     take = reaper.MIDIEditor_EnumTakes(editor, takeindex, true)
 
 end -- while take end
+
+reaper.Undo_EndBlock('音符碎拨', -1)
 
 x, y = reaper.GetMousePosition()
 reaper.TrackCtl_SetToolTip('请手动处理乐句的起伏！', x, y - 30, true)

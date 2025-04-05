@@ -1,6 +1,6 @@
 --[[
  * ReaScript Name: 小力度音符粘连到上一音符(吉他扫弦工具)
- * Version: 1.0.4
+ * Version: 1.0.5
  * Author: YS
 --]]
 
@@ -12,11 +12,10 @@
 
 function select_low()
     local i, idx = 2, -1
-
     local tbidx = {}
     local tbst = {}
     local tbpitch = {}
-    local selidx = {}
+    selidx = {}
     local tempst = -11
     local integer = reaper.MIDI_EnumSelNotes(take, idx)
 
@@ -66,19 +65,15 @@ function select_low()
         tempst = startppqpos
         idx = integer
     end -- while end
-    reaper.MIDI_SelectAll(take, false)
-    for i, v in ipairs(selidx) do
-        reaper.MIDI_SetNote(take, v, true, NULL, NULL, NULL, NULL, NULL, NULL, false)
-    end
+
 end -- sel low note
 
 function select_top()
-
     local i, idx = 2, -1
     local tbidx = {}
     local tbst = {}
     local tbpitch = {}
-    local selidx = {}
+    selidx = {}
     local tempst = -11
     local integer = reaper.MIDI_EnumSelNotes(take, idx)
 
@@ -128,64 +123,117 @@ function select_top()
         tempst = startppqpos
         idx = integer
     end -- while end
-    reaper.MIDI_SelectAll(take, false)
-    for i, v in ipairs(selidx) do
-        reaper.MIDI_SetNote(take, v, true, NULL, NULL, NULL, NULL, NULL, NULL, false)
-    end
 
 end -- sel top note
 
 local editor = reaper.MIDIEditor_GetActive()
 
-retval, shuzhi = reaper.GetUserInputs('小力度音符粘连到上一音符', 2, '0 低音 1 高音,输入力度临界值 :', '0,85')
+retval, shuzhi = reaper.GetUserInputs('小力度音符粘连到上一音符', 2, '0:低音 1:高音 2:All,输入力度临界值 :', '2,85')
 if retval == false then
     return reaper.SN_FocusMIDIEditor()
 end
 toplow, shuzhi = string.match(shuzhi, "(.+),(.+)")
 shuzhi = tonumber(shuzhi)
 
+reaper.Undo_BeginBlock()
+
 takeindex = 0
 take = reaper.MIDIEditor_EnumTakes(editor, takeindex, true)
 while take ~= nil do
 
     reaper.MIDI_DisableSort(take)
+
     if toplow == '0' then
         select_low()
-    else
+    elseif toplow == '1' then
         select_top()
+    elseif toplow == '2' then
+        select_low()
+    else
+        reaper.SN_FocusMIDIEditor()
+        reaper.TrackCtl_SetToolTip('输入模式非法', 50, 0, true)
+        return
     end
 
-    idx = -1
     note = {}
-    integer = reaper.MIDI_EnumSelNotes(take, -1)
-    retval, selected, muted, startppqpos, endppqpos, chan, pitch, vel = reaper.MIDI_GetNote(take, integer)
-    note['st'] = endppqpos
-    note['pitch'] = pitch
-    note['idx'] = integer
-    idx = integer
+    if #selidx > 2 then
+        retval, selected, muted, startppqpos, endppqpos, chan, pitch, vel = reaper.MIDI_GetNote(take, selidx[1])
+        note['st'] = endppqpos
+        note['pitch'] = pitch
+        note['idx'] = selidx[1]
+        DeleteNote = {}
+        SetNote = {}
+        for i = 2, #selidx do
+            retval, selected, muted, startppqpos, endppqpos, chan, pitch, vel = reaper.MIDI_GetNote(take, selidx[i])
+            dur = endppqpos - startppqpos
+            jiange = startppqpos - note['st']
+            if vel <= shuzhi and pitch == note['pitch'] and dur > 30 and jiange < 60 then
+                table.insert(DeleteNote, selidx[i])
+                -- reaper.MIDI_DeleteNote(take, idx)
+                SetNote[note['idx']] = endppqpos
+                -- reaper.MIDI_SetNote(take, note['idx'], true, false, NULL, endppqpos, NULL, NULL, NULL, false)
+                note['st'] = endppqpos
+            else
+                note['st'] = endppqpos
+                note['pitch'] = pitch
+                note['idx'] = selidx[i]
+            end
+        end
 
-    while (integer ~= -1) do
-        integer = reaper.MIDI_EnumSelNotes(take, idx)
-        retval, selected, muted, startppqpos, endppqpos, chan, pitch, vel = reaper.MIDI_GetNote(take, integer)
-        dur = endppqpos - startppqpos
-        jiange = startppqpos - note['st']
-        if vel <= shuzhi and pitch == note['pitch'] and dur > 30 and jiange < 60 then
-            reaper.MIDI_DeleteNote(take, integer)
-            reaper.MIDI_SetNote(take, note['idx'], true, false, NULL, endppqpos, NULL, NULL, NULL, false)
-            note['st'] = endppqpos
-        else
-            note['st'] = endppqpos
-            note['pitch'] = pitch
-            note['idx'] = integer
-            idx = integer
-            integer = reaper.MIDI_EnumSelNotes(take, idx)
+        for i, v in pairs(SetNote) do
+            reaper.MIDI_SetNote(take, i, nil, nil, nil, v, nil, nil, nil, false)
+        end
+
+        for i = #DeleteNote, 1, -1 do
+            reaper.MIDI_DeleteNote(take, DeleteNote[i])
         end
     end
     reaper.MIDI_Sort(take)
+
+    if toplow == '2' then
+        reaper.MIDI_DisableSort(take)
+        select_top()
+        note = {}
+        if #selidx > 2 then
+            retval, selected, muted, startppqpos, endppqpos, chan, pitch, vel = reaper.MIDI_GetNote(take, selidx[1])
+            note['st'] = endppqpos
+            note['pitch'] = pitch
+            note['idx'] = selidx[1]
+            DeleteNote = {}
+            SetNote = {}
+            for i = 2, #selidx do
+                retval, selected, muted, startppqpos, endppqpos, chan, pitch, vel = reaper.MIDI_GetNote(take, selidx[i])
+                dur = endppqpos - startppqpos
+                jiange = startppqpos - note['st']
+                if vel <= shuzhi and pitch == note['pitch'] and dur > 30 and jiange < 60 then
+                    table.insert(DeleteNote, selidx[i])
+                    SetNote[note['idx']] = endppqpos
+                    note['st'] = endppqpos
+                else
+                    note['st'] = endppqpos
+                    note['pitch'] = pitch
+                    note['idx'] = selidx[i]
+                end
+            end
+
+            for i, v in pairs(SetNote) do
+                reaper.MIDI_SetNote(take, i, nil, nil, nil, v, nil, nil, nil, false)
+            end
+
+            for i = #DeleteNote, 1, -1 do
+                reaper.MIDI_DeleteNote(take, DeleteNote[i])
+            end
+        end
+        reaper.MIDI_Sort(take)
+    end
+
+    reaper.MarkTrackItemsDirty(reaper.GetMediaItemTake_Track(take), reaper.GetMediaItemTake_Item(take))
 
     takeindex = takeindex + 1
     take = reaper.MIDIEditor_EnumTakes(editor, takeindex, true)
 end -- while take end
 
 reaper.SN_FocusMIDIEditor()
+reaper.Undo_EndBlock('扫弦小力度粘连', -1)
+reaper.TrackCtl_SetToolTip('扫弦小力度粘连处理成功', 50, 0, true)
 
