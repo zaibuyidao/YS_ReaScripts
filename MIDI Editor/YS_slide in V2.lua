@@ -1,6 +1,6 @@
 --[[
  * ReaScript Name: slide in V2
- * Version: 1.0.1
+ * Version: 1.0.2
  * Author: YS
 --]]
 
@@ -42,7 +42,7 @@ function slideIn()
 
     juli = Thru_tick - From_tick
     b = juli / wanyin_num
-    
+
     reaper.Undo_BeginBlock()
     reaper.MIDI_DisableSort(take)
     if (Thru ~= 0) then
@@ -87,15 +87,15 @@ function slideIn()
                     if (beishu < 0) then
                         beishu = beishu - 1
                     end
-                    if jiange > 3 then
+                    --[[if jiange > 3 then
                         subjiange = jiange * 2
                         subjuli = juli / 0.74
                     else
-                        subjiange = jiange + (c * 0.85)
+                                                subjiange = jiange + (c * 0.85)
                         subjuli = juli
-                    end
-                    InsertTick = From_tick + subjuli * c / (subjiange - (c * 0.65))
-                    -- InsertTick = From_tick + juli * ((c + c) / (jiange + c))
+                    end --]]
+                    -- InsertTick = From_tick + subjuli * c / (subjiange - (c * 0.65))
+                    InsertTick = From_tick + juli * ((c + c) / (jiange + c))
                     if InsertTick - TempTick < 9 then
                         txt = txt .. '警告 : 弯音 ' .. pitch .. ' 间隔低于 10 tick!\n'
                     end
@@ -165,8 +165,8 @@ function slideIn()
         end
     end -- thru fushu
     reaper.MIDI_Sort(take)
-    
-    reaper.MarkTrackItemsDirty( reaper.GetMediaItemTake_Track(take), reaper.GetMediaItemTake_Item(take))
+
+    reaper.MarkTrackItemsDirty(reaper.GetMediaItemTake_Track(take), reaper.GetMediaItemTake_Item(take))
     reaper.Undo_EndBlock('slide in', -1)
     reaper.SetProjExtState(0, 'slide in', 'mode', slide_mode)
 
