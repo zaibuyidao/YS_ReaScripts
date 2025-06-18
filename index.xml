@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<index version="1" name="YS Scripts" commit="c77dbf3ff6a4b32a132e79edef011be42455d596">
+<index version="1" name="YS Scripts" commit="f8af5ada02b55eb893121ef58ca3bcb7f3ec0a2e">
   <category name="Items Editing">
     <reapack name="YS_Midi Take Name From Track.lua" type="script" desc="Midi Take Name From Track">
       <version name="1.0" author="YS" time="2021-10-14T16:59:44Z">
@@ -574,6 +574,9 @@
       <version name="1.0.1" author="YS" time="2024-09-08T11:28:29Z">
         <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/9f7b33bf8a6aafdb16cdae14d9a6dcd4b77c9a20/MIDI%20Editor/YS_slide%20in%20V2.lua</source>
       </version>
+      <version name="1.0.2" author="YS" time="2025-06-18T12:32:32Z">
+        <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/f8af5ada02b55eb893121ef58ca3bcb7f3ec0a2e/MIDI%20Editor/YS_slide%20in%20V2.lua</source>
+      </version>
     </reapack>
     <reapack name="YS_slide in.lua" type="script" desc="slide in">
       <version name="1.0" author="YS" time="2021-08-29T12:17:58Z">
@@ -720,6 +723,12 @@
       </version>
       <version name="1.1.1" author="YS" time="2023-05-10T09:30:52Z">
         <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/4c427076f9345c0b241088867c7eb17e2887bc79/MIDI%20Editor/YS_Velocity%E5%8A%9B%E5%BA%A6%20V2_Multi%20Track.lua</source>
+      </version>
+    </reapack>
+    <reapack name="YS_zoom 切换.lua" type="script" desc="zoom 切换">
+      <version name="1.0" author="YS" time="2025-06-18T12:32:32Z">
+        <changelog><![CDATA[New Script]]></changelog>
+        <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/f8af5ada02b55eb893121ef58ca3bcb7f3ec0a2e/MIDI%20Editor/YS_zoom%20%E5%88%87%E6%8D%A2.lua</source>
       </version>
     </reapack>
     <reapack name="YS_仅显示已使用的 CC Lane.lua" type="script" desc="仅显示已使用的 CC Lane">
@@ -930,6 +939,9 @@
       <version name="1.0" author="YS" time="2022-01-15T15:04:19Z">
         <changelog><![CDATA[+ Initial release]]></changelog>
         <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/4c65d10a6ee75f3a84989a4760220daf3cb92d6b/MIDI%20Editor/YS_%E6%A0%B9%E6%8D%AE%E6%89%80%E9%80%89%E4%BA%8B%E4%BB%B6%E8%AE%BE%E7%BD%AE%E5%8F%AF%E7%BC%96%E8%BE%91%E5%A4%9ATake.lua</source>
+      </version>
+      <version name="1.0.1" author="YS" time="2025-06-18T12:32:32Z">
+        <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/f8af5ada02b55eb893121ef58ca3bcb7f3ec0a2e/MIDI%20Editor/YS_%E6%A0%B9%E6%8D%AE%E6%89%80%E9%80%89%E4%BA%8B%E4%BB%B6%E8%AE%BE%E7%BD%AE%E5%8F%AF%E7%BC%96%E8%BE%91%E5%A4%9ATake.lua</source>
       </version>
     </reapack>
     <reapack name="YS_滚擦自动分轨.lua" type="script" desc="滚擦自动分轨">
