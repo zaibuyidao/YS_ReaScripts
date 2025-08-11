@@ -2,18 +2,23 @@
 editor = reaper.MIDIEditor_GetActive()
 
 pattern = {}
-pattern[1] = {'0,240,100', '240,360,100', '360,480,100', '480,720,100', '720,840,100', '840,960,100', '960,1200,100', '1200,1320,100',
-              '1320,1440,100', '1440,1680,100', '1680,1800,100', '1800,1920,100'}
-pattern[2] = {'0,120,100', '120,240,100', '240,480,100', '480,600,100', '600,720,100', '720,960,100', '960,1080,100', '1080,1200,100',
-              '1200,1440,100', '1440,1560,100', '1560,1680,100', '1680,1920,100'}
-pattern[3] = {'0,120,100', '120,360,100', '360,480,100', '480,600,100', '600,840,100', '840,960,100', '960,1080,100', '1080,1320,100',
-              '1320,1440,100', '1440,1560,100', '1560,1800,100', '1800,1920,100'}
-pattern[4] = {'0,240,100', '240,480,77', '480,720,110', '720,840,76', '840,960,88', '960,1080,74', '1080,1200,93', '1200,1440,79', '1440,1680,110',
-              '1680,1800,92', '1800,1920,79'}
-pattern[5] = {'0,240,100', '240,480,77', '480,720,110', '720,840,83', '840,960,71', '960,1200,100', '1200,1440,74', '1440,1680,110', '1680,1800,84',
-              '1800,1920,72'}
-pattern[6] = {'0,120,100', '360,480,100', '720,840,100', '1080,1200,100', '1440,1560,100', '1680,1800,100'}
-pattern[7] = {'240,480,100', '720,960,100', '1200,1440,100', '1680,1920,100'}
+pattern[1] = { '0,240,100', '240,360,100', '360,480,100', '480,720,100', '720,840,100', '840,960,100', '960,1200,100',
+    '1200,1320,100',
+    '1320,1440,100', '1440,1680,100', '1680,1800,100', '1800,1920,100' }
+pattern[2] = { '0,120,100', '120,240,100', '240,480,100', '480,600,100', '600,720,100', '720,960,100', '960,1080,100',
+    '1080,1200,100',
+    '1200,1440,100', '1440,1560,100', '1560,1680,100', '1680,1920,100' }
+pattern[3] = { '0,120,100', '120,360,100', '360,480,100', '480,600,100', '600,840,100', '840,960,100', '960,1080,100',
+    '1080,1320,100',
+    '1320,1440,100', '1440,1560,100', '1560,1800,100', '1800,1920,100' }
+pattern[4] = { '0,240,100', '240,480,77', '480,720,110', '720,840,76', '840,960,88', '960,1080,74', '1080,1200,93',
+    '1200,1440,79', '1440,1680,110',
+    '1680,1800,92', '1800,1920,79' }
+pattern[5] = { '0,240,100', '240,480,77', '480,720,110', '720,840,83', '840,960,71', '960,1200,100', '1200,1440,74',
+    '1440,1680,110', '1680,1800,84',
+    '1800,1920,72' }
+pattern[6] = { '0,120,100', '360,480,100', '720,840,100', '1080,1200,100', '1440,1560,100', '1680,1800,100' }
+pattern[7] = { '240,480,100', '720,960,100', '1200,1440,100', '1680,1920,100' }
 pattern[8] = {}
 
 function getuserpattern()
@@ -99,7 +104,8 @@ function inputpattern(patterntype)
                 endpos = tonumber(endpos)
                 if noteStartOfMeasure <= stpos and noteendOfMeasure >= endpos then
                     flag = 1
-                    reaper.MIDI_InsertNote(take, false, muted, StartOfMeasure + stpos, StartOfMeasure + endpos, chan, pitch, Mvel, false)
+                    reaper.MIDI_InsertNote(take, false, muted, StartOfMeasure + stpos, StartOfMeasure + endpos, chan,
+                        pitch, Mvel, false)
                 end
             end
             if flag == 0 then
@@ -113,10 +119,10 @@ function inputpattern(patterntype)
     end -- while take end
 end
 
-local ctx = reaper.ImGui_CreateContext('Pattern Generator')
+local ctx = reaper.ImGui_CreateContext('节奏生成器')
 windows_flag = reaper.ImGui_WindowFlags_TopMost()
 windows_flag = windows_flag | reaper.ImGui_WindowFlags_AlwaysAutoResize()
-local font = reaper.ImGui_CreateFont('sans-serif', 14)
+local font = reaper.ImGui_CreateFont('微软雅黑')
 reaper.ImGui_Attach(ctx, font)
 is_new_value, filename, sectionID, cmdID, mode, resolution, val = reaper.get_action_context()
 filename1 = string.gsub(filename, 'YS_pattern 节奏生成器.lua', 'pattern1.jpg')
@@ -142,64 +148,67 @@ filename7 = string.gsub(filename7, '\\', '\\\\')
 img7 = reaper.ImGui_CreateImage(filename7)
 
 function loop()
-    reaper.ImGui_PushFont(ctx, font)
-    local visible, open = reaper.ImGui_Begin(ctx, 'Pattern Generator', true, windows_flag)
+    reaper.ImGui_PushFont(ctx, font, 12)
+    local visible, open = reaper.ImGui_Begin(ctx, '节奏生成器', true, windows_flag)
     if visible then
-        if reaper.ImGui_Button(ctx, 'Pattern 1') then
+        if reaper.ImGui_Button(ctx, '节奏型 1') then
             inputpattern(1)
             open = false
         end
         reaper.ImGui_SameLine(ctx)
-        reaper.ImGui_Image(ctx, img1, 200, 25, 0.0, 0.0, 1.0, 1.0, 0xFFFFFFFF, 0x00000000)
+        reaper.ImGui_ImageWithBg(ctx, img1, 200, 25, 0.0, 0.0, 1.0, 1.0, 0x00000000, 0xFFFFFFFF)
 
-        if reaper.ImGui_Button(ctx, 'Pattern 2') then
+        if reaper.ImGui_Button(ctx, '节奏型 2') then
             inputpattern(2)
             open = false
         end
         reaper.ImGui_SameLine(ctx)
-        reaper.ImGui_Image(ctx, img2, 200, 25, 0.0, 0.0, 1.0, 1.0, 0xFFFFFFFF, 0x00000000)
+        reaper.ImGui_ImageWithBg(ctx, img2, 200, 25, 0.0, 0.0, 1.0, 1.0, 0x00000000, 0xFFFFFFFF)
 
-        if reaper.ImGui_Button(ctx, 'Pattern 3') then
+        if reaper.ImGui_Button(ctx, '节奏型 3') then
             inputpattern(3)
             open = false
         end
         reaper.ImGui_SameLine(ctx)
-        reaper.ImGui_Image(ctx, img3, 200, 25, 0.0, 0.0, 1.0, 1.0, 0xFFFFFFFF, 0x00000000)
+        reaper.ImGui_ImageWithBg(ctx, img3, 200, 25, 0.0, 0.0, 1.0, 1.0, 0x00000000, 0xFFFFFFFF)
 
-        if reaper.ImGui_Button(ctx, 'Pattern 4') then
+        if reaper.ImGui_Button(ctx, '节奏型 4') then
             inputpattern(6)
             open = false
         end
         reaper.ImGui_SameLine(ctx)
-        reaper.ImGui_Image(ctx, img6, 200, 25, 0.0, 0.0, 1.0, 1.0, 0xFFFFFFFF, 0x00000000)
+        reaper.ImGui_ImageWithBg(ctx, img6, 200, 25, 0.0, 0.0, 1.0, 1.0, 0x00000000, 0xFFFFFFFF)
 
-        if reaper.ImGui_Button(ctx, 'Pattern 5') then
+        if reaper.ImGui_Button(ctx, '节奏型 5') then
             inputpattern(7)
             open = false
         end
         reaper.ImGui_SameLine(ctx)
-        reaper.ImGui_Image(ctx, img7, 130, 25, 0.0, 0.0, 1.0, 1.0, 0xFFFFFFFF, 0x00000000)
+        reaper.ImGui_ImageWithBg(ctx, img7, 130, 25, 0.0, 0.0, 1.0, 1.0, 0x00000000, 0xFFFFFFFF)
 
-        if reaper.ImGui_Button(ctx, 'A.G Rhythm 1') then
+        if reaper.ImGui_Button(ctx, 'A.G 节奏型 1') then
             inputpattern(4)
             open = false
         end
         reaper.ImGui_SameLine(ctx)
-        reaper.ImGui_Image(ctx, img4, 200, 25, 0.0, 0.0, 1.0, 1.0, 0xFFFFFFFF, 0x00000000)
+        reaper.ImGui_ImageWithBg(ctx, img4, 200, 25, 0.0, 0.0, 1.0, 1.0, 0x00000000, 0xFFFFFFFF)
 
-        if reaper.ImGui_Button(ctx, 'A.G Rhythm 2') then
+        if reaper.ImGui_Button(ctx, 'A.G 节奏型 2') then
             inputpattern(5)
             open = false
         end
         reaper.ImGui_SameLine(ctx)
-        reaper.ImGui_Image(ctx, img5, 200, 25, 0.0, 0.0, 1.0, 1.0, 0xFFFFFFFF, 0x00000000)
+        reaper.ImGui_ImageWithBg(ctx, img5, 200, 25, 0.0, 0.0, 1.0, 1.0, 0x00000000, 0xFFFFFFFF)
 
-        if reaper.ImGui_Button(ctx, 'Get User Pattern ') then
+        if reaper.ImGui_Button(ctx, '获取自定义节奏') then
             getuserpattern()
+        end
+        if reaper.ImGui_IsItemHovered(ctx) then
+            reaper.ImGui_SetTooltip(ctx, '仅选择一个小节内的单音')
         end
         if #pattern[8] > 0 then
             reaper.ImGui_SameLine(ctx)
-            if reaper.ImGui_Button(ctx, 'Set User Pattern') then
+            if reaper.ImGui_Button(ctx, '应用自定义节奏') then
                 inputpattern(8)
                 open = false
             end

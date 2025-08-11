@@ -1259,7 +1259,7 @@ function chordin()
 
     reaper.MarkTrackItemsDirty(reaper.GetMediaItemTake_Track(take), reaper.GetMediaItemTake_Item(take))
     reaper.Undo_EndBlock('Chord Note In', -1)
-
+    reaper.SN_FocusMIDIEditor()
 end -- function end
 
 --------------------------------------------------------------------------------------
@@ -1331,6 +1331,7 @@ function inkeymark()
     key = tb_mark[name_low]
     reaper.AddProjectMarker2(0, false, pos, -1, 'Key=' .. key, -1, 33521664)
 end
+
 ------------------------------------------------------------
 function chordtolyrics()
     local editor = reaper.MIDIEditor_GetActive()
@@ -1412,7 +1413,6 @@ function chordtolyrics()
             inkeymark0()
         end
     else
-
         reaper.MIDI_DisableSort(take)
 
         retval, notecnt, ccevtcnt, extsyxevtcnt = reaper.MIDI_CountEvts(take)
@@ -1436,7 +1436,6 @@ function chordtolyrics()
         chord_val = ''
 
         while noteidx <= notecnt do
-
             retval, selected, muted, startppqpos, endppqpos, chan, pitch, vel = reaper.MIDI_GetNote(take, noteidx)
 
             if startppqpos == tempst then
@@ -1620,7 +1619,7 @@ function chordtolyrics()
                     while ii ~= #notepitch do
                         chordnum = chordnum + (notepitch[ii + 1] - notepitch[ii]) * (10 ^ ii)
                         ii = ii + 1
-                    end -- while end   
+                    end -- while end
                     ii = 1
                     chord_val = chordtype[chordnum]
 
@@ -1655,7 +1654,6 @@ function chordtolyrics()
             if noteidx > notecnt then
                 reaper.TrackCtl_SetToolTip('         恭喜！\n和弦标记全部写入！', 500, 400, true)
             end
-
         end -- while end
     end -- ticklist end
 
@@ -1665,11 +1663,10 @@ function chordtolyrics()
 
     reaper.MarkTrackItemsDirty(reaper.GetMediaItemTake_Track(take), reaper.GetMediaItemTake_Item(take))
     reaper.Undo_EndBlock('音符转和弦标记', -1)
-
 end -- chordtolyrics
+
 ---------------------------------------------------------------------------
 function chordtolyrics_series()
-
     local editor = reaper.MIDIEditor_GetActive()
 
     local take = reaper.MIDIEditor_GetTake(editor)
@@ -1678,6 +1675,7 @@ function chordtolyrics_series()
     take = reaper.MIDIEditor_GetTake(editor)
 
     key_list = {}
+    --[[
     key_list['key=c'] = 'Ⅰ,#Ⅰ,Ⅱ,bⅢ,Ⅲ,Ⅳ,#Ⅳ,Ⅴ,bⅥ,Ⅵ,bⅦ,Ⅶ'
     key_list['key=db'] = 'Ⅶ,Ⅰ,#Ⅰ,Ⅱ,bⅢ,Ⅲ,Ⅳ,#Ⅳ,Ⅴ,bⅥ,Ⅵ,bⅦ'
     key_list['key=c#'] = 'Ⅶ,Ⅰ,#Ⅰ,Ⅱ,bⅢ,Ⅲ,Ⅳ,#Ⅳ,Ⅴ,bⅥ,Ⅵ,bⅦ'
@@ -1692,6 +1690,21 @@ function chordtolyrics_series()
     key_list['key=a'] = 'bⅢ,Ⅲ,Ⅳ,#Ⅳ,Ⅴ,bⅥ,Ⅵ,bⅦ,Ⅶ,Ⅰ,#Ⅰ,Ⅱ'
     key_list['key=bb'] = 'Ⅱ,bⅢ,Ⅲ,Ⅳ,#Ⅳ,Ⅴ,bⅥ,Ⅵ,bⅦ,Ⅶ,Ⅰ,#Ⅰ'
     key_list['key=b'] = '#Ⅰ,Ⅱ,bⅢ,Ⅲ,Ⅳ,#Ⅳ,Ⅴ,bⅥ,Ⅵ,bⅦ,Ⅶ,Ⅰ'
+    --]]
+    key_list['key=c'] = '1,#1,2,b3,3,4,#4,5,b6,6,b7,7'
+    key_list['key=db'] = '7,1,#1,2,b3,3,4,#4,5,b6,6,b7'
+    key_list['key=c#'] = '7,1,#1,2,b3,3,4,#4,5,b6,6,b7'
+    key_list['key=d'] = 'b7,7,1,#1,2,b3,3,4,#4,5,b6,6'
+    key_list['key=eb'] = '6,b7,7,1,#1,2,b3,3,4,#4,5,b6'
+    key_list['key=e'] = 'b6,6,b7,7,1,#1,2,b3,3,4,#4,5'
+    key_list['key=f'] = '5,b6,6,b7,7,1,#1,2,b3,3,4,#4'
+    key_list['key=f#'] = '#4,5,b6,6,b7,7,1,#1,2,b3,3,4'
+    -- key_list['key=gb']='#4,5,b6,6,b7,7,1,#1,2,b3,3,4'
+    key_list['key=g'] = '4,#4,5,b6,6,b7,7,1,#1,2,b3,3'
+    key_list['key=ab'] = '3,4,#4,5,b6,6,b7,7,1,#1,2,b3'
+    key_list['key=a'] = 'b3,3,4,#4,5,b6,6,b7,7,1,#1,2'
+    key_list['key=bb'] = '2,b3,3,4,#4,5,b6,6,b7,7,1,#1'
+    key_list['key=b'] = '#1,2,b3,3,4,#4,5,b6,6,b7,7,1'
 
     marklist = {}
     ticklist = {}
@@ -1718,7 +1731,6 @@ function chordtolyrics_series()
             inkeymark0()
         end
     else
-
         reaper.MIDI_DisableSort(take)
 
         retval, notecnt, ccevtcnt, extsyxevtcnt = reaper.MIDI_CountEvts(take)
@@ -1742,7 +1754,6 @@ function chordtolyrics_series()
         chord_val2 = ''
 
         while noteidx <= notecnt do
-
             retval, selected, muted, startppqpos, endppqpos, chan, pitch, vel = reaper.MIDI_GetNote(take, noteidx)
 
             if startppqpos == tempst then
@@ -2058,7 +2069,7 @@ function chordtolyrics_series()
                     while ii ~= #notepitch do
                         chordnum = chordnum + (notepitch[ii + 1] - notepitch[ii]) * (10 ^ ii)
                         ii = ii + 1
-                    end -- while end   
+                    end -- while end
                     ii = 1
                     chord_val2 = chordtype[chordnum]
 
@@ -2093,7 +2104,6 @@ function chordtolyrics_series()
             if noteidx > notecnt then
                 reaper.TrackCtl_SetToolTip('         恭喜！\n和弦标记全部写入！', 500, 400, true)
             end
-
         end -- while end
     end -- ticklist end
 
@@ -2103,11 +2113,10 @@ function chordtolyrics_series()
 
     reaper.MarkTrackItemsDirty(reaper.GetMediaItemTake_Track(take), reaper.GetMediaItemTake_Item(take))
     reaper.Undo_EndBlock('音符转和弦级数', -1)
-
 end -- chordtolyrics_series
+
 -----------------------------------------------------------------
 function LyricsToNote()
-
     local editor = reaper.MIDIEditor_GetActive()
     local take = reaper.MIDIEditor_GetTake(editor)
 
@@ -2223,7 +2232,6 @@ function LyricsToNote()
         idx = idx + 1
 
         retval, selected, muted, ppqpos, txt_type, chord_txt = reaper.MIDI_GetTextSysexEvt(take, idx, true, false, 0, 5, '')
-
     until retval == false
 
     reaper.MIDI_Sort(take)
@@ -2234,8 +2242,8 @@ function LyricsToNote()
 
     reaper.MarkTrackItemsDirty(reaper.GetMediaItemTake_Track(take), reaper.GetMediaItemTake_Item(take))
     reaper.Undo_EndBlock('和弦标记转音符', -1)
-
 end -- LyricsToNote
+
 -----------------------------------------------------------
 
 function LyricsToChordTrack()
@@ -2255,7 +2263,7 @@ function LyricsToChordTrack()
     repeat
         retval, selected, muted, ppqpos_p, t_type, msg = reaper.MIDI_GetTextSysexEvt(take, idx, NULL, NULL, -1, 5, '')
         idx = idx + 1
-    until t_type == 5 or idx >= textsyxevtcnt - 1 -- first 
+    until t_type == 5 or idx >= textsyxevtcnt - 1 -- first
     pos_p = reaper.MIDI_GetProjTimeFromPPQPos(take, ppqpos_p)
     table.insert(tb_pos, pos_p)
     table.insert(tbchord, msg)
@@ -2307,8 +2315,8 @@ function LyricsToChordTrack()
 
     reaper.MarkTrackItemsDirty(reaper.GetMediaItemTake_Track(take), reaper.GetMediaItemTake_Item(take))
     reaper.Undo_EndBlock('和弦标记转和弦轨', -1)
-
 end -- LyricsToChordTrack
+
 --------------------------------------------------------
 
 function LyricsToregion()
@@ -2328,7 +2336,7 @@ function LyricsToregion()
     repeat
         retval, selected, muted, ppqpos_p, t_type, msg = reaper.MIDI_GetTextSysexEvt(take, idx, NULL, NULL, -1, 5, '')
         idx = idx + 1
-    until t_type == 5 or idx >= textsyxevtcnt - 1 -- first 
+    until t_type == 5 or idx >= textsyxevtcnt - 1 -- first
     pos_p = reaper.MIDI_GetProjTimeFromPPQPos(take, ppqpos_p)
     table.insert(tb_pos, pos_p)
     table.insert(tbchord, msg)
@@ -2361,6 +2369,7 @@ function LyricsToregion()
     reaper.MarkTrackItemsDirty(reaper.GetMediaItemTake_Track(take), reaper.GetMediaItemTake_Item(take))
     reaper.Undo_EndBlock('和弦标记转区域标记', -1)
 end -- Lyrics To region
+
 -----------------------------------------------------------
 function Audition()
     reaper.Main_OnCommand(reaper.NamedCommandLookup('_BR_SAVE_SOLO_MUTE_ALL_TRACKS_SLOT_1'), 0)
@@ -2530,23 +2539,22 @@ function Audition()
         end
     end
 end -- function end
+
 ----------------------------------------------------
 function recst()
+    reaper.PreventUIRefresh(1)
     editor = reaper.MIDIEditor_GetActive()
     take = reaper.MIDIEditor_GetTake(editor)
     TK = reaper.GetMediaItemTake_Track(take)
 
     reaper.Main_OnCommand(40491, 0) -- all rec off
     retval = reaper.SetMediaTrackInfo_Value(TK, 'I_RECARM', 1)
-    retval, str = reaper.GetTrackStateChunk(TK, '', false)
-    oldrec = string.match(str, 'REC%s%d+%s%d+%s%d+%s%d+%s%d+%s%d+%s%d+')
-    if oldrec ~= 'REC 1 5088 1 0 0 0 0' then
-        str = string.gsub(str, oldrec, 'REC 1 5088 1 0 0 0 0')
-        ok = reaper.SetTrackStateChunk(TK, str, false)
-        reaper.TrackCtl_SetToolTip('              提示！\n当前轨道录音监听已打开，全部MIDI输入全部通道！', 50, 0,
-            true)
-    end
+    reaper.SetMediaTrackInfo_Value(TK, 'I_RECINPUT', 6080)
+    reaper.SetMediaTrackInfo_Value(TK, 'I_RECMON', 1)
+    reaper.TrackCtl_SetToolTip('              提示！\n当前轨道录音监听已打开，虚拟键盘输入全部通道！', 0, 0, true)
+    reaper.PreventUIRefresh(-1)
 end -- recst end
+
 recst()
 
 function recend()
@@ -2555,10 +2563,10 @@ end
 
 local ctx = reaper.ImGui_CreateContext('Chord Tools')
 local size = reaper.GetAppVersion():match('OSX') and 12 or 14
-local font = reaper.ImGui_CreateFont('sans-serif', 14)
+local font = reaper.ImGui_CreateFont('微软雅黑')
 reaper.ImGui_Attach(ctx, font)
 is_new_value, filename, sectionID, cmdID, mode, resolution, val = reaper.get_action_context()
-filename = string.gsub(filename, 'Chord Tools.lua', 'keyboard.jpg')
+filename = string.gsub(filename, 'YS_Chord Tools.lua', 'keyboard.jpg')
 filename = string.gsub(filename, '\\', '\\\\')
 img = reaper.ImGui_CreateImage(filename)
 
@@ -2573,8 +2581,8 @@ windows_flag = windows_flag | reaper.ImGui_WindowFlags_NoCollapse()
 windows_flag = windows_flag | reaper.ImGui_WindowFlags_TopMost()
 flag = true
 function loop()
-    reaper.ImGui_PushFont(ctx, font)
-    local visible, open = reaper.ImGui_Begin(ctx, 'Chord Tools ~ Right mouse button audition', true, windows_flag)
+    reaper.ImGui_PushFont(ctx, font, 12)
+    local visible, open = reaper.ImGui_Begin(ctx, 'Chord Tools ~ 右键试听', true, windows_flag)
     if visible then
         retval, piano_mode = reaper.ImGui_Checkbox(ctx, 'keyboard Mode', piano_mode)
         if piano_mode then
@@ -2583,7 +2591,7 @@ function loop()
             tint_col_rgba = 0x6969695F
         end
         reaper.ImGui_SameLine(ctx)
-        reaper.ImGui_Image(ctx, img, 200, 20, 0.0, 0.0, 1.0, 1.0, tint_col_rgba, 0x00000000)
+        reaper.ImGui_ImageWithBg(ctx, img, 200, 20, 0.0, 0.0, 1.0, 1.0, 0x00000000, tint_col_rgba)
         reaper.ImGui_SameLine(ctx)
         retval, hold = reaper.ImGui_Checkbox(ctx, 'Hold', hold)
 
@@ -3342,35 +3350,37 @@ function loop()
         reaper.ImGui_PushStyleColor(ctx, reaper.ImGui_Col_ButtonHovered(), 0x9400D3DF)
         reaper.ImGui_PushStyleColor(ctx, reaper.ImGui_Col_ButtonActive(), 0xFF00FFFF)
 
-        if reaper.ImGui_Button(ctx, "Chord Note To Lyrics") then
+        if reaper.ImGui_Button(ctx, "和弦音符转歌词") then
             chordtolyrics()
             flag = false
         end
         reaper.ImGui_SameLine(ctx)
-        if reaper.ImGui_Button(ctx, "Chord Note Series To Lyrics") then
+        if reaper.ImGui_Button(ctx, "和弦级数转歌词") then
             chordtolyrics_series()
             flag = false
         end
 
-        if reaper.ImGui_Button(ctx, "Lyrics To Track") then
+        if reaper.ImGui_Button(ctx, "歌词生成到轨道") then
             LyricsToChordTrack()
             flag = false
         end
         reaper.ImGui_SameLine(ctx)
-        if reaper.ImGui_Button(ctx, "Lyrics To region") then
+        if reaper.ImGui_Button(ctx, "歌词生成到区域") then
             LyricsToregion()
             flag = false
         end
         reaper.ImGui_SameLine(ctx)
-        if reaper.ImGui_Button(ctx, "Lyrics To Note") then
+        if reaper.ImGui_Button(ctx, "和弦名称生成音符") then
             LyricsToNote()
             flag = false
         end
-        reaper.ImGui_SameLine(ctx)
-        if reaper.ImGui_Button(ctx, "Help") then
-            reaper.MB(help, 'Help', 0)
-        end
         reaper.ImGui_PopStyleColor(ctx, 3)
+
+        reaper.ImGui_SameLine(ctx)
+        reaper.ImGui_Button(ctx, "Help")
+        if reaper.ImGui_IsItemHovered(ctx) then
+            reaper.ImGui_SetTooltip(ctx, help)
+        end
 
         if hold then
             flag = true
@@ -3411,4 +3421,3 @@ function loop()
 end
 
 reaper.defer(loop)
-

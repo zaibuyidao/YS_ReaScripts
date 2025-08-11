@@ -1,6 +1,6 @@
 --[[
  * ReaScript Name: Swing tools
- * Version: 1.0
+ * Version: 1.0.1
  * Author: YS
 --]]
 
@@ -364,7 +364,7 @@ end -- function end
 
 local ctx = reaper.ImGui_CreateContext('Swing Tool')
 local size = reaper.GetAppVersion():match('OSX') and 12 or 14
-local font = reaper.ImGui_CreateFont('sans-serif', 15)
+local font = reaper.ImGui_CreateFont('微软雅黑')
 reaper.ImGui_Attach(ctx, font)
 windowflag = reaper.ImGui_WindowFlags_TopMost()
 windowflag = windowflag | reaper.ImGui_WindowFlags_AlwaysAutoResize()
@@ -372,17 +372,19 @@ windowflag = windowflag | reaper.ImGui_WindowFlags_NoCollapse()
 flag = true
 
 function loop()
-    reaper.ImGui_PushFont(ctx, font)
+    reaper.ImGui_PushFont(ctx, font, 12)
     local visible, open = reaper.ImGui_Begin(ctx, 'Swing Tools', true, windowflag)
     if visible then
         retval, beat_mode = reaper.ImGui_RadioButtonEx(ctx, '16TH', beat_mode, 0)
         reaper.ImGui_SameLine(ctx)
         retval, beat_mode = reaper.ImGui_RadioButtonEx(ctx, '8TH', beat_mode, 1)
+
         reaper.ImGui_SameLine(ctx)
-        if reaper.ImGui_Button(ctx, 'Help') then
-            reaper.MB(help, 'help', 0)
+        reaper.ImGui_Button(ctx, 'Help')
+                if reaper.ImGui_IsItemHovered(ctx) then
+            reaper.ImGui_SetTooltip(ctx, help)
         end
-        if reaper.ImGui_Button(ctx, 'Straight') then
+        if reaper.ImGui_Button(ctx, '平均') then
             if beat_mode == 0 then
                 Normal()
             else
@@ -390,7 +392,7 @@ function loop()
             end
         end
         reaper.ImGui_SameLine(ctx)
-        if reaper.ImGui_Button(ctx, 'Swing') then
+        if reaper.ImGui_Button(ctx, '摇摆') then
             if beat_mode == 0 then
                 swing_add()
             else

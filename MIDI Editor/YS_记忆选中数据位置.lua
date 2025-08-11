@@ -1,6 +1,6 @@
 --[[
  * ReaScript Name: 记忆选中数据位置
- * Version: 1.0
+ * Version: 1.0.1
  * Author: YS
 --]]
 
@@ -90,9 +90,9 @@ function Jumpend()
     reaper.SN_FocusMIDIEditor()
 end
 
-local ctx = reaper.ImGui_CreateContext('position memory')
+local ctx = reaper.ImGui_CreateContext('记忆选中数据位置')
 local size = reaper.GetAppVersion():match('OSX') and 12 or 14
-local font = reaper.ImGui_CreateFont('sans-serif', size)
+local font = reaper.ImGui_CreateFont('微软雅黑')
 reaper.ImGui_Attach(ctx, font)
 
 windows_flag = reaper.ImGui_WindowFlags_TopMost()
@@ -100,11 +100,11 @@ windows_flag = windows_flag | reaper.ImGui_WindowFlags_AlwaysAutoResize()
 windows_flag = windows_flag | reaper.ImGui_WindowFlags_NoTitleBar()
 flag = true
 function loop()
-    reaper.ImGui_PushFont(ctx, font)
-    local visible, open = reaper.ImGui_Begin(ctx, 'Position Memory', true, windows_flag)
+    reaper.ImGui_PushFont(ctx, font, 12)
+    local visible, open = reaper.ImGui_Begin(ctx, '记忆选中数据位置', true, windows_flag)
     if visible then
 
-        if reaper.ImGui_Button(ctx, 'Sel event position memory') then
+        if reaper.ImGui_Button(ctx, '记忆选中数据位置') then
             event_position()
         end
         reaper.ImGui_SameLine(ctx)
@@ -114,19 +114,19 @@ function loop()
         reaper.ImGui_Spacing(ctx)
 
         if #pos_tb ~= 0 then
-            if reaper.ImGui_Button(ctx, 'Jump First') then
+            if reaper.ImGui_Button(ctx, '跳转到第一个') then
                 Jumpfirst()
             end
             reaper.ImGui_SameLine(ctx)
-            if reaper.ImGui_ArrowButton(ctx, 'Jump Left', reaper.ImGui_Dir_Left()) then
+            if reaper.ImGui_ArrowButton(ctx, '往左跳转', reaper.ImGui_Dir_Left()) then
                 JumpForward()
             end
             reaper.ImGui_SameLine(ctx)
-            if reaper.ImGui_ArrowButton(ctx, 'Jump Right', reaper.ImGui_Dir_Right()) then
+            if reaper.ImGui_ArrowButton(ctx, '往右跳转', reaper.ImGui_Dir_Right()) then
                 Jumpback()
             end
             reaper.ImGui_SameLine(ctx)
-            if reaper.ImGui_Button(ctx, 'Jump End') then
+            if reaper.ImGui_Button(ctx, '跳转到最后') then
                 Jumpend()
             end
         end

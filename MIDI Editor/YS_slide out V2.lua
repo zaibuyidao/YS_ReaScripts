@@ -1,6 +1,6 @@
 --[[
  * ReaScript Name: slide out V2
- * Version: 1.0.1
+ * Version: 1.0.2
  * Author: YS
 --]]
 
@@ -41,7 +41,7 @@ function slideout()
     end
 
     juli = Thru_tick - From_tick
-    
+
     reaper.Undo_BeginBlock()
     reaper.MIDI_DisableSort(take)
 
@@ -171,8 +171,8 @@ function slideout()
     end -- thru fushu
 
     reaper.MIDI_Sort(take)
-    
-    reaper.MarkTrackItemsDirty( reaper.GetMediaItemTake_Track(take), reaper.GetMediaItemTake_Item(take))
+
+    reaper.MarkTrackItemsDirty(reaper.GetMediaItemTake_Track(take), reaper.GetMediaItemTake_Item(take))
     reaper.Undo_EndBlock('slide out', -1)
 
     reaper.SetProjExtState(0, 'slide out', 'mode', slide_mode)
@@ -192,8 +192,8 @@ end
 ----------------------------------------------------------------
 
 local ctx = reaper.ImGui_CreateContext('SLIDEOUT')
- size = reaper.GetAppVersion():match('OSX') and 12 or 14
-local font = reaper.ImGui_CreateFont('sans-serif', size)
+size = reaper.GetAppVersion():match('OSX') and 12 or 14
+local font = reaper.ImGui_CreateFont('微软雅黑')
 reaper.ImGui_Attach(ctx, font)
 
 x, y = reaper.GetMousePosition()
@@ -204,7 +204,7 @@ windows_flag = windows_flag | reaper.ImGui_WindowFlags_AlwaysAutoResize()
 windows_flag = windows_flag | reaper.ImGui_WindowFlags_NoCollapse()
 flag = true
 function loop()
-    reaper.ImGui_PushFont(ctx, font)
+    reaper.ImGui_PushFont(ctx, font, 12)
     local visible, open = reaper.ImGui_Begin(ctx, 'Slide Out', true, windows_flag)
     if visible then
 
@@ -352,19 +352,11 @@ function loop()
 
         reaper.ImGui_Spacing(ctx)
 
-        retval, slide_mode = reaper.ImGui_RadioButtonEx(ctx, 'Character', slide_mode, 0)
+        retval, slide_mode = reaper.ImGui_RadioButtonEx(ctx, '品格', slide_mode, 0)
         reaper.ImGui_SameLine(ctx)
-        retval, slide_mode = reaper.ImGui_RadioButtonEx(ctx, 'Hammer', slide_mode, 1)
+        retval, slide_mode = reaper.ImGui_RadioButtonEx(ctx, '击勾弦', slide_mode, 1)
         reaper.ImGui_SameLine(ctx)
-        retval, slide_mode = reaper.ImGui_RadioButtonEx(ctx, 'Smooth', slide_mode, 2)
-        reaper.ImGui_SameLine(ctx)
-        if reaper.ImGui_Button(ctx, ' ?') then
-            help = [[Character 模式为品格滑弦，以半音为单位滑动。
-Hammer 模式为击勾弦，直接归零。
-Smooth 模式为平滑。
-模式跟随工程记忆。]]
-            reaper.MB(help, '说明', 0)
-        end
+        retval, slide_mode = reaper.ImGui_RadioButtonEx(ctx, '平滑', slide_mode, 2)
 
         retval = reaper.ImGui_IsKeyPressed(ctx, reaper.ImGui_Key_Escape(), nil)
         if retval then

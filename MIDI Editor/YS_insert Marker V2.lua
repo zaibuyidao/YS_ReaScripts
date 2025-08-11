@@ -1,6 +1,6 @@
 --[[
  * ReaScript Name: insert Marker V2
- * Version: 1.0.4
+ * Version: 1.0.5
  * Author: YS
  * provides: [main=main,midi_editor] .
 --]]
@@ -176,6 +176,8 @@ function markauto()
             midx = midx - 1
             num_maker2 = num_maker2 - 1
         else
+            name = name:gsub("^%s+", ""):gsub("%s+$", "") --清除开头和末尾的空格
+            name = name:gsub(" +", " ", 2) --中间多个空格改为一个
             name_low = string.lower(name)
             if name_low ~= 'f0' then
                 name_low = string.gsub(name_low, '%d+', '')
@@ -196,6 +198,7 @@ function markauto()
 
                 poslist[midx] = tb_mark[name_low]
             else
+                reaper.SetProjectMarker(markrgnindexnumber, false, pos, 0, name)
                 buf = reaper.format_timestr_pos(pos, '', 2)
                 txt = txt .. '错误：有无法识别的标签 "' .. name .. '" 在 ' .. buf .. ' ！ \n'
             end
@@ -587,7 +590,7 @@ end -- function end
 
 local ctx = reaper.ImGui_CreateContext('instmark')
 local size = reaper.GetAppVersion():match('OSX') and 12 or 14
-local font = reaper.ImGui_CreateFont('sans-serif', size)
+local font = reaper.ImGui_CreateFont('微软雅黑')
 reaper.ImGui_Attach(ctx, font)
 
 x, y = reaper.GetMousePosition()
@@ -598,9 +601,9 @@ windowflag = reaper.ImGui_WindowFlags_AlwaysAutoResize()
 flag = true
 
 function loop()
-    reaper.ImGui_PushFont(ctx, font)
+    reaper.ImGui_PushFont(ctx, font, 12)
 
-    local visible, open = reaper.ImGui_Begin(ctx, 'Insert Marker', true, windowflag)
+    local visible, open = reaper.ImGui_Begin(ctx, 'Marker 工具', true, windowflag)
     if visible then
         if reaper.ImGui_Button(ctx, 'Intro') then
             insertMarker('Intro')
@@ -625,12 +628,12 @@ function loop()
         reaper.ImGui_PushStyleColor(ctx, reaper.ImGui_Col_Button(), 0x6969697F)
         reaper.ImGui_PushStyleColor(ctx, reaper.ImGui_Col_ButtonHovered(), 0x696969FF)
         reaper.ImGui_PushStyleColor(ctx, reaper.ImGui_Col_ButtonActive(), 0x6969698F)
-        if reaper.ImGui_Button(ctx, 'Normalize') then
+        if reaper.ImGui_Button(ctx, '规格化') then
             markauto()
             flag = false
         end
         if reaper.ImGui_IsItemHovered(ctx) then
-            reaper.ImGui_SetTooltip(ctx, 'Marker Format Specification')
+            reaper.ImGui_SetTooltip(ctx, '标记格式规范化')
         end
         reaper.ImGui_Spacing(ctx)
         reaper.ImGui_PopStyleColor(ctx, 3)
@@ -655,7 +658,7 @@ function loop()
             flag = false
         end
         if reaper.ImGui_IsItemHovered(ctx) then
-            reaper.ImGui_SetTooltip(ctx, 'Select The Range Of Vox')
+            reaper.ImGui_SetTooltip(ctx, '选择Vox的范围')
         end
         reaper.ImGui_PopStyleColor(ctx, 3)
 

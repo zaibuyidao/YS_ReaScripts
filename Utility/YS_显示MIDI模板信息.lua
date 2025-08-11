@@ -1,6 +1,6 @@
 --[[
  * ReaScript Name: 显示MIDI模板信息
- * Version: 1.0.9
+ * Version: 1.0.10
  * Author: YS
 --]]
 
@@ -1902,11 +1902,8 @@ tb_ins_show[30] = [[    1 DistortionGt  sc55
  2306 5th Dist.  sc88
  2307 5th Dist.  sc88pro
  3074 Rock Rhythm  sc88
- 3074 M.G  sc88
  3075 Rock Rhythm  sc88pro
- 3075 M.G  sc88pro
  3202 Rock Rhythm2  sc88
- 3202 M.G  sc88
  3203 Rock Rhythm2  sc88pro
 10241 Rh2_Dist.Gt.
 10242 Rh2_DistortionGt
@@ -3312,6 +3309,60 @@ function getmark()
 end -- getmark end
 getmark()
 
+function CC_Usage_Statistics()
+    local CountTracks = reaper.CountTracks(0)
+    local trackidx = 0
+    local ccuser = 'CC 使用情况统计：\n'
+    while trackidx < CountTracks do
+        track = reaper.GetTrack(0, trackidx)
+        cc_count = {}
+        itemidx = 1
+        item = reaper.GetTrackMediaItem(track, itemidx)
+        while item do
+            take = reaper.GetMediaItemTake(item, 0)
+            if reaper.TakeIsMIDI(take) then
+                retval, notecnt, ccevtcnt, textsyxevtcnt = reaper.MIDI_CountEvts(take)
+                if ccevtcnt > 0 then
+                    ccidx = 0
+                    while ccidx < ccevtcnt do
+                        retval, selected, muted, ppqpos, chanmsg, chan, msg2, msg3 = reaper.MIDI_GetCC(take, ccidx)
+                        if chanmsg == 176 then
+                            if cc_count['CC' .. msg2] then
+                                cc_count['CC' .. msg2] = cc_count['CC' .. msg2] + 1
+                            else
+                                cc_count['CC' .. msg2] = 1
+                            end
+                        end
+                        if chanmsg == 224 then
+                            if cc_count['Wheel'] then
+                                cc_count['Wheel'] = cc_count['Wheel'] + 1
+                            else
+                                cc_count['Wheel'] = 1
+                            end
+                        end
+                        ccidx = ccidx + 1
+                    end
+                end
+            end
+            itemidx = itemidx + 1
+            item = reaper.GetTrackMediaItem(track, itemidx)
+        end
+        cc_count['CC0'] = nil
+        cc_count['CC32'] = nil
+        if next(cc_count) then
+            ret, trackname = reaper.GetTrackName(track)
+            trackname = string.format("%-20s", trackname)
+            ccuser = ccuser .. trackname
+            for i, v in pairs(cc_count) do
+                ccuser = ccuser .. ' | ' .. i .. ' = ' .. v .. ' '
+            end
+            ccuser = ccuser .. '\n'
+        end
+        trackidx = trackidx + 1
+    end
+    reaper.ShowConsoleMsg(ccuser)
+end
+
 function MaxEvent()
     evtinfo = {}
     maxdata = ''
@@ -3369,12 +3420,19 @@ function MaxEvent()
     end
 
     for i, v in ipairs(evtinfo) do
+        mea_st, _, _, _, _, _ = reaper.TimeMap_GetMeasureInfo(0, i - 1)
+        mea_end, _, _, _, _, _ = reaper.TimeMap_GetMeasureInfo(0, i)
+        mea_len = mea_end - mea_st
+        evtinfo[i] = math.floor((v / mea_len) + 0.5)
+    end
+
+    for i, v in ipairs(evtinfo) do
         if v > datacount then
             datacount = v
             maxmeasure = i
         end
     end
-    maxdata = maxdata .. '第 ' .. maxmeasure .. ' 小节数据量为: ' .. datacount .. '\n'
+    maxdata = maxdata .. '第 ' .. maxmeasure .. ' 小节每秒数据量为: ' .. datacount .. '\n'
     datacount1 = datacount
     datacount = 0
 
@@ -3384,7 +3442,7 @@ function MaxEvent()
             maxmeasure = i
         end
     end
-    maxdata = maxdata .. '第 ' .. maxmeasure .. ' 小节数据量为: ' .. datacount .. '\n'
+    maxdata = maxdata .. '第 ' .. maxmeasure .. ' 小节每秒数据量为: ' .. datacount .. '\n'
     datacount2 = datacount
     datacount = 0
 
@@ -3394,7 +3452,7 @@ function MaxEvent()
             maxmeasure = i
         end
     end
-    maxdata = maxdata .. '第 ' .. maxmeasure .. ' 小节数据量为: ' .. datacount .. '\n'
+    maxdata = maxdata .. '第 ' .. maxmeasure .. ' 小节每秒数据量为: ' .. datacount .. '\n'
     datacount3 = datacount
     datacount = 0
 
@@ -3404,7 +3462,7 @@ function MaxEvent()
             maxmeasure = i
         end
     end
-    maxdata = maxdata .. '第 ' .. maxmeasure .. ' 小节数据量为: ' .. datacount .. '\n'
+    maxdata = maxdata .. '第 ' .. maxmeasure .. ' 小节每秒数据量为: ' .. datacount .. '\n'
     datacount4 = datacount
     datacount = 0
 
@@ -3414,7 +3472,7 @@ function MaxEvent()
             maxmeasure = i
         end
     end
-    maxdata = maxdata .. '第 ' .. maxmeasure .. ' 小节数据量为: ' .. datacount .. '\n'
+    maxdata = maxdata .. '第 ' .. maxmeasure .. ' 小节每秒数据量为: ' .. datacount .. '\n'
     datacount5 = datacount
     datacount = 0
 
@@ -3424,7 +3482,7 @@ function MaxEvent()
             maxmeasure = i
         end
     end
-    maxdata = maxdata .. '第 ' .. maxmeasure .. ' 小节数据量为: ' .. datacount .. '\n'
+    maxdata = maxdata .. '第 ' .. maxmeasure .. ' 小节每秒数据量为: ' .. datacount .. '\n'
     datacount6 = datacount
     datacount = 0
 
@@ -3520,7 +3578,7 @@ function Maxsound()
         if reascript_console_hwnd == nil then
             return false
         end
-        local styles = {32, 33, 36, 31, 214, 37, 218, 1606, 4373, 3297, 220, 3492, 3733, 3594, 35, 1890, 2878, 3265, 4392}
+        local styles = {32, 0, 36, 31, 214, 37, 218, 1606, 4373, 3297, 220, 3492, 3733, 3594, 35, 1890, 2878, 3265, 4392}
         local Textfield = reaper.JS_Window_FindChildByID(reascript_console_hwnd, 1177)
         reaper.JS_WindowMessage_Send(Textfield, "WM_SETFONT", styles[style], 0, 1, 0)
     end
@@ -3730,15 +3788,15 @@ miditempinfo()
 
 local ctx = reaper.ImGui_CreateContext('tempinfo')
 local size = reaper.GetAppVersion():match('OSX') and 12 or 14
-local font = reaper.ImGui_CreateFont('sans-serif', size)
+local font = reaper.ImGui_CreateFont('微软雅黑')
 reaper.ImGui_Attach(ctx, font)
 
 StateChangeCount_old = reaper.GetProjectStateChangeCount(0)
-txt_title = '        Track Name        ' .. '              Bank' .. '        Patch' .. '    Volume' .. '     Pan' .. '       Reverb' ..
-                '   Chorus' .. '   Delay'
+txt_title = '        Track Name        ' .. '       Bank' .. '    Patch' .. '   Volume' .. '    Pan' .. '    Reverb' ..
+                '  Chorus' .. '   Delay'
 
 function loop()
-    AnyPopup = reaper.ImGui_IsPopupOpen(ctx, '', reaper.ImGui_PopupFlags_AnyPopup())
+    --AnyPopup = reaper.ImGui_IsPopupOpen(ctx, '', reaper.ImGui_PopupFlags_AnyPopup())
 
     window_flag = reaper.ImGui_WindowFlags_AlwaysAutoResize()
     -- reaper.ImGui_SetNextWindowSize(ctx, 730, 70+(#take_tb*23.7))
@@ -3751,7 +3809,7 @@ function loop()
         StateChangeCount_old = StateChangeCount
     end
 
-    reaper.ImGui_PushFont(ctx, font)
+    reaper.ImGui_PushFont(ctx, font, 12)
     playmode = reaper.GetToggleCommandStateEx(0, 1007)
     if playmode == 1 then
         tpos = reaper.GetPlayPosition()
@@ -3762,7 +3820,7 @@ function loop()
         markpos, name = string.match(v, '(%d+%.%d+),(.+)')
         if markpos and name then
             markpos = tonumber(markpos)
-            if tpos > markpos then
+            if tpos >= markpos then
                 MKname = name
             end
         end
@@ -3780,21 +3838,24 @@ function loop()
         reaper.ImGui_PushStyleColor(ctx, reaper.ImGui_Col_Button(), 0x8080807F)
         reaper.ImGui_PushStyleColor(ctx, reaper.ImGui_Col_ButtonHovered(), 0x808080FF)
         reaper.ImGui_PushStyleColor(ctx, reaper.ImGui_Col_ButtonActive(), 0xD2691ECF)
-        if reaper.ImGui_Button(ctx, 'Project:') then
+        if reaper.ImGui_Button(ctx, '跳转') then
             reaper.Main_OnCommand(40069, 0)
         end
         reaper.ImGui_SameLine(ctx)
         reaper.ImGui_Text(ctx, time_buf)
 
         reaper.ImGui_SameLine(ctx)
-        if reaper.ImGui_Button(ctx, 'Audio:') then
+        if reaper.ImGui_Button(ctx, '原曲') then
             mm, ss = 0, 0
-            reaper.ImGui_OpenPopup(ctx, 'Jump To Audio Time')
+            reaper.ImGui_OpenPopup(ctx, '跳转到原曲时间')
+        end
+        if reaper.ImGui_IsItemHovered(ctx) then
+            reaper.ImGui_SetTooltip(ctx, '跳转到原曲的时间点')
         end
         x, y = reaper.GetMousePosition()
         x, y = reaper.ImGui_PointConvertNative(ctx, x, y)
         reaper.ImGui_SetNextWindowPos(ctx, x, y, reaper.ImGui_Cond_Appearing())
-        if reaper.ImGui_BeginPopupModal(ctx, 'Jump To Audio Time', true) then
+        if reaper.ImGui_BeginPopupModal(ctx, '跳转到原曲时间', true) then
             if reaper.ImGui_IsWindowAppearing(ctx) then
                 reaper.ImGui_SetKeyboardFocusHere(ctx, 0)
             end
@@ -3818,21 +3879,21 @@ function loop()
         reaper.ImGui_Text(ctx, Original_song_time)
 
         reaper.ImGui_SameLine(ctx)
-        if reaper.ImGui_Button(ctx, 'Tempo:') then
+        if reaper.ImGui_Button(ctx, 'Bpm') then
             reaper.Main_OnCommand(reaper.NamedCommandLookup('_RS4293099acb34ec98e33a7b31449e21878f4165df'), 0)
         end
         reaper.ImGui_SameLine(ctx)
         reaper.ImGui_Text(ctx, bpm)
 
         reaper.ImGui_SameLine(ctx)
-        if reaper.ImGui_Button(ctx, 'Marker:') then
+        if reaper.ImGui_Button(ctx, 'Mark') then
             showmarklist()
         end
         reaper.ImGui_SameLine(ctx)
         reaper.ImGui_Text(ctx, MKname)
 
         reaper.ImGui_SameLine(ctx)
-        if reaper.ImGui_Button(ctx, 'Poly') then
+        if reaper.ImGui_Button(ctx, '发音数') then
             Maxsound()
         end
         switch = 0
@@ -3843,12 +3904,19 @@ function loop()
             end
             if #Eventinfo_array ~= 0 then
                 reaper.ImGui_BeginTooltip(ctx)
-                reaper.ImGui_PlotHistogram(ctx, '', Eventinfo_array, NULL, 'Event distribution', NULL, NULL, 700, 300)
+                reaper.ImGui_PlotHistogram(ctx, 'i', Eventinfo_array, NULL, 'Event distribution', NULL, NULL, 700, 300)
                 reaper.ImGui_EndTooltip(ctx)
             end
         else
             switch = 0
-
+        end
+        
+        reaper.ImGui_SameLine(ctx)
+        if reaper.ImGui_Button(ctx, 'cc') then
+            CC_Usage_Statistics()
+        end
+        if reaper.ImGui_IsItemHovered(ctx) then
+            reaper.ImGui_SetTooltip(ctx, 'CC控制器使用情况分析')
         end
 
         reaper.ImGui_PopStyleColor(ctx, 3)
@@ -3857,13 +3925,16 @@ function loop()
         getlock = reaper.GetExtState('Template state', 'lock')
         track1solo = reaper.GetToggleCommandStateEx(0, 23)
         if getlock == 'lock' then
-            reaper.ImGui_RadioButton(ctx, 'lock', true)
+            reaper.ImGui_RadioButton(ctx, '锁定', true)
         else
             if track1solo == 1 then
-                reaper.ImGui_RadioButton(ctx, 'TRK1 solo', true)
+                reaper.ImGui_RadioButton(ctx, '原曲', true)
             else
-                reaper.ImGui_RadioButton(ctx, 'unlock', false)
+                reaper.ImGui_RadioButton(ctx, '解锁', false)
             end
+        end
+        if reaper.ImGui_IsItemHovered(ctx) then
+            reaper.ImGui_SetTooltip(ctx, '模板当前状态')
         end
 
         reaper.ImGui_TextColored(ctx, 0xFA8072FF, txt_title)
@@ -4342,10 +4413,10 @@ function loop()
             reaper.ImGui_PopID(ctx)
         end
 
-        Tab_Key = reaper.ImGui_IsKeyPressed(ctx, reaper.ImGui_Key_Tab(), nil)
+        --[[Tab_Key = reaper.ImGui_IsKeyPressed(ctx, reaper.ImGui_Key_Tab(), nil)
         if Tab_Key and AnyPopup == false then
             reaper.Main_OnCommand(23, 0)
-        end
+        end --]]
 
         reaper.ImGui_End(ctx)
     end

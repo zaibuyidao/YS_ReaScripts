@@ -1,13 +1,7 @@
 --[[
  * ReaScript Name: CYM ROLL 滚擦生成器
- * Version: 1.0.2
+ * Version: 1.0.3
  * Author: YS
---]]
-
---[[
- * Changelog:
- * v1.0 (2024-4-29)
-  + Initial release
 --]]
 
 function cymroll()
@@ -160,7 +154,7 @@ end
 
 local ctx = reaper.ImGui_CreateContext('CYM roll')
 local size = reaper.GetAppVersion():match('OSX') and 12 or 14
-local font = reaper.ImGui_CreateFont('sans-serif', size)
+local font = reaper.ImGui_CreateFont('微软雅黑')
 reaper.ImGui_Attach(ctx, font)
 
 x, y = reaper.GetMousePosition()
@@ -180,7 +174,7 @@ else
     ms_sub = tonumber(ms_sub)
 end
 function loop()
-    reaper.ImGui_PushFont(ctx, font)
+    reaper.ImGui_PushFont(ctx, font, 12)
     local visible, open = reaper.ImGui_Begin(ctx, 'Cym Roll', true, windows_flag)
     if visible then
 
@@ -200,9 +194,9 @@ function loop()
             dub = false
         end
         reaper.ImGui_Spacing(ctx)
-        retval, maxvel = reaper.ImGui_SliderInt(ctx, 'Max Velocity', maxvel, 40, 127, "%d")
-        retval, ms_sub = reaper.ImGui_SliderInt(ctx, 'Interval ms', ms_sub, 60, 90, "%d")
-        retval, curve = reaper.ImGui_SliderInt(ctx, 'Curve', curve, -5, 5, "%d")
+        retval, maxvel = reaper.ImGui_SliderInt(ctx, '最大力度', maxvel, 40, 127, "%d")
+        retval, ms_sub = reaper.ImGui_SliderInt(ctx, '间隔毫秒', ms_sub, 60, 90, "%d")
+        retval, curve = reaper.ImGui_SliderInt(ctx, '曲线', curve, -5, 5, "%d")
         From, Thru = reaper.GetSet_LoopTimeRange(false, true, 0, 0, true)
 
         if maxvel ~= temp_maxvel or ms_sub ~= temp_ms_sub or curve ~= temp_curve or From ~= temp_From or Thru ~= temp_Thru then
@@ -214,7 +208,7 @@ function loop()
             temp_Thru = Thru
         end
 
-        reaper.ImGui_PlotHistogram(ctx, '', reaper_array, 0, 'Preview', 0, 127, 300, 200)
+        reaper.ImGui_PlotHistogram(ctx, 'r', reaper_array, 0, 'Preview', 0, 127, 300, 200)
 
         retval = reaper.ImGui_IsKeyPressed(ctx, reaper.ImGui_Key_Escape(), nil)
         if retval then

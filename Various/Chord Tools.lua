@@ -1,9 +1,8 @@
 -- @description Chord Tools
 -- @author YS
--- @version 1.0.2
+-- @version 1.0.3
 -- @changelog
---   增加hold模式，以及和弦识别范围扩大，不同的排列以及省略音的识别。
---   Added hold mode, expanded chord recognition range, and improved detection of different voicings and omitted notes.
+--   优化代码以兼容 ReaImGui 0.10
 -- @metapackage
 -- @provides
 --   [main=midi_editor] Chord Tools/YS_Chord Tools.lua

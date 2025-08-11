@@ -1,6 +1,6 @@
 --[[
  * ReaScript Name: Tempo list 速度列表
- * Version: 1.1.1
+ * Version: 1.1.2
  * Author: YS
  * provides: [main=main] .
 --]]
@@ -65,13 +65,13 @@ tempo_list()
 tempchangecount = 0
 local ctx_tempo = reaper.ImGui_CreateContext('Tempo List')
 local size = reaper.GetAppVersion():match('OSX') and 12 or 14
-local font = reaper.ImGui_CreateFont('sans-serif', 15)
+local font = reaper.ImGui_CreateFont('微软雅黑')
 reaper.ImGui_Attach(ctx_tempo, font)
 
 reaper.ImGui_SetNextWindowSize(ctx_tempo, 240, 400)
 
 function loop()
-    reaper.ImGui_PushFont(ctx_tempo, font)
+    reaper.ImGui_PushFont(ctx_tempo, font, 12)
     StateChangeCount = reaper.GetProjectStateChangeCount(0)
     if StateChangeCount ~= tempchangecount then
         tempo_list()
@@ -80,7 +80,7 @@ function loop()
     local visible, open = reaper.ImGui_Begin(ctx_tempo, 'Tempo List', true)
     if visible then
         if tempo_array then
-            reaper.ImGui_PlotHistogram(ctx_tempo, '', tempo_array, NULL, NULL, 0, NULL, 220, 100)
+            reaper.ImGui_PlotHistogram(ctx_tempo, 't', tempo_array, NULL, NULL, 0, NULL, 220, 100)
         end
         reaper.ImGui_TextColored(ctx_tempo, 0xFA8072FF, txt_title)
         reaper.ImGui_Text(ctx_tempo, txt)

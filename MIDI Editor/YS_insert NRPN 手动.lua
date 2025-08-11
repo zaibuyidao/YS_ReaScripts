@@ -1,5 +1,5 @@
 -- @description insert NRPN 手动
--- @version 1.0
+-- @version 1.0.1
 -- @author YS
 -- @changelog New Script
 -- @provides [main=midi_editor,midi_eventlisteditor] .
@@ -54,7 +54,7 @@ list2 = {a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1, l1, m1, n1, o1, p1, q1, r1,
 getinput = {}
 
 local ctx = reaper.ImGui_CreateContext('My script')
-local font = reaper.ImGui_CreateFont('sans-serif', 14)
+local font = reaper.ImGui_CreateFont('微软雅黑')
 reaper.ImGui_Attach(ctx, font)
 windows_flag = reaper.ImGui_WindowFlags_TopMost()
 windows_flag = windows_flag | reaper.ImGui_WindowFlags_AlwaysAutoResize()
@@ -66,10 +66,10 @@ function loop()
     if not editor then
         flag = false
     end
-    reaper.ImGui_PushFont(ctx, font)
+    reaper.ImGui_PushFont(ctx, font, 12)
     local visible, open = reaper.ImGui_Begin(ctx, 'Insert NRPN', true, windows_flag)
     if visible then
-        reaper.ImGui_TextColored(ctx, 0xFA8072FF, '   CC98                   CC6')
+        reaper.ImGui_TextColored(ctx, 0xFA8072FF, '   CC98               CC6')
         for var = 1, numNRPN do
             reaper.ImGui_PushID(ctx, var)
             if is_first_appearance and var == 1 then

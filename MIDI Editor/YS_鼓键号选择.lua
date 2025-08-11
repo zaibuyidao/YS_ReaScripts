@@ -1,6 +1,6 @@
 --[[
  * ReaScript Name: 鼓键号选择
- * Version: 1.0.1
+ * Version: 1.0.2
  * Author: YS
 --]]
 
@@ -192,7 +192,7 @@ end -- funtion end
 
 local ctx = reaper.ImGui_CreateContext('Select Drums')
 local size = reaper.GetAppVersion():match('OSX') and 12 or 14
-local font = reaper.ImGui_CreateFont('sans-serif', 14)
+local font = reaper.ImGui_CreateFont('微软雅黑')
 reaper.ImGui_Attach(ctx, font)
 
 x, y = reaper.GetMousePosition()
@@ -203,7 +203,7 @@ windowflag = reaper.ImGui_WindowFlags_TopMost()
 windowflag = windowflag | reaper.ImGui_WindowFlags_AlwaysAutoResize()
 flag = true
 function loop()
-    reaper.ImGui_PushFont(ctx, font)
+    reaper.ImGui_PushFont(ctx, font, 12)
     local visible, open = reaper.ImGui_Begin(ctx, 'Select Drums Notes (GM)', true, windowflag)
     if visible then
         

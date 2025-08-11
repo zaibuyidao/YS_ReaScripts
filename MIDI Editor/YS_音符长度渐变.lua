@@ -1,6 +1,6 @@
 --[[
  * ReaScript Name: 音符长度渐变
- * Version: 1.0.4
+ * Version: 1.0.5
  * Author: YS
 --]]
 
@@ -41,12 +41,10 @@ function notedur()
         noteend = noteend + (noteddnew - notedd)
         reaper.MIDI_SetNote(take, noteidx, true, false, NULL, noteend, NULL, NULL, NULL, true)
     end
-
 end -- function end
 
-local ctx = reaper.ImGui_CreateContext('Note length gradient')
-local size = reaper.GetAppVersion():match('OSX') and 12 or 14
-local font = reaper.ImGui_CreateFont('sans-serif', size)
+local ctx = reaper.ImGui_CreateContext('音符长度渐变')
+local font = reaper.ImGui_CreateFont('微软雅黑')
 reaper.ImGui_Attach(ctx, font)
 
 x, y = reaper.GetMousePosition()
@@ -58,10 +56,10 @@ windowflag = windowflag | reaper.ImGui_WindowFlags_AlwaysAutoResize()
 flag = true
 Sliderflag = 0
 function loop()
-    reaper.ImGui_PushFont(ctx, font)
-    local visible, open = reaper.ImGui_Begin(ctx, 'Note length gradient', true, windowflag)
+    reaper.ImGui_PushFont(ctx, font, 12)
+    local visible, open = reaper.ImGui_Begin(ctx, '音符长度渐变', true, windowflag)
     if visible then
-        retval, durbili = reaper.ImGui_SliderInt(ctx, 'Gradient direction', durbili, -10, 10, nil, nil)
+        retval, durbili = reaper.ImGui_SliderInt(ctx, '渐变参数', durbili, -10, 10, nil, nil)
         durbili2 = durbili * -1
         retval_esc = reaper.ImGui_IsKeyPressed(ctx, reaper.ImGui_Key_Escape(), nil)
         retval_enter = reaper.ImGui_IsKeyPressed(ctx, reaper.ImGui_Key_Enter(), nil)

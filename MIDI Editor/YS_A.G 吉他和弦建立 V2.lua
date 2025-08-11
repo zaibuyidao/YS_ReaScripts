@@ -1,10 +1,10 @@
 --[[
  * ReaScript Name: A.G 吉他和弦建立 V2
- * Version: 1.0.11
+ * Version: 1.0.12
  * Author: YS
 --]]
 
-leixing_tb = {}
+local leixing_tb = {}
 leixing_tb['m'] = 0
 leixing_tb['m7'] = 0
 leixing_tb['7'] = 0
@@ -14,7 +14,7 @@ leixing_tb['sus2'] = 0
 leixing_tb['dim'] = 0
 leixing_tb['aug'] = 0
 
-key = {}
+local key = {}
 key[0] = 'C'
 key[1] = 'Db'
 key[2] = 'D'
@@ -27,7 +27,7 @@ key[8] = 'Ab'
 key[9] = 'A'
 key[10] = 'Bb'
 key[11] = 'B'
-chord = {}
+local chord = {}
 -- Maj
 chord['C'] = '0,48,52,55,60,64'
 chord['Db'] = '0,49,56,61,65,68'
@@ -252,7 +252,7 @@ chord['A6'] = '0,45,52,57,61,66'
 chord['Bb6'] = '0,46,50,55,62,65'
 chord['B6'] = '47,51,54,59,63,68'
 
---m6
+-- m6
 chord['Cm6'] = '0,48,51,57,60,67'
 chord['Dbm6'] = '0,49,52,58,61,68'
 chord['Dm6'] = '0,0,50,57,59,65'
@@ -266,8 +266,7 @@ chord['Am6'] = '0,45,54,57,60,64'
 chord['Bbm6'] = '0,46,53,55,61,65'
 chord['Bm6'] = '0,47,50,56,59,66'
 
-
-chord_ukulele = {}
+local chord_ukulele = {}
 chord_ukulele['C'] = '0,0,0,64,67,72'
 chord_ukulele['Db'] = '0,0,0,65,68,73'
 chord_ukulele['D'] = '0,0,0,62,66,69'
@@ -377,7 +376,7 @@ chord_ukulele['Aaug'] = '0,0,0,61,65,69'
 chord_ukulele['Bbaug'] = '0,0,0,62,66,70'
 chord_ukulele['Baug'] = '0,0,0,63,67,71'
 
-chord_EG = {}
+local chord_EG = {}
 chord_EG['C'] = '0,0,48,55,60,64'
 chord_EG['Db'] = '0,0,49,56,61,65'
 chord_EG['D'] = '0,0,50,57,62,66'
@@ -420,14 +419,14 @@ function chordin()
     local editor = reaper.MIDIEditor_GetActive()
 
     local take = reaper.MIDIEditor_GetTake(editor)
-    
+
     reaper.Undo_BeginBlock()
-    
+
     reaper.MIDI_DisableSort(take)
 
-    idx = -1
+    local idx = -1
     repeat
-        integer = reaper.MIDI_EnumSelNotes(take, idx)
+        local integer = reaper.MIDI_EnumSelNotes(take, idx)
         if integer ~= -1 then
             retval, selected, muted, startppqpos, endppqpos, chan, pitch, vel = reaper.MIDI_GetNote(take, integer)
             reaper.MIDI_DeleteNote(take, integer)
@@ -468,11 +467,15 @@ function chordin()
     until integer == -1
 
     reaper.MIDI_Sort(take)
-    
-    reaper.MarkTrackItemsDirty( reaper.GetMediaItemTake_Track(take), reaper.GetMediaItemTake_Item(take))
-    if leixing == '' then leixing_sub = 'Maj' else leixing_sub=leixing end
+
+    reaper.MarkTrackItemsDirty(reaper.GetMediaItemTake_Track(take), reaper.GetMediaItemTake_Item(take))
+    if leixing == '' then
+        leixing_sub = 'Maj'
+    else
+        leixing_sub = leixing
+    end
+
     reaper.Undo_EndBlock('A.G Chord : ' .. leixing_sub, -1)
-    
 
     reaper.SN_FocusMIDIEditor()
 
@@ -491,10 +494,34 @@ else
     chord_mode = tonumber(chord_mode)
 end
 
+-----------------------------------------------------
+function unsolo_all_tracks()
+    solotrack = {}
+    solotrack2 = {}
+    for i = 0, reaper.CountTracks(0) - 1 do
+        track = reaper.GetTrack(0, i)
+        getsolo = reaper.GetMediaTrackInfo_Value(track, "I_SOLO")
+        if getsolo ~= 0 then
+            table.insert(solotrack, track)
+            table.insert(solotrack2, getsolo)
+        end
+    end
+    reaper.SoloAllTracks(0)
+end
+
+function restore_solo_track()
+    reaper.PreventUIRefresh(1)
+    for i, v in ipairs(solotrack) do
+        reaper.SetMediaTrackInfo_Value(v, "I_SOLO", solotrack2[i])
+    end
+    reaper.PreventUIRefresh(-1)
+end
+
 ------------------------------------------------------
 function Audition()
-    reaper.Main_OnCommand(reaper.NamedCommandLookup('_BR_SAVE_SOLO_MUTE_ALL_TRACKS_SLOT_1'), 0)
-    reaper.Main_OnCommand(40340, 0) -- unsolo all track
+    reaper.StuffMIDIMessage(0, 176, 120, 0)
+    unsolo_all_tracks()
+    yanchi = os.clock()
     local editor = reaper.MIDIEditor_GetActive()
     local take = reaper.MIDIEditor_GetTake(editor)
     integer = reaper.MIDI_EnumSelNotes(take, -1)
@@ -513,43 +540,57 @@ function Audition()
         end
         n1, n2, n3, n4, n5, n6 = string.match(notetb, "(%d+),(%d+),(%d+),(%d+),(%d+),(%d+)")
 
-        if n1 ~= '0' then
+        flag = 0
+        flag1 = 0
+        flag2 = 0
+        flag3 = 0
+        flag4 = 0
+        flag5 = 0
+        flag6 = 0
+        flag7 = 0
+        flag8 = 0
+    end -- integer ~= -1
+end -- function end
+
+function Audition2()
+    if n1 ~= '0' then
+        if os.clock() - yanchi > 0.00 and flag == 0 then
             reaper.StuffMIDIMessage(0, 144, n1 + capo, vel)
+            flag = 1
         end
-        if n2 ~= '0' then
-            local yanchi = os.clock()
-            while os.clock() - yanchi < 0.08 do
-            end
+    end
+    if n2 ~= '0' then
+        if os.clock() - yanchi > 0.08 and flag1 == 0 then
             reaper.StuffMIDIMessage(0, 144, n2 + capo, vel)
+            flag1 = 1
         end
-        if n3 ~= '0' then
-            local yanchi = os.clock()
-            while os.clock() - yanchi < 0.08 do
-            end
+    end
+    if n3 ~= '0' then
+        if os.clock() - yanchi > 0.16 and flag2 == 0 then
             reaper.StuffMIDIMessage(0, 144, n3 + capo, vel)
+            flag2 = 1
         end
-        if n4 ~= '0' then
-            local yanchi = os.clock()
-            while os.clock() - yanchi < 0.08 do
-            end
+    end
+    if n4 ~= '0' then
+        if os.clock() - yanchi > 0.24 and flag3 == 0 then
             reaper.StuffMIDIMessage(0, 144, n4 + capo, vel)
+            flag3 = 1
         end
-        if n5 ~= '0' then
-            local yanchi = os.clock()
-            while os.clock() - yanchi < 0.08 do
-            end
+    end
+    if n5 ~= '0' then
+        if os.clock() - yanchi > 0.32 and flag4 == 0 then
             reaper.StuffMIDIMessage(0, 144, n5 + capo, vel)
+            flag4 = 1
         end
-        if n6 ~= '0' then
-            local yanchi = os.clock()
-            while os.clock() - yanchi < 0.08 do
-            end
+    end
+    if n6 ~= '0' then
+        if os.clock() - yanchi > 0.40 and flag5 == 0 then
             reaper.StuffMIDIMessage(0, 144, n6 + capo, vel)
+            flag5 = 1
         end
-        local yanchi = os.clock()
-        while os.clock() - yanchi < 0.3 do
-        end
-        -- reaper.StuffMIDIMessage(0, 176,123,0)
+    end
+
+    if os.clock() - yanchi > 0.70 and flag6 == 0 then
         if n1 ~= '0' then
             reaper.StuffMIDIMessage(0, 128, n1 + capo, 0)
         end
@@ -568,29 +609,31 @@ function Audition()
         if n6 ~= '0' then
             reaper.StuffMIDIMessage(0, 128, n6 + capo, 0)
         end
+        flag6 = 1
+    end
 
-    end -- integer ~= -1
-    reaper.Main_OnCommand(reaper.NamedCommandLookup('_BR_RESTORE_SOLO_MUTE_ALL_TRACKS_SLOT_1'), 0)
+    if os.clock() - yanchi < 0.75 then
+        reaper.defer(Audition2)
+    else
+        restore_solo_track()
+    end
+end
 
-end -- function end
 -------------------------------------------------
 function recst()
+    reaper.PreventUIRefresh(1)
     editor = reaper.MIDIEditor_GetActive()
     take = reaper.MIDIEditor_GetTake(editor)
     TK = reaper.GetMediaItemTake_Track(take)
 
     reaper.Main_OnCommand(40491, 0) -- all rec off
     retval = reaper.SetMediaTrackInfo_Value(TK, 'I_RECARM', 1)
-    retval, str = reaper.GetTrackStateChunk(TK, '', false)
-    oldrec = string.match(str, 'REC%s%d+%s%d+%s%d+%s%d+%s%d+%s%d+%s%d+')
-    if oldrec ~= 'REC 1 5088 1 0 0 0 0' then
-        str = string.gsub(str, oldrec, 'REC 1 5088 1 0 0 0 0')
-        ok = reaper.SetTrackStateChunk(TK, str, false)
-        reaper.TrackCtl_SetToolTip('              提示！\n当前轨道录音监听已打开，全部MIDI输入全部通道！', 500, 400,
-            true)
-    end
+    reaper.SetMediaTrackInfo_Value(TK, 'I_RECINPUT', 6080)
+    reaper.SetMediaTrackInfo_Value(TK, 'I_RECMON', 1)
+    reaper.TrackCtl_SetToolTip('              提示！\n当前轨道录音监听已打开，虚拟键盘输入全部通道！', 0, 0, true)
+    reaper.PreventUIRefresh(-1)
 end -- recst end
-recst()
+
 function recend()
     retval = reaper.SetMediaTrackInfo_Value(TK, 'I_RECARM', 0)
 end
@@ -598,7 +641,7 @@ end
 
 local ctx = reaper.ImGui_CreateContext('A.G CHORD')
 local size = reaper.GetAppVersion():match('OSX') and 12 or 14
-local font = reaper.ImGui_CreateFont('sans-serif', size)
+local font = reaper.ImGui_CreateFont('微软雅黑')
 reaper.ImGui_Attach(ctx, font)
 
 x, y = reaper.GetMousePosition()
@@ -608,8 +651,8 @@ windows_flag = reaper.ImGui_WindowFlags_TopMost()
 windows_flag = windows_flag | reaper.ImGui_WindowFlags_AlwaysAutoResize()
 flag = true
 function loop()
-    reaper.ImGui_PushFont(ctx, font)
-    local visible, open = reaper.ImGui_Begin(ctx, 'Guitar Chord ~ Right audition', true, windows_flag)
+    reaper.ImGui_PushFont(ctx, font, 12)
+    local visible, open = reaper.ImGui_Begin(ctx, 'Guitar Chord 右键试听', true, windows_flag)
     if visible then
         retval, chord_mode = reaper.ImGui_RadioButtonEx(ctx, 'A.G', chord_mode, 0)
         reaper.ImGui_SameLine(ctx)
@@ -617,11 +660,12 @@ function loop()
         reaper.ImGui_SameLine(ctx)
         retval, chord_mode = reaper.ImGui_RadioButtonEx(ctx, 'Ukulele', chord_mode, 2)
         reaper.ImGui_SameLine(ctx)
-        if reaper.ImGui_Button(ctx, 'Help') then
-            help = [[A.G 模式为开放式和弦。
+        reaper.ImGui_Button(ctx, 'Help')
+        help = [[A.G 模式为开放式和弦。
 E.G 模式为4个音的小横按，分别为根音，5音，8度音，3度音。通常应用于失真伴奏。
 Ukulele 模式为标准调弦常用指法。]]
-            reaper.MB(help, '说明', 0)
+        if reaper.ImGui_IsItemHovered(ctx) then
+            reaper.ImGui_SetTooltip(ctx, help)
         end
         reaper.ImGui_Spacing(ctx)
 
@@ -633,6 +677,7 @@ Ukulele 模式为标准调弦常用指法。]]
         if reaper.ImGui_IsItemClicked(ctx, reaper.ImGui_MouseButton_Right()) then
             leixing = ''
             Audition()
+            Audition2()
         end
         reaper.ImGui_SameLine(ctx)
         if reaper.ImGui_Button(ctx, 'Min') then
@@ -643,6 +688,7 @@ Ukulele 模式为标准调弦常用指法。]]
         if reaper.ImGui_IsItemClicked(ctx, reaper.ImGui_MouseButton_Right()) then
             leixing = 'm'
             Audition()
+            Audition2()
         end
         reaper.ImGui_SameLine(ctx)
         if reaper.ImGui_Button(ctx, 'sus4') then
@@ -653,6 +699,7 @@ Ukulele 模式为标准调弦常用指法。]]
         if reaper.ImGui_IsItemClicked(ctx, reaper.ImGui_MouseButton_Right()) then
             leixing = 'sus4'
             Audition()
+            Audition2()
         end
         if chord_mode ~= 1 then
             reaper.ImGui_SameLine(ctx)
@@ -664,6 +711,7 @@ Ukulele 模式为标准调弦常用指法。]]
             if reaper.ImGui_IsItemClicked(ctx, reaper.ImGui_MouseButton_Right()) then
                 leixing = 'sus2'
                 Audition()
+                Audition2()
             end
             reaper.ImGui_SameLine(ctx)
             if reaper.ImGui_Button(ctx, 'm7') then
@@ -674,6 +722,7 @@ Ukulele 模式为标准调弦常用指法。]]
             if reaper.ImGui_IsItemClicked(ctx, reaper.ImGui_MouseButton_Right()) then
                 leixing = 'm7'
                 Audition()
+                Audition2()
             end
             reaper.ImGui_SameLine(ctx)
             if reaper.ImGui_Button(ctx, '7') then
@@ -684,6 +733,7 @@ Ukulele 模式为标准调弦常用指法。]]
             if reaper.ImGui_IsItemClicked(ctx, reaper.ImGui_MouseButton_Right()) then
                 leixing = '7'
                 Audition()
+                Audition2()
             end
             reaper.ImGui_SameLine(ctx)
             if reaper.ImGui_Button(ctx, 'Maj7') then
@@ -694,6 +744,7 @@ Ukulele 模式为标准调弦常用指法。]]
             if reaper.ImGui_IsItemClicked(ctx, reaper.ImGui_MouseButton_Right()) then
                 leixing = '7M'
                 Audition()
+                Audition2()
             end
             if reaper.ImGui_Button(ctx, 'Dim') then
                 leixing = 'dim'
@@ -703,6 +754,7 @@ Ukulele 模式为标准调弦常用指法。]]
             if reaper.ImGui_IsItemClicked(ctx, reaper.ImGui_MouseButton_Right()) then
                 leixing = 'dim'
                 Audition()
+                Audition2()
             end
             reaper.ImGui_SameLine(ctx)
             if reaper.ImGui_Button(ctx, 'Aug') then
@@ -713,6 +765,7 @@ Ukulele 模式为标准调弦常用指法。]]
             if reaper.ImGui_IsItemClicked(ctx, reaper.ImGui_MouseButton_Right()) then
                 leixing = 'aug'
                 Audition()
+                Audition2()
             end
             if chord_mode == 0 then
                 reaper.ImGui_SameLine(ctx)
@@ -724,6 +777,7 @@ Ukulele 模式为标准调弦常用指法。]]
                 if reaper.ImGui_IsItemClicked(ctx, reaper.ImGui_MouseButton_Right()) then
                     leixing = '9'
                     Audition()
+                    Audition2()
                 end
                 reaper.ImGui_SameLine(ctx)
                 if reaper.ImGui_Button(ctx, 'm9') then
@@ -734,6 +788,7 @@ Ukulele 模式为标准调弦常用指法。]]
                 if reaper.ImGui_IsItemClicked(ctx, reaper.ImGui_MouseButton_Right()) then
                     leixing = 'm9'
                     Audition()
+                    Audition2()
                 end
                 reaper.ImGui_SameLine(ctx)
                 if reaper.ImGui_Button(ctx, 'Maj9') then
@@ -744,6 +799,7 @@ Ukulele 模式为标准调弦常用指法。]]
                 if reaper.ImGui_IsItemClicked(ctx, reaper.ImGui_MouseButton_Right()) then
                     leixing = 'Maj9'
                     Audition()
+                    Audition2()
                 end
                 reaper.ImGui_SameLine(ctx)
                 if reaper.ImGui_Button(ctx, '7-5') then
@@ -754,6 +810,7 @@ Ukulele 模式为标准调弦常用指法。]]
                 if reaper.ImGui_IsItemClicked(ctx, reaper.ImGui_MouseButton_Right()) then
                     leixing = '7-5'
                     Audition()
+                    Audition2()
                 end
                 reaper.ImGui_SameLine(ctx)
                 if reaper.ImGui_Button(ctx, 'm7-5') then
@@ -764,6 +821,7 @@ Ukulele 模式为标准调弦常用指法。]]
                 if reaper.ImGui_IsItemClicked(ctx, reaper.ImGui_MouseButton_Right()) then
                     leixing = 'm7-5'
                     Audition()
+                    Audition2()
                 end
                 if reaper.ImGui_Button(ctx, '7sus4') then
                     leixing = '7sus4'
@@ -773,6 +831,7 @@ Ukulele 模式为标准调弦常用指法。]]
                 if reaper.ImGui_IsItemClicked(ctx, reaper.ImGui_MouseButton_Right()) then
                     leixing = '7sus4'
                     Audition()
+                    Audition2()
                 end
                 reaper.ImGui_SameLine(ctx)
                 if reaper.ImGui_Button(ctx, '7sus2') then
@@ -783,6 +842,7 @@ Ukulele 模式为标准调弦常用指法。]]
                 if reaper.ImGui_IsItemClicked(ctx, reaper.ImGui_MouseButton_Right()) then
                     leixing = '7sus2'
                     Audition()
+                    Audition2()
                 end
                 reaper.ImGui_SameLine(ctx)
                 if reaper.ImGui_Button(ctx, '6') then
@@ -793,6 +853,7 @@ Ukulele 模式为标准调弦常用指法。]]
                 if reaper.ImGui_IsItemClicked(ctx, reaper.ImGui_MouseButton_Right()) then
                     leixing = '6'
                     Audition()
+                    Audition2()
                 end
                 reaper.ImGui_SameLine(ctx)
                 if reaper.ImGui_Button(ctx, 'm6') then
@@ -803,13 +864,14 @@ Ukulele 模式为标准调弦常用指法。]]
                 if reaper.ImGui_IsItemClicked(ctx, reaper.ImGui_MouseButton_Right()) then
                     leixing = 'm6'
                     Audition()
+                    Audition2()
                 end
             end -- chord mode 1
         end -- chord mode 2
 
         reaper.ImGui_Spacing(ctx)
 
-        retval, capo = reaper.ImGui_SliderInt(ctx, 'capo', capo, -2, 11, nil, nil)
+        retval, capo = reaper.ImGui_SliderInt(ctx, '变调夹', capo, -2, 11, nil, nil)
         retval = reaper.ImGui_IsKeyPressed(ctx, reaper.ImGui_Key_Escape(), nil)
         if retval then
             flag = false
@@ -835,4 +897,5 @@ Ukulele 模式为标准调弦常用指法。]]
 end
 
 reaper.defer(loop)
+recst()
 

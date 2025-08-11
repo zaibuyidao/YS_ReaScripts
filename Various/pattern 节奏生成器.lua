@@ -1,6 +1,6 @@
 -- @description pattern 节奏生成器
 -- @author YS
--- @version 1.0
+-- @version 1.0.1
 -- @changelog
 --   Initial release
 -- @metapackage

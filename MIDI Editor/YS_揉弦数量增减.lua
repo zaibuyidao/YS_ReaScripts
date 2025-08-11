@@ -1,6 +1,6 @@
 --[[
  * ReaScript Name: 揉弦数量增减
- * Version: 1.0.2
+ * Version: 1.0.3
  * Author: YS
 --]]
 
@@ -11,13 +11,13 @@
 --]]
 
 editor = reaper.MIDIEditor_GetActive()
-take = reaper.MIDIEditor_GetTake(editor)
 
 function vibadd()
     ccidx = -1
     cctb = {}
     rouxian = {}
     flag = true
+    take = reaper.MIDIEditor_GetTake(editor)
     reaper.MIDI_DisableSort(take)
     ccidx = reaper.MIDI_EnumSelCC(take, ccidx)
     if ccidx == -1 then
@@ -82,6 +82,7 @@ function vibminus()
     cctb = {}
     rouxian = {}
     flag = true
+    take = reaper.MIDIEditor_GetTake(editor)
     reaper.MIDI_DisableSort(take)
     ccidx = reaper.MIDI_EnumSelCC(take, ccidx)
     if ccidx == -1 then
@@ -144,23 +145,21 @@ function vibminus()
 end
 
 local ctx = reaper.ImGui_CreateContext('vibratonum')
-local size = reaper.GetAppVersion():match('OSX') and 12 or 14
-local font = reaper.ImGui_CreateFont('sans-serif', 15)
+local font = reaper.ImGui_CreateFont('微软雅黑')
 reaper.ImGui_Attach(ctx, font)
 
 windows_flag = reaper.ImGui_WindowFlags_TopMost()
 windows_flag = windows_flag | reaper.ImGui_WindowFlags_AlwaysAutoResize()
 closeflag = true
 function loop()
-    reaper.ImGui_PushFont(ctx, font)
-    local visible, open = reaper.ImGui_Begin(ctx, 'vibrato num edit', true, windows_flag)
+    reaper.ImGui_PushFont(ctx, font, 12)
+    local visible, open = reaper.ImGui_Begin(ctx, '揉弦数量增减', true, windows_flag)
     if visible then
-
-        if reaper.ImGui_Button(ctx, '+ Add quantity') then
+        if reaper.ImGui_Button(ctx, '+ 增加数量') then
             vibadd()
         end
         reaper.ImGui_SameLine(ctx)
-        if reaper.ImGui_Button(ctx, '- Reduce quantity') then
+        if reaper.ImGui_Button(ctx, '- 减少数量') then
             vibminus()
         end
 
@@ -186,4 +185,3 @@ function loop()
 end
 
 reaper.defer(loop)
-
