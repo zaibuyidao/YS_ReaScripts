@@ -1,6 +1,6 @@
 --[[
  * ReaScript Name: strum-it_Down_Multi Track
- * Version: 1.1.1
+ * Version: 1.1.2
  * Author: YS
 --]]
 
@@ -51,8 +51,8 @@ if retval and num then
                 end)
                 for ii, vv in ipairs(v) do
                     newst = vv.notest + ((ii - 1) * num)
-                    if newst > vv.noteend then
-                        newend = newst + 1
+                    if vv.noteend - newst < 10 then
+                        newend = newst + 10
                     else
                         newend = vv.noteend
                     end
