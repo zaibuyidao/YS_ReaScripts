@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<index version="1" name="YS Scripts" commit="942d5299d6e765d9bc8ff472b93238176d6e4fb4">
+<index version="1" name="YS Scripts" commit="15b41876fa3ebb43c0a99907a9b1000d6a191c3a">
   <category name="Items Editing">
     <reapack name="YS_Midi Take Name From Track.lua" type="script" desc="Midi Take Name From Track">
       <version name="1.0" author="YS" time="2021-10-14T16:59:44Z">
@@ -619,6 +619,9 @@
       </version>
       <version name="1.0.3" author="YS" time="2025-08-11T12:19:53Z">
         <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/703f790543ecfcb6fc1cd60c9d6638cff8892907/MIDI%20Editor/YS_slide%20in%20V2.lua</source>
+      </version>
+      <version name="1.0.4" author="YS" time="2026-04-04T17:28:44Z">
+        <source main="midi_editor">https://github.com/zaibuyidao/YS_ReaScripts/raw/15b41876fa3ebb43c0a99907a9b1000d6a191c3a/MIDI%20Editor/YS_slide%20in%20V2.lua</source>
       </version>
     </reapack>
     <reapack name="YS_slide in.lua" type="script" desc="slide in">
