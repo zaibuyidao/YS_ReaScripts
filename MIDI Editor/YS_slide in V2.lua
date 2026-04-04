@@ -1,6 +1,6 @@
 --[[
  * ReaScript Name: slide in V2
- * Version: 1.0.3
+ * Version: 1.0.4
  * Author: YS
 --]]
 
@@ -87,15 +87,11 @@ function slideIn()
                     if (beishu < 0) then
                         beishu = beishu - 1
                     end
-                    --[[if jiange > 3 then
-                        subjiange = jiange * 2
-                        subjuli = juli / 0.74
-                    else
-                                                subjiange = jiange + (c * 0.85)
-                        subjuli = juli
-                    end --]]
-                    -- InsertTick = From_tick + subjuli * c / (subjiange - (c * 0.65))
-                    InsertTick = From_tick + juli * ((c + c) / (jiange + c))
+
+                    subjiange = jiange * 2
+
+                    InsertTick = From_tick + juli * c / (subjiange - (c * 0.65)) * 1.2
+
                     if InsertTick - TempTick < 9 then
                         txt = txt .. '警告 : 弯音 ' .. pitch .. ' 间隔低于 10 tick!\n'
                     end
@@ -350,7 +346,7 @@ function loop()
         retval, slide_mode = reaper.ImGui_RadioButtonEx(ctx, '击勾弦', slide_mode, 1)
         reaper.ImGui_SameLine(ctx)
         retval, slide_mode = reaper.ImGui_RadioButtonEx(ctx, '平滑', slide_mode, 2)
-        
+
         retval = reaper.ImGui_IsKeyPressed(ctx, reaper.ImGui_Key_Escape(), nil)
         if retval then
             flag = false
